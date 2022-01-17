@@ -1,0 +1,2 @@
+class AccuserCategory < ApplicationRecord
+end

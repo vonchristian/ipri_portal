@@ -1,0 +1,300 @@
+
+<div class="grid grid-cols-12 min-h-screen">
+  <div class="col-span-3 bg-green-500">
+    <h1 class="pt-10 pl-4 font-bold py-5 px-10"> Step 5/7:</h1>
+    <h3 class="pl-2 font-bold pl-8"><i class="fa fa-circle fa-2x"></i> <span class="align-top pl-4 pb-2">Documenter Details</span></h3>
+    <h3 class="pl-2 font-bold pl-8 pt-4"><i class="fa fa-circle fa-2x"></i> <span class="align-top pl-4 pb-2">Data Sharing Agreement</span></h3>
+    <h3 class="pl-2 font-bold pl-8 pt-4"><i class="fa fa-circle fa-2x"></i> <span class="align-top pl-4 pb-2">Incident Details</span></h3>
+    <h3 class="pl-2 font-bold pl-8 pt-4"><i class="fa fa-circle fa-2x"></i> <span class="align-top pl-4 pb-2">Victims</span></h3>
+    <h3 class="pl-2 font-bold pl-8 pt-4"><i class="fa fa-circle fa-2x"></i> <span class="align-top pl-4 pb-2">Human Rights Violations</span></h3>
+    <h3 class="pl-2 font-bold pl-8 pt-4"><i class="fa fa-circle-o fa-2x"></i> <span class="align-top pl-4 pb-2">Actions Taken</span></h3>
+    <h3 class="pl-2 font-bold pl-8 pt-4"><i class="fa fa-circle-o fa-2x"></i> <span class="align-top pl-4 pb-2">Development Projects</span></h3>
+  </div>
+
+  <div class="col-span-9 bg-white py-10 px-5">
+    <%= form_for @criminalization, url: :fact_sheets_temp_fact_sheet_criminalizations do |f| %>
+    <div class="max-w-7xl mx-auto lg:px-0">
+      <h2 class="font-bold text-xl text-gray-900">Criminalization Details</h2>
+
+          <div class="border-t border-gray-200 mt-4"></div>
+          <div>
+            <div class="px-4 py-5  space-y-4 sm:p-6">
+              <div class="col-span-6 sm:col-span-3">
+                <label for="first-name" class="text-base font-medium text-gray-700 pt-4">Why was/were the victim/s criminalized?</label>
+                <%= f.text_area :criminalization_details,  class: "mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md" %>
+              </div>
+               <fieldset>
+                <div>
+                  <legend class="text-base font-medium text-gray-700 pt-4">Did the victim/s experience any form of harassment or intimidation prior to criminalization?</legend>
+                </div>
+                <div class="mt-4 space-y-4">
+                  <div class="flex items-center">
+                    <%= f.radio_button :experienced_harrassment_or_intimidation, :yes, class:"focus:ring-indigo-500 h-4 w-4 text-indigo-600 border-gray-300"  %>
+                    <label for="primary-data" class="ml-3 block text-sm font-medium text-gray-700">
+                      Yes
+                    </label>
+                  </div>
+                  <div class="flex items-center">
+                    <%= f.radio_button :experienced_harrassment_or_intimidation, :no, class:"focus:ring-indigo-500 h-4 w-4 text-indigo-600 border-gray-300"  %>
+                    <label for="primary-data" class="ml-3 block text-sm font-medium text-gray-700">
+                      No
+                    </label>
+                  </div>
+                  <div class="flex items-center">
+                    <%= f.radio_button :experienced_harrassment_or_intimidation, :no_information, class:"focus:ring-indigo-500 h-4 w-4 text-indigo-600 border-gray-300"  %>
+                    <label for="primary-data" class="ml-3 block text-sm font-medium text-gray-700">
+                      No Information
+                    </label>
+                  </div>
+                </div>
+              </fieldset>
+              <div class="col-span-6 sm:col-span-3">
+                <label for="first-name" class="text-base font-medium text-gray-700 pt-4">If yes, please provide more information</label>
+                <%= f.text_area :harrassment_or_intimidation_details,  class: "mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md" %>
+              </div>
+              <div class="col-span-6 sm:col-span-3">
+                <label for="first-name" class="text-base font-medium text-gray-700 pt-4">What was/were the accusation/s or charge/s filed against the victim/s?</label>
+                <%= f.text_area :accusation_or_charges_details,  class: "mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md" %>
+              </div>
+              <div class="col-span-6 sm:col-span-3">
+                <label for="first-name" class="text-base font-medium text-gray-700 pt-4">What was/were the policy/ies or law/s or institutional justification/s used against the victim/s?</label>
+                <%= f.text_area :policies_or_laws_used,  class: "mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md" %>
+              </div>
+              <div class="col-span-6 sm:col-span-3">
+                <label for="first-name" class="text-base font-medium text-gray-700 mt-8">Who put forward the accusation/s or charge/s against the victim/s?</label>
+
+              <% AccuserCategory.all.each do |accuser_category| %>
+                <%= f.fields_for :criminalization_accuser_categories do |ff| %>
+                <div class="col-span-6 sm:col-span-3">
+
+                  <%= ff.check_box :accuser_category_id, value: accuser_category.id, class: "focus:ring-indigo-500 h-4 w-4 text-indigo-600 border-gray-300 rounded" %>
+                  <label for="first-name" class="text-base font-medium text-gray-700 pt-4 pl-4"><%= accuser_category.name %></label>
+                  </div>
+                <% end %>
+              <% end %>
+              </div>
+               <div class="col-span-6 sm:col-span-3">
+                <label for="first-name" class="text-base font-medium text-gray-700 pt-4">Please provide more information</label>
+                <%= f.text_area :accuser_details,  class: "mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md" %>
+              </div>
+              <fieldset>
+                <div>
+                  <legend class="text-base font-medium text-gray-700 pt-4">Was/were the accusation/s or charge/s against the victim legally or formally filed?</legend>
+                </div>
+                <div class="mt-4 space-y-4">
+                  <div class="flex items-center">
+                    <%= f.radio_button :case_filing_status, :yes, class:"focus:ring-indigo-500 h-4 w-4 text-indigo-600 border-gray-300"  %>
+                    <label for="primary-data" class="ml-3 block text-sm font-medium text-gray-700">
+                      Yes
+                    </label>
+                  </div>
+                  <div class="flex items-center">
+                    <%= f.radio_button :case_filing_status, :no, class:"focus:ring-indigo-500 h-4 w-4 text-indigo-600 border-gray-300"  %>
+                    <label for="primary-data" class="ml-3 block text-sm font-medium text-gray-700">
+                      No
+                    </label>
+                  </div>
+                  <div class="flex items-center">
+                    <%= f.radio_button :case_filing_status, :no_information, class:"focus:ring-indigo-500 h-4 w-4 text-indigo-600 border-gray-300"  %>
+                    <label for="primary-data" class="ml-3 block text-sm font-medium text-gray-700">
+                      No Information
+                    </label>
+                  </div>
+                </div>
+              </fieldset>
+               <div class="col-span-6 sm:col-span-3">
+                <label for="first-name" class="text-base font-medium text-gray-700 pt-4">If yes, where was the case/s filed? (e.g., regional court, military court, supreme court, etc.)</label>
+                <%= f.text_area :case_filing_details,  class: "mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md" %>
+              </div>
+               <div class="col-span-6 sm:col-span-3">
+                <label for="first-name" class="text-base font-medium text-gray-700 pt-4">If no, Please provide more information</label>
+                <%= f.text_area :case_filing_details,  class: "mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md" %>
+              </div>
+              <fieldset>
+                <div>
+                  <legend class="text-base font-medium text-gray-700 pt-4">Is there a decision on the legal or formal accusation/s or charge/s filed against the victim/s?</legend>
+                </div>
+                <div class="mt-4 space-y-4">
+                  <div class="flex items-center">
+                    <%= f.radio_button :case_decision_status, :yes, class:"focus:ring-indigo-500 h-4 w-4 text-indigo-600 border-gray-300"  %>
+                    <label for="primary-data" class="ml-3 block text-sm font-medium text-gray-700">
+                      Yes
+                    </label>
+                  </div>
+                  <div class="flex items-center">
+                    <%= f.radio_button :case_decision_status, :no, class:"focus:ring-indigo-500 h-4 w-4 text-indigo-600 border-gray-300"  %>
+                    <label for="primary-data" class="ml-3 block text-sm font-medium text-gray-700">
+                      No
+                    </label>
+                  </div>
+                  <div class="flex items-center">
+                    <%= f.radio_button :case_decision_status, :no_information, class:"focus:ring-indigo-500 h-4 w-4 text-indigo-600 border-gray-300"  %>
+                    <label for="primary-data" class="ml-3 block text-sm font-medium text-gray-700">
+                      No Information
+                    </label>
+                  </div>
+                </div>
+              </fieldset>
+
+              <div class="col-span-6 sm:col-span-3">
+                <label for="first-name" class="text-base font-medium text-gray-700 pt-4">Please provide more information</label>
+                <%= f.text_area :case_decision_details,  class: "mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md" %>
+              </div>
+              <fieldset>
+                <div>
+                  <legend class="text-base font-medium text-gray-700 pt-4">Is/Are the victim/s in prison or detention facility?</legend>
+                </div>
+                <div class="mt-4 space-y-4">
+                  <div class="flex items-center">
+                    <%= f.radio_button :victims_in_detention, :yes, class:"focus:ring-indigo-500 h-4 w-4 text-indigo-600 border-gray-300"  %>
+                    <label for="primary-data" class="ml-3 block text-sm font-medium text-gray-700">
+                      Yes
+                    </label>
+                  </div>
+                  <div class="flex items-center">
+                    <%= f.radio_button :victims_in_detention, :no, class:"focus:ring-indigo-500 h-4 w-4 text-indigo-600 border-gray-300"  %>
+                    <label for="primary-data" class="ml-3 block text-sm font-medium text-gray-700">
+                      No
+                    </label>
+                  </div>
+                  <div class="flex items-center">
+                    <%= f.radio_button :victims_in_detention, :no_information, class:"focus:ring-indigo-500 h-4 w-4 text-indigo-600 border-gray-300"  %>
+                    <label for="primary-data" class="ml-3 block text-sm font-medium text-gray-700">
+                      No Information
+                    </label>
+                  </div>
+                </div>
+              </fieldset>
+               <div class="col-span-6 sm:col-span-3">
+                <label for="first-name" class="text-base font-medium text-gray-700 pt-4">If yes, please provide more information on their conditions or situation in the prison or detention facility—do they know where is the prison or detention facility located? Are they allowed visitors?
+</label>
+                <%= f.text_area :victims_in_detention_details,  class: "mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md" %>
+              </div>
+              <div class="col-span-6 sm:col-span-3">
+                <label for="first-name" class="text-base font-medium text-gray-700 pt-4">If no, please provide more information on the current situation of the victim/s—Is/Are s/he/they in hiding? Released on bail? Awaiting court trial? On house arrest? etc</label>
+                <%= f.text_area :victims_in_detention_details,  class: "mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md" %>
+              </div>
+              <fieldset>
+                <div>
+                  <legend class="text-base font-medium text-gray-700 pt-4">Was/Were there (a) legal case/s filed against the alleged perpetrators on behalf of the victim/s criminalized?</legend>
+                </div>
+                <div class="mt-4 space-y-4">
+                  <div class="flex items-center">
+                    <%= f.radio_button :case_filing_against_perpetrator, :yes, class:"focus:ring-indigo-500 h-4 w-4 text-indigo-600 border-gray-300"  %>
+                    <label for="primary-data" class="ml-3 block text-sm font-medium text-gray-700">
+                      Yes
+                    </label>
+                  </div>
+                  <div class="flex items-center">
+                    <%= f.radio_button :case_filing_against_perpetrator, :no, class:"focus:ring-indigo-500 h-4 w-4 text-indigo-600 border-gray-300"  %>
+                    <label for="primary-data" class="ml-3 block text-sm font-medium text-gray-700">
+                      No
+                    </label>
+                  </div>
+                  <div class="flex items-center">
+                    <%= f.radio_button :case_filing_against_perpetrator, :no_information, class:"focus:ring-indigo-500 h-4 w-4 text-indigo-600 border-gray-300"  %>
+                    <label for="primary-data" class="ml-3 block text-sm font-medium text-gray-700">
+                      No Information
+                    </label>
+                  </div>
+                </div>
+              </fieldset>
+              <div class="col-span-6 sm:col-span-3">
+                <label for="first-name" class="text-base font-medium text-gray-700 pt-4">If yes, please provide further information: Where is/are the case/s filed? Who filed the case? E.g., victim, family of the victim, support organizations, etc.; any other details of the case/s filed, please share.</label>
+                <%= f.text_area :case_filing_against_perpetrator_details,  class: "mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md" %>
+              </div>
+               <div class="col-span-6 sm:col-span-3">
+                <label for="first-name" class="text-base font-medium text-gray-700 pt-4">If no, please elaborate on your response (e.g. can you provide probable reasons on why there has been no legal case/s filed against the alleged perpetrators? Etc.)</label>
+                <%= f.text_area :case_filing_against_perpetrator_details,  class: "mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md" %>
+              </div>
+              <fieldset>
+                <div>
+                  <legend class="text-base font-medium text-gray-700 pt-4">Has the State undertaken any action/s to address the incident of criminalization?</legend>
+                </div>
+                <div class="mt-4 space-y-4">
+                  <div class="flex items-center">
+                    <%= f.radio_button :state_action_to_address_criminalization, :yes, class:"focus:ring-indigo-500 h-4 w-4 text-indigo-600 border-gray-300"  %>
+                    <label for="primary-data" class="ml-3 block text-sm font-medium text-gray-700">
+                      Yes
+                    </label>
+                  </div>
+                  <div class="flex items-center">
+                    <%= f.radio_button :state_action_to_address_criminalization, :no, class:"focus:ring-indigo-500 h-4 w-4 text-indigo-600 border-gray-300"  %>
+                    <label for="primary-data" class="ml-3 block text-sm font-medium text-gray-700">
+                      No
+                    </label>
+                  </div>
+                  <div class="flex items-center">
+                    <%= f.radio_button :state_action_to_address_criminalization, :no_information, class:"focus:ring-indigo-500 h-4 w-4 text-indigo-600 border-gray-300"  %>
+                    <label for="primary-data" class="ml-3 block text-sm font-medium text-gray-700">
+                      No Information
+                    </label>
+                  </div>
+                </div>
+              </fieldset>
+               <div class="col-span-6 sm:col-span-3">
+                <label for="first-name" class="text-base font-medium text-gray-700 pt-4">If yes, please provide more information on the action/s undertaken, including any relevant results.</label>
+                <%= f.text_area :case_filing_against_perpetrator_details,  class: "mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md" %>
+              </div>
+              <div class="col-span-6 sm:col-span-3">
+                <label for="first-name" class="text-base font-medium text-gray-700 pt-4">If no, please elaborate on your response</label>
+                <%= f.text_area :case_filing_against_perpetrator_details,  class: "mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md" %>
+              </div>
+              <fieldset>
+                <div>
+                  <legend class="text-base font-medium text-gray-700 pt-4">Has there been any investigation/s on the incident of criminalization?</legend>
+                </div>
+                <div class="mt-4 space-y-4">
+                  <div class="flex items-center">
+                    <%= f.radio_button :investigation_on_criminalization, :yes, class:"focus:ring-indigo-500 h-4 w-4 text-indigo-600 border-gray-300"  %>
+                    <label for="primary-data" class="ml-3 block text-sm font-medium text-gray-700">
+                      Yes
+                    </label>
+                  </div>
+                  <div class="flex items-center">
+                    <%= f.radio_button :investigation_on_criminalization, :no, class:"focus:ring-indigo-500 h-4 w-4 text-indigo-600 border-gray-300"  %>
+                    <label for="primary-data" class="ml-3 block text-sm font-medium text-gray-700">
+                      No
+                    </label>
+                  </div>
+                  <div class="flex items-center">
+                    <%= f.radio_button :investigation_on_criminalization, :no_information, class:"focus:ring-indigo-500 h-4 w-4 text-indigo-600 border-gray-300"  %>
+                    <label for="primary-data" class="ml-3 block text-sm font-medium text-gray-700">
+                      No Information
+                    </label>
+                  </div>
+                </div>
+              </fieldset>
+              <div class="col-span-6 sm:col-span-3">
+                <label for="first-name" class="text-base font-medium text-gray-700 pt-4">If yes, please provide additional information on the investigation, including relevant date/s and institutions/ office/s or representative/s involved, e.g., national human rights institutions, United Nations body, etc.</label>
+                <%= f.text_area :investigation_on_criminalization_details,  class: "mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md" %>
+              </div>
+              <div class="col-span-6 sm:col-span-3">
+                <label for="first-name" class="text-base font-medium text-gray-700 pt-4">If no, please elaborate on your response. (e.g. can you provide probable reasons on why there has been no investigation/s conducted? Or, is the case not yet publicly reported? Etc.)</label>
+                <%= f.text_area :investigation_on_criminalization_details,  class: "mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md" %>
+              </div>
+              <h2 class="font-bold text-xl text-gray-900 pt-5">Impact/s of the Incident/s of Human Rights Violation</h2>
+              <div class="md:mt-0 md:col-span-2 bg-white px-4">
+
+              <div class="col-span-6 sm:col-span-3">
+                <label for="first-name" class="text-base font-medium text-gray-700 pt-4">How did the incident/s affect the victim/s and his/her/their family?</label>
+                <%= f.text_area :impact_to_victim_details,  class: "mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md" %>
+                 <p class="mt-1 text-sm text-gray-600">
+                (E.g., the family members had to relocate for safety. Or, the family lost a breadwinner, etc.)
+                </p>
+              </div>
+
+              <div class="col-span-6 sm:col-span-3 py-4">
+                <label for="first-name" class="text-base font-medium text-gray-700 pt-4">How did the incident/s affect the Indigenous Peoples group/s or community/ies and/or organization of the victim/s?</label>
+                <%= f.text_area :impact_to_community_details,  class: "mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md" %>
+                <p class="mt-1 text-sm text-gray-600">
+                (E.g., disrupted livelihood, culture and tradition, functions of indigenous institutions, community cohesion, cannot access ancestral territories and resources, rituals are affected etc.)
+                </p>
+              </div>
+
+              <div class="px-4 py-3 bg-gray-100 text-right sm:px-6">
+                <button type="submit" class="inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-green-600 hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500">
+                  Save and Proceed
+                </button>
+              </div>
+    <% end %>

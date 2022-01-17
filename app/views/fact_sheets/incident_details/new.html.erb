@@ -1,0 +1,95 @@
+
+<div class="grid grid-cols-12 min-h-screen">
+  <div class="col-span-3 bg-green-500">
+    <h1 class="pt-10 pl-4 font-bold py-5 px-10"> Step 3/7:</h1>
+    <h3 class="pl-2 font-bold pl-8"><i class="fa fa-circle fa-2x"></i> <span class="align-middle pl-4 pb-2">Documenter Details</span></h3>
+    <h3 class="pl-2 font-bold pl-8 pt-4"><i class="fa fa-circle fa-2x"></i> <span class="align-middle pl-4 pb-2">Data Sharing Agreement</span></h3>
+    <h3 class="pl-2 font-bold pl-8 pt-4"><i class="fa fa-circle fa-2x"></i> <span class="align-middle pl-4 pb-2">Incident Details</span></h3>
+    <h3 class="pl-2 font-bold pl-8 pt-4"><i class="fa fa-circle-o fa-2x"></i> <span class="align-middle pl-4 pb-2">Victims</span></h3>
+    <h3 class="pl-2 font-bold pl-8 pt-4"><i class="fa fa-circle-o fa-2x"></i> <span class="align-middle pl-4 pb-2">Human Rights Violoations</span></h3>
+    <h3 class="pl-2 font-bold pl-8 pt-4"><i class="fa fa-circle-o fa-2x"></i> <span class="align-middle pl-4 pb-2">Actions Taken</span></h3>
+    <h3 class="pl-2 font-bold pl-8 pt-4"><i class="fa fa-circle-o fa-2x"></i> <span class="align-middle pl-4 pb-2">Development Projects</span></h3>
+  </div>
+  <div class="col-span-9 bg-white py-10 px-5">
+    <%= form_for @incident_detail, url: :fact_sheets_temp_fact_sheet_incident_details do |f| %>
+      <h2 class="font-bold text-xl text-gray-900">Place and Data of Incident </h2>
+      <div class="md:mt-0 md:col-span-2 bg-white px-4">
+
+          <div class="border-t border-gray-200 mt-4"></div>
+          <div>
+            <div class="px-4 py-5  space-y-4 sm:p-6">
+              <div class="grid grid-cols-4 gap-6">
+                <div class="col-span-2 sm:col-span-2">
+                  <label for="first-name" class="block text-sm font-medium text-gray-700 pb-2">Country of Incident</label>
+                 <%= f.collection_select :country_id, Country.all, :id, :name, class: "mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md" %>
+                </div>
+              </div>
+              <div class="col-span-6 sm:col-span-3">
+                <label for="first-name" class="block text-sm font-medium text-gray-700 pb-2">Subnational Location</label>
+                <%= f.text_area :subnational_location,  class: "mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md" %>
+                <p class="mt-1 text-sm text-gray-600">
+                  (Specify what state, department, county, province etc.)
+                </p>
+              </div>
+              <div class="col-span-6 sm:col-span-3">
+                <label for="first-name" class="block text-sm font-medium text-gray-700 pb-2">Other Location Details (1)</label>
+                <%= f.text_area :location_details_1,  class: "mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md" %>
+                <p class="mt-1 text-sm text-gray-600">
+                  (Specify what city or municipality)
+                </p>
+              </div>
+              <div class="col-span-6 sm:col-span-3">
+                <label for="first-name" class="block text-sm font-medium text-gray-700 pb-2">Other Location Details (2)</label>
+                <%= f.text_area :location_details_2,  class: "mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md" %>
+                <p class="mt-1 text-sm text-gray-600">
+                  (Specify what town, village, etc.)
+                </p>
+              </div>
+              <fieldset>
+                <div>
+                  <legend class="text-base font-medium text-gray-700 pt-4">Is this an ongoing case?</legend>
+                </div>
+                <div class="mt-4 space-y-4">
+                  <div class="flex items-center">
+                    <input id="push-everything" name="push-notifications" type="radio" class="focus:ring-indigo-500 h-4 w-4 text-indigo-600 border-gray-300">
+                    <label for="push-everything" class="ml-3 block text-sm font-medium text-gray-700">
+                      Yes
+                    </label>
+                  </div>
+                  <div class="flex items-center">
+                    <input id="push-email" name="push-notifications" type="radio" class="focus:ring-indigo-500 h-4 w-4 text-indigo-600 border-gray-300">
+                    <label for="push-email" class="ml-3 block text-sm font-medium text-gray-700">
+                      No
+                    </label>
+                  </div>
+                </div>
+              </fieldset>
+              <div class="col-span-8">
+                <label for="first-name" class="block text-sm font-medium text-gray-700 pb-2">Start Date of Incident</label>
+                <%= f.select :incident_start_month, Date::MONTHNAMES, default: Date.current %>
+                <%= f.select :incident_start_day, 1..31 %>
+                <%= f.select :incident_start_year, (Date.current - 10.year).year..(Time.zone.now.year) %>
+              </div>
+
+              <div class="col-span-8">
+                <label for="first-name" class="block text-sm font-medium text-gray-700 pb-2">End Date of Incident</label>
+                <%= f.select :incident_end_month, Date::MONTHNAMES, default: Date.current %>
+                <%= f.select :incident_end_day, 1..31 %>
+                <%= f.select :incident_end_year, (Date.current - 10.year).year..(Time.zone.now.year) %>
+              </div>
+
+              <div class="col-span-8">
+                <label for="first-name" class="block text-sm font-medium text-gray-700 pb-2">Incident Time</label>
+                <%= f.select :incident_hour,  1..24 %>
+                <%= f.select :incident_minute,  1..59 %>
+
+              </div>
+
+      <div class="px-4 py-3 bg-gray-100 text-right sm:px-6">
+        <button type="submit" class="inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-green-600 hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500">
+          Next
+        </button>
+      </div>
+    <% end %>
+  </div>
+</div>

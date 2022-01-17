@@ -1,0 +1,2 @@
+class PerpetratorCategory < ApplicationRecord
+end

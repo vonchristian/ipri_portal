@@ -1,0 +1,71 @@
+
+<div class="grid grid-cols-12 min-h-screen">
+  <div class="col-span-3 bg-green-500">
+    <h1 class="pt-10 pl-4 font-bold py-5 px-10"> Step 4/7:</h1>
+    <h3 class="pl-2 font-bold pl-8"><i class="fa fa-circle fa-2x"></i> <span class="align-top pl-4 pb-2">Documenter Details</span></h3>
+    <h3 class="pl-2 font-bold pl-8 pt-4"><i class="fa fa-circle fa-2x"></i> <span class="align-top pl-4 pb-2">Data Sharing Agreement</span></h3>
+    <h3 class="pl-2 font-bold pl-8 pt-4"><i class="fa fa-circle fa-2x"></i> <span class="align-top pl-4 pb-2">Incident Details</span></h3>
+    <h3 class="pl-2 font-bold pl-8 pt-4"><i class="fa fa-circle fa-2x"></i> <span class="align-top pl-4 pb-2">Victims</span></h3>
+    <h3 class="pl-2 font-bold pl-8 pt-4"><i class="fa fa-circle-o fa-2x"></i> <span class="align-top pl-4 pb-2">Human Rights Violations</span></h3>
+    <h3 class="pl-2 font-bold pl-8 pt-4"><i class="fa fa-circle-o fa-2x"></i> <span class="align-top pl-4 pb-2">Actions Taken</span></h3>
+    <h3 class="pl-2 font-bold pl-8 pt-4"><i class="fa fa-circle-o fa-2x"></i> <span class="align-top pl-4 pb-2">Development Projects</span></h3>
+  </div>
+
+  <div class="col-span-9 bg-white py-10 px-5">
+    <%= form_for @individual_victim, url: :fact_sheets_temp_fact_sheet_individual_victims do |f| %>
+    <div class="max-w-7xl mx-auto lg:px-0">
+      <h2 class="font-bold text-xl text-gray-900">Individual Victim Details</h2>
+      <div class="md:mt-0 md:col-span-2 bg-white px-4">
+
+          <div class="border-t border-gray-200 mt-4"></div>
+          <div>
+            <div class="px-4 py-5  space-y-4 sm:p-6">
+              <div class="col-span-6 sm:col-span-3">
+                <label for="first-name" class="block text-sm font-medium text-gray-700 pb-2">Full Name</label>
+                <%= f.text_field :full_name,  class: "mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md" %>
+              </div>
+                  <label for="first-name" class="block text-sm font-medium text-gray-700 pb-2">Gender</label>
+                  <%= f.select :gender, options_for_select(IndividualVictim.genders.map {|key, value| [value.upcase, IndividualVictim.genders.key(value)]}) %>
+
+                  <label for="first-name" class="block text-sm font-medium text-gray-700 pb-2">Dependent Type</label>
+                  <%= f.select :dependent_type, options_for_select(IndividualVictim.dependent_types.map {|key, value| [key.titleize, IndividualVictim.dependent_types.key(value)]}) %>
+               <div class="col-span-8">
+                <label for="first-name" class="block text-sm font-medium text-gray-700 pb-2">Date of Birth</label>
+                <%= f.select :date_of_birth_month, Date::MONTHNAMES, default: Date.current %>
+                <%= f.select :date_of_birth_day, 1..31 %>
+                <%= f.select :date_of_birth_year, (Date.current - 100.year).year..(Time.zone.now.year) %>
+              </div>
+              <div class="grid grid-cols-4 gap-6">
+                <div class="col-span-2 sm:col-span-2">
+                  <label for="first-name" class="block text-sm font-medium text-gray-700 pb-2">Age Bracket</label>
+                 <%= f.select :age_bracket_id, AgeBracket.all.map{|a| [a.range_name, a.id] }, class: "mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md" %>
+                </div>
+              </div>
+              <div class="col-span-6 sm:col-span-3">
+                <label for="first-name" class="block text-sm font-medium text-gray-700 pb-2">Dependent Details</label>
+                <%= f.text_area :dependent_details,  class: "mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md" %>
+                <p class="mt-1 text-sm text-gray-600">
+                Please provide details of dependents. (E.g., children, partner, grandchildren etc.) (List details of dependents.)
+                </p>
+              </div>
+              <div class="col-span-6 sm:col-span-3">
+                <label for="first-name" class="block text-sm font-medium text-gray-700 pb-2">Ethnic Identity</label>
+                <%= f.text_field :ethnic_identity,  class: "mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md" %>
+                <p class="mt-1 text-sm text-gray-600">
+                Name of Indigenous Peoples’ group or Ethnic Identity of victim
+                </p>
+              </div>
+              <div class="col-span-6 sm:col-span-3">
+                <label for="first-name" class="block text-sm font-medium text-gray-700 pb-2">Role of Victim in the Community</label>
+                <%= f.text_area :victim_role,  class: "mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md" %>
+                <p class="mt-1 text-sm text-gray-600">
+                (The response in this field can be elder, healer or spiritual leader, community organizer, a vocal protester against human rights violations, etc.) This information is meant to capture the victim’s involvement in the community and understand why s/he was the target of human rights violation and/or the impact of the human rights violation against him/her to the community or movement.
+                </p>
+              </div>
+
+              <div class="px-4 py-3 bg-gray-100 text-right sm:px-6">
+                <button type="submit" class="inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-green-600 hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500">
+                  Next
+                </button>
+              </div>
+    <% end %>
