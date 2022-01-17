@@ -20,11 +20,11 @@
     <div class="items-center px-4 py-4">
     <h2 class="font-bold text-xl text-gray-900">Individuals </h2>
       <p class="mt-1 text-sm text-gray-600">Choose this category if the name/s of the victim/s is/are known</p>
-        <a href="/fact_sheets/temp_fact_sheets/<%=@temp_fact_sheet.id%>/individual_victims/new"type="submit" class="inline-flex py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-green-600 hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500">
+        <a href="/fact_sheets/fact_sheets/<%=@fact_sheet.id%>/individual_victims/new"type="submit" class="inline-flex py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-green-600 hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500">
           Add
         </a>
     </div>
-    <% @temp_fact_sheet.individual_victims.each do |individual_victim| %>
+    <% @fact_sheet.individual_victims.each do |individual_victim| %>
     <%= individual_victim.full_name %>
     <% end %>
 
@@ -34,16 +34,16 @@
         (Choose this category&nbsp;if the name/s of the victims are too many to identify and are not known, e.g., 100 of members of an entire indigenous community or an entire village etc)
       </p>
 
-        <a href="/fact_sheets/temp_fact_sheets/<%=@temp_fact_sheet.id%>/collective_victims/new"type="submit" class="inline-flex py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-green-600 hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500">
+        <a href="/fact_sheets/fact_sheets/<%=@fact_sheet.id%>/collective_victims/new"type="submit" class="inline-flex py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-green-600 hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500">
           Add
         </a>
     </div>
-     <% @temp_fact_sheet.collective_victims.each do |collective_victim| %>
+     <% @fact_sheet.collective_victims.each do |collective_victim| %>
     <%= collective_victim.inspect %>
     <% end %>
 
 <div class="px-4 py-3 bg-gray-100 text-right sm:px-6">
-                 <a href="/fact_sheets/temp_fact_sheets/<%=@temp_fact_sheet.id%>/human_rights_violations"type="submit" class="inline-flex py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-green-600 hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500">
+                 <a href="/fact_sheets/fact_sheets/<%=@fact_sheet.id%>/human_rights_violations"type="submit" class="inline-flex py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-green-600 hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500">
           Next
         </a>
               </div>

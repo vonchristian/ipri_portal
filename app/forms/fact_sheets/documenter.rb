@@ -10,27 +10,27 @@ module FactSheets
 
     def process!
       ApplicationRecord.transaction do
-        create_temp_fact_sheet
+        create_fact_sheet
       end
     end
 
     private
 
-    def create_temp_fact_sheet
-      Tmps::FactSheet.create!(
-        documenter_first_name: first_name,
-        documenter_last_name: last_name,
+    def create_fact_sheet
+      FactSheet.create!(
+        documenter_first_name:        first_name,
+        documenter_last_name:         last_name,
         documenter_organization_name: documenter_organization,
         submission_date_year:         submission_date_year,
         submission_date_day:          submission_date_day,
         submission_date_month:        submission_date_month,
-        primary_data: primary_data,
-        reference_number: reference_number,
-        documenter_email: documenter_email,
-        documenter_phone_number: documenter_phone_number,
-        incident_start_year:         submission_date_year,
-        incident_start_day:          submission_date_day,
-        incident_start_month:        submission_date_month,
+        primary_data:                 primary_data,
+        reference_number:             reference_number,
+        documenter_email:             documenter_email,
+        documenter_phone_number:      documenter_phone_number,
+        incident_start_year:          submission_date_year,
+        incident_start_day:           submission_date_day,
+        incident_start_month:         submission_date_month,
       )
     end
   end

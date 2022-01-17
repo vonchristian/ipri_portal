@@ -1,6 +1,6 @@
-class CreateTempFactSheets < ActiveRecord::Migration[7.0]
+class CreateFactSheets < ActiveRecord::Migration[7.0]
   def change
-    create_table :temp_fact_sheets do |t|
+    create_table :fact_sheets do |t|
       t.string :documenter_first_name, null: false
       t.string :documenter_last_name, null: false
       t.string :documenter_organization_name, null: false
@@ -32,6 +32,6 @@ class CreateTempFactSheets < ActiveRecord::Migration[7.0]
 
       t.timestamps
     end
-    add_index :temp_fact_sheets, :reference_number, unique: true
+    add_index :fact_sheets, :reference_number, unique: true
   end
 end

@@ -22,13 +22,13 @@ ActiveRecord::Schema.define(version: 2021_12_28_111112) do
   end
 
   create_table "actions_undertakens", force: :cascade do |t|
-    t.bigint "temp_fact_sheet_id"
+    t.bigint "fact_sheet_id"
     t.string "advocacy_or_action"
     t.text "advocacy_or_action_details"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["advocacy_or_action"], name: "index_actions_undertakens_on_advocacy_or_action"
-    t.index ["temp_fact_sheet_id"], name: "index_actions_undertakens_on_temp_fact_sheet_id"
+    t.index ["fact_sheet_id"], name: "index_actions_undertakens_on_fact_sheet_id"
   end
 
   create_table "age_brackets", force: :cascade do |t|
@@ -50,7 +50,7 @@ ActiveRecord::Schema.define(version: 2021_12_28_111112) do
   end
 
   create_table "collective_victims", force: :cascade do |t|
-    t.bigint "temp_fact_sheet_id"
+    t.bigint "fact_sheet_id"
     t.text "affected_total"
     t.text "victim_details"
     t.boolean "refer_to_individuals"
@@ -58,7 +58,7 @@ ActiveRecord::Schema.define(version: 2021_12_28_111112) do
     t.integer "female_total"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.index ["temp_fact_sheet_id"], name: "index_collective_victims_on_temp_fact_sheet_id"
+    t.index ["fact_sheet_id"], name: "index_collective_victims_on_fact_sheet_id"
   end
 
   create_table "companies", force: :cascade do |t|
@@ -84,7 +84,7 @@ ActiveRecord::Schema.define(version: 2021_12_28_111112) do
   end
 
   create_table "criminalizations", force: :cascade do |t|
-    t.bigint "temp_fact_sheet_id"
+    t.bigint "fact_sheet_id"
     t.text "criminalization_details"
     t.string "experienced_harrassment_or_intimidation"
     t.text "harrassment_or_intimidation_details"
@@ -111,9 +111,9 @@ ActiveRecord::Schema.define(version: 2021_12_28_111112) do
     t.index ["case_filing_against_perpetrator"], name: "index_criminalizations_on_case_filing_against_perpetrator"
     t.index ["case_filing_status"], name: "index_criminalizations_on_case_filing_status"
     t.index ["experienced_harrassment_or_intimidation"], name: "index_criminalizations_on_harrassment_or_intimidation"
+    t.index ["fact_sheet_id"], name: "index_criminalizations_on_fact_sheet_id"
     t.index ["investigation_on_criminalization"], name: "index_criminalizations_on_investigation_on_criminalization"
     t.index ["state_action_to_address_criminalization"], name: "index_criminalizations_on_state_action_to_address"
-    t.index ["temp_fact_sheet_id"], name: "index_criminalizations_on_temp_fact_sheet_id"
     t.index ["victims_in_detention"], name: "index_criminalizations_on_victims_in_detention"
   end
 
@@ -132,85 +132,7 @@ ActiveRecord::Schema.define(version: 2021_12_28_111112) do
     t.datetime "updated_at", precision: 6, null: false
   end
 
-  create_table "funding_sources", force: :cascade do |t|
-    t.string "name"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
-  end
-
-  create_table "individual_victims", force: :cascade do |t|
-    t.bigint "age_bracket_id", null: false
-    t.string "full_name"
-    t.string "gender"
-    t.string "dependent_type"
-    t.string "ethnic_identity"
-    t.string "date_of_birth_month"
-    t.integer "date_of_birth_day"
-    t.integer "date_of_birth_year"
-    t.text "victim_role"
-    t.text "dependent_details"
-    t.bigint "temp_fact_sheet_id"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
-    t.index ["age_bracket_id"], name: "index_individual_victims_on_age_bracket_id"
-    t.index ["dependent_type"], name: "index_individual_victims_on_dependent_type"
-    t.index ["gender"], name: "index_individual_victims_on_gender"
-    t.index ["temp_fact_sheet_id"], name: "index_individual_victims_on_temp_fact_sheet_id"
-  end
-
-  create_table "killing_perpetrator_categories", force: :cascade do |t|
-    t.bigint "killing_id", null: false
-    t.bigint "perpetrator_category_id", null: false
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
-    t.index ["killing_id"], name: "index_killing_perpetrator_categories_on_killing_id"
-    t.index ["perpetrator_category_id"], name: "index_killing_perpetrator_categories_on_perpetrator_category_id"
-  end
-
-  create_table "killings", force: :cascade do |t|
-    t.bigint "temp_fact_sheet_id"
-    t.text "killing_details"
-    t.text "killing_carried_out"
-    t.string "experienced_harrassment_or_intimidation"
-    t.text "harrassment_or_intimidation_details"
-    t.string "alleged_perpetrators_known"
-    t.string "case_filing_status"
-    t.text "case_filing_details"
-    t.string "state_action_to_address_killing"
-    t.text "state_action_to_address_killing_details"
-    t.string "investigation_on_killing"
-    t.text "investigation_on_killing_details"
-    t.text "impact_to_victim_details"
-    t.text "impact_to_community_details"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
-    t.index ["alleged_perpetrators_known"], name: "index_killings_on_alleged_perpetrators_known"
-    t.index ["case_filing_status"], name: "index_killings_on_case_filing_status"
-    t.index ["experienced_harrassment_or_intimidation"], name: "index_killings_on_experienced_harrassment_or_intimidation"
-    t.index ["investigation_on_killing"], name: "index_killings_on_investigation_on_killing"
-    t.index ["state_action_to_address_killing"], name: "index_killings_on_state_action_to_address_killing"
-    t.index ["temp_fact_sheet_id"], name: "index_killings_on_temp_fact_sheet_id"
-  end
-
-  create_table "perpetrator_categories", force: :cascade do |t|
-    t.string "name"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
-    t.index ["name"], name: "index_perpetrator_categories_on_name", unique: true
-  end
-
-  create_table "project_fundings", force: :cascade do |t|
-    t.bigint "funding_source_id", null: false
-    t.bigint "development_project_id", null: false
-    t.text "funding_description"
-    t.text "website_sources"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
-    t.index ["development_project_id"], name: "index_project_fundings_on_development_project_id"
-    t.index ["funding_source_id"], name: "index_project_fundings_on_funding_source_id"
-  end
-
-  create_table "temp_fact_sheets", force: :cascade do |t|
+  create_table "fact_sheets", force: :cascade do |t|
     t.string "documenter_first_name", null: false
     t.string "documenter_last_name", null: false
     t.string "documenter_organization_name", null: false
@@ -238,24 +160,102 @@ ActiveRecord::Schema.define(version: 2021_12_28_111112) do
     t.string "location_details_2"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.index ["country_id"], name: "index_temp_fact_sheets_on_country_id"
-    t.index ["reference_number"], name: "index_temp_fact_sheets_on_reference_number", unique: true
+    t.index ["country_id"], name: "index_fact_sheets_on_country_id"
+    t.index ["reference_number"], name: "index_fact_sheets_on_reference_number", unique: true
   end
 
-  add_foreign_key "actions_undertakens", "temp_fact_sheets"
+  create_table "funding_sources", force: :cascade do |t|
+    t.string "name"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
+  create_table "individual_victims", force: :cascade do |t|
+    t.bigint "age_bracket_id", null: false
+    t.string "full_name"
+    t.string "gender"
+    t.string "dependent_type"
+    t.string "ethnic_identity"
+    t.string "date_of_birth_month"
+    t.integer "date_of_birth_day"
+    t.integer "date_of_birth_year"
+    t.text "victim_role"
+    t.text "dependent_details"
+    t.bigint "fact_sheet_id"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["age_bracket_id"], name: "index_individual_victims_on_age_bracket_id"
+    t.index ["dependent_type"], name: "index_individual_victims_on_dependent_type"
+    t.index ["fact_sheet_id"], name: "index_individual_victims_on_fact_sheet_id"
+    t.index ["gender"], name: "index_individual_victims_on_gender"
+  end
+
+  create_table "killing_perpetrator_categories", force: :cascade do |t|
+    t.bigint "killing_id", null: false
+    t.bigint "perpetrator_category_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["killing_id"], name: "index_killing_perpetrator_categories_on_killing_id"
+    t.index ["perpetrator_category_id"], name: "index_killing_perpetrator_categories_on_perpetrator_category_id"
+  end
+
+  create_table "killings", force: :cascade do |t|
+    t.bigint "fact_sheet_id"
+    t.text "killing_details"
+    t.text "killing_carried_out"
+    t.string "experienced_harrassment_or_intimidation"
+    t.text "harrassment_or_intimidation_details"
+    t.string "alleged_perpetrators_known"
+    t.string "case_filing_status"
+    t.text "case_filing_details"
+    t.string "state_action_to_address_killing"
+    t.text "state_action_to_address_killing_details"
+    t.string "investigation_on_killing"
+    t.text "investigation_on_killing_details"
+    t.text "impact_to_victim_details"
+    t.text "impact_to_community_details"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["alleged_perpetrators_known"], name: "index_killings_on_alleged_perpetrators_known"
+    t.index ["case_filing_status"], name: "index_killings_on_case_filing_status"
+    t.index ["experienced_harrassment_or_intimidation"], name: "index_killings_on_experienced_harrassment_or_intimidation"
+    t.index ["fact_sheet_id"], name: "index_killings_on_fact_sheet_id"
+    t.index ["investigation_on_killing"], name: "index_killings_on_investigation_on_killing"
+    t.index ["state_action_to_address_killing"], name: "index_killings_on_state_action_to_address_killing"
+  end
+
+  create_table "perpetrator_categories", force: :cascade do |t|
+    t.string "name"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["name"], name: "index_perpetrator_categories_on_name", unique: true
+  end
+
+  create_table "project_fundings", force: :cascade do |t|
+    t.bigint "funding_source_id", null: false
+    t.bigint "development_project_id", null: false
+    t.text "funding_description"
+    t.text "website_sources"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["development_project_id"], name: "index_project_fundings_on_development_project_id"
+    t.index ["funding_source_id"], name: "index_project_fundings_on_funding_source_id"
+  end
+
+  add_foreign_key "actions_undertakens", "fact_sheets"
   add_foreign_key "collective_victim_age_bracket_breakdowns", "age_brackets"
   add_foreign_key "collective_victim_age_bracket_breakdowns", "collective_victims"
-  add_foreign_key "collective_victims", "temp_fact_sheets"
+  add_foreign_key "collective_victims", "fact_sheets"
   add_foreign_key "companies", "countries"
   add_foreign_key "criminalization_accuser_categories", "accuser_categories"
   add_foreign_key "criminalization_accuser_categories", "criminalizations"
-  add_foreign_key "criminalizations", "temp_fact_sheets"
+  add_foreign_key "criminalizations", "fact_sheets"
+  add_foreign_key "fact_sheets", "countries"
   add_foreign_key "individual_victims", "age_brackets"
-  add_foreign_key "individual_victims", "temp_fact_sheets"
+  add_foreign_key "individual_victims", "fact_sheets"
   add_foreign_key "killing_perpetrator_categories", "killings"
   add_foreign_key "killing_perpetrator_categories", "perpetrator_categories"
-  add_foreign_key "killings", "temp_fact_sheets"
+  add_foreign_key "killings", "fact_sheets"
   add_foreign_key "project_fundings", "development_projects"
   add_foreign_key "project_fundings", "funding_sources"
-  add_foreign_key "temp_fact_sheets", "countries"
 end

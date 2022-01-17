@@ -12,7 +12,7 @@ class CreateIndividualVictims < ActiveRecord::Migration[7.0]
       t.text :victim_role
       t.text :dependent_details
 
-      t.belongs_to :temp_fact_sheet,  foreign_key: true
+      t.belongs_to :fact_sheet,  foreign_key: true
 
       t.timestamps
     end

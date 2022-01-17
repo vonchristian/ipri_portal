@@ -1,5 +1,7 @@
+# frozen_string_literal: true
+
 class IndividualVictim < ApplicationRecord
-  belongs_to :temp_fact_sheet, class_name: "Tmps::FactSheet"
+  belongs_to :fact_sheet
   enum gender: {
     male: "male",
     female: "female",

@@ -5,7 +5,7 @@ module FactSheets
     class Collective
       include ActiveModel::Model
 
-      attr_accessor :temp_fact_sheet_id, :affected_total, :refer_to_individuals, :victim_details, :male_total, :female_total, :age_bracket_breakdowns
+      attr_accessor :fact_sheet_id, :affected_total, :refer_to_individuals, :victim_details, :male_total, :female_total, :age_bracket_breakdowns
 
       def process!
         ApplicationRecord.transaction do
@@ -17,7 +17,7 @@ module FactSheets
 
       def create_collective_victim
         collective_victim = CollectiveVictim.create!(
-          temp_fact_sheet_id: temp_fact_sheet_id,
+          fact_sheet_id: fact_sheet_id,
           affected_total: affected_total,
           refer_to_individuals: refer_to_individuals,
           victim_details: victim_details,

@@ -3,17 +3,17 @@
 module FactSheets
   class CriminalizationsController < ApplicationController
     def new
-      @temp_fact_sheet = Tmps::FactSheet.find(params.fetch(:temp_fact_sheet_id))
-      @criminalization = @temp_fact_sheet.criminalizations.build
+      @fact_sheet      = FactSheet.find(params.fetch(:fact_sheet_id))
+      @criminalization = @fact_sheet.criminalizations.build
     end
 
     def create
-      @temp_fact_sheet = Tmps::FactSheet.find(params.fetch(:temp_fact_sheet_id))
-      @criminalization = @temp_fact_sheet.criminalizations.create(criminalization_params)
+      @fact_sheet      = FactSheet.find(params.fetch(:fact_sheet_id))
+      @criminalization = @fact_sheet.criminalizations.create(criminalization_params)
       if @criminalization.valid?
         @criminalization.save!
 
-        redirect_to new_fact_sheets_temp_fact_sheet_incident_detail_url(@temp_fact_sheet)
+        redirect_to new_fact_sheets_fact_sheet_incident_detail_url(@fact_sheet)
       else
         render :new
       end

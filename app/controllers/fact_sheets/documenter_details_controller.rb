@@ -10,9 +10,9 @@ module FactSheets
       @documenter = FactSheets::Documenter.new(documenter_params)
       if @documenter.valid?
         @documenter.process!
-        @temp_fact_sheet = Tmps::FactSheet.find_by(reference_number: params[:fact_sheets_documenter][:reference_number])
+        @fact_sheet = FactSheet.find_by(reference_number: params[:fact_sheets_documenter][:reference_number])
 
-        redirect_to new_fact_sheets_temp_fact_sheet_data_sharing_agreement_url(@temp_fact_sheet)
+        redirect_to new_fact_sheets_fact_sheet_data_sharing_agreement_url(@fact_sheet)
       else
         render :new
       end
