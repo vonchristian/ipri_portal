@@ -1,0 +1,49 @@
+
+<div class="grid grid-cols-12 min-h-screen">
+  <div class="col-span-3 bg-green-500">
+    <h1 class="pt-10 pl-4 font-bold py-5 px-10"> Step 4/7:</h1>
+    <h3 class="pl-2 font-bold pl-8 pt-4 align-middle"><i class="fa fa-circle fa-2x"></i> <span class="pl-4">Documenter Details</span></h3>
+    <h3 class="pl-2 font-bold pl-8 pt-4"><i class="fa fa-circle fa-2x"></i> <span class="align-middle pl-4 pb-2">Data Sharing Agreement</span></h3>
+    <h3 class="pl-2 font-bold pl-8 pt-4"><i class="fa fa-circle fa-2x"></i> <span class="align-middle pl-4 pb-2">Incident Details</span></h3>
+    <h3 class="pl-2 font-bold pl-8 pt-4"><i class="fa fa-circle fa-2x"></i> <span class="align-middle pl-4 pb-2">Victims</span></h3>
+    <h3 class="pl-2 font-bold pl-8 pt-4"><i class="fa fa-circle-o fa-2x"></i> <span class="align-middle pl-4 pb-2">Human Rights Violoations</span></h3>
+    <h3 class="pl-2 font-bold pl-8 pt-4"><i class="fa fa-circle-o fa-2x"></i> <span class="align-middle pl-4 pb-2">Actions Taken</span></h3>
+    <h3 class="pl-2 font-bold pl-8 pt-4"><i class="fa fa-circle-o fa-2x"></i> <span class="inline-block align-text-bottom pl-4">Development Projects</span></h3>
+  </div>
+  <div class="col-span-9 bg-white py-10 px-5">
+    <h2 class="font-bold text-xl text-gray-900">Victim Details </h2>
+          <div class="border-t border-gray-200 mt-4"></div>
+
+
+          <div class="border-t border-gray-200 mt-4"></div>
+
+    <div class="items-center px-4 py-4">
+    <h2 class="font-bold text-xl text-gray-900">Individuals </h2>
+      <p class="mt-1 text-sm text-gray-600">Choose this category if the name/s of the victim/s is/are known</p>
+        <a href="/ip_rights/case_details/<%=@case_detail.id%>/individual_victims/new"type="submit" class="inline-flex py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-green-600 hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500">
+          Add
+        </a>
+    </div>
+    <% @case_detail.individual_victims.each do |individual_victim| %>
+    <%= individual_victim.full_name %>
+    <% end %>
+
+    <div class="flex flex-wrap items-center justify-between bg-gray-100 px-4 py-4">
+    <h2 class="font-bold text-xl text-gray-900">Group of People </h2>
+      <p class="mt-1 text-sm text-gray-600 px-4">
+        (Choose this category&nbsp;if the name/s of the victims are too many to identify and are not known, e.g., 100 of members of an entire indigenous community or an entire village etc)
+      </p>
+
+        <a href="/ip_rights/case_details/<%=@case_detail.id%>/collective_victims/new"type="submit" class="inline-flex py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-green-600 hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500">
+          Add
+        </a>
+    </div>
+     <% @case_detail.collective_victims.each do |collective_victim| %>
+    <%= collective_victim.inspect %>
+    <% end %>
+
+<div class="px-4 py-3 bg-gray-100 text-right sm:px-6">
+                 <a href="/ip_rights/case_details/<%=@case_detail.id%>/human_rights_violations"type="submit" class="inline-flex py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-green-600 hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500">
+          Save and Proceed
+        </a>
+              </div>

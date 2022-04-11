@@ -1,7 +1,7 @@
 class CreateCollectiveVictims < ActiveRecord::Migration[7.0]
   def change
     create_table :collective_victims do |t|
-      t.belongs_to :fact_sheet, foreign_key: true
+      t.belongs_to :case_detail, foreign_key: true
       t.text :affected_total
       t.text :victim_details
       t.boolean :refer_to_individuals

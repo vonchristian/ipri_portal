@@ -1,7 +1,7 @@
 Rails.application.routes.draw do
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
-  namespace :fact_sheets do
-    resources :fact_sheets, only: [:show] do
+  namespace :ip_rights do
+    resources :case_details, only: [:show] do
       resources :data_sharing_agreements, only: [:new, :create]
       resources :incident_details,        only: [:new, :create]
       resources :victims,                 only: [:index]
@@ -13,6 +13,4 @@ Rails.application.routes.draw do
 
     resources :documenter_details,      only: [:new, :create]
   end
-  # Defines the root path route ("/")
-  # root "articles#index"
 end

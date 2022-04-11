@@ -10,63 +10,102 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_12_28_111112) do
-
+ActiveRecord::Schema[7.0].define(version: 2022_03_26_134839) do
   # These are extensions that must be enabled in order to support this database
+  enable_extension "pgcrypto"
   enable_extension "plpgsql"
 
   create_table "accuser_categories", force: :cascade do |t|
     t.string "name"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "actions_undertakens", force: :cascade do |t|
-    t.bigint "fact_sheet_id"
+    t.bigint "case_detail_id"
     t.string "advocacy_or_action"
     t.text "advocacy_or_action_details"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
     t.index ["advocacy_or_action"], name: "index_actions_undertakens_on_advocacy_or_action"
-    t.index ["fact_sheet_id"], name: "index_actions_undertakens_on_fact_sheet_id"
+    t.index ["case_detail_id"], name: "index_actions_undertakens_on_case_detail_id"
+  end
+
+  create_table "admin_users", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.string "first_name", null: false
+    t.string "last_name", null: false
+    t.string "email", null: false
+    t.string "password_digest", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "age_brackets", force: :cascade do |t|
     t.integer "min_age"
     t.integer "max_age"
     t.string "name"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "case_details", force: :cascade do |t|
+    t.string "organization_name", null: false
+    t.integer "submission_date_year", null: false
+    t.integer "submission_date_day", null: false
+    t.string "submission_date_month", null: false
+    t.integer "incident_start_year", null: false
+    t.integer "incident_start_day", null: false
+    t.string "incident_start_month", null: false
+    t.integer "incident_end_year"
+    t.integer "incident_end_day"
+    t.string "incident_end_month"
+    t.integer "incident_hour"
+    t.integer "incident_minute"
+    t.string "time_period"
+    t.string "reference_number", null: false
+    t.boolean "primary_data", default: false, null: false
+    t.string "data_sharing", null: false
+    t.bigint "country_id"
+    t.string "subnational_location"
+    t.string "location_details_1"
+    t.string "location_details_2"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.uuid "documenter_id", null: false
+    t.index ["country_id"], name: "index_case_details_on_country_id"
+    t.index ["data_sharing"], name: "index_case_details_on_data_sharing"
+    t.index ["documenter_id"], name: "index_case_details_on_documenter_id"
+    t.index ["reference_number"], name: "index_case_details_on_reference_number", unique: true
   end
 
   create_table "collective_victim_age_bracket_breakdowns", force: :cascade do |t|
     t.bigint "collective_victim_id", null: false
     t.bigint "age_bracket_id", null: false
     t.integer "total"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
     t.index ["age_bracket_id"], name: "index_collective_victim_breakdowns_on_age_bracket_id"
     t.index ["collective_victim_id"], name: "index_collective_victim_breakdowns_on_collective_victim_id"
   end
 
   create_table "collective_victims", force: :cascade do |t|
-    t.bigint "fact_sheet_id"
+    t.bigint "case_detail_id"
     t.text "affected_total"
     t.text "victim_details"
     t.boolean "refer_to_individuals"
     t.integer "male_total"
     t.integer "female_total"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
-    t.index ["fact_sheet_id"], name: "index_collective_victims_on_fact_sheet_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["case_detail_id"], name: "index_collective_victims_on_case_detail_id"
   end
 
   create_table "companies", force: :cascade do |t|
     t.bigint "country_id", null: false
     t.string "name"
     t.string "description"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
     t.index ["country_id"], name: "index_companies_on_country_id"
   end
 
@@ -77,14 +116,14 @@ ActiveRecord::Schema.define(version: 2021_12_28_111112) do
   create_table "criminalization_accuser_categories", force: :cascade do |t|
     t.bigint "criminalization_id", null: false
     t.bigint "accuser_category_id", null: false
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
     t.index ["accuser_category_id"], name: "index_criminalization_accuser_categories_on_accuser_category_id"
     t.index ["criminalization_id"], name: "index_criminalization_accuser_categories_on_criminalization_id"
   end
 
   create_table "criminalizations", force: :cascade do |t|
-    t.bigint "fact_sheet_id"
+    t.bigint "case_detail_id"
     t.text "criminalization_details"
     t.string "experienced_harrassment_or_intimidation"
     t.text "harrassment_or_intimidation_details"
@@ -105,13 +144,13 @@ ActiveRecord::Schema.define(version: 2021_12_28_111112) do
     t.text "investigation_on_criminalization_details"
     t.text "impact_to_victim_details"
     t.text "impact_to_community_details"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
     t.index ["case_decision_status"], name: "index_criminalizations_on_case_decision_status"
+    t.index ["case_detail_id"], name: "index_criminalizations_on_case_detail_id"
     t.index ["case_filing_against_perpetrator"], name: "index_criminalizations_on_case_filing_against_perpetrator"
     t.index ["case_filing_status"], name: "index_criminalizations_on_case_filing_status"
     t.index ["experienced_harrassment_or_intimidation"], name: "index_criminalizations_on_harrassment_or_intimidation"
-    t.index ["fact_sheet_id"], name: "index_criminalizations_on_fact_sheet_id"
     t.index ["investigation_on_criminalization"], name: "index_criminalizations_on_investigation_on_criminalization"
     t.index ["state_action_to_address_criminalization"], name: "index_criminalizations_on_state_action_to_address"
     t.index ["victims_in_detention"], name: "index_criminalizations_on_victims_in_detention"
@@ -119,8 +158,8 @@ ActiveRecord::Schema.define(version: 2021_12_28_111112) do
 
   create_table "development_project_categories", force: :cascade do |t|
     t.string "name"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "development_projects", force: :cascade do |t|
@@ -128,46 +167,69 @@ ActiveRecord::Schema.define(version: 2021_12_28_111112) do
     t.text "description"
     t.integer "project_start_year"
     t.text "website_sources"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
-  end
-
-  create_table "fact_sheets", force: :cascade do |t|
-    t.string "documenter_first_name", null: false
-    t.string "documenter_last_name", null: false
-    t.string "documenter_organization_name", null: false
-    t.integer "submission_date_year", null: false
-    t.integer "submission_date_day", null: false
-    t.string "submission_date_month", null: false
-    t.integer "incident_start_year", null: false
-    t.integer "incident_start_day", null: false
-    t.string "incident_start_month", null: false
-    t.integer "incident_end_year"
-    t.integer "incident_end_day"
-    t.string "incident_end_month"
-    t.integer "incident_hour"
-    t.integer "incident_minute"
-    t.string "time_period"
-    t.string "reference_number", null: false
-    t.string "documenter_email"
-    t.string "documenter_phone_number"
-    t.boolean "primary_data", default: false, null: false
-    t.boolean "data_sharing_restricted", default: false
-    t.boolean "data_sharing_unrestricted", default: false
-    t.bigint "country_id"
-    t.string "subnational_location"
-    t.string "location_details_1"
-    t.string "location_details_2"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
-    t.index ["country_id"], name: "index_fact_sheets_on_country_id"
-    t.index ["reference_number"], name: "index_fact_sheets_on_reference_number", unique: true
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "funding_sources", force: :cascade do |t|
     t.string "name"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "human_rights_violation_categories", force: :cascade do |t|
+    t.string "title"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["title"], name: "index_human_rights_violation_categories_on_title", unique: true
+  end
+
+  create_table "human_rights_violation_categorizations", force: :cascade do |t|
+    t.bigint "human_rights_violation_id", null: false
+    t.bigint "human_rights_violation_category_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["human_rights_violation_category_id", "human_rights_violation_id"], name: "index_hrv_categorizations_on_hrv_category_id_and_hrv_id", unique: true
+    t.index ["human_rights_violation_category_id"], name: "index_hr_violation_categorizations_on_hr_violation_category_id"
+    t.index ["human_rights_violation_id"], name: "index_hr_violation_categorizations_on_hr_violation_id"
+  end
+
+  create_table "human_rights_violation_perpetratorizations", force: :cascade do |t|
+    t.bigint "human_rights_violation_id", null: false
+    t.bigint "perpetrator_category_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["human_rights_violation_id"], name: "index_hr_violation_perpetrators_on_hr_violation_id"
+    t.index ["perpetrator_category_id"], name: "index_hr_violation_perpetrators_on_perpetrator_category_id"
+  end
+
+  create_table "human_rights_violations", force: :cascade do |t|
+    t.bigint "case_detail_id", null: false
+    t.text "violation_details"
+    t.string "alleged_perpetrators_known"
+    t.text "alleged_perpetrator_details"
+    t.string "case_filing_status"
+    t.text "case_filing_details"
+    t.string "state_action_to_address_violation"
+    t.string "state_action_to_address_violation_details"
+    t.string "investigation_on_violation"
+    t.text "investigation_on_violation_details"
+    t.string "impact_to_victim_details"
+    t.text "impact_to_community_details"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["alleged_perpetrators_known"], name: "index_human_rights_violations_on_alleged_perpetrators_known"
+    t.index ["case_detail_id"], name: "index_human_rights_violations_on_case_detail_id"
+    t.index ["case_filing_status"], name: "index_human_rights_violations_on_case_filing_status"
+    t.index ["investigation_on_violation"], name: "index_human_rights_violations_on_investigation_on_violation"
+    t.index ["state_action_to_address_violation"], name: "index_hr_violations_on_state_action_to_address_violation"
+  end
+
+  create_table "human_rights_violations_perpetrator_categories", force: :cascade do |t|
+    t.string "title"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["title"], name: "index_human_rights_violations_perpetrator_categories_on_title", unique: true
   end
 
   create_table "individual_victims", force: :cascade do |t|
@@ -181,26 +243,26 @@ ActiveRecord::Schema.define(version: 2021_12_28_111112) do
     t.integer "date_of_birth_year"
     t.text "victim_role"
     t.text "dependent_details"
-    t.bigint "fact_sheet_id"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
+    t.bigint "case_detail_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
     t.index ["age_bracket_id"], name: "index_individual_victims_on_age_bracket_id"
+    t.index ["case_detail_id"], name: "index_individual_victims_on_case_detail_id"
     t.index ["dependent_type"], name: "index_individual_victims_on_dependent_type"
-    t.index ["fact_sheet_id"], name: "index_individual_victims_on_fact_sheet_id"
     t.index ["gender"], name: "index_individual_victims_on_gender"
   end
 
   create_table "killing_perpetrator_categories", force: :cascade do |t|
     t.bigint "killing_id", null: false
     t.bigint "perpetrator_category_id", null: false
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
     t.index ["killing_id"], name: "index_killing_perpetrator_categories_on_killing_id"
     t.index ["perpetrator_category_id"], name: "index_killing_perpetrator_categories_on_perpetrator_category_id"
   end
 
   create_table "killings", force: :cascade do |t|
-    t.bigint "fact_sheet_id"
+    t.bigint "case_detail_id"
     t.text "killing_details"
     t.text "killing_carried_out"
     t.string "experienced_harrassment_or_intimidation"
@@ -214,21 +276,21 @@ ActiveRecord::Schema.define(version: 2021_12_28_111112) do
     t.text "investigation_on_killing_details"
     t.text "impact_to_victim_details"
     t.text "impact_to_community_details"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
     t.index ["alleged_perpetrators_known"], name: "index_killings_on_alleged_perpetrators_known"
+    t.index ["case_detail_id"], name: "index_killings_on_case_detail_id"
     t.index ["case_filing_status"], name: "index_killings_on_case_filing_status"
     t.index ["experienced_harrassment_or_intimidation"], name: "index_killings_on_experienced_harrassment_or_intimidation"
-    t.index ["fact_sheet_id"], name: "index_killings_on_fact_sheet_id"
     t.index ["investigation_on_killing"], name: "index_killings_on_investigation_on_killing"
     t.index ["state_action_to_address_killing"], name: "index_killings_on_state_action_to_address_killing"
   end
 
-  create_table "perpetrator_categories", force: :cascade do |t|
+  create_table "killings_perpetrator_categories", force: :cascade do |t|
     t.string "name"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
-    t.index ["name"], name: "index_perpetrator_categories_on_name", unique: true
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["name"], name: "index_killings_perpetrator_categories_on_name", unique: true
   end
 
   create_table "project_fundings", force: :cascade do |t|
@@ -236,26 +298,43 @@ ActiveRecord::Schema.define(version: 2021_12_28_111112) do
     t.bigint "development_project_id", null: false
     t.text "funding_description"
     t.text "website_sources"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
     t.index ["development_project_id"], name: "index_project_fundings_on_development_project_id"
     t.index ["funding_source_id"], name: "index_project_fundings_on_funding_source_id"
   end
 
-  add_foreign_key "actions_undertakens", "fact_sheets"
+  create_table "users", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.string "email", null: false
+    t.string "password_digest", null: false
+    t.string "first_name", null: false
+    t.string "last_name", null: false
+    t.string "phone_number"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["email"], name: "index_users_on_email", unique: true
+  end
+
+  add_foreign_key "actions_undertakens", "case_details"
+  add_foreign_key "case_details", "countries"
+  add_foreign_key "case_details", "users", column: "documenter_id"
   add_foreign_key "collective_victim_age_bracket_breakdowns", "age_brackets"
   add_foreign_key "collective_victim_age_bracket_breakdowns", "collective_victims"
-  add_foreign_key "collective_victims", "fact_sheets"
+  add_foreign_key "collective_victims", "case_details"
   add_foreign_key "companies", "countries"
   add_foreign_key "criminalization_accuser_categories", "accuser_categories"
   add_foreign_key "criminalization_accuser_categories", "criminalizations"
-  add_foreign_key "criminalizations", "fact_sheets"
-  add_foreign_key "fact_sheets", "countries"
+  add_foreign_key "criminalizations", "case_details"
+  add_foreign_key "human_rights_violation_categorizations", "human_rights_violation_categories"
+  add_foreign_key "human_rights_violation_categorizations", "human_rights_violations"
+  add_foreign_key "human_rights_violation_perpetratorizations", "human_rights_violations"
+  add_foreign_key "human_rights_violation_perpetratorizations", "human_rights_violations_perpetrator_categories", column: "perpetrator_category_id"
+  add_foreign_key "human_rights_violations", "case_details"
   add_foreign_key "individual_victims", "age_brackets"
-  add_foreign_key "individual_victims", "fact_sheets"
+  add_foreign_key "individual_victims", "case_details"
   add_foreign_key "killing_perpetrator_categories", "killings"
-  add_foreign_key "killing_perpetrator_categories", "perpetrator_categories"
-  add_foreign_key "killings", "fact_sheets"
+  add_foreign_key "killing_perpetrator_categories", "killings_perpetrator_categories", column: "perpetrator_category_id"
+  add_foreign_key "killings", "case_details"
   add_foreign_key "project_fundings", "development_projects"
   add_foreign_key "project_fundings", "funding_sources"
 end

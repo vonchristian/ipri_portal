@@ -1,0 +1,34 @@
+
+<div class="grid grid-cols-12 min-h-screen">
+  <div class="col-span-3 bg-green-500">
+    <h1 class="pt-10 pl-4 font-bold py-5 px-10"> Step 5/7:</h1>
+    <h3 class="font-bold pl-8"><i class="fa fa-circle fa-2x"></i> <span class="align-top pl-4 pb-2">Documenter Details</span></h3>
+    <h3 class="font-bold pl-8 pt-4"><i class="fa fa-circle fa-2x"></i> <span class="align-top pl-4 pb-2">Data Sharing Agreement</span></h3>
+    <h3 class="font-bold pl-8 pt-4"><i class="fa fa-circle fa-2x"></i> <span class="align-top pl-4 pb-2">Incident Details</span></h3>
+    <h3 class="font-bold pl-8 pt-4"><i class="fa fa-circle fa-2x"></i> <span class="align-top pl-4 pb-2">Victims</span></h3>
+    <h3 class="font-bold pl-8 pt-4"><i class="fa fa-circle fa-2x"></i> <span class="align-top pl-4 pb-2">Human Rights Violations</span></h3>
+    <h3 class="font-bold pl-8 pt-4"><i class="fa fa-circle-o fa-2x"></i> <span class="align-top pl-4 pb-2">Actions Taken</span></h3>
+    <h3 class="font-bold pl-8 pt-4"><i class="fa fa-circle-o fa-2x"></i> <span class="align-top pl-4 pb-2">Development Projects</span></h3>
+  </div>
+
+  <div class="col-span-9 bg-white py-10 px-5">
+    <%= form_for @human_rights_violation, url: :ip_rights_case_detail_human_rights_violations do |f| %>
+    <div class="max-w-7xl mx-auto lg:px-0">
+      <h2 class="font-bold text-xl text-gray-900">Human Rights Violation Details</h2>
+
+          <div class="border-t border-gray-200 mt-4"></div>
+          <div>
+            <div class="px-4 py-5  space-y-4 sm:p-6">
+              <div class="col-span-6 sm:col-span-3">
+                <label for="first-name" class="text-base font-medium text-gray-700 pt-4">Why did the victim/s suffer from the human rights violation/s?</label>
+                <%= f.text_area :violation_details,  class: "mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md" %>
+              </div>
+               <fieldset>
+
+
+              <div class="px-4 py-3 bg-gray-100 text-right sm:px-6">
+                <button type="submit" class="inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-green-600 hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500">
+                  Save and Proceed
+                </button>
+              </div>
+    <% end %>

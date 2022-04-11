@@ -1,0 +1,126 @@
+require:
+  - rubocop-rails
+  - rubocop-rspec
+
+inherit_gem:
+  rubocop-shopify: rubocop.yml
+
+AllCops:
+  NewCops: enable
+  # We don't always use bundler to make for a faster boot time.
+  # In this case we vendor a small number of dependencies we absolutely
+  # require. Since they are vendored and 3rd party we do not impose our
+  # styleguide on them but they are still in the repo.
+  Exclude:
+  #   - "bin/**/*"
+  #   - "config/**/*"
+  #   - "config.ru"
+    - "db/schema.rb"
+    - "node_modules/**/*"
+    - "vendor/bundle/**/*"
+
+  # Mac OS High Sierra ships with Ruby 2.3.x
+  # Therefore we target Ruby 2.3
+  TargetRubyVersion: 3.0
+
+# This doesn't take into account retrying from an exception. E.g.:
+#   begin
+#     retries ||= 0
+#     do_a_thing
+#   rescue => e
+#     retry if (retries += 1) < 3
+#     handle_error(e)
+#   end
+Lint/SuppressedException:
+  Enabled: false
+
+Metrics/AbcSize:
+  Max: 15
+  Exclude:
+    - "db/migrate/**/*"
+
+Metrics/CyclomaticComplexity:
+  Max: 6
+  Exclude:
+    - "db/migrate/**/*"
+
+Metrics/BlockLength:
+  Enabled: false
+  Exclude:
+    - "db/migrate/**/*"
+    - "lib/tasks/**/*"
+    - "spec/**/*"
+
+Metrics/ClassLength:
+  Max: 100
+
+Metrics/ModuleLength:
+  Max: 100
+  Exclude:
+    - "db/migrate/**/*"
+
+Metrics/MethodLength:
+  Max: 10
+  Exclude:
+    - "db/migrate/**/*"
+
+Metrics/PerceivedComplexity:
+  Max: 7
+
+Style/AndOr:
+  EnforcedStyle: conditionals
+
+Style/Documentation:
+  Enabled: false
+
+# Allow the use of globals which occasionally makes sense in a CLI app
+# As we are not multi-threaded and have a single entry point, this makes it easy to,
+# for example, track process environments to restore at the end of invocation
+Style/GlobalVars:
+  Enabled: false
+
+Style/HashEachMethods:
+  Enabled: true
+
+Style/HashTransformKeys:
+  Enabled: true
+
+Style/HashTransformValues:
+  Enabled: true
+
+Style/MethodCallWithArgsParentheses:
+  IgnoredMethods:
+    - eq
+    - head
+    - include
+    - not_to
+    - print
+    - puts
+    - redirect_back
+    - redirect_to
+    - raise
+    - render
+    - require
+    - require_relative
+    - require_dependency
+    - shared_context
+    - sign_out
+    - stream_from
+    - to
+    - validates
+    - validates_uniqueness_of
+    - yield
+  Exclude:
+    - "db/migrate/**/*"
+    - Gemfile
+    - 'spec/**/*'
+
+# Allow readable block formatting in some weird cases
+# Particularly in something like:
+#   Dev::Util.begin do
+#     might_raise_if_costly_prep_not_done()
+#   end.retry_after(ExpectedError) do
+#     costly_prep()
+#   end
+Style/MultilineBlockChain:
+  Enabled: false

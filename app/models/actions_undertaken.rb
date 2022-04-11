@@ -1,3 +1,3 @@
 class ActionsUndertaken < ApplicationRecord
-  belongs_to :tmp_fact_sheet
+  belongs_to :case_detail
 end

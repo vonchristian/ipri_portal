@@ -1,21 +1,24 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>Ipri</title>
+    <title>Portal</title>
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
     <%= stylesheet_link_tag "tailwind", "inter-font", "data-turbo-track": "reload" %>
 
     <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
-
+    <%= javascript_importmap_tags %>
   </head>
 
   <body class="bg-gray-200">
     <main class="container mx-auto mt-28 px-5 flex">
+      <<% flash.each do |type, msg| %>
+        <div>
+          <%= msg %>
+        </div>
+      <% end %>
       <%= yield %>
     </main>
-<script src="https://cdn.jsdelivr.net/gh/alpinejs/alpine@v2.x.x/dist/alpine.min.js" defer></script>
-
   </body>
 </html>
