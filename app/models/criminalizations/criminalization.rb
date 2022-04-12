@@ -2,6 +2,8 @@
 
 module Criminalizations
   class Criminalization < ApplicationRecord
-    has_many :criminalization_accuser_categories
+    belongs_to :case_detail, class_name: "CaseDetails::CaseDetail"
+    has_many :accuserizations, dependent: :destroy
+    has_many :accuser_categories, through: :accuserizations
   end
 end

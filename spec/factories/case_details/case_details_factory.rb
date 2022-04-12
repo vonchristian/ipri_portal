@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 FactoryBot.define do
-  factory :case_detail do
+  factory :case_detail, class: "CaseDetails::CaseDetail" do
     reference_number { SecureRandom.hex(8) }
     association :documenter, factory: :user
     organization_name { Faker::Company.name }

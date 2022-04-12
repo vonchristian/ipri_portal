@@ -16,9 +16,10 @@ ActiveRecord::Schema[7.0].define(version: 2022_03_26_134839) do
   enable_extension "plpgsql"
 
   create_table "accuser_categories", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
-    t.string "name"
+    t.string "title"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["title"], name: "index_accuser_categories_on_title", unique: true
   end
 
   create_table "actions_undertakens", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
@@ -194,6 +195,13 @@ ActiveRecord::Schema[7.0].define(version: 2022_03_26_134839) do
     t.index ["human_rights_violation_id"], name: "index_hr_violation_categorizations_on_hr_violation_id"
   end
 
+  create_table "human_rights_violation_perpetrator_categories", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.string "title"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["title"], name: "index_human_rights_violation_perpetrator_categories_on_title", unique: true
+  end
+
   create_table "human_rights_violation_perpetratorizations", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.uuid "human_rights_violation_id", null: false
     t.uuid "perpetrator_category_id", null: false
@@ -225,13 +233,6 @@ ActiveRecord::Schema[7.0].define(version: 2022_03_26_134839) do
     t.index ["state_action_to_address_violation"], name: "index_hr_violations_on_state_action_to_address_violation"
   end
 
-  create_table "human_rights_violations_perpetrator_categories", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
-    t.string "title"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["title"], name: "index_human_rights_violations_perpetrator_categories_on_title", unique: true
-  end
-
   create_table "individual_victims", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.uuid "age_bracket_id", null: false
     t.string "full_name"
@@ -253,12 +254,19 @@ ActiveRecord::Schema[7.0].define(version: 2022_03_26_134839) do
   end
 
   create_table "killing_perpetrator_categories", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.string "title"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["title"], name: "index_killing_perpetrator_categories_on_title", unique: true
+  end
+
+  create_table "killing_perpetratorizations", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.uuid "killing_id", null: false
     t.uuid "perpetrator_category_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["killing_id"], name: "index_killing_perpetrator_categories_on_killing_id"
-    t.index ["perpetrator_category_id"], name: "index_killing_perpetrator_categories_on_perpetrator_category_id"
+    t.index ["killing_id"], name: "index_killing_perpetratorizations_on_killing_id"
+    t.index ["perpetrator_category_id"], name: "index_killing_perpetratorizations_on_perpetrator_category_id"
   end
 
   create_table "killings", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
@@ -284,13 +292,6 @@ ActiveRecord::Schema[7.0].define(version: 2022_03_26_134839) do
     t.index ["experienced_harrassment_or_intimidation"], name: "index_killings_on_experienced_harrassment_or_intimidation"
     t.index ["investigation_on_killing"], name: "index_killings_on_investigation_on_killing"
     t.index ["state_action_to_address_killing"], name: "index_killings_on_state_action_to_address_killing"
-  end
-
-  create_table "killings_perpetrator_categories", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
-    t.string "name"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["name"], name: "index_killings_perpetrator_categories_on_name", unique: true
   end
 
   create_table "project_fundings", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
@@ -327,13 +328,13 @@ ActiveRecord::Schema[7.0].define(version: 2022_03_26_134839) do
   add_foreign_key "criminalizations", "case_details"
   add_foreign_key "human_rights_violation_categorizations", "human_rights_violation_categories"
   add_foreign_key "human_rights_violation_categorizations", "human_rights_violations"
+  add_foreign_key "human_rights_violation_perpetratorizations", "human_rights_violation_perpetrator_categories", column: "perpetrator_category_id"
   add_foreign_key "human_rights_violation_perpetratorizations", "human_rights_violations"
-  add_foreign_key "human_rights_violation_perpetratorizations", "human_rights_violations_perpetrator_categories", column: "perpetrator_category_id"
   add_foreign_key "human_rights_violations", "case_details"
   add_foreign_key "individual_victims", "age_brackets"
   add_foreign_key "individual_victims", "case_details"
-  add_foreign_key "killing_perpetrator_categories", "killings"
-  add_foreign_key "killing_perpetrator_categories", "killings_perpetrator_categories", column: "perpetrator_category_id"
+  add_foreign_key "killing_perpetratorizations", "killing_perpetrator_categories", column: "perpetrator_category_id"
+  add_foreign_key "killing_perpetratorizations", "killings"
   add_foreign_key "killings", "case_details"
   add_foreign_key "project_fundings", "development_projects"
   add_foreign_key "project_fundings", "funding_sources"
