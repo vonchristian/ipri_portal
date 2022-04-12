@@ -1,7 +1,7 @@
 class CreateHumanRightsViolations < ActiveRecord::Migration[7.0]
   def change
-    create_table :human_rights_violations do |t|
-      t.belongs_to :case_detail, null: false, foreign_key: true
+    create_table :human_rights_violations, id: :uuid do |t|
+      t.belongs_to :case_detail, null: false, foreign_key: true, type: :uuid
       t.text :violation_details
       t.string :alleged_perpetrators_known
       t.text :alleged_perpetrator_details

@@ -6,5 +6,7 @@ module HumanRightsViolations
 
     belongs_to :human_rights_violation
     belongs_to :perpetrator_category
+
+    validates :perpetrator_category_id, uniqueness: { scope: :human_rights_violation_id }
   end
 end

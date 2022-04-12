@@ -15,14 +15,14 @@ ActiveRecord::Schema[7.0].define(version: 2022_03_26_134839) do
   enable_extension "pgcrypto"
   enable_extension "plpgsql"
 
-  create_table "accuser_categories", force: :cascade do |t|
+  create_table "accuser_categories", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.string "name"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
 
-  create_table "actions_undertakens", force: :cascade do |t|
-    t.bigint "case_detail_id"
+  create_table "actions_undertakens", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.uuid "case_detail_id", null: false
     t.string "advocacy_or_action"
     t.text "advocacy_or_action_details"
     t.datetime "created_at", null: false
@@ -40,7 +40,7 @@ ActiveRecord::Schema[7.0].define(version: 2022_03_26_134839) do
     t.datetime "updated_at", null: false
   end
 
-  create_table "age_brackets", force: :cascade do |t|
+  create_table "age_brackets", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.integer "min_age"
     t.integer "max_age"
     t.string "name"
@@ -48,7 +48,7 @@ ActiveRecord::Schema[7.0].define(version: 2022_03_26_134839) do
     t.datetime "updated_at", null: false
   end
 
-  create_table "case_details", force: :cascade do |t|
+  create_table "case_details", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.string "organization_name", null: false
     t.integer "submission_date_year", null: false
     t.integer "submission_date_day", null: false
@@ -65,7 +65,7 @@ ActiveRecord::Schema[7.0].define(version: 2022_03_26_134839) do
     t.string "reference_number", null: false
     t.boolean "primary_data", default: false, null: false
     t.string "data_sharing", null: false
-    t.bigint "country_id"
+    t.uuid "country_id"
     t.string "subnational_location"
     t.string "location_details_1"
     t.string "location_details_2"
@@ -78,9 +78,9 @@ ActiveRecord::Schema[7.0].define(version: 2022_03_26_134839) do
     t.index ["reference_number"], name: "index_case_details_on_reference_number", unique: true
   end
 
-  create_table "collective_victim_age_bracket_breakdowns", force: :cascade do |t|
-    t.bigint "collective_victim_id", null: false
-    t.bigint "age_bracket_id", null: false
+  create_table "collective_victim_age_bracket_breakdowns", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.uuid "collective_victim_id", null: false
+    t.uuid "age_bracket_id", null: false
     t.integer "total"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
@@ -88,8 +88,8 @@ ActiveRecord::Schema[7.0].define(version: 2022_03_26_134839) do
     t.index ["collective_victim_id"], name: "index_collective_victim_breakdowns_on_collective_victim_id"
   end
 
-  create_table "collective_victims", force: :cascade do |t|
-    t.bigint "case_detail_id"
+  create_table "collective_victims", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.uuid "case_detail_id", null: false
     t.text "affected_total"
     t.text "victim_details"
     t.boolean "refer_to_individuals"
@@ -100,8 +100,8 @@ ActiveRecord::Schema[7.0].define(version: 2022_03_26_134839) do
     t.index ["case_detail_id"], name: "index_collective_victims_on_case_detail_id"
   end
 
-  create_table "companies", force: :cascade do |t|
-    t.bigint "country_id", null: false
+  create_table "companies", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.uuid "country_id", null: false
     t.string "name"
     t.string "description"
     t.datetime "created_at", null: false
@@ -109,21 +109,21 @@ ActiveRecord::Schema[7.0].define(version: 2022_03_26_134839) do
     t.index ["country_id"], name: "index_companies_on_country_id"
   end
 
-  create_table "countries", force: :cascade do |t|
+  create_table "countries", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.string "name", null: false
   end
 
-  create_table "criminalization_accuser_categories", force: :cascade do |t|
-    t.bigint "criminalization_id", null: false
-    t.bigint "accuser_category_id", null: false
+  create_table "criminalization_accuserizations", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.uuid "criminalization_id", null: false
+    t.uuid "accuser_category_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["accuser_category_id"], name: "index_criminalization_accuser_categories_on_accuser_category_id"
-    t.index ["criminalization_id"], name: "index_criminalization_accuser_categories_on_criminalization_id"
+    t.index ["accuser_category_id"], name: "index_criminalization_accuserizations_on_accuser_category_id"
+    t.index ["criminalization_id"], name: "index_criminalization_accuserizations_on_criminalization_id"
   end
 
-  create_table "criminalizations", force: :cascade do |t|
-    t.bigint "case_detail_id"
+  create_table "criminalizations", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.uuid "case_detail_id"
     t.text "criminalization_details"
     t.string "experienced_harrassment_or_intimidation"
     t.text "harrassment_or_intimidation_details"
@@ -156,13 +156,13 @@ ActiveRecord::Schema[7.0].define(version: 2022_03_26_134839) do
     t.index ["victims_in_detention"], name: "index_criminalizations_on_victims_in_detention"
   end
 
-  create_table "development_project_categories", force: :cascade do |t|
+  create_table "development_project_categories", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.string "name"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
 
-  create_table "development_projects", force: :cascade do |t|
+  create_table "development_projects", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.string "name"
     t.text "description"
     t.integer "project_start_year"
@@ -171,22 +171,22 @@ ActiveRecord::Schema[7.0].define(version: 2022_03_26_134839) do
     t.datetime "updated_at", null: false
   end
 
-  create_table "funding_sources", force: :cascade do |t|
+  create_table "funding_sources", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.string "name"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
 
-  create_table "human_rights_violation_categories", force: :cascade do |t|
+  create_table "human_rights_violation_categories", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.string "title"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["title"], name: "index_human_rights_violation_categories_on_title", unique: true
   end
 
-  create_table "human_rights_violation_categorizations", force: :cascade do |t|
-    t.bigint "human_rights_violation_id", null: false
-    t.bigint "human_rights_violation_category_id", null: false
+  create_table "human_rights_violation_categorizations", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.uuid "human_rights_violation_id", null: false
+    t.uuid "human_rights_violation_category_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["human_rights_violation_category_id", "human_rights_violation_id"], name: "index_hrv_categorizations_on_hrv_category_id_and_hrv_id", unique: true
@@ -194,17 +194,17 @@ ActiveRecord::Schema[7.0].define(version: 2022_03_26_134839) do
     t.index ["human_rights_violation_id"], name: "index_hr_violation_categorizations_on_hr_violation_id"
   end
 
-  create_table "human_rights_violation_perpetratorizations", force: :cascade do |t|
-    t.bigint "human_rights_violation_id", null: false
-    t.bigint "perpetrator_category_id", null: false
+  create_table "human_rights_violation_perpetratorizations", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.uuid "human_rights_violation_id", null: false
+    t.uuid "perpetrator_category_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["human_rights_violation_id"], name: "index_hr_violation_perpetrators_on_hr_violation_id"
     t.index ["perpetrator_category_id"], name: "index_hr_violation_perpetrators_on_perpetrator_category_id"
   end
 
-  create_table "human_rights_violations", force: :cascade do |t|
-    t.bigint "case_detail_id", null: false
+  create_table "human_rights_violations", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.uuid "case_detail_id", null: false
     t.text "violation_details"
     t.string "alleged_perpetrators_known"
     t.text "alleged_perpetrator_details"
@@ -225,15 +225,15 @@ ActiveRecord::Schema[7.0].define(version: 2022_03_26_134839) do
     t.index ["state_action_to_address_violation"], name: "index_hr_violations_on_state_action_to_address_violation"
   end
 
-  create_table "human_rights_violations_perpetrator_categories", force: :cascade do |t|
+  create_table "human_rights_violations_perpetrator_categories", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.string "title"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["title"], name: "index_human_rights_violations_perpetrator_categories_on_title", unique: true
   end
 
-  create_table "individual_victims", force: :cascade do |t|
-    t.bigint "age_bracket_id", null: false
+  create_table "individual_victims", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.uuid "age_bracket_id", null: false
     t.string "full_name"
     t.string "gender"
     t.string "dependent_type"
@@ -243,7 +243,7 @@ ActiveRecord::Schema[7.0].define(version: 2022_03_26_134839) do
     t.integer "date_of_birth_year"
     t.text "victim_role"
     t.text "dependent_details"
-    t.bigint "case_detail_id"
+    t.uuid "case_detail_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["age_bracket_id"], name: "index_individual_victims_on_age_bracket_id"
@@ -252,17 +252,17 @@ ActiveRecord::Schema[7.0].define(version: 2022_03_26_134839) do
     t.index ["gender"], name: "index_individual_victims_on_gender"
   end
 
-  create_table "killing_perpetrator_categories", force: :cascade do |t|
-    t.bigint "killing_id", null: false
-    t.bigint "perpetrator_category_id", null: false
+  create_table "killing_perpetrator_categories", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.uuid "killing_id", null: false
+    t.uuid "perpetrator_category_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["killing_id"], name: "index_killing_perpetrator_categories_on_killing_id"
     t.index ["perpetrator_category_id"], name: "index_killing_perpetrator_categories_on_perpetrator_category_id"
   end
 
-  create_table "killings", force: :cascade do |t|
-    t.bigint "case_detail_id"
+  create_table "killings", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.uuid "case_detail_id", null: false
     t.text "killing_details"
     t.text "killing_carried_out"
     t.string "experienced_harrassment_or_intimidation"
@@ -286,16 +286,16 @@ ActiveRecord::Schema[7.0].define(version: 2022_03_26_134839) do
     t.index ["state_action_to_address_killing"], name: "index_killings_on_state_action_to_address_killing"
   end
 
-  create_table "killings_perpetrator_categories", force: :cascade do |t|
+  create_table "killings_perpetrator_categories", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.string "name"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["name"], name: "index_killings_perpetrator_categories_on_name", unique: true
   end
 
-  create_table "project_fundings", force: :cascade do |t|
-    t.bigint "funding_source_id", null: false
-    t.bigint "development_project_id", null: false
+  create_table "project_fundings", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.uuid "funding_source_id", null: false
+    t.uuid "development_project_id", null: false
     t.text "funding_description"
     t.text "website_sources"
     t.datetime "created_at", null: false
@@ -322,8 +322,8 @@ ActiveRecord::Schema[7.0].define(version: 2022_03_26_134839) do
   add_foreign_key "collective_victim_age_bracket_breakdowns", "collective_victims"
   add_foreign_key "collective_victims", "case_details"
   add_foreign_key "companies", "countries"
-  add_foreign_key "criminalization_accuser_categories", "accuser_categories"
-  add_foreign_key "criminalization_accuser_categories", "criminalizations"
+  add_foreign_key "criminalization_accuserizations", "accuser_categories"
+  add_foreign_key "criminalization_accuserizations", "criminalizations"
   add_foreign_key "criminalizations", "case_details"
   add_foreign_key "human_rights_violation_categorizations", "human_rights_violation_categories"
   add_foreign_key "human_rights_violation_categorizations", "human_rights_violations"

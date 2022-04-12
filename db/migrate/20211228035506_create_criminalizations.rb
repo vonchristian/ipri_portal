@@ -1,7 +1,7 @@
 class CreateCriminalizations < ActiveRecord::Migration[7.0]
   def change
-    create_table :criminalizations do |t|
-      t.belongs_to :case_detail, foreign_key: true
+    create_table :criminalizations, id: :uuid do |t|
+      t.belongs_to :case_detail, foreign_key: true, type: :uuid
       t.text :criminalization_details
       t.string :experienced_harrassment_or_intimidation, index: { name: "index_criminalizations_on_harrassment_or_intimidation"}
       t.text :harrassment_or_intimidation_details

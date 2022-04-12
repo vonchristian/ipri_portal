@@ -1,7 +1,7 @@
 class CreateIndividualVictims < ActiveRecord::Migration[7.0]
   def change
-    create_table :individual_victims do |t|
-      t.belongs_to :age_bracket, null: false, foreign_key: true
+    create_table :individual_victims, id: :uuid do |t|
+      t.belongs_to :age_bracket, null: false, foreign_key: true, type: :uuid
       t.string :full_name
       t.string :gender
       t.string :dependent_type
@@ -12,7 +12,7 @@ class CreateIndividualVictims < ActiveRecord::Migration[7.0]
       t.text :victim_role
       t.text :dependent_details
 
-      t.belongs_to :case_detail,  foreign_key: true
+      t.belongs_to :case_detail,  foreign_key: true, type: :uuid
 
       t.timestamps
     end

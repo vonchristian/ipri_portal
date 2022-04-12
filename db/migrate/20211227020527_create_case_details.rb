@@ -1,6 +1,6 @@
 class CreateCaseDetails < ActiveRecord::Migration[7.0]
   def change
-    create_table :case_details do |t|
+    create_table :case_details, id: :uuid do |t|
       t.string  :organization_name, null: false
       t.integer :submission_date_year, null: false
       t.integer :submission_date_day, null: false
@@ -18,7 +18,7 @@ class CreateCaseDetails < ActiveRecord::Migration[7.0]
       t.string :reference_number, null: false
       t.boolean :primary_data, null: false, default: false
       t.string :data_sharing, null: false
-      t.belongs_to :country, foreign_key: true
+      t.belongs_to :country, foreign_key: true, type: :uuid
       t.string :subnational_location
       t.string :location_details_1
       t.string :location_details_2

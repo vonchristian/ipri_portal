@@ -1,6 +1,6 @@
 class CreateKillingsPerpetratorCategories < ActiveRecord::Migration[7.0]
   def change
-    create_table :killings_perpetrator_categories do |t|
+    create_table :killings_perpetrator_categories, id: :uuid do |t|
       t.string :name
 
       t.timestamps
