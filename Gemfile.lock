@@ -90,6 +90,8 @@ GEM
     database_cleaner-core (2.0.1)
     diff-lcs (1.5.0)
     digest (3.1.0)
+    email_validator (2.2.3)
+      activemodel
     erubi (1.10.0)
     factory_bot (6.2.1)
       activesupport (>= 5.0.0)
@@ -237,6 +239,7 @@ DEPENDENCIES
   bootsnap
   countries
   database_cleaner-active_record
+  email_validator
   factory_bot_rails
   faker!
   font-awesome-rails
@@ -258,7 +261,7 @@ DEPENDENCIES
   tzinfo-data
 
 RUBY VERSION
-   ruby 3.1.1p18
+   ruby 3.1.2p20
 
 BUNDLED WITH
    2.3.3

@@ -13,4 +13,19 @@ Rails.application.routes.draw do
 
     resources :documenter_details,      only: [:new, :create]
   end
+  namespace :admin do
+    get "/login", to: "sessions#new"
+    post "/sessions", to: "sessions#create"
+    delete "/sessions", to: "sessions#destroy"
+    resources :dashboard, only: [:index]
+    resources :users, only: [:index, :show, :new, :create]
+  end
+
+  namespace :documenters do
+    get "/login", to: "sessions#new"
+    post "/sessions", to: "sessions#create"
+    delete "/sessions", to: "sessions#destroy"
+    resources :dashboard, only: [:index]
+    resources :case_details, only: [:index, :new]
+  end
 end

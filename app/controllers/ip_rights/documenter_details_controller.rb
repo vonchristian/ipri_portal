@@ -1,7 +1,8 @@
 # frozen_string_literal: true
 
 module IpRights
-  class DocumenterDetailsController < ApplicationController
+  class DocumenterDetailsController < Documenters::BaseController
+    layout "application"
     def new
       @documenter = CaseDetails::Documenter.new
     end
@@ -9,7 +10,6 @@ module IpRights
     def create
       @reference_number = SecureRandom.uuid
       @documenter       = CaseDetails::Documenter.new(documenter_params)
-      binding.pry
       if @documenter.valid?
         @documenter.process!
         @case_detail = CaseDetail.find_by(reference_number: @reference_number)
@@ -27,8 +27,8 @@ module IpRights
       .require(:case_details_documenter)
       .permit(:first_name, :last_name, :submission_date_day, :submission_date_month,
         :submission_date_year, :documenter_organization, :email,
-        :phone_number, :primary_data)
-        .merge!(reference_number: @reference_number)
+        :phone_number, :primary_data, :organization_name)
+        .merge!(reference_number: @reference_number, user_id: current_documenter.id)
     end
   end
 end

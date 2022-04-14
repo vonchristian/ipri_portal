@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>Portal</title>
+    <title>IPRIGHTS PORTAL</title>
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
@@ -13,10 +13,22 @@
 
   <body>
     <main>
-      <turbo-frame id="flash">
-        <%= render 'layouts/flash' %>
-      </turbo-frame>
-      <%= yield %>
+      <div class="grid grid-cols-1 md:grid-cols-12">
+        <div class="col-span-2">
+            <%= render "/layouts/admin/sidebar" %>
+        </div>
+        <div class="col-span-10 bg-gray-100">
+          <div class="container">
+          <% flash.each do |type, msg| %>
+            <div>
+              <%= msg %>
+            </div>
+          <% end %>
+            <%= yield %>
+          </div>
+        </div>
+      </div>
+
     </main>
     <script defer src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js"></script>
   </body>

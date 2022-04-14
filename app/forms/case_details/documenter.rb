@@ -14,7 +14,8 @@ module CaseDetails
       :website_links,
       :submission_date_month,
       :submission_date_day,
-      :submission_date_year
+      :submission_date_year,
+      :user_id
 
     validates :first_name, :last_name, :organization_name,
       :submission_date_month, :submission_date_day, :submission_date_year,
@@ -42,15 +43,8 @@ module CaseDetails
         incident_start_month:         submission_date_month,
         organization_name:            organization_name,
         data_sharing:                 false,
-        documenter_id:                   find_or_create_user.id,
+        documenter_id:                user_id
       )
-    end
-
-    def find_or_create_user
-      user = User.find_by(email: email, first_name: first_name, last_name: last_name)
-      return user if user
-
-      User.create!(email: email, first_name: first_name, last_name: last_name, password: 'password123', password_confirmation: 'password123')
     end
   end
 end

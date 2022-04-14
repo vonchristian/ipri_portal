@@ -4,10 +4,11 @@ module Users
   class Registration
     include ActiveModel::Model
 
-    attr_accessor :first_name, :last_name, :email, :password, :password_confirmation, :phone_number
-    validates :first_name, :last_name, :email, :password, :password_confirmation, presence: true
+    attr_accessor :first_name, :last_name, :email, :organization_name, :phone_number
 
-    def process!
+    validates :first_name, :last_name, :organization_name, :email, presence: true
+
+    def register!
       if valid?
         create_user
         send_activation_email
@@ -17,6 +18,14 @@ module Users
     private
 
     def create_user
+      Users::User.create!(
+        first_name: first_name,
+        last_name: last_name,
+        email: email,
+        password: 'Simple123',
+        password_confirmation: "Simple123",
+        phone_number: phone_number
+      )
     end
 
     def send_activation_email

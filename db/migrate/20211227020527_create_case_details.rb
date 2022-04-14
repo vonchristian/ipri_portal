@@ -17,7 +17,7 @@ class CreateCaseDetails < ActiveRecord::Migration[7.0]
 
       t.string :reference_number, null: false
       t.boolean :primary_data, null: false, default: false
-      t.string :data_sharing, null: false
+      t.string :data_sharing
       t.belongs_to :country, foreign_key: true, type: :uuid
       t.string :subnational_location
       t.string :location_details_1
