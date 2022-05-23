@@ -6,6 +6,7 @@ module CaseDetails
       include ActiveModel::Model
 
       attr_accessor :case_detail_id, :affected_total, :refer_to_individuals, :victim_details, :male_total, :female_total, :age_bracket_breakdowns
+      validates :affected_total, presence: true
 
       def process!
         ApplicationRecord.transaction do

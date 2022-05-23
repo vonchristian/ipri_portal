@@ -8,7 +8,7 @@ module Documenters
 
     def current_documenter
       if session[:user_id]
-        @documenter = Users::User.find(session[:user_id])
+        @documenter = Users::Documenter.find(session[:user_id])
       end
     end
 

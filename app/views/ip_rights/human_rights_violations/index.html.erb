@@ -1,14 +1,14 @@
 
 <div class="grid grid-cols-12 min-h-screen">
-  <div class="col-span-3 bg-green-500">
+   <div class="col-span-3 bg-green-700">
     <h1 class="pt-10 pl-4 font-bold py-5 px-10"> Step 5/7:</h1>
-    <h3 class="pl-2 font-bold pl-8 pt-4 align-middle"><i class="fa fa-circle fa-2x"></i> <span class="pl-4">Documenter Details</span></h3>
-    <h3 class="pl-2 font-bold pl-8 pt-4"><i class="fa fa-circle fa-2x"></i> <span class="align-middle pl-4 pb-2">Data Sharing Agreement</span></h3>
-    <h3 class="pl-2 font-bold pl-8 pt-4"><i class="fa fa-circle fa-2x"></i> <span class="align-middle pl-4 pb-2">Incident Details</span></h3>
-    <h3 class="pl-2 font-bold pl-8 pt-4"><i class="fa fa-circle fa-2x"></i> <span class="align-middle pl-4 pb-2">Victims</span></h3>
-    <h3 class="pl-2 font-bold pl-8 pt-4"><i class="fa fa-circle fa-2x"></i> <span class="align-middle pl-4 pb-2">Human Rights Violoations</span></h3>
-    <h3 class="pl-2 font-bold pl-8 pt-4"><i class="fa fa-circle-o fa-2x"></i> <span class="align-middle pl-4 pb-2">Actions Taken</span></h3>
-    <h3 class="pl-2 font-bold pl-8 pt-4"><i class="fa fa-circle-o fa-2x"></i> <span class="inline-block align-text-bottom pl-4">Development Projects</span></h3>
+    <h3 class="font-bold pl-8 pt-4 align-middle"><i class="fa fa-circle fa-2x"></i> <span class="pl-4">Documenter Details</span></h3>
+    <h3 class="font-bold pl-8 pt-4"><i class="fa fa-circle fa-2x"></i> <span class="align-middle pl-4 pb-2">Data Sharing Agreement</span></h3>
+    <h3 class="font-bold pl-8 pt-4"><i class="fa fa-circle fa-2x"></i> <span class="align-middle pl-4 pb-2">Incident Details</span></h3>
+    <h3 class="font-bold pl-8 pt-4"><i class="fa fa-circle fa-2x"></i> <span class="align-top pl-4 pb-2">Victims</span></h3>
+    <h3 class="font-bold pl-8 pt-4 bg-green-800"><i class="fa fa-circle-o fa-2x"></i> <span class="align-middle pl-4 pb-2">Human Rights Viloations</span></h3>
+    <h3 class="font-bold pl-8 pt-4"><i class="fa fa-circle-o fa-2x"></i> <span class="align-middle pl-4 pb-2">Impact and Actions Taken</span></h3>
+    <h3 class="font-bold pl-8 pt-4"><i class="fa fa-circle-o fa-2x"></i> <span class="inline-block align-text-bottom pl-4">Development Projects</span></h3>
   </div>
   <div class="col-span-9 bg-white py-10 px-5">
     <h2 class="font-bold text-xl text-gray-900">Categories of Incidents of Human Rights Violations </h2>
@@ -25,7 +25,7 @@
 
     <div class="items-center px-4 py-4">
     <h2 class="font-bold text-xl text-gray-900 py-4">Killing </h2>
-        <a href="/ip_rights/case_details/<%=@case_detail.id%>/individual_victims/new"type="submit" class="inline-flex py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-green-600 hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500">
+        <a href="/ip_rights/case_details/<%=@case_detail.id%>/killings/new"type="submit" class="inline-flex py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-green-600 hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500">
           Add Details
         </a>
     </div>
@@ -40,7 +40,7 @@
     </div>
 
 <div class="px-4 py-3 bg-gray-100 text-right sm:px-6">
-                 <a href="/ip_rights/case_details/<%=@case_detail.id%>/human_rights_violations"type="submit" class="inline-flex py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-green-600 hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500">
+                 <a href="/ip_rights/case_details/<%=@case_detail.id%>/impact_and_actions/new"type="submit" class="inline-flex py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-green-600 hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500">
           Next
         </a>
               </div>

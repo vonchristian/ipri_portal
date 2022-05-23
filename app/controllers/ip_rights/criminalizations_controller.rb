@@ -3,19 +3,27 @@
 module IpRights
   class CriminalizationsController < ApplicationController
     def new
-      @case_detail      = CaseDetail.find(params.fetch(:case_detail_id))
+      @case_detail     = CaseDetails::CaseDetail.find(params.fetch(:case_detail_id))
       @criminalization = @case_detail.criminalizations.build
     end
 
     def create
-      @case_detail      = CaseDetail.find(params.fetch(:case_detail_id))
+      @case_detail     = CaseDetails::CaseDetail.find(params.fetch(:case_detail_id))
       @criminalization = @case_detail.criminalizations.create(criminalization_params)
       if @criminalization.valid?
         @criminalization.save!
 
-        redirect_to ip_rights_case_detail_human_rights_violations_url(@case_detail)
+        respond_to do |format|
+          format.html do
+            redirect_to ip_rights_case_detail_human_rights_violations_url(@case_detail)
+          end
+        end
       else
-        render :new
+        respond_to do |format|
+          format.html do
+            render :new, status: :unprocessable_entity
+          end
+        end
       end
     end
 

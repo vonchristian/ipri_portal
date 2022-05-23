@@ -4,6 +4,10 @@ class AgeBracket < ApplicationRecord
   end
 
   def range_name
-    "#{min_age} - #{max_age} years old"
+    if range.include?(100)
+      "#{min_age} years old and above"
+    else
+      "#{min_age} - #{max_age} years old"
+    end
   end
 end

@@ -22,6 +22,7 @@ class CreateCaseDetails < ActiveRecord::Migration[7.0]
       t.string :subnational_location
       t.string :location_details_1
       t.string :location_details_2
+      t.text :data_sources
 
       t.timestamps
     end

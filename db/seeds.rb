@@ -24,8 +24,41 @@ Criminalizations::AccuserCategory.create!(title: "National or local corporation"
 Criminalizations::AccuserCategory.create!(title: "Transnational corporation")
 
 
+Killings::PerpetratorCategory.create!(title: "National Level Government Official")
+Killings::PerpetratorCategory.create!(title: "Federal Level Government Official")
+Killings::PerpetratorCategory.create!(title: "Local Government Official")
+Killings::PerpetratorCategory.create!(title: "Official in the Judiciary")
+Killings::PerpetratorCategory.create!(title: "Prison Official")
+Killings::PerpetratorCategory.create!(title: "Police")
+Killings::PerpetratorCategory.create!(title: "Armed Forces")
+Killings::PerpetratorCategory.create!(title: "Intelligence agency; Secret Service")
+Killings::PerpetratorCategory.create!(title: "Vigilante groups; death squads")
+Killings::PerpetratorCategory.create!(title: "Guerilla armies officials")
+Killings::PerpetratorCategory.create!(title: "National or local corporation")
+Killings::PerpetratorCategory.create!(title: "Transnational corporation")
+
+HumanRightsViolations::Category.create!(title: "Violation of collective right to free, prior and informed consent")
+HumanRightsViolations::Category.create!(title: "Arbitrary detention")
+HumanRightsViolations::Category.create!(title: "Forced displacement")
+HumanRightsViolations::Category.create!(title: "Enforced disappearance")
+HumanRightsViolations::Category.create!(title: "Sexual Violence and other forms of gender-based violence")
+HumanRightsViolations::Category.create!(title: "Land grabbing")
+HumanRightsViolations::Category.create!(title: "Physical injury/Beatings/Torture")
+HumanRightsViolations::Category.create!(title: "Forced eviction")
+HumanRightsViolations::Category.create!(title: "Kidnapping")
 
 
-
+HumanRightsViolations::PerpetratorCategory.create!(title: "National Level Government Official")
+HumanRightsViolations::PerpetratorCategory.create!(title: "Federal Level Government Official")
+HumanRightsViolations::PerpetratorCategory.create!(title: "Local Government Official")
+HumanRightsViolations::PerpetratorCategory.create!(title: "Official in the Judiciary")
+HumanRightsViolations::PerpetratorCategory.create!(title: "Prison Official")
+HumanRightsViolations::PerpetratorCategory.create!(title: "Police")
+HumanRightsViolations::PerpetratorCategory.create!(title: "Armed Forces")
+HumanRightsViolations::PerpetratorCategory.create!(title: "Intelligence agency; Secret Service")
+HumanRightsViolations::PerpetratorCategory.create!(title: "Vigilante groups; death squads")
+HumanRightsViolations::PerpetratorCategory.create!(title: "Guerilla armies officials")
+HumanRightsViolations::PerpetratorCategory.create!(title: "National or local corporation")
+HumanRightsViolations::PerpetratorCategory.create!(title: "Transnational corporation")
 
 

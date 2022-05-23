@@ -6,6 +6,7 @@ module CaseDetails
       attr_accessor :case_detail_id, :gender, :full_name, :dependent_type, :ethnic_identity, :victim_role, :dependent_details,
       :age_bracket_id, :date_of_birth_day, :date_of_birth_month, :date_of_birth_year
 
+      validates :case_detail_id, :gender, :full_name, :dependent_type, :victim_role, :ethnic_identity, :dependent_details, :age_bracket_id,  presence: true
       def process!
         ApplicationRecord.transaction do
           create_individual_victim

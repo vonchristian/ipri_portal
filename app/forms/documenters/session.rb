@@ -9,7 +9,7 @@ module Documenters
     validates :email, :password, presence: true
 
     def find_user
-      Users::User.find_by(email: email)
+      Users::Documenter.find_by(email: email)
     end
 
     def valid_password?

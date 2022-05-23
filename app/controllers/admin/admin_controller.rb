@@ -8,7 +8,7 @@ module Admin
 
     def current_admin_user
       if session[:admin_user_id]
-        @admin_user = Users::AdminUser.find(session[:admin_user_id])
+        @admin_user ||= Users::AdminUser.find(session[:admin_user_id])
       end
     end
 

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_03_26_134839) do
+ActiveRecord::Schema[7.0].define(version: 2022_04_30_065018) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
   enable_extension "plpgsql"
@@ -30,6 +30,34 @@ ActiveRecord::Schema[7.0].define(version: 2022_03_26_134839) do
     t.datetime "updated_at", null: false
     t.index ["advocacy_or_action"], name: "index_actions_undertakens_on_advocacy_or_action"
     t.index ["case_detail_id"], name: "index_actions_undertakens_on_case_detail_id"
+  end
+
+  create_table "active_storage_attachments", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.string "name", null: false
+    t.string "record_type", null: false
+    t.uuid "record_id", null: false
+    t.uuid "blob_id", null: false
+    t.datetime "created_at", null: false
+    t.index ["blob_id"], name: "index_active_storage_attachments_on_blob_id"
+    t.index ["record_type", "record_id", "name", "blob_id"], name: "index_active_storage_attachments_uniqueness", unique: true
+  end
+
+  create_table "active_storage_blobs", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.string "key", null: false
+    t.string "filename", null: false
+    t.string "content_type"
+    t.text "metadata"
+    t.string "service_name", null: false
+    t.bigint "byte_size", null: false
+    t.string "checksum"
+    t.datetime "created_at", null: false
+    t.index ["key"], name: "index_active_storage_blobs_on_key", unique: true
+  end
+
+  create_table "active_storage_variant_records", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.uuid "blob_id", null: false
+    t.string "variation_digest", null: false
+    t.index ["blob_id", "variation_digest"], name: "index_active_storage_variant_records_uniqueness", unique: true
   end
 
   create_table "admin_users", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
@@ -65,14 +93,19 @@ ActiveRecord::Schema[7.0].define(version: 2022_03_26_134839) do
     t.string "time_period"
     t.string "reference_number", null: false
     t.boolean "primary_data", default: false, null: false
-    t.string "data_sharing", null: false
+    t.string "data_sharing"
     t.uuid "country_id"
     t.string "subnational_location"
     t.string "location_details_1"
     t.string "location_details_2"
+    t.text "data_sources"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.uuid "documenter_id", null: false
+    t.text "impact_to_victim_details"
+    t.text "impact_to_community_details"
+    t.text "actions_taken_details"
+    t.boolean "actions_taken_status"
     t.index ["country_id"], name: "index_case_details_on_country_id"
     t.index ["data_sharing"], name: "index_case_details_on_data_sharing"
     t.index ["documenter_id"], name: "index_case_details_on_documenter_id"
@@ -108,6 +141,15 @@ ActiveRecord::Schema[7.0].define(version: 2022_03_26_134839) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["country_id"], name: "index_companies_on_country_id"
+  end
+
+  create_table "company_projects", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.uuid "company_id", null: false
+    t.uuid "development_project_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["company_id"], name: "index_company_projects_on_company_id"
+    t.index ["development_project_id"], name: "index_company_projects_on_development_project_id"
   end
 
   create_table "countries", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
@@ -170,6 +212,17 @@ ActiveRecord::Schema[7.0].define(version: 2022_03_26_134839) do
     t.text "website_sources"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+  end
+
+  create_table "documenters", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.string "email", null: false
+    t.string "password_digest", null: false
+    t.string "first_name", null: false
+    t.string "last_name", null: false
+    t.string "phone_number"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["email"], name: "index_documenters_on_email", unique: true
   end
 
   create_table "funding_sources", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
@@ -286,6 +339,7 @@ ActiveRecord::Schema[7.0].define(version: 2022_03_26_134839) do
     t.text "impact_to_community_details"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.text "alleged_perpetrator_details"
     t.index ["alleged_perpetrators_known"], name: "index_killings_on_alleged_perpetrators_known"
     t.index ["case_detail_id"], name: "index_killings_on_case_detail_id"
     t.index ["case_filing_status"], name: "index_killings_on_case_filing_status"
@@ -305,24 +359,17 @@ ActiveRecord::Schema[7.0].define(version: 2022_03_26_134839) do
     t.index ["funding_source_id"], name: "index_project_fundings_on_funding_source_id"
   end
 
-  create_table "users", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
-    t.string "email", null: false
-    t.string "password_digest", null: false
-    t.string "first_name", null: false
-    t.string "last_name", null: false
-    t.string "phone_number"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["email"], name: "index_users_on_email", unique: true
-  end
-
   add_foreign_key "actions_undertakens", "case_details"
+  add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
+  add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
   add_foreign_key "case_details", "countries"
-  add_foreign_key "case_details", "users", column: "documenter_id"
+  add_foreign_key "case_details", "documenters"
   add_foreign_key "collective_victim_age_bracket_breakdowns", "age_brackets"
   add_foreign_key "collective_victim_age_bracket_breakdowns", "collective_victims"
   add_foreign_key "collective_victims", "case_details"
   add_foreign_key "companies", "countries"
+  add_foreign_key "company_projects", "companies"
+  add_foreign_key "company_projects", "development_projects"
   add_foreign_key "criminalization_accuserizations", "accuser_categories"
   add_foreign_key "criminalization_accuserizations", "criminalizations"
   add_foreign_key "criminalizations", "case_details"

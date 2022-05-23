@@ -1,0 +1,33 @@
+<div class="grid grid-cols-12 min-h-screen">
+   <div class="col-span-3 bg-green-700">
+    <h1 class="pt-10 pl-4 font-bold py-5 px-10"> Step 6/7:</h1>
+    <h3 class="font-bold pl-8 pt-4 align-middle"><i class="fa fa-circle fa-2x"></i> <span class="pl-4">Documenter Details</span></h3>
+    <h3 class="font-bold pl-8 pt-4"><i class="fa fa-circle fa-2x"></i> <span class="align-middle pl-4 pb-2">Data Sharing Agreement</span></h3>
+    <h3 class="font-bold pl-8 pt-4"><i class="fa fa-circle fa-2x"></i> <span class="align-middle pl-4 pb-2">Incident Details</span></h3>
+    <h3 class="font-bold pl-8 pt-4"><i class="fa fa-circle fa-2x"></i> <span class="align-top pl-4 pb-2">Victims</span></h3>
+    <h3 class="font-bold pl-8 pt-4"><i class="fa fa-circle fa-2x"></i> <span class="align-middle pl-4 pb-2">Human Rights Viloations</span></h3>
+    <h3 class="font-bold pl-8 pt-4 bg-green-800"><i class="fa fa-circle fa-2x"></i> <span class="align-middle pl-4 pb-2">Impact and Actions Taken</span></h3>
+    <h3 class="font-bold pl-8 pt-4"><i class="fa fa-circle-o fa-2x"></i> <span class="inline-block align-text-bottom pl-4">Development Projects</span></h3>
+  </div>
+  <div class="col-span-9 bg-white py-10 px-5">
+  <div data-controller="impact-and-action-form" class="col-span-9 bg-white py-10 px-5">
+    <%= simple_form_for @impact_and_action, url: :ip_rights_case_detail_impact_and_actions do |f| %>
+  <h2 class="font-bold text-xl text-gray-900">Impact of Incident/s of Human Rights Violations </h2>
+    <div class="border-t border-gray-200 mt-5"></div>
+     <div class="px-4 py-5  space-y-4 sm:p-6">
+      <%= f.input :impact_to_victim_details, as: :text, label: "How did the incident/s affect the victim/s and his/her/their family?", hint: "(E.g., the family members had to relocate for safety. Or, the family lost a breadwinner, etc.)" %>
+      <%= f.input :impact_to_community_details, as: :text, label: "How did the incident/s affect the Indigenous Peoples group/s or community/ies and/or organization of the victim/s?", hint: "(E.g., disrupted livelihood, culture and tradition, functions of indigenous institutions, community cohesion, cannot access ancestral territories and resources, rituals are affected etc.)" %>
+      <%= f.input :actions_taken_status, label: "Is/Are there any other advocacy and/or action/s undertaken?", collection: [['0', 'No'], ['1', 'Yes'] ], label_method: :second, value_method: :first, selected: "0", input_html: { data: { action: "impact-and-action-form#toggleActionTaken" } }  %>
+<div class="hidden" data-impact-and-action-form-target="actionTakenGroup">
+              <%= f.input :actions_taken_details, as: :text, label: "If YES, Please elaborate on any action/s at national level and indicate the actor who initiated the action/s.",
+              hint: "(E.g., community mobilization organized by family and local organization, fund-raising to support lawyers, communication submitted to national/regional human rights institution initiated by local organization and international NGO, etc.)" %>
+            </div>
+            <div data-impact-and-action-form-target="actionTakenGroup">
+              <%= f.input :actions_taken_details, as: :text, label: "If No, please elaborate on your response." %>
+            </div>
+             <div class="px-4 py-3 bg-gray-100 text-right sm:px-6">
+                <button type="submit" class="inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-green-600 hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500">
+                  Save and Proceed
+                </button>
+              </div>
+    <% end %>

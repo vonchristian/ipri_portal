@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-module Users
+module Documenters
   class Registration
     include ActiveModel::Model
 
@@ -8,17 +8,17 @@ module Users
 
     validates :first_name, :last_name, :organization_name, :email, presence: true
 
-    def register!
+    validates :email, format: { with: URI::MailTo::EMAIL_REGEXP }
+    def process!
       if valid?
-        create_user
-        send_activation_email
+        create_documenter
       end
     end
 
     private
 
     def create_user
-      Users::User.create!(
+      Users::Documenter.create!(
         first_name: first_name,
         last_name: last_name,
         email: email,

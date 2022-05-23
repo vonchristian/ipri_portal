@@ -1,18 +1,18 @@
 
 <div class="grid grid-cols-12 min-h-screen">
-  <div class="col-span-3 bg-green-500">
+  <div class="col-span-3 bg-green-700">
     <h1 class="pt-10 pl-4 font-bold py-5 px-10"> Step 4/7:</h1>
     <h3 class="font-bold pl-8"><i class="fa fa-circle fa-2x"></i> <span class="align-top pl-4 pb-2">Documenter Details</span></h3>
     <h3 class="font-bold pl-8 pt-4"><i class="fa fa-circle fa-2x"></i> <span class="align-top pl-4 pb-2">Data Sharing Agreement</span></h3>
     <h3 class="font-bold pl-8 pt-4"><i class="fa fa-circle fa-2x"></i> <span class="align-top pl-4 pb-2">Incident Details</span></h3>
-    <h3 class="font-bold pl-8 pt-4"><i class="fa fa-circle fa-2x"></i> <span class="align-top pl-4 pb-2">Victims</span></h3>
+    <h3 class="font-bold pl-8 pt-4 bg-green-800"><i class="fa fa-circle fa-2x"></i> <span class="align-top pl-4 pb-2">Victims</span></h3>
     <h3 class="font-bold pl-8 pt-4"><i class="fa fa-circle-o fa-2x"></i> <span class="align-top pl-4 pb-2">Human Rights Violations</span></h3>
     <h3 class="font-bold pl-8 pt-4"><i class="fa fa-circle-o fa-2x"></i> <span class="align-top pl-4 pb-2">Actions Taken</span></h3>
     <h3 class="font-bold pl-8 pt-4"><i class="fa fa-circle-o fa-2x"></i> <span class="align-top pl-4 pb-2">Development Projects</span></h3>
   </div>
 
-  <div class="col-span-9 bg-white py-10 px-5">
-    <%= form_for @collective_victim, url: :ip_rights_case_detail_collective_victims do |f| %>
+  <div data-controller="collective-victim-form" class="col-span-9 bg-white py-10 px-5">
+    <%= simple_form_for @collective_victim, url: :ip_rights_case_detail_collective_victims do |f| %>
     <div class="max-w-7xl mx-auto lg:px-0">
       <h2 class="font-bold text-xl text-gray-900">Group of People Victim Details</h2>
       <div class="md:mt-0 md:col-span-2 bg-white px-4">
@@ -20,53 +20,36 @@
           <div>
             <div class="px-4 py-5  space-y-4 sm:p-6">
               <div class="col-span-6 sm:col-span-3">
-                <label for="first-name" class="block text-sm font-medium text-gray-700 pb-2">Number of Affected People</label>
-                <%= f.text_area :affected_total,  class: "mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md" %>
-                <p class="mt-1 text-sm text-gray-600">
-                Specify if number refers to individuals, families, homes, groups, communities, villages etc. (E.g., 100 families, 250 homes)
-                </p>
+                <%= f.input :affected_total, as: :text, label: "Number of Affected People", hint: "Specify if number refers to individuals, families, homes, groups, communities, villages etc. (E.g., 100 families, 250 homes)" %>
+
               </div>
               <fieldset>
-                <div>
-                  <legend class="text-base font-medium text-gray-700 pt-4">Does the number of affected people refer to individuals?</legend>
-                </div>
                 <div class="mt-4 space-y-4">
-                  <div class="flex items-center">
-                    <%= f.radio_button :refer_to_individuals, true, class:"focus:ring-indigo-500 h-4 w-4 text-indigo-600 border-gray-300"  %>
-                    <label for="primary-data" class="ml-3 block text-sm font-medium text-gray-700">
-                      Yes
-                    </label>
-                  </div>
-                  <div class="flex items-center">
-                    <%= f.radio_button :refer_to_individuals, false, class:"focus:ring-indigo-500 h-4 w-4 text-indigo-600 border-gray-300"  %>
+                   <div class="mt-4 space-y-4">
+                    <div class="flex items-center" data-documenter-form-target="referToIndividuals">
+                      <%= f.input :refer_to_individuals, label: "Does the number of affected people refer to individuals?", collection: [['0', 'No'], ['1', 'Yes']], label_method: :second, value_method: :first, selected: "0", input_html: { data: { action: "collective-victim-form#toggleReferToIndividuals" } }  %>
 
-                    <label for="primary-data" class="ml-3 block text-sm font-medium text-gray-700">
-                      No
-                    </label>
+                  </div>
                   </div>
                 </div>
               </fieldset>
-              <div class="col-span-6 sm:col-span-3">
-                <label for="first-name" class="block text-sm font-medium text-gray-700 pb-2">Please provide more information about the victims</label>
-                <%= f.text_area :victim_details,  class: "mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md" %>
+              <div class="col-span-6 sm:col-span-3" data-collective-victim-form-target="referToIndividualGroup">
+                <%= f.input :victim_details, as: :text, label: "Please provide more information about the victims" %>
               </div>
 
-               <div class="col-span-6 sm:col-span-3">
-                <label for="first-name" class="block text-sm font-medium text-gray-700 pb-2">Write the number of MALE from the total number of individuals affected</label>
-                <%= f.text_field :male_total,  class: "mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md" %>
+               <div class="col-span-6 sm:col-span-3 hidden" data-collective-victim-form-target="referToIndividualGroup">
+                <%= f.input :male_total, label: "Write the number of MALE from the total number of individuals affected" %>
               </div>
 
-               <div class="col-span-6 sm:col-span-3">
-                <label for="first-name" class="block text-sm font-medium text-gray-700 pb-2">Write the number of FEMALE from the total number of individuals affected</label>
-                <%= f.text_field :female_total,  class: "mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md" %>
+               <div class="col-span-6 sm:col-span-3 hidden" data-collective-victim-form-target="referToIndividualGroup">
+                <%= f.input :female_total, label: "Write the number of FEMALE from the total number of individuals affected" %>
               </div>
 
               <% AgeBracket.all.each do |age_bracket| %>
               <%= f.fields_for :age_bracket_breakdowns do |ff| %>
                <%= ff.hidden_field :age_bracket_id, value: age_bracket.id %>
-               <div class="col-span-6 sm:col-span-3">
-                 <label for="first-name" class="block text-sm font-medium text-gray-700 pb-2">Write the number of <b><%= age_bracket.range_name %></b> from the total number of individuals affected</label>
-                <%= ff.text_field :total %>
+               <div class="col-span-6 sm:col-span-3 hidden" data-collective-victim-form-target="referToIndividualGroup">
+                <%= ff.input :total, label: "Write the number of #{age_bracket.range_name}  from the total number of individuals affected" %>
               </div>
               <% end %>
               <% end %>

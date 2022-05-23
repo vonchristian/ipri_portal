@@ -3,19 +3,27 @@
 module IpRights
   class IndividualVictimsController < ApplicationController
     def new
-      @case_detail = CaseDetail.find(params.fetch(:case_detail_id))
+      @case_detail = CaseDetails::CaseDetail.find(params.fetch(:case_detail_id))
       @individual_victim = CaseDetails::Victims::Individual.new
     end
 
     def create
-      @case_detail = CaseDetail.find(params.fetch(:case_detail_id))
+      @case_detail = CaseDetails::CaseDetail.find(params.fetch(:case_detail_id))
       @individual_victim = CaseDetails::Victims::Individual.new(individual_victim_params)
       if @individual_victim.valid?
         @individual_victim.process!
 
-        redirect_to ip_rights_case_detail_victims_url(@case_detail)
+        respond_to do |format|
+          format.html do
+            redirect_to ip_rights_case_detail_victims_url(@case_detail)
+          end
+        end
       else
-        render :new
+        respond_to do |format|
+          format.html do
+            render :new, status: :unprocessable_entity
+          end
+        end
       end
     end
 

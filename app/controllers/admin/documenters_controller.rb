@@ -1,22 +1,22 @@
 # frozen_string_literal: true
 
 module Admin
-  class UsersController < AdminController
+  class DocumentersController < AdminController
     def index
-      @users = Users::User.all
+      @documenters       = Users::Documenter.all
       @admin_users = Users::AdminUser.all
     end
 
     def new
-      @user = Users::Registration.new
+      @documenter = Documenters::Registration.new
     end
 
     def create
-      @user = Users::Registration.new(user_params)
-      if @user.valid?
-        @user.register!
+      @documenter = Documenters::Registration.new(user_params)
+      if @documenter.valid?
+        @documenter.process!
         respond_to do |format|
-          format.html { redirect_to admin_users_path, notice: "registered successfully" }
+          format.html { redirect_to admin_documenters_path, notice: "registered successfully" }
         end
       else
         respond_to do |format|
@@ -28,7 +28,7 @@ module Admin
     private
 
     def user_params
-      params.require(:users_registration)
+      params.require(:documenters_registration)
       .permit(:first_name, :last_name, :organization_name, :phone_number, :email)
     end
   end
