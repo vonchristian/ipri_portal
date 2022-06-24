@@ -329,17 +329,15 @@ ActiveRecord::Schema[7.0].define(version: 2022_04_30_065018) do
     t.string "experienced_harrassment_or_intimidation"
     t.text "harrassment_or_intimidation_details"
     t.string "alleged_perpetrators_known"
+    t.text "alleged_perpetrator_details"
     t.string "case_filing_status"
     t.text "case_filing_details"
     t.string "state_action_to_address_killing"
     t.text "state_action_to_address_killing_details"
     t.string "investigation_on_killing"
     t.text "investigation_on_killing_details"
-    t.text "impact_to_victim_details"
-    t.text "impact_to_community_details"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.text "alleged_perpetrator_details"
     t.index ["alleged_perpetrators_known"], name: "index_killings_on_alleged_perpetrators_known"
     t.index ["case_detail_id"], name: "index_killings_on_case_detail_id"
     t.index ["case_filing_status"], name: "index_killings_on_case_filing_status"
