@@ -1,2 +1,4 @@
-class DevelopmentProject < ApplicationRecord
+module DevelopmentProjects
+  class DevelopmentProject < ApplicationRecord
+  end
 end

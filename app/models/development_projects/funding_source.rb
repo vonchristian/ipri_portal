@@ -1,2 +1,5 @@
-class FundingSource < ApplicationRecord
+module DevelopmentProjects
+  class FundingSource < ApplicationRecord
+  end
 end
+
