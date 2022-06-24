@@ -47,8 +47,6 @@ task :deploy => :remote_environment do
     invoke :'bundle:install'
     invoke :'rails:db_migrate'
     invoke :'rails:assets_precompile'
-    command %{yarn install}
-    command %{NODE_ENV=production RAILS_ENV=production bundle exec rails webpacker:compile}
     invoke :'deploy:cleanup'
 
     on :launch do
