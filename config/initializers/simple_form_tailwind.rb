@@ -46,7 +46,7 @@ SimpleForm.setup do |config|
     b.optional :pattern
     b.optional :min_max
     b.optional :readonly
-    b.use :label, class: 'block text-sm font-bold text-gray-700 pb-2', error_class: 'text-gray-700'
+    b.use :label, class: 'block text-sm font-bold text-gray-900 pb-2', error_class: 'text-gray-700'
     b.use :input, class: 'shadow appearance-none border border-gray-300 rounded w-full py-2 px-3 bg-white focus:outline-none focus:ring-0 focus:border-blue-500 text-gray-700 leading-6 transition-colors duration-200 ease-in-out', error_class: 'border-red-500', valid_class: 'border-green-400'
     b.use :full_error, wrap_with: { tag: 'p', class: 'mt-2 text-red-700 text-xs italic' }
     b.use :hint, wrap_with: { tag: 'p', class: 'mt-1 text-sm text-gray-600' }
@@ -74,7 +74,8 @@ SimpleForm.setup do |config|
     b.wrapper :legend_tag, tag: 'legend', class: 'text-sm font-medium text-gray-600', error_class: 'text-red-700' do |ba|
       ba.use :label_text
     end
-    b.use :input, class: 'focus:ring-2 focus:ring-indigo-500 ring-offset-2 h-4 w-4 text-indigo-600 border-gray-300 rounded', error_class: 'text-red-700', valid_class: 'text-green-400'
+
+    b.use :input, class: 'mb-2 mt-2  w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600', error_class: 'text-red-700', valid_class: 'text-green-400'
     b.use :full_error, wrap_with: { tag: 'p', class: 'block mt-2 text-red-700 text-xs italic' }
     b.use :hint, wrap_with: { tag: 'p', class: 'mt-2 text-grey-700 text-xs italic' }
   end

@@ -102,6 +102,8 @@ GEM
       railties (>= 3.2, < 8.0)
     globalid (1.0.0)
       activesupport (>= 5.0)
+    heroicon (0.4.0)
+      rails (>= 5.2)
     i18n (1.12.0)
       concurrent-ruby (~> 1.0)
     image_processing (1.12.2)
@@ -211,6 +213,9 @@ GEM
     simple_form (5.1.0)
       actionpack (>= 5.2)
       activemodel (>= 5.2)
+    simple_form_tailwind_css (0.0.2)
+      heroicon
+      simple_form
     sixarm_ruby_unaccent (1.2.0)
     sprockets (4.1.1)
       concurrent-ruby (~> 1.0)
@@ -255,6 +260,7 @@ DEPENDENCIES
   factory_bot_rails
   faker!
   font-awesome-rails
+  heroicon
   image_processing (~> 1.2)
   importmap-rails
   jbuilder
@@ -267,6 +273,7 @@ DEPENDENCIES
   rspec-rails
   shoulda-matchers
   simple_form
+  simple_form_tailwind_css
   sprockets-rails
   stimulus-rails
   tailwindcss-rails (~> 2.0)
