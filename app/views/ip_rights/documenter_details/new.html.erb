@@ -1,17 +1,8 @@
 <div class="grid grid-cols-12 min-h-screen">
-  <div class="col-span-3 bg-green-600">
-    <h1 class="pt-10 pl-4 font-bold py-5"> Step 1/7:</h1>
-    <h3 class="font-bold pl-8"><i class="fa fa-circle fa-2x"></i> <span class="align-middle pl-4 pb-2">Documenter Details</span></h3>
-    <h3 class="font-bold pl-8 pt-4"><i class="fa fa-circle-o fa-2x"></i> <span class="align-middle pl-4 pb-2">Data Sharing Agreement</span></h3>
-    <h3 class="font-bold pl-8 pt-4"><i class="fa fa-circle-o fa-2x"></i> <span class="align-middle pl-4 pb-2">Incident Details</span></h3>
-    <h3 class="font-bold pl-8 pt-4"><i class="fa fa-circle-o fa-2x"></i> <span class="align-middle pl-4 pb-2">Victims</span></h3>
-    <h3 class="font-bold pl-8 pt-4"><i class="fa fa-circle-o fa-2x"></i> <span class="align-middle pl-4 pb-2">Human Rights Violoations</span></h3>
-    <h3 class="font-bold pl-8 pt-4"><i class="fa fa-circle-o fa-2x"></i> <span class="align-middle pl-4 pb-2">Actions Taken</span></h3>
-    <h3 class="font-bold pl-8 pt-4"><i class="fa fa-circle-o fa-2x"></i> <span class="align-middle pl-4 pb-2">Related Development Projects</span></h3>
-  </div>
-<div data-controller="documenter-form" class="col-span-9 bg-white py-10 px-5">
+ <%=render '/ip_rights/shared/sidebar', current_step: 1 %>
+<div data-controller="documenter-form" class="col-span-9 bg-gray-100 py-10 px-5">
   <%= simple_form_for @documenter, url: :ip_rights_documenter_details, html: { multipart: true } do |f| %>
-    <div class="bg-gray-50 mb-10">
+    <div class="bg-gray-100 mb-10">
       <div class="max-w-7xl mx-auto lg:px-0">
         <div class="md:grid md:grid-cols-3">
 

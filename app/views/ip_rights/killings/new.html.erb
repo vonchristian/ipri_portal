@@ -1,16 +1,6 @@
 
 <div class="grid grid-cols-12 min-h-screen">
-  <div class="col-span-3 bg-green-700">
-    <h1 class="pt-10 pl-4 font-bold py-5 px-10"> Step 5/7:</h1>
-    <h3 class="font-bold pl-8"><i class="fa fa-circle fa-2x"></i> <span class="align-top pl-4 pb-2">Documenter Details</span></h3>
-    <h3 class="font-bold pl-8 pt-4"><i class="fa fa-circle fa-2x"></i> <span class="align-top pl-4 pb-2">Data Sharing Agreement</span></h3>
-    <h3 class="font-bold pl-8 pt-4"><i class="fa fa-circle fa-2x"></i> <span class="align-top pl-4 pb-2">Incident Details</span></h3>
-    <h3 class="font-bold pl-8 pt-4"><i class="fa fa-circle fa-2x"></i> <span class="align-top pl-4 pb-2">Victims</span></h3>
-    <h3 class="font-bold pl-8 pt-4 bg-green-800"><i class="fa fa-circle fa-2x"></i> <span class="align-top pl-4 pb-2">Human Rights Violations</span></h3>
-    <h3 class="font-bold pl-8 pt-4"><i class="fa fa-circle-o fa-2x"></i> <span class="align-top pl-4 pb-2">Actions Taken</span></h3>
-    <h3 class="font-bold pl-8 pt-4"><i class="fa fa-circle-o fa-2x"></i> <span class="align-top pl-4 pb-2">Development Projects</span></h3>
-  </div>
-
+  <%= render '/ip_rights/shared/sidebar', current_step: 5 %>
   <div data-controller="killing-form" class="col-span-9 bg-white py-10 px-5">
     <%= simple_form_for @killing, url: :ip_rights_case_detail_killings do |f| %>
     <div class="max-w-7xl mx-auto lg:px-0">

@@ -1,14 +1,5 @@
 <div class="grid grid-cols-12 min-h-screen">
-  <div class="col-span-3 bg-green-600">
-    <h1 class="pt-10 pl-4 font-bold py-5"> Step 2/7:</h1>
-    <h3 class="font-bold pl-8"><i class="fa fa-circle fa-2x"></i> <span class="align-middle pl-4 pb-2">Documenter Details</span></h3>
-    <h3 class="font-bold pl-8 pt-4"><i class="fa fa-circle fa-2x"></i> <span class="align-middle pl-4 pb-2">Data Sharing Agreement</span></h3>
-    <h3 class="font-bold pl-8 pt-4"><i class="fa fa-circle-o fa-2x"></i> <span class="align-middle pl-4 pb-2">Incident Details</span></h3>
-    <h3 class="font-bold pl-8 pt-4"><i class="fa fa-circle-o fa-2x"></i> <span class="align-middle pl-4 pb-2">Victims</span></h3>
-    <h3 class="font-bold pl-8 pt-4"><i class="fa fa-circle-o fa-2x"></i> <span class="align-middle pl-4 pb-2">Human Rights Violoations</span></h3>
-    <h3 class="font-bold pl-8 pt-4"><i class="fa fa-circle-o fa-2x"></i> <span class="align-middle pl-4 pb-2">Actions Taken</span></h3>
-    <h3 class="font-bold pl-8 pt-4"><i class="fa fa-circle-o fa-2x"></i> <span class="align-middle pl-4 pb-2">Related Development Projects</span></h3>
-  </div>
+   <%= render '/ip_rights/shared/sidebar', current_step: 2 %>
   <div class="col-span-8 bg-white pt-20 pb-10 px-10">
     <%= simple_form_for @data_sharing, url: :ip_rights_case_detail_data_sharings do |f| %>
       <h2 class="font-bold text-xl text-gray-900">Data Sharing Agreement</h2>

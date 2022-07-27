@@ -18,14 +18,12 @@
             <%= render "/layouts/documenter/sidebar" %>
         </div>
         <div class="col-span-10 bg-gray-100">
-          <div class="container">
           <% flash.each do |type, msg| %>
             <div>
               <%= msg %>
             </div>
           <% end %>
-            <%= yield %>
-          </div>
+          <%= yield %>
         </div>
       </div>
 

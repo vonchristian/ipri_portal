@@ -1,19 +1,87 @@
 <div class="grid grid-cols-12 min-h-screen">
-   <div class="col-span-3 bg-green-700">
-    <h1 class="pt-10 pl-4 font-bold py-5 px-10"> Step 6/7:</h1>
-    <h3 class="font-bold pl-8 pt-4 align-middle"><i class="fa fa-circle fa-2x"></i> <span class="pl-4">Documenter Details</span></h3>
-    <h3 class="font-bold pl-8 pt-4"><i class="fa fa-circle fa-2x"></i> <span class="align-middle pl-4 pb-2">Data Sharing Agreement</span></h3>
-    <h3 class="font-bold pl-8 pt-4"><i class="fa fa-circle fa-2x"></i> <span class="align-middle pl-4 pb-2">Incident Details</span></h3>
-    <h3 class="font-bold pl-8 pt-4"><i class="fa fa-circle fa-2x"></i> <span class="align-top pl-4 pb-2">Victims</span></h3>
-    <h3 class="font-bold pl-8 pt-4"><i class="fa fa-circle fa-2x"></i> <span class="align-middle pl-4 pb-2">Human Rights Viloations</span></h3>
-    <h3 class="font-bold pl-8 pt-4 bg-green-800"><i class="fa fa-circle fa-2x"></i> <span class="align-middle pl-4 pb-2">Impact and Actions Taken</span></h3>
-    <h3 class="font-bold pl-8 pt-4"><i class="fa fa-circle-o fa-2x"></i> <span class="inline-block align-text-bottom pl-4">Development Projects</span></h3>
-  </div>
-  <div data-controller="killing-form" class="col-span-9 bg-white py-10">
+  <%= render '/ip_rights/shared/sidebar', current_step: 7 %>
+
+  <div data-controller="development-project-form" class="col-span-9 bg-white py-10">
     <%= simple_form_for @development_project, url: :ip_rights_case_detail_development_projects do |f| %>
     <div class="max-w-7xl mx-auto lg:px-0">
-      <h2 class="font-bold text-xl text-gray-900">Details of Development Project</h2>
+      <h2 class="font-bold text-xl text-gray-900 pl-6">Details of Development Project</h2>
       <div class="border-t border-gray-200 mt-4"></div>
         <div class="px-4 py-5  space-y-4 sm:p-6">
         <%= f.input :project_name, label: "Name of development project" %>
-    <% end %>
+        <%= f.input :project_description, label: "Description of development project", as: :text %>
+        <%= f.input :start_of_operation_year, label: "Indicate year of project's start of operation on the country where the incident of human rights violation happened" %>
+
+<h2 class="font-bold text-xl text-gray-900">Parent Company Profile</h2>
+      <div class="border-t border-gray-200 mt-4"></div>
+      <%= f.input :company_profile_known, label: "Do you know if the development project/s has/have a parent company offshore?", collection: [['0', 'No'], ['1', 'Yes'] ], label_method: :second, value_method: :first, selected: "0", input_html: { data: { action: "killing-form#togglePerpetratorCategories" } }  %>
+<div class="" development-project-form-target="parentCompanyGroup">
+<div class="col-span-2 sm:col-span-2">
+                 <%= f.input :parent_company_country_id, label: "Country of parent company", collection: Country.all.map{|country| [country.name, country.id] } %>
+                </div>
+        <%= f.input :parent_company_description, label: "Description of parent company", as: :text %>
+<h3 class="font-bold text-xl text-gray-900 py-4">Source of Information on Parent Company</h3>
+
+                  <label for="about" class="block text-sm font-medium text-gray-700">
+                    Other relevant websites/links
+                  </label>
+                  <div class="mt-1">
+                    <%= f.input :parent_company_data_sources, label: false, as: :text,  input_html: { class: "shadow-sm focus:ring-indigo-500 focus:border-indigo-500 mt-1 block w-full sm:text-sm border border-gray-300 rounded-md" } %>
+                  </div>
+                </div>
+                  <label class="block text-sm font-medium text-gray-700">
+                    Upload Documents
+                  </label>
+                  <div class="mt-1 flex justify-center px-6 pt-5 border-2 border-gray-300 border-dashed rounded-md pb-5">
+                    <div class="space-y-1 text-center">
+                      <svg class="mx-auto h-12 w-12 text-gray-400" stroke="currentColor" fill="none" viewBox="0 0 48 48" aria-hidden="true">
+                        <path d="M28 8H12a4 4 0 00-4 4v20m32-12v8m0 0v8a4 4 0 01-4 4H12a4 4 0 01-4-4v-4m32-4l-3.172-3.172a4 4 0 00-5.656 0L28 28M8 32l9.172-9.172a4 4 0 015.656 0L28 28m0 0l4 4m4-24h8m-4-4v8m-12 4h.02" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+                      </svg>
+                      <div class="flex text-sm text-gray-600">
+                        <label for="file-upload" class="relative cursor-pointer bg-white rounded-md font-medium text-indigo-600 hover:text-indigo-500 focus-within:outline-none focus-within:ring-2 focus-within:ring-offset-2 focus-within:ring-indigo-500">
+                          <span>Upload a file</span>
+                          <%= f.input :parent_company_documents, label: false, input_html: { multiple: true }, as: :file %>
+                        </label>
+                      </div>
+                      <p class="text-xs text-gray-500">
+                        PDF, PNG, JPG, GIF up to 10MB
+                      </p>
+                    </div>
+                    </div>
+<h2 class="font-bold text-xl text-gray-900">Source of Funding Profile</h2>
+      <div class="border-t border-gray-200 mt-4"></div>
+<%= f.input :funding_profile_known, label: "Do you know if the development project/s is/are linked to any financial institution/s?", collection: [['0', 'No'], ['1', 'Yes'] ], label_method: :second, value_method: :first, selected: "0", input_html: { data: { action: "killing-form#togglePerpetratorCategories" } }  %>
+ <% DevelopmentProjects::FundingSource.all.each do |category| %>
+ <div class="col-span-6 sm:col-span-3">
+                    <%= f.check_box :funding_source_ids, value: category.id, class: "focus:ring-indigo-500 h-4 w-4 text-indigo-600 border-gray-300 rounded" %>
+                    <label for="first-name" class="text-base font-medium text-gray-700 pl-4"><%= category.name %></label>
+</div>
+                <% end %>
+                 <%= f.input :funding_source_description, label: "Description of Source/s of Funding", as: :text %>
+                 <p class="font-bold text-gray-900">Source of Information on Funding Source</p>
+
+                  <label for="about" class="block text-sm font-medium text-gray-700">
+                    Other relevant websites/links
+                  </label>
+                  <div class="mt-1">
+                    <%= f.input :funding_source_data_sources, label: false, as: :text,  input_html: { class: "shadow-sm focus:ring-indigo-500 focus:border-indigo-500 mt-1 block w-full sm:text-sm border border-gray-300 rounded-md" } %>
+                  </div>
+                  <label class="block text-sm font-medium text-gray-700">
+                    Upload Documents
+                  </label>
+                  <div class="mt-1 flex justify-center px-6 pt-5 border-2 border-gray-300 border-dashed rounded-md pb-5">
+                    <div class="space-y-1 text-center">
+                      <svg class="mx-auto h-12 w-12 text-gray-400" stroke="currentColor" fill="none" viewBox="0 0 48 48" aria-hidden="true">
+                        <path d="M28 8H12a4 4 0 00-4 4v20m32-12v8m0 0v8a4 4 0 01-4 4H12a4 4 0 01-4-4v-4m32-4l-3.172-3.172a4 4 0 00-5.656 0L28 28M8 32l9.172-9.172a4 4 0 015.656 0L28 28m0 0l4 4m4-24h8m-4-4v8m-12 4h.02" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+                      </svg>
+                      <div class="flex text-sm text-gray-600">
+                        <label for="file-upload" class="relative cursor-pointer bg-white rounded-md font-medium text-indigo-600 hover:text-indigo-500 focus-within:outline-none focus-within:ring-2 focus-within:ring-offset-2 focus-within:ring-indigo-500">
+                          <span>Upload a file</span>
+                          <%= f.input :funding_source_documents, label: false, input_html: { multiple: true }, as: :file %>
+                        </label>
+                      </div>
+                      <p class="text-xs text-gray-500">
+                        PDF, PNG, JPG, GIF up to 10MB
+                      </p>
+                    </div>
+                    </div>
+<% end %>
