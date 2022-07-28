@@ -1,8 +1,8 @@
 require 'mina/rails'
 require 'mina/bundler'
 require 'mina/git'
-require 'mina/rbenv'
 require 'mina/puma'
+require 'mina/version_managers/rbenv'
 
 Dir["/lib/mina/*.rb"].each { |file| require file }
 
@@ -18,7 +18,7 @@ set :app_path, lambda { "#{fetch(:deploy_to)}/#{fetch(:current_path)}" }
 set :stage, 'production'
 set :shared_paths,  ['config/database.yml', 'log', 'tmp/log', 'public/system', 'tmp/pids', 'tmp/sockets']
 set :shared_dirs, fetch(:shared_dirs, []).push('public/assets').push('public/packs').push('public/storage')
-
+set :rbenv_path, '$HOME/.rbenv'
 
 # Optional settings:
 #   set :user, 'foobar'    # Username in the server to SSH to.
@@ -42,6 +42,7 @@ task :deploy => :remote_environment do
   deploy do
     # Put things that will set up an empty directory into a fully set-up
     # instance of your project.
+    invoke :'rbenv:load'
     invoke :'git:clone'
     invoke :'deploy:link_shared_paths'
     invoke :'bundle:install'

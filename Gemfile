@@ -71,3 +71,4 @@ gem "font-awesome-rails"
 gem "simple_form_tailwind_css"
 gem "heroicon"
 gem 'mina-ng-puma', require: false
+gem 'mina-version_managers'

@@ -128,6 +128,8 @@ GEM
     mina-ng-puma (1.4.0)
       mina (~> 1.2.0)
       puma (>= 2.13)
+    mina-version_managers (0.1.0)
+      mina (>= 1.0.0)
     mini_magick (4.11.0)
     mini_mime (1.1.2)
     minitest (5.16.2)
@@ -272,6 +274,7 @@ DEPENDENCIES
   importmap-rails
   jbuilder
   mina-ng-puma
+  mina-version_managers
   pg (~> 1.1)
   pry-rails
   puma (~> 5.0)
