@@ -2,7 +2,7 @@ require 'mina/rails'
 require 'mina/bundler'
 require 'mina/git'
 require 'mina/rbenv'
-# require 'mina/puma'
+require 'mina/puma'
 
 Dir["/lib/mina/*.rb"].each { |file| require file }
 
@@ -50,8 +50,7 @@ task :deploy => :remote_environment do
     invoke :'deploy:cleanup'
 
     on :launch do
-      # invoke :'puma:restart'
-      # invoke :'whenever:update'
+      invoke :'puma:smart_restart'
     end
   end
 end

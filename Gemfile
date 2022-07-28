@@ -70,3 +70,4 @@ gem "tailwindcss-rails", "~> 2.0"
 gem "font-awesome-rails"
 gem "simple_form_tailwind_css"
 gem "heroicon"
+gem 'mina-ng-puma', require: false

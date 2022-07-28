@@ -122,6 +122,12 @@ GEM
       mini_mime (>= 0.1.1)
     marcel (1.0.2)
     method_source (1.0.0)
+    mina (1.2.4)
+      open4 (~> 1.3.4)
+      rake
+    mina-ng-puma (1.4.0)
+      mina (~> 1.2.0)
+      puma (>= 2.13)
     mini_magick (4.11.0)
     mini_mime (1.1.2)
     minitest (5.16.2)
@@ -147,6 +153,7 @@ GEM
       racc (~> 1.4)
     nokogiri (1.13.8-x86_64-linux)
       racc (~> 1.4)
+    open4 (1.3.4)
     pg (1.4.1)
     pry (0.14.1)
       coderay (~> 1.1)
@@ -264,6 +271,7 @@ DEPENDENCIES
   image_processing (~> 1.2)
   importmap-rails
   jbuilder
+  mina-ng-puma
   pg (~> 1.1)
   pry-rails
   puma (~> 5.0)
