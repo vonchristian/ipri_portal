@@ -28,7 +28,6 @@ module CaseDetails
         incident_start_day:   incident_start_day,
         incident_start_month: incident_start_month,
         incident_start_year:  incident_start_year,
-        incident_start_day:   incident_start_day,
         incident_end_month:   incident_end_month,
         incident_end_year:    incident_end_year,
         incident_end_day:     incident_end_day,
