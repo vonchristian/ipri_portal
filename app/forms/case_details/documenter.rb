@@ -20,7 +20,7 @@ module CaseDetails
       :user_id
 
     validates :first_name, :last_name, :organization_name, :email,
-      :submission_date_month, :submission_date_day, :submission_date_year, :primary_data,
+      :submission_date_month, :submission_date_day, :submission_date_year,
       presence: true
 
     def process!

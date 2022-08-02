@@ -1,7 +1,7 @@
 import { Controller } from "@hotwired/stimulus"
 
 export default class extends Controller {
-  static targets = [ "hideable", "phoneFieldGroup", "phone", "dataSourceGroup" ]
+  static targets = [ "hideable", "phoneFieldGroup", "phone"]
 
   togglePhoneGroup() {
     const element = this.phoneFieldGroupTarget
@@ -11,15 +11,5 @@ export default class extends Controller {
       element.classList.add("hidden");
       this.phoneTarget.value = null;
     };
-  }
-
-  toggleDataSource() {
-    this.dataSourceGroupTargets.forEach((el) => {
-      if(el.classList.value.includes("hidden")) {
-        el.classList.remove("hidden");
-      } else {
-        el.classList.add("hidden");
-      };
-    });
   }
 }

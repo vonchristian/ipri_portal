@@ -37,8 +37,8 @@
             </tr>
           </thead>
           <tbody>
-            <tr class="border-b">
               <% @case_detail.individual_victims.each do |victim| %>
+                          <tr class="border-b">
                 <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
                   <%= victim.full_name %>
                 </td>
@@ -51,8 +51,8 @@
                  <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
                   <%= victim.age_bracket_range_name %>
                 </td>
+                </tr>
               <% end %>
-            </tr>
           </thead>
         </table>
       </div>
@@ -120,6 +120,6 @@
 
 <div class="px-4 py-3 bg-gray-100 text-right sm:px-6">
   <a href="/ip_rights/case_details/<%=@case_detail.id%>/human_rights_violations"type="submit" class="inline-flex py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-green-600 hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500">
-          Save and Proceed
-        </a>
-              </div>
+    Save and Proceed
+  </a>
+</div>
