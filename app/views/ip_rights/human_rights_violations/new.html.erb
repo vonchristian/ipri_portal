@@ -1,13 +1,9 @@
+  <%=render '/ip_rights/shared/sidebar', current_step: 5, step_name: 'Categories of Incidents of Human Rights Violations', percent_finished: 50 %>
 
-<div class="grid grid-cols-12 min-h-screen">
-     <%= render '/ip_rights/shared/sidebar', current_step: 5 %>
-  <div data-controller="human-rights-violation-form" class="col-span-9 bg-white py-10 px-5">
+  <div data-controller="human-rights-violation-form" class="col-span-9 bg-white mt-5 px-5">
     <%= simple_form_for @human_rights_violation, url: :ip_rights_case_detail_human_rights_violations do |f| %>
     <div class="max-w-7xl mx-auto lg:px-0">
       <h2 class="font-bold text-xl text-gray-900">Human Rights Violation Details</h2>
-
-          <div class="border-t border-gray-200 mt-4"></div>
-          <div>
             <div class="px-4 py-5  space-y-4 sm:p-6">
               <div class="col-span-6 sm:col-span-3">
                <label class="text-sm font-medium text-gray-600 block">What was/were the human rights violation/s?</label>

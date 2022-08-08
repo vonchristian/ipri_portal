@@ -1,10 +1,8 @@
-<div class="grid grid-cols-12 min-h-screen">
-    <%= render '/ip_rights/shared/sidebar', current_step: 6 %>
-  <div class="col-span-9 bg-white py-10 px-5">
-  <div data-controller="impact-and-action-form" class="col-span-9 bg-white py-10 px-5">
+<%= render '/ip_rights/shared/sidebar', current_step: 6, step_name: "Impact of Incident/s of Human Rights Violations", percent_finished: 80 %>
+  <div class="col-span-9 bg-white mt-5">
+  <div data-controller="impact-and-action-form" class="col-span-9">
     <%= simple_form_for @impact_and_action, url: :ip_rights_case_detail_impact_and_actions do |f| %>
   <h2 class="font-bold text-xl text-gray-900">Impact of Incident/s of Human Rights Violations </h2>
-    <div class="border-t border-gray-200 mt-5"></div>
      <div class="px-4 py-5  space-y-4 sm:p-6">
       <%= f.input :impact_to_victim_details, as: :text, label: "How did the incident/s affect the victim/s and his/her/their family?", hint: "(E.g., the family members had to relocate for safety. Or, the family lost a breadwinner, etc.)" %>
       <%= f.input :impact_to_community_details, as: :text, label: "How did the incident/s affect the Indigenous Peoples group/s or community/ies and/or organization of the victim/s?", hint: "(E.g., disrupted livelihood, culture and tradition, functions of indigenous institutions, community cohesion, cannot access ancestral territories and resources, rituals are affected etc.)" %>

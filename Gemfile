@@ -42,7 +42,7 @@ gem "tzinfo-data", platforms: %i[ mingw mswin x64_mingw jruby ]
 
 # Reduces boot times through caching; required in config/boot.rb
 gem "bootsnap", require: false
-
+gem 'pg_search'
 # Use Sass to process CSS
 # gem "sassc-rails"
 
@@ -67,8 +67,10 @@ group :test do
 end
 
 gem "tailwindcss-rails", "~> 2.0"
-gem "font-awesome-rails"
+gem "font-awesome-sass", "~> 6.1.2"
 gem "simple_form_tailwind_css"
 gem "heroicon"
 gem 'mina-ng-puma', require: false
 gem 'mina-version_managers'
+gem "chartkick"
+gem "groupdate"

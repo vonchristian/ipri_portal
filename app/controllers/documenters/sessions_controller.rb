@@ -15,7 +15,7 @@ module Documenters
       if @session.valid? && @session.valid_password?
         session[:user_id] = @session.find_user.id
         respond_to do |format|
-          format.html { redirect_to documenters_dashboard_index_path, notice: "signed in successfully" }
+          format.html { redirect_to documenters_dashboard_index_path }
         end
       else
         respond_to do |format|

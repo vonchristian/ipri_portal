@@ -2,6 +2,8 @@
 
 module IpRights
   class DevelopmentProjectsController < ApplicationController
+    layout "documenter"
+
     def index
       @case_detail = CaseDetails::CaseDetail.find(params.fetch(:case_detail_id))
     end
@@ -19,7 +21,7 @@ module IpRights
 
         respond_to do |format|
           format.html do
-            redirect_to documenters_case_details_path, notice: "Case Factsheet submitted successfully."
+            redirect_to ip_rights_case_detail_development_projects_url(@case_detail)
           end
         end
       else
@@ -36,7 +38,8 @@ module IpRights
     def development_project_params
       params
         .require(:case_details_development_project)
-        .permit(:project_name, :project_description)
+        .permit(:project_name, :project_description, :start_of_operation_year, :company_profile_known)
+        .merge!(case_detail_id: @case_detail.id)
     end
   end
 end

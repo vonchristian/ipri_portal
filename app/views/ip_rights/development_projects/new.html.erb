@@ -1,5 +1,4 @@
-<div class="grid grid-cols-12 min-h-screen">
-  <%= render '/ip_rights/shared/sidebar', current_step: 7 %>
+<%= render '/ip_rights/shared/sidebar', current_step: 7, step_name: "Related Development Projects", percent_finished: 100 %>
 
   <div data-controller="development-project-form" class="col-span-9 bg-white py-10">
     <%= simple_form_for @development_project, url: :ip_rights_case_detail_development_projects do |f| %>
@@ -95,5 +94,5 @@
         </div>
       </div>
       <div class="border-t border-gray-200 mt-4"></div>
-      <%= f.submit "Submit Case Factsheet", class: 'float-right class="w-full h-12 px-6 text-white transition-colors duration-150 bg-green-700 rounded-lg focus:shadow-outline hover:bg-green-800 mt-4' %>
+      <%= f.submit "Proceed", class: 'float-right class="w-full h-12 px-6 text-white transition-colors duration-150 bg-green-700 rounded-lg focus:shadow-outline hover:bg-green-800 mt-4' %>
 <% end %>

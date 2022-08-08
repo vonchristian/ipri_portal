@@ -2,7 +2,7 @@
 
 module IpRights
   class DataSharingsController < Documenters::BaseController
-    layout "application"
+    layout "documenter"
 
     def new
       @case_detail  = CaseDetails::CaseDetail.find(params.fetch(:case_detail_id))

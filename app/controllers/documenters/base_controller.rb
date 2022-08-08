@@ -17,7 +17,7 @@ module Documenters
     end
 
     def authenticate_documenter!
-      redirect_to documenter_login_path unless logged_in?
+      redirect_to documenters_login_path unless logged_in?
     end
   end
 end

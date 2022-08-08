@@ -2,6 +2,8 @@
 
 module IpRights
   class ImpactAndActionsController < ApplicationController
+    layout "documenter"
+
     def new
       @case_detail       = CaseDetails::CaseDetail.find(params.fetch(:case_detail_id))
       @impact_and_action = CaseDetails::ImpactAndAction.new

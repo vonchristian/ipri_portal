@@ -2,6 +2,8 @@
 
 module IpRights
   class KillingsController < ApplicationController
+    layout "documenter"
+
     def new
       @case_detail = CaseDetails::CaseDetail.find(params.fetch(:case_detail_id))
       @killing     = @case_detail.killings.build

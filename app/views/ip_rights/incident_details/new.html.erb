@@ -1,14 +1,11 @@
 
-<div class="grid grid-cols-12 min-h-screen">
-   <%=render '/ip_rights/shared/sidebar', current_step: 3 %>
-  <div data-controller="incident-form" class="col-span-9 bg-white py-10 px-5">
+
+   <%=render '/ip_rights/shared/sidebar', current_step: 3, step_name: "Place and Date of Incident", percent_finished: 30 %>
+  <div data-controller="incident-form" class="col-span-9 mt-5">
     <%= simple_form_for @incident_detail, url: :ip_rights_case_detail_incident_details do |f| %>
       <h2 class="font-bold text-xl text-gray-900">Place and Date of Incident </h2>
-      <div class="md:mt-0 md:col-span-2 bg-white px-4">
-
-          <div class="border-t border-gray-200 mt-4"></div>
-          <div>
-            <div class="px-4 py-5 sm:p-6">
+      <div class="md:mt-0 md:col-span-2">
+            <div class="py-5 sm:p-6">
               <div class="grid grid-cols-4 gap-6">
                 <div class="col-span-2 sm:col-span-2">
                  <%= f.input :country_id, label: "Country of Incident", collection: Country.all.map{|country| [country.name, country.id] } %>
@@ -29,9 +26,7 @@
                   <legend class="text-base font-medium text-gray-700 pt-4">Is this an ongoing case?</legend>
                 </div>
                 <div class="mt-4 space-y-4">
-                 <%= f.input :ongoing_case, label: false, collection: [['0', 'No'], ['1', 'Yes']], label_method: :second, value_method: :first, selected: "1", input_html: { data: { action: "incident-form#toggleOngoingCase" } }  %>
-
-
+                 <%= f.input :ongoing_case, label: '', collection: ['No', 'Yes'], checked: "No", input_html: { data: { incident_form_target: "input", action: "click->incident-form#toggle" } }, as: :radio_buttons  %>
                   </div>
                 </div>
               </fieldset>
@@ -43,7 +38,7 @@
                     <%= f.input :incident_start_year, label: false, collection: (Date.current - 10.year).year..(Time.zone.now.year), selected: Date.current.year %>
                   </div>
 
-              <div class="hidden" data-incident-form-target="ongoingCaseGroup">
+              <div data-incident-form-target="output">
                 <label class="block text-sm font-bold text-gray-700 pb-2">End Date of Incident</label>
                  <div class="grid grid-cols-3 gap-4">
                     <%= f.input :incident_end_month, label: false, collection: Date::MONTHNAMES, selected: Date.current.strftime("%B")  %>

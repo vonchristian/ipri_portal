@@ -13,11 +13,14 @@
 
   <body>
     <main>
+      <%= render "layouts/documenter/header" %>
       <div class="grid grid-cols-1 md:grid-cols-12">
+
         <div class="col-span-2">
             <%= render "/layouts/documenter/sidebar" %>
         </div>
-        <div class="col-span-10 bg-gray-100">
+        <div class="col-span-10 ml-4">
+
           <% flash.each do |type, msg| %>
             <div>
               <%= msg %>

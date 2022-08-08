@@ -1,9 +1,7 @@
 
-<div class="grid grid-cols-12 min-h-screen">
-  <%=render '/ip_rights/shared/sidebar', current_step: 4 %>
-  <div class="col-span-9 bg-white py-10 px-5">
+  <%=render '/ip_rights/shared/sidebar', current_step: 4, step_name: 'Victim Details', percent_finished: 40 %>
+  <div class="col-span-9 bg-white mt-5 px-5">
     <h2 class="font-bold text-xl text-gray-900">Victim Details </h2>
-    <div class="border-t border-gray-200 mt-4"></div>
   <div class="flex justify-between pt-5">
     <div class="cols">
     <h2 class="font-bold text-xl text-gray-900">Individual Victims</h2>
@@ -53,7 +51,7 @@
                 </td>
                 </tr>
               <% end %>
-          </thead>
+          </tbody>
         </table>
       </div>
     </div>

@@ -1,10 +1,12 @@
- <div class="col-span-3 bg-green-700">
-    <h1 class="pt-10 pl-4 font-bold py-5"> Step <%= current_step %>/7:</h1>
-    <h3 class="font-bold pl-8"><i class="<%= (1..current_step).include?(1) ? 'fa fa-circle' : 'fa fa-circle-o' %>"></i> <span class="inline-block align-top pl-4">Documenter Details</span></h3>
-    <h3 class="font-bold pl-8 pt-4"><i class="<%= (1..current_step).include?(2) ? 'fa fa-circle' : 'fa fa-circle-o' %>"></i> <span class="align-top pl-4">Data Sharing Agreement</span></h3>
-    <h3 class="font-bold pl-8 pt-4"><i class="<%= (1..current_step).include?(3) ? 'fa fa-circle' : 'fa fa-circle-o' %>"></i> <span class="align-top pl-4">Incident Details</span></h3>
-    <h3 class="font-bold pl-8 pt-4"><i class="<%= (1..current_step).include?(4) ? 'fa fa-circle' : 'fa fa-circle-o' %>"></i> <span class="align-top pl-4">Victims</span></h3>
-    <h3 class="font-bold pl-8 pt-4"><i class="<%= (1..current_step).include?(5) ? 'fa fa-circle' : 'fa fa-circle-o' %>"></i> <span class="align-top pl-4">Human Rights Violoations</span></h3>
-    <h3 class="font-bold pl-8 pt-4"><i class="<%= (1..current_step).include?(6) ? 'fa fa-circle' : 'fa fa-circle-o' %>"></i> <span class="align-top pl-4">Actions Taken</span></h3>
-    <h3 class="font-bold pl-8 pt-4"><i class="<%= (1..current_step).include?(7) ? 'fa fa-circle' : 'fa fa-circle-o' %>"></i> <span class="align-top pl-4">Related Development Projects</span></h3>
-  </div>
+<header>
+    <div class="w-full px-5 py-5">
+<div class="flex justify-between mb-1">
+  <span class="text-base font-normal text-gray-900 dark:text-white pb-2">Step <%= current_step %>/7: <%= step_name %> </span>
+  <span class="text-sm font-normal text-gray-900 dark:text-white"><%= percent_finished %>%</span>
+</div>
+<div class="w-full bg-gray-200 rounded-full h-2.5 dark:bg-gray-700">
+  <div class="bg-green-700 h-2.5 rounded-full" style="width: <%= percent_finished %>%"></div>
+</div>
+    </div>
+  </header>
+<div class="border-t border-gray-200 mt-4"></div>

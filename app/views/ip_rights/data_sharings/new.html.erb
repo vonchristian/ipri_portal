@@ -1,28 +1,31 @@
-<div class="grid grid-cols-12 min-h-screen">
-   <%= render '/ip_rights/shared/sidebar', current_step: 2 %>
-  <div class="col-span-8 bg-white pt-20 pb-10 px-10">
-    <%= simple_form_for @data_sharing, url: :ip_rights_case_detail_data_sharings do |f| %>
-      <h2 class="font-bold text-xl text-gray-900">Data Sharing Agreement</h2>
-      <div class="border-t border-gray-200 my-4"></div>
+ <%=render '/ip_rights/shared/sidebar', current_step: 2, step_name: "Data Sharing Agreement", percent_finished: 10 %>
 
-      <p class="mt-1 text-sm text-gray-600 px-4">
-        * As the documenter, I understand that Indigenous Peoples Rights International (IPRI) will record the information detailed in this case factsheet in its database. I am submitting this case factsheet with the following restrictions: (tick as preferred)
+  <div class="md:mt-0 md:col-span-6 py-5 px-5">
+            <h2 class="font-bold text-xl text-gray-900">Data Sharing Agreement</h2>
+            <div>
+      <p class="mt-1 text-md text-gray-700 px-4">
+        * As the documenter, I understand that <b>Indigenous Peoples Rights International (IPRI) </b> will record the information detailed in this case factsheet in its database. I am submitting this case factsheet with the following restrictions: (tick as preferred)
       </p>
-      <div class="px-4 pt-5 pb-10  space-y-6 sm:p-6">
-        <fieldset>
-          <legend class="font-bold text-gray-900 pb-5">Restrictions</legend>
-          <div class="mt-4 space-y-4 pb-10">
-              <div class="flex items-center h-5">
-                <%= f.input :data_sharing, as: :radio_buttons, label: '', collection: [['restricted', '[Restricted] The information in this case factsheet can be used by IPRI in understanding broad trends of criminalization, violence and impunity against Indigenous Peoples and can specifically refer to any of the details of this case'], ['unrestricted', '[Unrestricted] The information in this case factsheet can be used by IPRI only in understanding broad trends of criminalization, violence and impunity against Indigenous Peoples but cannot specifically refer to any of the details of this case. ']], label_method: :second, value_method: :first, checked: 'restricted', input_html: { class: "text-gray-800 focus:ring-indigo-500 h-4 w-4 text-indigo-600 border-gray-300 rounded" } %>
-              </div>
-          </div>
-        </fieldset>
-      </div>
-      <div class="px-4 py-5 bg-gray-100 text-right sm:px-6">
-        <button type="submit" class="inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-green-600 hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500">
-          Next
-        </button>
-      </div>
-    <% end %>
-  </div>
+ <%= form_for @data_sharing, url: :ip_rights_case_detail_data_sharings  do |f| %>
+ <div class="flex mt-5 ml-4">
+    <div class="flex items-center h-5">
+        <input name="case_details_data_sharing[data_sharing]" id="case_details_data_sharing_data_sharing_restricted" aria-describedby="helper-radio-text" type="radio" value="restricted" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
+    </div>
+    <div class="ml-2 text-sm">
+        <label for="case_details_data_sharing_data_sharing_restricted" class="font-bold text-gray-900 dark:text-gray-300">Cannot specifically refer to any of the details of this case</label>
+    <p id="case_details_data_sharing_data_sharing_restricted-text" class="text-sm font-normal text-gray-600 dark:text-gray-300">The information in this case factsheet can be used by IPRI only in understanding broad trends of criminalization, violence and impunity against Indigenous Peoples but cannot specifically refer to any of the details of this case.</p>
+    </div>
 </div>
+
+ <div class="flex mt-5 ml-4">
+    <div class="flex items-center h-5">
+        <input name="case_details_data_sharing[data_sharing]" id="case_details_data_sharing_data_sharing_unrestricted" aria-describedby="helper-radio-text" type="radio" value="unrestricted" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
+    </div>
+    <div class="ml-2 text-sm">
+        <label for="case_details_data_sharing_data_sharing_unrestricted" class="font-bold text-gray-900 dark:text-gray-300">Can specifically refer to any of the details of this case.</label>
+    <p id="case_details_data_sharing_data_sharing_restricted-text" class="text-sm font-normal text-gray-600 dark:text-gray-300">The information in this case factsheet can be used by IPRI in understanding broad trends of criminalization, violence and impunity against Indigenous Peoples and can specifically refer to any of the details of this case.</p>
+
+    </div>
+</div>
+   <%= f.submit "Proceed", class: "float-right mt-5 inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-green-600 hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500" %>
+<% end %>

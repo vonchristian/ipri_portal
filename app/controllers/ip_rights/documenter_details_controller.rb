@@ -2,7 +2,7 @@
 
 module IpRights
   class DocumenterDetailsController < Documenters::BaseController
-    layout "application"
+    layout "documenter"
     def new
       @documenter = CaseDetails::Documenter.new
     end

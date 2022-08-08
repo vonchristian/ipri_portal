@@ -2,6 +2,8 @@
 
 module IpRights
   class CollectiveVictimsController < ApplicationController
+    layout "documenter"
+
     def new
       @case_detail       = CaseDetails::CaseDetail.find(params.fetch(:case_detail_id))
       @collective_victim = CaseDetails::Victims::Collective.new

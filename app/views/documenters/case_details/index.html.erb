@@ -1,9 +1,68 @@
-<div class="pt-5 pb-5 bg-gray-50 overflow-hidden full">
-    <div class="container m-auto space-y-8 text-gray-500">
-        <div class="flex justify-between">
-          <h2 class="text-2xl text-gray-900 font-bold">Cases</h2>
-            <%= link_to "New Case", new_ip_rights_documenter_detail_path, class: "text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800" %>
-        </div>
+
+<header>
+    <div class="flex max-w-7xl mx-auto py-6 justify-between">
+      <h1 class="text-3xl font-bold text-gray-900">Case Factsheets</h1>
+       <%= link_to "New Case", new_ip_rights_documenter_detail_path, class: "text-white bg-green-700 hover:bg-green-800 focus:ring-4 focus:ring-green-800 font-medium rounded-lg text-sm px-5 py-3 mr-2 mb-2 dark:bg-green-600 dark:hover:bg-green-700 focus:outline-none dark:focus:ring-green-800" %>
     </div>
-</div>
-	<hr class="mb-6 border-t" />
+  </header>
+
+      <%=form_tag documenters_case_details_path, method: :get do %>
+        <div class="relative">
+          <div class="flex absolute inset-y-0 left-0 items-center pl-3 pointer-events-none">
+              <svg aria-hidden="true" class="w-5 h-5 text-gray-500 dark:text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path></svg>
+          </div>
+          <%= text_field_tag :search, params[:search], class: "block p-4 pl-10 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-green-500 focus:border-green-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-green-500 dark:focus:border-green-500", placeholder: "Search cases", type: "search" %>
+            <button type="submit" class="text-white absolute right-2.5 bottom-2.5 bg-green-700 hover:bg-green-800 focus:ring-4 focus:outline-none focus:ring-green-800 font-medium rounded-lg text-sm px-4 py-2 dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-800">Search</button>
+        </div>
+      <% end %>
+  <div class="overflow-x-auto sm:-mx-6 lg:-mx-8">
+    <div class="py-2 inline-block min-w-full sm:px-6 lg:px-8">
+      <div class="overflow-hidden">
+        <table class="mt-2 min-w-full">
+          <thead class="border-b bg-gray-50">
+            <tr>
+              <th scope="col" class="text-sm font-bold text-gray-900 px-6 py-4 text-left">
+                Organization
+              </th>
+              <th scope="col" class="text-sm font-bold text-gray-900 px-6 py-4 text-left">
+                Country
+              </th>
+              <th scope="col" class="text-sm font-bold text-gray-900 px-6 py-4 text-left">
+                Location 1
+              </th>
+              <th scope="col" class="text-sm font-bold text-gray-900 px-6 py-4 text-left">
+                Location 2
+              </th>
+              <th scope="col" class="text-sm font-bold text-gray-900 px-6 py-4 text-left">
+                Data Sharing
+              </th>
+            </tr>
+          </thead>
+          <tbody>
+              <% @case_details.each do |case_detail| %>
+                          <tr class="border-b">
+                <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
+                  <%= link_to case_detail.organization_name, documenters_case_detail_path(case_detail) %>
+                </td>
+
+                <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
+                  <%= case_detail.country_name %>
+                </td>
+
+                 <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
+                  <%= case_detail.location_details_1 %>
+                </td>
+
+                 <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
+                  <%= case_detail.location_details_2 %>
+                </td>
+
+                 <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
+                  <%= case_detail.data_sharing %>
+                </td>
+
+
+
+                </tr>
+              <% end %>
+          </tbody>

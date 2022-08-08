@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_04_30_065018) do
+ActiveRecord::Schema[7.0].define(version: 2022_08_08_125213) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
   enable_extension "plpgsql"
@@ -112,6 +112,15 @@ ActiveRecord::Schema[7.0].define(version: 2022_04_30_065018) do
     t.index ["reference_number"], name: "index_case_details_on_reference_number", unique: true
   end
 
+  create_table "case_projects", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.uuid "case_detail_id", null: false
+    t.uuid "development_project_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["case_detail_id"], name: "index_case_projects_on_case_detail_id"
+    t.index ["development_project_id"], name: "index_case_projects_on_development_project_id"
+  end
+
   create_table "collective_victim_age_bracket_breakdowns", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.uuid "collective_victim_id", null: false
     t.uuid "age_bracket_id", null: false
@@ -154,6 +163,8 @@ ActiveRecord::Schema[7.0].define(version: 2022_04_30_065018) do
 
   create_table "countries", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.string "name", null: false
+    t.integer "case_count"
+    t.index ["case_count"], name: "index_countries_on_case_count"
   end
 
   create_table "criminalization_accuserizations", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
@@ -362,6 +373,8 @@ ActiveRecord::Schema[7.0].define(version: 2022_04_30_065018) do
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
   add_foreign_key "case_details", "countries"
   add_foreign_key "case_details", "documenters"
+  add_foreign_key "case_projects", "case_details"
+  add_foreign_key "case_projects", "development_projects"
   add_foreign_key "collective_victim_age_bracket_breakdowns", "age_brackets"
   add_foreign_key "collective_victim_age_bracket_breakdowns", "collective_victims"
   add_foreign_key "collective_victims", "case_details"

@@ -2,6 +2,8 @@
 
 module IpRights
   class IncidentDetailsController < ApplicationController
+    layout "documenter"
+
     def new
       @case_detail = CaseDetails::CaseDetail.find(params.fetch(:case_detail_id))
       @incident_detail = CaseDetails::Incident.new

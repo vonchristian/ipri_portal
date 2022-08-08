@@ -1,13 +1,10 @@
 
-<div class="grid grid-cols-12 min-h-screen">
-   <%=render '/ip_rights/shared/sidebar', current_step: 4 %>
-
-  <div data-controller="collective-victim-form" class="col-span-9 bg-white py-10 px-5">
+  <%=render '/ip_rights/shared/sidebar', current_step: 4, step_name: 'Victim Details', percent_finished: 40 %>
+  <div data-controller="collective-victim-form" class="col-span-9 bg-white mt-5 px-5">
     <%= simple_form_for @collective_victim, url: :ip_rights_case_detail_collective_victims do |f| %>
     <div class="max-w-7xl mx-auto lg:px-0">
       <h2 class="font-bold text-xl text-gray-900">Group of People Victim Details</h2>
       <div class="md:mt-0 md:col-span-2 bg-white px-4">
-          <div class="border-t border-gray-200 mt-4"></div>
           <div>
             <div class="px-4 py-5  space-y-4 sm:p-6">
               <div class="col-span-6 sm:col-span-3">
