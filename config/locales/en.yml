@@ -31,3 +31,9 @@
 
 en:
   hello: "Hello world"
+  details_of_documenter: "Details of Documenter"
+  first_name: "First Name"
+  last_name: "Last Name"
+  organization_or_affiliation: "Organization/Affiliation"
+  date_of_submission: "Submission Date"
+  contact_details: "Contact Details"

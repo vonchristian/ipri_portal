@@ -1,0 +1,8 @@
+es:
+  hello: "Hello world"
+  details_of_documenter: "Informacion De Registrador"
+  first_name: "Nombre"
+  last_name: "Apellido"
+  organization_or_affiliation: "Organización / Afiliación"
+  date_of_submission: "Fecha de presentación"
+  contact_details: "Datos de contacto"

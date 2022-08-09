@@ -1,30 +1,30 @@
 
- <%=render '/ip_rights/shared/sidebar', current_step: 1, step_name: "Documenter Details", percent_finished: 1 %>
+ <%=render '/ip_rights/shared/sidebar', current_step: 1, step_name: "#{t(:details_of_documenter)}", percent_finished: 1 %>
 <div data-controller="documenter-form">
   <%= simple_form_for @documenter, url: :ip_rights_documenter_details, html: { multipart: true } do |f| %>
 
           <div class="md:col-span-6 mt-5 px-5">
-            <h2 class="font-bold text-xl text-gray-900">Details of Documenter</h2>
+            <h2 class="font-bold text-xl text-gray-900"><%= t(:details_of_documenter) %></h2>
             <div>
               <div class="px-4 py-5  space-y-4 sm:p-6">
                 <div class="grid grid-cols-4 gap-6">
                   <div class="col-span-2 sm:col-span-2">
-                    <label for="first-name" class="block text-sm font-bold text-gray-700 pb-2">First name</label>
+                    <label for="first-name" class="block text-sm font-bold text-gray-700 pb-2"><%= t(:first_name) %></label>
                     <%= f.input :first_name, label: false, class: "mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md" %>
                   </div>
                   <div class="col-span-2 sm:col-span-2">
-                    <label for="last-name" class="block text-sm font-bold text-gray-700 pb-2">Last name</label>
+                    <label for="last-name" class="block text-sm font-bold text-gray-700 pb-2"><%= t(:last_name) %></label>
                     <%= f.input :last_name, label: false, class: "mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md" %>
                   </div>
                 </div>
 
-                <label class="block text-sm font-bold text-gray-700">Organization/Affiliation</label>
+                <label class="block text-sm font-bold text-gray-700"><%= t(:organization_or_affiliation) %></label>
                 <%= f.input :organization_name, label: false, class: "focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md" %>
                 <p class="mt-2 text-sm text-gray-500 dark:text-gray-400">
                   Write the full name of your Organization / Affiliation
                 </p>
                 <div>
-                  <label for="submission-date" class="block text-sm font-bold text-gray-700 pb-2 pt-2">Date of Submission</label>
+                  <label for="submission-date" class="block text-sm font-bold text-gray-700 pb-2 pt-2"><%= t(:date_of_submission) %></label>
                   <div class="grid grid-cols-3 gap-4">
                     <%= f.input :submission_date_month, label: false, collection: Date::MONTHNAMES, selected: Date.current.strftime("%B")  %>
                     <%= f.input :submission_date_day, label: false, collection: 1..(Date.current.all_month.count), selected: Date.current.day %>
@@ -32,7 +32,7 @@
                   </div>
                 </div>
                 <fieldset>
-                  <legend class="text-base font-medium text-gray-900 mb-4">Contact Details</legend>
+                  <legend class="text-base font-medium text-gray-900 mb-4"><%= t(:contact_details) %></legend>
                     <div class="col-span-6 sm:col-span-3 pb-1" data-documenter-form-target="emailField">
                       <label for="email" class="block text-sm font-bold text-gray-700 pb-2">Email</label>
                       <%= f.input :email, required: true, label: false, id: "documenter-email", class: "mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md" %>

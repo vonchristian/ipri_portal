@@ -35,4 +35,6 @@ Rails.application.routes.draw do
 
     resources :case_details, only: [:index, :new, :show]
   end
+
+  resources :countries, only: [:index]
 end

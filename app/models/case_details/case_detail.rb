@@ -25,5 +25,9 @@ module CaseDetails
     has_many :development_projects,    class_name: "DevelopmentProjects::DevelopmentProject", through: :case_projects
 
     delegate :name, to: :country, prefix: true, allow_nil: true
+
+    def self.submitted_current_year
+      where(submission_date_year: Date.current.year)
+    end
   end
 end
