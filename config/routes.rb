@@ -23,6 +23,10 @@ Rails.application.routes.draw do
     resources :dashboard, only: [:index]
     resources :documenters, only: [:index, :show, :new, :create]
     resources :admin_users, only: [:index, :show, :new, :create]
+    namespace :case_factsheets do
+      resources :dashboard, only: [:index], controller: '/admin/case_factsheets/dashboard'
+    end
+    resources :killings, only: [:index]
   end
 
   namespace :documenters do

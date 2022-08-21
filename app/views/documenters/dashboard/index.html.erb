@@ -66,3 +66,5 @@
         </ul>
    </div>
 </div>
+
+ <%= geo_chart CaseDetails::CaseDetail.joins(:country).group('countries.name').count, width: 200, height: 50, label: 'Cases', options: {background_color: '#548999'} %>

@@ -9,23 +9,25 @@
 
     <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
     <%= javascript_importmap_tags %>
+    <%= javascript_include_tag "https://www.gstatic.com/charts/loader.js" %>
   </head>
 
   <body>
     <main>
+      <%= render "layouts/admin/header" %>
       <div class="grid grid-cols-1 md:grid-cols-12">
-        <div class="col-span-2">
+
+        <div class="col-span-2 bg-gray-50">
             <%= render "/layouts/admin/sidebar" %>
         </div>
-        <div class="col-span-10 bg-gray-100">
-          <div class="container">
+        <div class="col-span-10 pl-4 bg-white">
+
           <% flash.each do |type, msg| %>
             <div>
               <%= msg %>
             </div>
           <% end %>
-            <%= yield %>
-          </div>
+          <%= yield %>
         </div>
       </div>
 
