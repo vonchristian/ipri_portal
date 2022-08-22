@@ -34,7 +34,9 @@ Rails.application.routes.draw do
     post "/sessions", to: "sessions#create"
     delete "/sessions", to: "sessions#destroy"
     resources :dashboard, only: [:index]
-    resources :individual_victims, only: [:index]
+    resources :individual_victims, only: [:index, :show] do
+      resources :case_details, only: [:index], controller: '/documenters/individual_victims/case_details'
+    end
     resources :collective_victims, only: [:index]
 
     resources :case_details, only: [:index, :new, :show]

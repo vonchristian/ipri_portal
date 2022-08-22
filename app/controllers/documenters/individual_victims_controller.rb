@@ -3,7 +3,11 @@
 module Documenters
   class IndividualVictimsController < BaseController
     def index
-      @victims = Victims::IndividualVictim.all
+      @individual_victims = Victims::IndividualVictim.all
+    end
+
+    def show
+      @individual_victim = Victims::IndividualVictim.find(params.fetch(:id))
     end
   end
 end

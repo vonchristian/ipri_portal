@@ -1,0 +1,169 @@
+<div class="flex w-full mx-auto mt-4 justify-between">
+  <h2 class="font-bold text-l text-gray-900 mt-4">Documenter Details</h2>
+  <%= link_to "Edit", new_ip_rights_documenter_detail_path, class: "mr-4 text-gray-900 bg-white border border-gray-300 focus:outline-none hover:bg-gray-100 focus:ring-4 focus:ring-gray-200 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-gray-800 dark:text-white dark:border-gray-600 dark:hover:bg-gray-700 dark:hover:border-gray-600 dark:focus:ring-gray-700" %>
+</div>
+  <div class="grid grid-cols-1 md:grid-cols-12">
+    <div class="col-span-3 ml-4 mt-2">
+      <p class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300"> First Name </p>
+    </div>
+    <div class="col-span-1">
+    </div>
+    <div class="col-span-8 mt-2">
+      <p class="text-gray-500"> <%= @case_detail.documenter.first_name %> </p>
+    </div>
+
+    <div class="col-span-3 ml-4 mt-2">
+      <p class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300"> Last Name </p>
+    </div>
+    <div class="col-span-1">
+    </div>
+    <div class="col-span-8 mt-2">
+      <p class="text-gray-500"> <%= @case_detail.documenter.last_name %> </p>
+    </div>
+
+    <div class="col-span-3 ml-4 mt-2">
+      <p class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300"> Organization/Affiliation </p>
+    </div>
+    <div class="col-span-1">
+    </div>
+    <div class="col-span-8 mt-2">
+      <p class="text-gray-500"> <%= @case_detail.organization_name %> </p>
+    </div>
+
+    <div class="col-span-3 ml-4 mt-2">
+      <p class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300"> Email </p>
+    </div>
+    <div class="col-span-1">
+    </div>
+    <div class="col-span-8 mt-2">
+      <p class="text-gray-500"> <%= @case_detail.documenter.email %> </p>
+    </div>
+     <div class="col-span-3 ml-4 mt-2">
+      <p class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300"> Phone Number </p>
+    </div>
+    <div class="col-span-1">
+    </div>
+    <div class="col-span-8 mt-2">
+      <p class="text-gray-500"> <%= @case_detail.documenter.phone_number %> </p>
+    </div>
+  </div>
+<div class="border-t border-gray-200 my-4"></div>
+
+<div class="flex w-full mx-auto justify-between">
+  <h2 class="font-bold text-l text-gray-900 mt-4">Case Details</h2>
+  <%= link_to "Edit", new_ip_rights_documenter_detail_path, class: "mr-4 text-gray-900 bg-white border border-gray-300 focus:outline-none hover:bg-gray-100 focus:ring-4 focus:ring-gray-200 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-gray-800 dark:text-white dark:border-gray-600 dark:hover:bg-gray-700 dark:hover:border-gray-600 dark:focus:ring-gray-700" %>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-12">
+  <div class="col-span-3 ml-4 mt-2">
+    <p class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300"> Primary Data</p>
+  </div>
+  <div class="col-span-1">
+  </div>
+  <div class="col-span-8 mt-2">
+    <p class="text-gray-500"> <%= @case_detail.primary_data ? "Yes" : "No" %> </p>
+  </div>
+
+  <div class="col-span-3 ml-4 mt-2">
+    <p class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300">  Submission Date </p>
+  </div>
+  <div class="col-span-1">
+  </div>
+  <div class="col-span-8 mt-2">
+    <p class="text-gray-500"> <%= @case_detail.submission_date %> </p>
+  </div>
+</div>
+<div class="border-t border-gray-200 my-4"></div>
+
+<h2 class="font-bold text-l text-gray-900 mt-4">Data Sharing Agreement</h2>
+<div class="grid grid-cols-1 md:grid-cols-12">
+  <div class="col-span-3 ml-4 mt-2">
+    <p class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300"> Agreement</p>
+  </div>
+  <div class="col-span-1">
+  </div>
+  <div class="col-span-8 mt-2">
+    <label class="font-bold text-sm text-gray-900"><%= @case_detail.data_sharing_title %></label>
+    <p class="text-gray-500"> <%= @case_detail.data_sharing_content %> </p>
+  </div>
+</div>
+<div class="border-t border-gray-200 my-4"></div>
+
+<h2 class="font-bold text-l text-gray-900 mt-4">Place and Date of Incident</h2>
+<div class="grid grid-cols-1 md:grid-cols-12">
+  <div class="col-span-3 ml-4 mt-2">
+    <p class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300"> Country of Incident</p>
+  </div>
+  <div class="col-span-1">
+  </div>
+  <div class="col-span-8 mt-2">
+    <p class="text-gray-500"> <%= @case_detail.country_name %> </p>
+  </div>
+
+  <div class="col-span-3 ml-4 mt-2">
+    <p class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300"> Subnational location</p>
+  </div>
+  <div class="col-span-1">
+  </div>
+  <div class="col-span-8 mt-2">
+    <p class="text-gray-500"> <%= @case_detail.subnational_location %> </p>
+  </div>
+
+  <div class="col-span-3 ml-4 mt-2">
+    <p class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300"> Other Location Details (1) </p>
+  </div>
+  <div class="col-span-1">
+  </div>
+  <div class="col-span-8 mt-2">
+    <p class="text-gray-500"> <%= @case_detail.location_details_1 %> </p>
+  </div>
+
+  <div class="col-span-3 ml-4 mt-2">
+    <p class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300"> Other Location Details (2) </p>
+  </div>
+  <div class="col-span-1">
+  </div>
+  <div class="col-span-8 mt-2">
+    <p class="text-gray-500"> <%= @case_detail.location_details_2 %> </p>
+  </div>
+
+  <div class="col-span-3 ml-4 mt-2">
+    <p class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300"> Ongoing Case ? </p>
+  </div>
+  <div class="col-span-1">
+  </div>
+  <div class="col-span-8 mt-2">
+    <p class="text-gray-500"> <%= @case_detail.incident_end_day ? "Yes" : "No" %> </p>
+  </div>
+</div>
+
+<div class="border-t border-gray-200 my-4"></div>
+
+<h2 class="font-bold text-l text-gray-900 mt-4">Impact of Incident/s of Human Rights Violations</h2>
+<div class="grid grid-cols-1 md:grid-cols-12">
+  <div class="col-span-3 ml-4 mt-2">
+    <p class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300"> How did the incident/s affect the victim/s and his/her/their family?</p>
+  </div>
+  <div class="col-span-1">
+  </div>
+  <div class="col-span-8 mt-2">
+    <p class="text-gray-500"> <%= @case_detail.impact_to_victim_details %> </p>
+  </div>
+
+  <div class="col-span-3 ml-4 mt-2">
+    <p class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300"> How did the incident/s affect the Indigenous Peoples group/s or community/ies and/or organization of the victim/s?</p>
+  </div>
+  <div class="col-span-1">
+  </div>
+  <div class="col-span-8 mt-2">
+    <p class="text-gray-500"> <%= @case_detail.impact_to_community_details %> </p>
+  </div>
+
+  <div class="col-span-3 ml-4 mt-2">
+    <p class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300"> Advocacies and/or action/s undertaken</p>
+  </div>
+  <div class="col-span-1">
+  </div>
+  <div class="col-span-8 mt-2">
+    <p class="text-gray-500"> <%= @case_detail.actions_taken_details %> </p>
+  </div>
+</div>

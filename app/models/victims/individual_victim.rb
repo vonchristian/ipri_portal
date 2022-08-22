@@ -19,5 +19,9 @@ module Victims
       no_data: "no_data"
 
     }
+
+    def date_of_birth
+      "#{date_of_birth_month}/#{date_of_birth_day}/#{date_of_birth_year}"
+    end
   end
 end

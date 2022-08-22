@@ -3,11 +3,15 @@
 module Documenters
   class CaseDetailsController < BaseController
     def index
-      if params[:search].present?
-        @case_details = CaseDetails::CaseDetail.text_search(params[:search])
+      @case_details = if params[:search].present?
+        CaseDetails::CaseDetail.text_search(params[:search])
       else
-        @case_details = CaseDetails::CaseDetail.all
+        CaseDetails::CaseDetail.all
       end
+    end
+
+    def show
+      @case_detail = CaseDetails::CaseDetail.find(params.fetch(:id))
     end
   end
 end

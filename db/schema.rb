@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_08_08_125213) do
+ActiveRecord::Schema[7.0].define(version: 2022_08_22_030901) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
   enable_extension "plpgsql"
@@ -297,6 +297,16 @@ ActiveRecord::Schema[7.0].define(version: 2022_08_08_125213) do
     t.index ["state_action_to_address_violation"], name: "index_hr_violations_on_state_action_to_address_violation"
   end
 
+  create_table "individual_victim_case_details", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.uuid "victim_id", null: false
+    t.uuid "case_detail_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["case_detail_id"], name: "index_individual_victim_case_details_on_case_detail_id"
+    t.index ["victim_id", "case_detail_id"], name: "test"
+    t.index ["victim_id"], name: "index_victim_on_individual_victim_details"
+  end
+
   create_table "individual_victims", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.uuid "age_bracket_id", null: false
     t.string "full_name"
@@ -389,6 +399,8 @@ ActiveRecord::Schema[7.0].define(version: 2022_08_08_125213) do
   add_foreign_key "human_rights_violation_perpetratorizations", "human_rights_violation_perpetrator_categories", column: "perpetrator_category_id"
   add_foreign_key "human_rights_violation_perpetratorizations", "human_rights_violations"
   add_foreign_key "human_rights_violations", "case_details"
+  add_foreign_key "individual_victim_case_details", "case_details"
+  add_foreign_key "individual_victim_case_details", "individual_victims", column: "victim_id"
   add_foreign_key "individual_victims", "age_brackets"
   add_foreign_key "individual_victims", "case_details"
   add_foreign_key "killing_perpetratorizations", "killing_perpetrator_categories", column: "perpetrator_category_id"
