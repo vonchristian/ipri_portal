@@ -1,0 +1,55 @@
+<header>
+  <div class="max-w-7xl py-6">
+    <h1 class="text-l font-bold text-gray-900">Individual Victims</h1>
+  </div>
+</header>
+<div class="overflow-x-auto relative shadow-md sm:rounded-lg">
+  <table class="w-full text-sm text-left text-gray-500 dark:text-gray-400">
+    <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
+      <tr>
+        <th scope="col" class="py-3 px-6">
+            Full Name
+        </th>
+            <th scope="col" class="py-3 px-6">
+            Age Bracket
+        </th>
+        <th scope="col" class="py-3 px-6">
+            Gender
+        </th>
+        <th scope="col" class="py-3 px-6">
+            Dependent Type
+        </th>
+        <th scope="col" class="py-3 px-6">
+            Ethnic Identity
+        </th>
+        <th scope="col" class="py-3 px-6">
+            Date of Birth
+        </th>
+      </tr>
+    </thead>
+    <tbody>
+      <% case_detail.individual_victims.each do |individual_victim| %>
+        <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
+            <td scope="row" class="py-4 px-6 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+              <%= link_to individual_victim.full_name, documenters_individual_victim_path(individual_victim.id) %>
+            </td>
+            <td class="py-4 px-6">
+              <%= individual_victim.age_bracket_range_name %>
+            </td>
+            <td class="py-4 px-6">
+              <%= individual_victim.gender&.titleize %>
+            </td>
+            <td class="py-4 px-6">
+              <%= individual_victim.dependent_type&.titleize %>
+            </td>
+            <td class="py-4 px-6">
+              <%= individual_victim.ethnic_identity %>
+            </td>
+              <td class="py-4 px-6">
+              <%= individual_victim.date_of_birth %>
+            </td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+</div>

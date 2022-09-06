@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 Rails.application.routes.draw do
   namespace :ip_rights do
     resources :case_details, only: [:show] do
@@ -13,7 +15,7 @@ Rails.application.routes.draw do
       resources :development_projects,    only: [:index, :new, :create]
     end
 
-    resources :documenter_details,      only: [:new, :create]
+    resources :documenter_details, only: [:new, :create]
   end
 
   namespace :admin do
@@ -24,7 +26,7 @@ Rails.application.routes.draw do
     resources :documenters, only: [:index, :show, :new, :create]
     resources :admin_users, only: [:index, :show, :new, :create]
     namespace :case_factsheets do
-      resources :dashboard, only: [:index], controller: '/admin/case_factsheets/dashboard'
+      resources :dashboard, only: [:index], controller: "/admin/case_factsheets/dashboard"
     end
     resources :killings, only: [:index]
   end
@@ -35,11 +37,13 @@ Rails.application.routes.draw do
     delete "/sessions", to: "sessions#destroy"
     resources :dashboard, only: [:index]
     resources :individual_victims, only: [:index, :show] do
-      resources :case_details, only: [:index], controller: '/documenters/individual_victims/case_details'
+      resources :case_details, only: [:index], controller: "/documenters/individual_victims/case_details"
     end
-    resources :collective_victims, only: [:index]
+    resources :collective_victims, only: [:index, :show]
 
-    resources :case_details, only: [:index, :new, :show]
+    resources :case_details, only: [:index, :new, :show] do
+      resources :victims, only: [:index], controller: "case_details/victims"
+    end
   end
 
   resources :countries, only: [:index]
