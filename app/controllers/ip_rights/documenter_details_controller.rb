@@ -3,6 +3,7 @@
 module IpRights
   class DocumenterDetailsController < Documenters::BaseController
     layout "documenter"
+
     def new
       @documenter = CaseDetails::Documenter.new
     end
@@ -29,11 +30,11 @@ module IpRights
 
     def documenter_params
       params
-      .require(:case_details_documenter)
-      .permit(:first_name, :last_name, :submission_date_day, :submission_date_month,
-        :submission_date_year, :documenter_organization, :email,
-        :phone_number, :primary_data, :organization_name, :data_sources, documents: [])
-      .merge!(reference_number: @reference_number, user_id: current_documenter.id)
+        .require(:case_details_documenter)
+        .permit(:first_name, :last_name, :submission_date_day, :submission_date_month,
+          :submission_date_year, :documenter_organization, :email,
+          :phone_number, :primary_data, :organization_name, :data_sources, :locale, documents: [])
+        .merge!(reference_number: @reference_number, user_id: current_documenter.id)
     end
   end
 end

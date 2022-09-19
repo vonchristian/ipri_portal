@@ -32,6 +32,9 @@ Rails.application.routes.draw do
   end
 
   namespace :documenters do
+    resources :documenter, only: [] do
+      resource :locale
+    end
     get "/login", to: "sessions#new"
     post "/sessions", to: "sessions#create"
     delete "/sessions", to: "sessions#destroy"

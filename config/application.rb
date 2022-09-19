@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require_relative "boot"
 
 require "rails"
@@ -21,13 +23,13 @@ Bundler.require(*Rails.groups)
 module IpriPortal
   class Application < Rails::Application
     # Initialize configuration defaults for originally generated Rails version.
-    config.load_defaults 7.0
+    config.load_defaults(7.0)
     config.generators do |g|
-      g.orm :active_record, primary_key_type: :uuid
+      g.orm(:active_record, primary_key_type: :uuid)
     end
 
-    I18n.available_locales = [:en, :es]
-    I18n.default_locale = :en
+    config.i18n.available_locales = [:en, :es]
+    config.i18n.default_locale = :en
     # Configuration for the application, engines, and railties goes here.
     #
     # These settings can be overridden in specific environments using the files

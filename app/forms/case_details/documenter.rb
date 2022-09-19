@@ -17,7 +17,8 @@ module CaseDetails
       :submission_date_year,
       :data_sources,
       :documents,
-      :user_id
+      :user_id,
+      :locale
 
     validates :first_name, :last_name, :organization_name, :email,
       :submission_date_month, :submission_date_day, :submission_date_year,
@@ -45,7 +46,7 @@ module CaseDetails
         incident_start_month:  submission_date_month,
         organization_name:     organization_name,
         data_sharing:          "restricted",
-        documenter_id:         user_id
+        documenter_id:         user_id,
       )
 
       if documents.present?

@@ -1,10 +1,10 @@
- <%=render '/ip_rights/shared/sidebar', current_step: 2, step_name: "Data Sharing Agreement", percent_finished: 10 %>
+ <%=render '/ip_rights/shared/sidebar', current_step: 2, step_name: "#{t(:data_sharing_agreement)}", percent_finished: 10 %>
 
   <div class="md:mt-0 md:col-span-6 py-5 px-5">
-            <h2 class="font-bold text-xl text-gray-900">Data Sharing Agreement</h2>
+            <h2 class="font-bold text-xl text-gray-900"><%= t(:data_sharing_agreement) %></h2>
             <div>
       <p class="mt-1 text-md text-gray-700 px-4">
-        * As the documenter, I understand that <b>Indigenous Peoples Rights International (IPRI) </b> will record the information detailed in this case factsheet in its database. I am submitting this case factsheet with the following restrictions: (tick as preferred)
+       <%= t(:data_sharing_agreement_hint_html) %>
       </p>
  <%= form_for @data_sharing, url: :ip_rights_case_detail_data_sharings  do |f| %>
  <div class="flex mt-5 ml-4">
@@ -12,8 +12,8 @@
         <input name="case_details_data_sharing[data_sharing]" id="case_details_data_sharing_data_sharing_restricted" aria-describedby="helper-radio-text" type="radio" value="restricted" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
     </div>
     <div class="ml-2 text-sm">
-        <label for="case_details_data_sharing_data_sharing_restricted" class="font-bold text-gray-900 dark:text-gray-300">Cannot specifically refer to any of the details of this case</label>
-    <p id="case_details_data_sharing_data_sharing_restricted-text" class="text-sm font-normal text-gray-600 dark:text-gray-300">The information in this case factsheet can be used by IPRI only in understanding broad trends of criminalization, violence and impunity against Indigenous Peoples but cannot specifically refer to any of the details of this case.</p>
+        <label for="case_details_data_sharing_data_sharing_restricted" class="font-bold text-gray-900 dark:text-gray-300"><%= t(:cannot_specifically_refer_to_any_of_the_details_in_this_case) %></label>
+    <p id="case_details_data_sharing_data_sharing_restricted-text" class="text-sm font-normal text-gray-600 dark:text-gray-300"><%= t(:restricted_access_to_case_detail) %></p>
     </div>
 </div>
 
@@ -23,7 +23,7 @@
     </div>
     <div class="ml-2 text-sm">
         <label for="case_details_data_sharing_data_sharing_unrestricted" class="font-bold text-gray-900 dark:text-gray-300">Can specifically refer to any of the details of this case.</label>
-    <p id="case_details_data_sharing_data_sharing_restricted-text" class="text-sm font-normal text-gray-600 dark:text-gray-300">The information in this case factsheet can be used by IPRI in understanding broad trends of criminalization, violence and impunity against Indigenous Peoples and can specifically refer to any of the details of this case.</p>
+    <p id="case_details_data_sharing_data_sharing_restricted-text" class="text-sm font-normal text-gray-600 dark:text-gray-300"><%= t(:unrestricted_access_to_case_detail) %></p>
 
     </div>
 </div>

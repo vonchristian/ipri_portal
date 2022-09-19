@@ -31,6 +31,7 @@
 
 en:
   language_name: "English (US)"
+  step: "Step"
   details_of_documenter: "Details of Documenter"
   first_name: "First Name"
   last_name: "Last Name"
@@ -40,3 +41,16 @@ en:
   contact_details: "Contact Details"
   phone_number: "Phone Number"
   is_the_documenter_submitting_this_case_factsheet_as_primary_data: "Is the documenter submitting this case factsheet as primary data?"
+  primary_data_hint: " Primary data refers to data that are gathered directly from the victim/s, family/ies of the victim/s, member/s of the Indigenous Peoples that were affected."
+  upload_document: "Upload Document"
+  other_relevant_websites_or_links: "Other relevant websites/links"
+  please_provide_information_on_source_of_data: "Please provide information on source of data"
+  continue: "Continue"
+  data_sharing_agreement: "Data Sharing Agreement"
+  data_sharing_agreement_hint_html: " * As the documenter, I understand that <strong>Indigenous Peoples Rights International (IPRI) </strong> will record the information detailed in this case factsheet in its database. I am submitting this case factsheet with the following restrictions: (tick as preferred)"
+  cannot_specifically_refer_to_any_of_the_details_in_this_case: "Cannot specifically refer to any of the details of this case"
+  restricted_access_to_case_detail: "The information in this case factsheet can be used by IPRI only in understanding broad trends of criminalization, violence and impunity against Indigenous Peoples but cannot specifically refer to any of the details of this case."
+  unrestricted_access_to_case_detail: "The information in this case factsheet can be used by IPRI in understanding broad trends of criminalization, violence and impunity against Indigenous Peoples and can specifically refer to any of the details of this case."
+
+  place_and_date_of_incident: "Place and Date of Incident"
+  country_of_incident: "Country of Incident"

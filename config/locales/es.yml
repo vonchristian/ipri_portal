@@ -1,5 +1,6 @@
 es:
   language_name: "Spanish"
+  step: "Paso"
   details_of_documenter: "Informacion De Registrador"
   first_name: "Nombre"
   last_name: "Apellido"
@@ -9,3 +10,16 @@ es:
   contact_details: "Datos de contacto"
   phone_number: "Número de teléfono"
   is_the_documenter_submitting_this_case_factsheet_as_primary_data: "Yo, como registrador/a de esta hoja de datos, entiendo y acepto que Indigenous Peoples Rights International (IPRI) registrará lo datos detallados en esta hoja a su base de datos. Mi entrega de esta hoja de datos se entrega con las siguientes restricciones: (seleccione lo apropiado)?"
+  primary_data_hint: "Los datos primarios se refieren a los datos que se recogen directamente de la(s) víctima(s), la(s) familia(s) de la(s) víctima(s), el/los miembro(s) de los pueblos indígenas que fueron afectados."
+  upload_document: "Cargar documento"
+  other_relevant_websites_or_links: "Otro sitio web/enlace relevante"
+  please_provide_information_on_source_of_data: "Por favor, facilite información sobre la fuente de datos."
+  continue: "Continuar"
+  data_sharing_agreement: "Acuerdo para Compartir Datos"
+  data_sharing_agreement_hint_html: "Yo, como registrador/a de esta hoja de datos, entiendo y acepto que <strong>Indigenous Peoples Rights International (IPRI) </strong> registrará lo datos detallados en esta hoja a su base de datos. Mi entrega de esta hoja de datos se entrega con las siguientes restricciones: (seleccione lo apropiado)."
+  cannot_specifically_refer_to_any_of_the_details_in_this_case: "No se puede hacer referencia específica a ninguno de los detalles de este caso."
+  restricted_access_to_case_detail: "La información detallada en esta hoja de datos puede ser usada por IPRI para elucidar tendencias de criminalización, violencia, y impunidad contra Pueblos Indígenas pero sin referirse a los detalles específicos de este caso."
+  unrestricted_access_to_case_detail: "La información detallada en esta hoja de datos puede ser usada por IPRI para elucidar tendencias de criminalización, violencia, y impunidad contra Pueblos Indígenas y puede hacer referencia a los detalles específicos de este caso. Al escoger esta opción, incluyo el formulario de consentimiento de IPRI que viene adjunto con esta hoja de"
+
+  place_and_date_of_incident: "Lugar y Fecha De Incidente"
+  country_of_incident: "País de incidente"
