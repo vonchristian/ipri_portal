@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>IPRIGHTS PORTAL</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <%= csrf_meta_tags %>
+    <%= csp_meta_tag %>
+    <%= stylesheet_link_tag "tailwind", "inter-font", "data-turbo-track": "reload" %>
+
+    <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
+    <%= javascript_importmap_tags %>
+    <%= javascript_include_tag "https://www.gstatic.com/charts/loader.js" %>
+  </head>
+
+  <body>
+    <main>
+      <%= render "layouts/portal/header" %>
+      <div class="grid grid-cols-1 md:grid-cols-12">
+        <div class="col-span-12 pl-4 bg-white">
+          <% flash.each do |type, msg| %>
+            <div>
+              <%= msg %>
+            </div>
+          <% end %>
+          <%= yield %>
+        </div>
+      </div>
+
+    </main>
+    <script defer src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js"></script>
+  </body>
+  <div class="text-red-700 text-gray-400 text-blue-400 border-red-500........... "></div>
+</html>

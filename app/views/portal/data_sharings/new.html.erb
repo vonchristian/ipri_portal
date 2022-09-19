@@ -6,6 +6,6 @@
       <p class="mt-1 text-md text-gray-700 px-4">
        <%= t(:data_sharing_agreement_hint_html) %>
       </p>
- <%= form_for @data_sharing, url: :ip_rights_case_detail_data_sharings  do |f| %>
+ <%= form_for @data_sharing, url: :portal_case_detail_data_sharings  do |f| %>
    <%= render "shared/data_sharings/form", f: f %>
 <% end %>

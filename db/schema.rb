@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_09_19_031936) do
+ActiveRecord::Schema[7.0].define(version: 2022_09_19_104126) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
   enable_extension "plpgsql"
@@ -101,11 +101,16 @@ ActiveRecord::Schema[7.0].define(version: 2022_09_19_031936) do
     t.text "data_sources"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.uuid "documenter_id", null: false
+    t.uuid "documenter_id"
     t.text "impact_to_victim_details"
     t.text "impact_to_community_details"
     t.text "actions_taken_details"
     t.boolean "actions_taken_status"
+    t.string "documenter_first_name"
+    t.string "documenter_last_name"
+    t.string "documenter_email"
+    t.string "documenter_phone_number"
+    t.string "documenter_organization"
     t.index ["country_id"], name: "index_case_details_on_country_id"
     t.index ["data_sharing"], name: "index_case_details_on_data_sharing"
     t.index ["documenter_id"], name: "index_case_details_on_documenter_id"
@@ -243,6 +248,12 @@ ActiveRecord::Schema[7.0].define(version: 2022_09_19_031936) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "guests", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.string "locale"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "human_rights_violation_categories", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.string "title"
     t.datetime "created_at", null: false
@@ -304,7 +315,6 @@ ActiveRecord::Schema[7.0].define(version: 2022_09_19_031936) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["case_detail_id"], name: "index_individual_victim_case_details_on_case_detail_id"
-    t.index ["victim_id", "case_detail_id"], name: "test"
     t.index ["victim_id"], name: "index_victim_on_individual_victim_details"
   end
 

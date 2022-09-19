@@ -9,7 +9,7 @@ class CreateIndividualVictimCaseDetails < ActiveRecord::Migration[7.0]
 
       t.timestamps
     end
-    add_index :individual_victim_case_details, [:victim_id, :case_detail_id],
-      name: "index_unique_victim_and_case_detail_id_in_victim_case_details"
+    # add_index :individual_victim_case_details, [:victim_id, :case_detail_id],
+    # name: "index_unique_victim_and_case_detail_id_in_victim_case_details"
   end
 end

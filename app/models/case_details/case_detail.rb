@@ -15,7 +15,7 @@ module CaseDetails
     }
     validates :reference_number, presence: true, uniqueness: true
 
-    belongs_to :documenter,            class_name: "Users::Documenter"
+    belongs_to :documenter,            class_name: "Users::Documenter", optional: true
     belongs_to :country, optional: true
     has_many :individual_victims,      class_name: "Victims::IndividualVictim"
     has_many :collective_victims,      class_name: "Victims::CollectiveVictim"

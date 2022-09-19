@@ -1,9 +1,7 @@
 # frozen_string_literal: true
 
-module IpRights
-  class DocumenterDetailsController < Documenters::BaseController
-    layout "documenter"
-
+module Portal
+  class DocumenterDetailsController < BaseController
     def new
       @documenter = CaseDetails::Documenter.new
     end
@@ -16,7 +14,7 @@ module IpRights
         respond_to do |format|
           format.html do
             case_detail = CaseDetails::CaseDetail.find_by(reference_number: @reference_number)
-            redirect_to new_ip_rights_case_detail_data_sharing_url(case_detail)
+            redirect_to new_portal_case_detail_data_sharing_url(case_detail)
           end
         end
       else
@@ -34,7 +32,7 @@ module IpRights
         .permit(:first_name, :last_name, :submission_date_day, :submission_date_month,
           :submission_date_year, :documenter_organization, :email,
           :phone_number, :primary_data, :organization_name, :data_sources, :locale, documents: [])
-        .merge!(reference_number: @reference_number, documenter_id: current_documenter.id)
+        .merge!(reference_number: @reference_number)
     end
   end
 end

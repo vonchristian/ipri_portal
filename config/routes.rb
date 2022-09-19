@@ -50,4 +50,15 @@ Rails.application.routes.draw do
   end
 
   resources :countries, only: [:index]
+
+  namespace :portal do
+    resources :guests, only: [:create] do
+      resource :locale, controller: "guests/locale"
+    end
+    resources :case_details, only: [:show] do
+      resources :data_sharings, only: [:new, :create]
+    end
+
+    resources :documenter_details, only: [:new, :create]
+  end
 end

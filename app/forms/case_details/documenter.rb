@@ -17,7 +17,7 @@ module CaseDetails
       :submission_date_year,
       :data_sources,
       :documents,
-      :user_id,
+      :documenter_id,
       :locale
 
     validates :first_name, :last_name, :organization_name, :email,
@@ -46,12 +46,25 @@ module CaseDetails
         incident_start_month:  submission_date_month,
         organization_name:     organization_name,
         data_sharing:          "restricted",
-        documenter_id:         user_id,
+        documenter_id:         documenter_id,
+        documenter_first_name: documenter_first_name,
+        documenter_last_name: documenter.present? ? documenter.last_name : last_name,
+        documenter_email: documenter.present? ? documenter.email : email,
+        documenter_phone_number: documenter.present? ? documenter.phone_number : phone_number,
+        documenter_organization: organization_name,
       )
 
       if documents.present?
         case_detail.documents.attach(documents)
       end
+    end
+
+    def documenter_first_name
+      documenter.present? ? documenter.first_name : first_name
+    end
+
+    def documenter
+      Users::Documenter.find_by(id: documenter_id)
     end
   end
 end
