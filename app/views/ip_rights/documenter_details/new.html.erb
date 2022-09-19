@@ -21,7 +21,7 @@
                 <label class="block text-sm font-bold text-gray-700"><%= t(:organization_or_affiliation) %></label>
                 <%= f.input :organization_name, label: false, class: "focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md" %>
                 <p class="mt-2 text-sm text-gray-500 dark:text-gray-400">
-                  Write the full name of your Organization / Affiliation
+                 <%= t(:organization_or_affiliation_help_text) %>
                 </p>
                 <div>
                   <label for="submission-date" class="block text-sm font-bold text-gray-700 pb-2 pt-2"><%= t(:date_of_submission) %></label>
@@ -46,17 +46,17 @@
                         data-action="documenter-form#togglePhoneGroup">
                       </div>
                       <div class="ml-3 text-sm">
-                        <label class="font-bold text-gray-700">With Phone Number</label>
+                        <label class="font-bold text-gray-700"><%= t(:phone_number) %></label>
                       </div>
                     </div>
                 </fieldset>
                 <div class="col-span-6 sm:col-span-3 hidden" data-documenter-form-target="phoneFieldGroup">
-                  <label for="first-name" class="block text-sm font-medium text-gray-700">Phone Number</label>
+                  <label for="first-name" class="block text-sm font-medium text-gray-700"><%= t(:phone_number) %></label>
                   <%= f.text_field :phone_number, class: "mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md", data: { documenter_form_target: "phone" } %>
                 </div>
                 <div class="pt-2" data-controller='source-of-data'>
                     <label class="block text-sm font-bold text-gray-900">
-                      Is the documenter submitting this case factsheet as primary data?
+                      <%= t(:is_the_documenter_submitting_this_case_factsheet_as_primary_data) %>
                     </label>
                     <p class="text-sm text-gray-500">
                         Primary data refers to data that are gathered directly from the victim/s, family/ies of the victim/s, member/s of the Indigenous Peoples that were affected.

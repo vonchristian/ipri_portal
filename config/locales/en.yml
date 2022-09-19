@@ -30,10 +30,13 @@
 # available at https://guides.rubyonrails.org/i18n.html.
 
 en:
-  hello: "Hello world"
+  language_name: "English (US)"
   details_of_documenter: "Details of Documenter"
   first_name: "First Name"
   last_name: "Last Name"
   organization_or_affiliation: "Organization/Affiliation"
+  organization_or_affiliation_help_text: "Write the full name of your Organization / Affiliation"
   date_of_submission: "Submission Date"
   contact_details: "Contact Details"
+  phone_number: "Phone Number"
+  is_the_documenter_submitting_this_case_factsheet_as_primary_data: "Is the documenter submitting this case factsheet as primary data?"

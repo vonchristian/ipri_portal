@@ -1,8 +1,11 @@
 es:
-  hello: "Hello world"
+  language_name: "Spanish"
   details_of_documenter: "Informacion De Registrador"
   first_name: "Nombre"
   last_name: "Apellido"
   organization_or_affiliation: "Organización / Afiliación"
+  organization_or_affiliation_help_text: "Organización / Afiliación"
   date_of_submission: "Fecha de presentación"
   contact_details: "Datos de contacto"
+  phone_number: "Número de teléfono"
+  is_the_documenter_submitting_this_case_factsheet_as_primary_data: "Yo, como registrador/a de esta hoja de datos, entiendo y acepto que Indigenous Peoples Rights International (IPRI) registrará lo datos detallados en esta hoja a su base de datos. Mi entrega de esta hoja de datos se entrega con las siguientes restricciones: (seleccione lo apropiado)?"
