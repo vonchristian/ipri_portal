@@ -28,7 +28,7 @@ SimpleForm.setup do |config|
     b.use(:input,
       class: "appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm",
       error_class: "block w-full pr-10 border-red-300 text-red-900 placeholder-red-300 focus:outline-none focus:ring-red-500 focus:border-red-500 sm:text-sm rounded-md")
-    b.use(:full_error, wrap_with: { tag: "p", class: "mt-2 text-sm text-red-600" })
+    b.use(:error, wrap_with: { tag: "p", class: "mt-2 text-sm text-red-600" })
     b.use(:hint, wrap_with: { tag: :p, class: "mt-2 text-sm text-gray-500" })
   end
 
@@ -49,7 +49,7 @@ SimpleForm.setup do |config|
         class: "flex-1 min-w-0 block w-full px-3 py-2 rounded-none rounded-r-md focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm border-gray-300",
         error_class: "flex-1 min-w-0 block w-full px-3 py-2 rounded-none rounded-r-md focus:ring-red-500 focus:border-red-500 sm:text-sm border-red-300 text-red-900 placeholder-red-300")
     end
-    b.use(:full_error, wrap_with: { tag: "p", class: "mt-2 text-sm text-red-600" })
+    b.use(:error, wrap_with: { tag: "p", class: "mt-2 text-sm text-red-600" })
     b.use(:hint, wrap_with: { tag: :p, class: "mt-2 text-sm text-gray-500" })
   end
 
@@ -70,7 +70,7 @@ SimpleForm.setup do |config|
         error_class: "flex-1 min-w-0 block w-full px-3 py-2 rounded-none rounded-l-md focus:ring-red-500 focus:border-red-500 sm:text-sm border-red-300 text-red-900 placeholder-red-300")
       d.use(:append)
     end
-    b.use(:full_error, wrap_with: { tag: "p", class: "mt-2 text-sm text-red-600" })
+    b.use(:error, wrap_with: { tag: "p", class: "mt-2 text-sm text-red-600" })
     b.use(:hint, wrap_with: { tag: :p, class: "mt-2 text-sm text-gray-500" })
   end
 
@@ -91,7 +91,7 @@ SimpleForm.setup do |config|
     b.use(:input,
       class: "appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm",
       error_class: "block w-full pr-10 border-red-300 text-red-900 placeholder-red-300 focus:outline-none focus:ring-red-500 focus:border-red-500 sm:text-sm rounded-md")
-    b.use(:full_error, wrap_with: { tag: "p", class: "mt-2 text-sm text-red-600" })
+    b.use(:error, wrap_with: { tag: "p", class: "mt-2 text-sm text-red-600" })
   end
 
   # The default wrapper to be used by the FormBuilder.
@@ -203,9 +203,35 @@ SimpleForm.setup do |config|
   # config.include_default_input_wrapper_class = true
 
   # Defines which i18n scope will be used in Simple Form.
-  config.i18n_scope = "simple_form"
+  # config.i18n_scope = "simple_form"
 
   # Defines validation classes to the input_field. By default it's nil.
   # config.input_field_valid_class = 'is-valid'
   # config.input_field_error_class = 'is-invalid'
+end
+
+module SimpleForm
+  module Inputs
+    class Base
+      def translate_from_namespace(namespace, default = "")
+        model_names = lookup_model_names.dup
+        lookups     = []
+
+        until model_names.empty?
+          joined_model_names = model_names.join(".")
+          model_names.shift
+
+          lookups << :"#{joined_model_names}.#{lookup_action}.#{reflection_or_attribute_name}"
+          lookups << :"#{joined_model_names}.#{reflection_or_attribute_name}"
+        end
+        lookups << :"defaults.#{lookup_action}.#{reflection_or_attribute_name}"
+        lookups << :"defaults.#{reflection_or_attribute_name}"
+        lookups << default
+
+        puts lookups.inspect
+
+        I18n.t(lookups.shift, scope: :"#{i18n_scope}.#{namespace}", default: lookups).presence
+      end
+    end
+  end
 end

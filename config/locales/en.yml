@@ -54,3 +54,13 @@ en:
 
   place_and_date_of_incident: "Place and Date of Incident"
   country_of_incident: "Country of Incident"
+  subnational_location: "Subnational Location"
+  subnational_location_hint: "(Specify what state, department, county, province etc.)"
+  other_location_details_1: "Other Location Details (1)"
+  other_location_details_1_hint: "(Specify what city or municipality)"
+  other_location_details_2: "Other Location Details (2)"
+  other_location_details_2: "(Specify what town, village, etc.)"
+  is_this_an_ongoing_case: "Is this an ongoing case?"
+  start_date_of_incident: "Fecha de inicio del Incidente"
+  end_date_of_incident: "Fecha de finalización del Incidente"
+  time_of_incident: "Tiempo de incidente"

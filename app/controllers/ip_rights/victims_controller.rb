@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 module IpRights
-  class VictimsController < ApplicationController
+  class VictimsController < Documenters::BaseController
     layout "documenter"
 
     def index

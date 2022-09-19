@@ -1,9 +1,37 @@
 <div class='min-h-full w-full'>
+
       <header class="bg-green-700">
             <nav class="mx-auto flex justify-between mx-4 py-4">
                 <ul class="flex">
                     <li> <a href="#" class="text-lg font-semibold tracking-widest text-gray-900 uppercase rounded-lg dark-mode:text-white focus:outline-none focus:shadow-outline float-left">IPRIGHTS.ORG</a></li>
                 </ul>
+<div class="w-full mt-1 mr-2">
+
+<div class="relative float-right" x-data="{ isOpen: false}">
+<button
+        @click="isOpen = !isOpen"
+        @keydown.escape="isOpen = false"
+        class="flex items-center"
+>
+  <span class="text-sm text-gray-900"><%= t(:language_name) %></span>
+
+    <svg fill="currentColor" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24"><path d="M15.3 9.3a1 1 0 0 1 1.4 1.4l-4 4a1 1 0 0 1-1.4 0l-4-4a1 1 0 0 1 1.4-1.4l3.3 3.29 3.3-3.3z" class="heroicon-ui text-gray-900"></path></svg>
+</button>
+<ul x-show="isOpen"
+    @click.away="isOpen = false"
+    class="absolute font-normal bg-white shadow overflow-hidden rounded w-48 border mt-2 py-1 right-0 z-20"
+>
+<li>
+<%= button_to 'English (US)', documenters_documenter_locale_path(documenter_id: current_documenter.id,locale: "en"), method: :post, class: "text-sm text-gray-900 flex items-center px-3 py-3 hover:bg-gray-100 w-full" %>
+</li>
+<li>
+<%= button_to 'Spanish', documenters_documenter_locale_path(documenter_id: current_documenter.id,locale: "es"), method: :post, class: "text-sm text-gray-900 flex items-center px-3 py-3 hover:bg-gray-100 w-full" %>
+</li>
+
+
+</ul>
+</div>
+</div>
                 <div class="relative" x-data="{ isOpen: false}">
                     <button
                             @click="isOpen = !isOpen"

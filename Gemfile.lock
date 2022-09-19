@@ -270,9 +270,6 @@ GEM
     simple_form (5.1.0)
       actionpack (>= 5.2)
       activemodel (>= 5.2)
-    simple_form_tailwind_css (1.0.0)
-      heroicon
-      simple_form
     sixarm_ruby_unaccent (1.2.0)
     sprockets (4.1.1)
       concurrent-ruby (~> 1.0)
@@ -334,10 +331,9 @@ DEPENDENCIES
   rubocop-shopify
   shoulda-matchers
   simple_form
-  simple_form_tailwind_css
   sprockets-rails
   stimulus-rails
-  tailwindcss-rails (~> 2.0)
+  tailwindcss-rails
   turbo-rails!
   tzinfo-data
 

@@ -71,9 +71,8 @@ group :test do
   gem "database_cleaner-active_record"
 end
 
-gem "tailwindcss-rails", "~> 2.0"
+gem "tailwindcss-rails"
 gem "font-awesome-sass", "~> 6.1.2"
-gem "simple_form_tailwind_css"
 gem "heroicon"
 gem 'mina-ng-puma', require: false
 gem 'mina-version_managers'

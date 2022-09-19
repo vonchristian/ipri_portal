@@ -1,16 +1,16 @@
-import { Controller } from "@hotwired/stimulus"
+import { Controller } from "@hotwired/stimulus";
 
 export default class extends Controller {
-  static targets = ["input", "output"]
+  static targets = ["input", "output"];
   connect() {
-    this.outputTarget.hidden = true
+    this.outputTarget.hidden = true;
   }
 
   toggle(event) {
-    if(event.target.value == "Yes") {
-      this.outputTarget.hidden = false
-    } else if(event.target.value != "Yes") {
-      this.outputTarget.hidden = true
+    if (["Yes", "Sí"].includes(event.target.value)) {
+      this.outputTarget.hidden = false;
+    } else if (!["Yes", "Sí"].includes(event.target.value)) {
+      this.outputTarget.hidden = true;
     }
   }
 }

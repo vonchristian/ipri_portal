@@ -5,6 +5,13 @@ module Documenters
     before_action :authenticate_documenter!
     helper_method :current_documenter
     layout "documenter"
+    around_action :switch_locale
+
+    def switch_locale(&action)
+      locale = current_documenter ? current_documenter.locale : I18n.default_locale
+      I18n.with_locale(locale, &action)
+      Rails.logger.info(locale)
+    end
 
     def current_documenter
       if session[:user_id]

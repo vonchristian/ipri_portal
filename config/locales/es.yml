@@ -1,6 +1,8 @@
 es:
   language_name: "Spanish"
   step: "Paso"
+  no_option: "No"
+  yes_option: "Sí"
   details_of_documenter: "Informacion De Registrador"
   first_name: "Nombre"
   last_name: "Apellido"
@@ -23,3 +25,13 @@ es:
 
   place_and_date_of_incident: "Lugar y Fecha De Incidente"
   country_of_incident: "País de incidente"
+  subnational_location: "Ubicación subnacional"
+  subnational_location_hint: "(Especifique qué estado, departamento, condado, provincia, etc.)"
+  other_location_details_1: "Otros detalles de la ubicación (1)"
+  other_location_details_1_hint: "(Especifique qué ciudad o municipio)"
+  other_location_details_2: "Otros detalles de la ubicación (2)"
+  other_location_details_2_hint: "(Especifique qué ciudad, pueblo, etc.)"
+  is_this_an_ongoing_case: "¿Está el caso en curso?"
+  start_date_of_incident: "Start Date of Incident"
+  end_date_of_incident: "End Date of Incident"
+  time_of_incident: "Time of Incident"
