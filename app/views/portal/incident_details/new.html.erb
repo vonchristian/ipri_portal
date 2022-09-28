@@ -1,6 +1,6 @@
 <%= render 'shared/progress', current_step: 3, step_name: "#{t(:place_and_date_of_incident)}", percent_finished: 30 %>
   <div data-controller="incident-form">
-    <%= simple_form_for @incident_detail, url: :ip_rights_case_detail_incident_details do |f| %>
+    <%= simple_form_for @incident_detail, url: :portal_case_detail_incident_details do |f| %>
       <%= render 'shared/incident_details/form', f: f %>
     <% end %>
   </div>

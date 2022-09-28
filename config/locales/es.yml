@@ -19,7 +19,9 @@ es:
   continue: "Continuar"
   data_sharing_agreement: "Acuerdo para Compartir Datos"
   data_sharing_agreement_hint_html: "Yo, como registrador/a de esta hoja de datos, entiendo y acepto que <strong>Indigenous Peoples Rights International (IPRI) </strong> registrará lo datos detallados en esta hoja a su base de datos. Mi entrega de esta hoja de datos se entrega con las siguientes restricciones: (seleccione lo apropiado)."
-  cannot_specifically_refer_to_any_of_the_details_in_this_case: "No se puede hacer referencia específica a ninguno de los detalles de este caso."
+  unrestricted: "No Restringido"
+  restricted: "Restringido"
+
   restricted_access_to_case_detail: "La información detallada en esta hoja de datos puede ser usada por IPRI para elucidar tendencias de criminalización, violencia, y impunidad contra Pueblos Indígenas pero sin referirse a los detalles específicos de este caso."
   unrestricted_access_to_case_detail: "La información detallada en esta hoja de datos puede ser usada por IPRI para elucidar tendencias de criminalización, violencia, y impunidad contra Pueblos Indígenas y puede hacer referencia a los detalles específicos de este caso. Al escoger esta opción, incluyo el formulario de consentimiento de IPRI que viene adjunto con esta hoja de"
 

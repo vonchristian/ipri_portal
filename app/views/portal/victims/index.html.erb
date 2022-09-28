@@ -1,0 +1,123 @@
+
+  <%=render 'shared/progress', current_step: 4, step_name: 'Victim Details', percent_finished: 40 %>
+  <div class="col-span-9 ml-5 bg-white mt-5 px-5">
+    <h2 class="font-bold text-xl text-gray-900">Victim Details </h2>
+  <div class="flex justify-between pt-5">
+    <div class="cols">
+    <h2 class="font-bold text-xl text-gray-900">Individual Victims</h2>
+     <p class="mt-1 text-sm text-gray-600 pb-5">Choose this category if the name/s of the victim/s is/are known</p>
+    </div>
+    <div class="cols">
+     <a href="/portal/case_details/<%=@case_detail.id%>/individual_victims/new"type="submit" class="inline-flex py-2 px-2 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-green-600 hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500">
+              Add Victim
+            </a>
+    </div>
+  </div>
+<div class="flex flex-col">
+  <div class="overflow-x-auto sm:-mx-6 lg:-mx-8">
+    <div class="py-2 inline-block min-w-full sm:px-6 lg:px-8">
+      <div class="overflow-hidden">
+        <table class="min-w-full">
+          <thead class="border-b">
+            <tr>
+              <th scope="coul" class="text-sm font-bold text-gray-900 px-6 py-4 text-left">
+                Full Name
+              </th>
+              <th scope="col" class="text-sm font-bold text-gray-900 px-6 py-4 text-left">
+                Gender
+              </th>
+              <th scope="col" class="text-sm font-bold text-gray-900 px-6 py-4 text-left">
+                Dependent Type
+              </th>
+              <th scope="col" class="text-sm font-bold text-gray-900 px-6 py-4 text-left">
+                Age Bracket
+              </th>
+            </tr>
+          </thead>
+          <tbody>
+              <% @case_detail.individual_victims.each do |victim| %>
+                          <tr class="border-b">
+                <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
+                  <%= victim.full_name %>
+                </td>
+                <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
+                  <%= victim.gender %>
+                </td>
+                <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
+                  <%= victim.dependent_type %>
+                </td>
+                 <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
+                  <%= victim.age_bracket_range_name %>
+                </td>
+                </tr>
+              <% end %>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<div class="flex justify-between pt-5">
+    <div class="cols">
+    <h2 class="font-bold text-xl text-gray-900">Group of People</h2>
+     <p class="mt-1 text-sm text-gray-600">Choose this category if the name/s of the victims are too many to identify and are not known,</p>
+     <p class="mt-1 text-sm text-gray-600">  e.g., 100 of members of an entire indigenous community or an entire village etc.</p>
+    </div>
+    <div class="cols">
+     <a href="/ip_rights/case_details/<%=@case_detail.id%>/collective_victims/new"type="submit" class="inline-flex py-2 px-2 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-green-600 hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500">
+              Add Victim
+            </a>
+    </div>
+  </div>
+<div class="flex flex-col pb-10">
+  <div class="overflow-x-auto sm:-mx-6 lg:-mx-8">
+    <div class="py-2 inline-block min-w-full sm:px-6 lg:px-8">
+      <div class="overflow-hidden">
+        <table class="min-w-full">
+          <thead class="border-b">
+            <tr>
+              <th scope="col" class="text-sm font-medium text-gray-900 px-6 py-4 text-left">
+                Total Affected
+              </th>
+              <th scope="col" class="text-sm font-medium text-gray-900 px-6 py-4 text-left">
+                Details
+              </th>
+              <th scope="col" class="text-sm font-medium text-gray-900 px-6 py-4 text-left">
+                Male Total
+              </th>
+              <th scope="col" class="text-sm font-medium text-gray-900 px-6 py-4 text-left">
+                Female Total
+              </th>
+            </tr>
+          </thead>
+          <tbody>
+            <% @case_detail.collective_victims.each do |victim| %>
+              <tr class="border-b">
+                <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
+                  <%= victim.affected_total %>
+                </td>
+                <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
+                  <%= victim.victim_details %>
+                </td>
+                <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
+                  <%= victim.male_total %>
+                </td>
+                <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
+                  <%= victim.female_total %>
+                </td>
+              </tr>
+            <% end %>
+          </thead>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="px-4 py-3 bg-gray-100 text-right sm:px-6">
+  <a href="/ip_rights/case_details/<%=@case_detail.id%>/human_rights_violations"type="submit" class="inline-flex py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-green-600 hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500">
+    Save and Proceed
+  </a>
+</div>

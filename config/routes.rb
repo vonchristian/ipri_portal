@@ -57,6 +57,8 @@ Rails.application.routes.draw do
     end
     resources :case_details, only: [:show] do
       resources :data_sharings, only: [:new, :create]
+      resources :incident_details, only: [:new, :create]
+      resources :victims, only: [:index]
     end
 
     resources :documenter_details, only: [:new, :create]

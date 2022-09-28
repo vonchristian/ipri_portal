@@ -1,0 +1,57 @@
+<div class="md:col-span-6 px-5">
+      <h2 class="font-bold text-xl text-gray-900"><%= t(:place_and_date_of_incident) %></h2>
+      <div class="md:mt-0 md:col-span-2">
+            <div class="py-5 sm:p-6">
+              <div class="grid grid-cols-4 gap-6">
+                <div class="col-span-2 sm:col-span-2">
+                 <%= f.input :country_id, label: "#{t(:country_of_incident)}", collection: Country.all.map { |country| [country.name, country.id] } %>
+                </div>
+              </div>
+              <div class="col-span-6 sm:col-span-3">
+                <%= f.input :subnational_location, label: "#{t(:subnational_location)}", as: :text, hint: "#{t(:subnational_location_hint)}" %>
+              </div>
+              <div class="col-span-6 sm:col-span-3">
+                <%= f.input :location_details_1, label: "#{t(:other_location_details_1)}", as: :text, hint: "#{t(:other_location_details_1_hint)}" %>
+              </div>
+              <div class="col-span-6 sm:col-span-3">
+                <label for="first-name" class="block text-sm font-bold text-gray-700 pb-2"></label>
+                <%= f.input :location_details_2, label: "#{t(:other_location_details_2)}", as: :text, hint: "#{t(:other_location_details_2_hint)}" %>
+              </div>
+              <fieldset>
+                <div>
+                  <legend class="text-base font-medium text-gray-700 pt-4"><%= t(:is_this_an_ongoing_case) %></legend>
+                </div>
+                <div class="mt-4 space-y-4">
+                 <%= f.input :ongoing_case, label: '', collection: ["#{t(:no_option)}", "#{t(:yes_option)}"], checked: "#{t(:no_option)}", input_html: { data: { incident_form_target: "input", action: "click->incident-form#toggle" } }, as: :radio_buttons  %>
+                  </div>
+                </div>
+              </fieldset>
+
+                <label class="block text-sm font-bold text-gray-700 pb-2"><%= t(:start_date_of_incident) %></label>
+                  <div class="grid grid-cols-3 gap-4">
+                    <%= f.input :incident_start_month, label: false, collection: Date::MONTHNAMES, selected: Date.current.strftime("%B")  %>
+                    <%= f.input :incident_start_day, label: false, collection: 1..(Date.current.all_month.count), selected: Date.current.day %>
+                    <%= f.input :incident_start_year, label: false, collection: (Date.current - 10.year).year..(Time.zone.now.year), selected: Date.current.year %>
+                  </div>
+
+              <div data-incident-form-target="output">
+                <label class="block text-sm font-bold text-gray-700 pb-2"><%= t(:end_date_of_incident) %></label>
+                 <div class="grid grid-cols-3 gap-4">
+                    <%= f.input :incident_end_month, label: false, collection: Date::MONTHNAMES, selected: Date.current.strftime("%B")  %>
+                    <%= f.input :incident_end_day, label: false, collection: 1..(Date.current.all_month.count), selected: Date.current.day %>
+                    <%= f.input :incident_end_year, label: false, collection: (Date.current - 10.year).year..(Time.zone.now.year), selected: Date.current.year %>
+                  </div>
+              </div>
+
+              <div class="col-span-8">
+                <label for="first-name" class="block text-sm font-medium text-gray-700 pb-2"><%= t(:time_of_incident) %></label>
+                <%= f.select :incident_hour,  1..24 %>
+                <%= f.select :incident_minute,  1..59 %>
+
+              </div>
+
+      <div class="px-4 py-3 text-right sm:px-6">
+        <button type="submit" class="inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-green-600 hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500">
+          <%= t(:continue) %>
+        </button>
+      </div>

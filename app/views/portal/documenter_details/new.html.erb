@@ -1,7 +1,8 @@
-
- <%=render '/ip_rights/shared/sidebar', current_step: 1, step_name: "#{t(:details_of_documenter)}", percent_finished: 1 %>
+<div class="mt-5">
+<%= render 'shared/progress', current_step: 1, step_name: "#{t(:details_of_documenter)}", percent_finished: 0 %>
 <div data-controller="documenter-form">
   <%= simple_form_for @documenter, as: :case_details_documenter, url: :portal_documenter_details, html: { multipart: true } do |f| %>
     <%= render "shared/documenter_details/form", f: f %>
   <% end %>
+</div>
 </div>
