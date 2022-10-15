@@ -21,7 +21,7 @@ gem "puma", "~> 5.0"
 gem "importmap-rails"
 
 # Hotwire's SPA-like page accelerator [https://turbo.hotwired.dev]
-gem "turbo-rails", github: "hotwired/turbo-rails", branch: "turbo-7-2-0"
+gem "turbo-rails"
 
 # Hotwire's modest JavaScript framework [https://stimulus.hotwired.dev]
 gem "stimulus-rails"
@@ -58,7 +58,7 @@ group :development, :test do
   # See https://guides.rubyonrails.org/debugging_rails_applications.html#debugging-with-the-debug-gem
   gem "pry-rails"
   gem "factory_bot_rails"
-  gem "faker", git: "https://github.com/faker-ruby/faker.git", branch: "master"
+  gem "faker"
 end
 
 group :development do
@@ -78,3 +78,6 @@ gem 'mina-ng-puma', require: false
 gem 'mina-version_managers'
 gem "chartkick"
 gem "groupdate"
+gem "roo", "~> 2.9.0"
+gem 'active_interaction', '~> 5.1'
+gem "kt-paperclip", "~> 6.4", ">= 6.4.1"

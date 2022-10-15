@@ -1,0 +1,31 @@
+<div class="md:col-span-6 mt-6 ml-2">
+            <h2 class="font-bold text-xl text-gray-900"><%= @country.name.upcase %></h2>
+            <div>
+  <div class="border-t border-gray-200 my-5"></div>
+
+    <a href="" class="mb-4 flex flex-col items-center bg-white rounded-lg border shadow-md md:flex-row md:max-w-xl hover:bg-gray-100 dark:border-gray-700 dark:bg-gray-800 dark:hover:bg-gray-700">
+              <h1 class="text-5xl font-bold text-red-700 my-5 mx-8"><%= @country.case_count %></h1>
+        <div class="flex flex-col justify-between p-4 leading-normal">
+            <h5 class="mb-2 text-1xl font-bold tracking-tight text-gray-900 dark:text-white">TOTAL CASES</h5>
+            <p class="mb-3 text-sm text-gray-700 dark:text-gray-400"> <%= @country.case_details.submitted_current_year.size %> Submitted this year</p>
+        </div>
+    </a>
+  </div>
+<div class="text-sm font-medium text-center text-gray-500 border-b border-gray-200 dark:text-gray-400 dark:border-gray-700">
+    <ul class="flex flex-wrap -mb-px">
+      <li class="mr-2">
+          <a href="" class="<%= "inline-block p-4 text-blue-600 rounded-t-lg border-b-2 border-blue-600 active dark:text-blue-500 dark:border-blue-500" %>inline-block p-4 rounded-t-lg border-b-2 border-transparent hover:text-gray-600 hover:border-gray-300 dark:hover:text-gray-300">Cases</a>
+      </li>
+      <li class="mr-2">
+          <a href="" class="<%= "inline-block p-4 text-blue-600 rounded-t-lg border-b-2 border-blue-600 active dark:text-blue-500 dark:border-blue-500" if current_page?(country_path(@country.id)) %>inline-block p-4 rounded-t-lg border-b-2 border-transparent hover:text-gray-600 hover:border-gray-300 dark:hover:text-gray-300">Individual Victims</a>
+      </li>
+       <li class="mr-2">
+          <a href="" class="<%= "inline-block p-4 text-blue-600 rounded-t-lg border-b-2 border-blue-600 active dark:text-blue-500 dark:border-blue-500" if current_page?(country_path(@country.id)) %>inline-block p-4 rounded-t-lg border-b-2 border-transparent hover:text-gray-600 hover:border-gray-300 dark:hover:text-gray-300">Collective Victims</a>
+      </li>
+    </ul>
+  </div>
+    <% if current_page?(country_path(@country)) %>
+     <%= render 'countries/case_details/index', case_details: @country.case_details %>
+    <% end %>
+</div>
+

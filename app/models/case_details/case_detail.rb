@@ -17,13 +17,13 @@ module CaseDetails
 
     belongs_to :documenter,            class_name: "Users::Documenter", optional: true
     belongs_to :country, optional: true
-    has_many :individual_victims,      class_name: "Victims::IndividualVictim"
-    has_many :collective_victims,      class_name: "Victims::CollectiveVictim"
-    has_many :criminalizations,        class_name: "Criminalizations::Criminalization"
-    has_many :human_rights_violations, class_name: "HumanRightsViolations::HumanRightsViolation"
-    has_many :killings,                class_name: "Killings::Killing"
-    has_many_attached :documents
-    has_many :case_projects,           class_name: "DevelopmentProjects::CaseProject"
+    has_many :individual_victims,      class_name: "Victims::IndividualVictim", dependent: :destroy
+    has_many :collective_victims,      class_name: "Victims::CollectiveVictim", dependent: :destroy
+    has_many :criminalizations,        class_name: "Criminalizations::Criminalization", dependent: :destroy
+    has_many :human_rights_violations, class_name: "HumanRightsViolations::HumanRightsViolation", dependent: :destroy
+    has_many :killings,                class_name: "Killings::Killing", dependent: :destroy
+    has_many_attached :documents, dependent: :destroy
+    has_many :case_projects,           class_name: "DevelopmentProjects::CaseProject", dependent: :destroy
     has_many :development_projects,    class_name: "DevelopmentProjects::DevelopmentProject", through: :case_projects
 
     delegate :name, to: :country, prefix: true, allow_nil: true
@@ -50,6 +50,10 @@ module CaseDetails
 
     def restricted_title
       "Cannot specifically refer to any of the details of this case"
+    end
+
+    def unrestricted_title
+      "Can specifically refer to any of the details of this case"
     end
 
     def restricted_content

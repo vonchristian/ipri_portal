@@ -14,6 +14,12 @@
                <span class="flex-1 ml-3 whitespace-nowrap">Cases</span>
             </a>
          </li>
+        <li>
+            <a href="/countries" class=" <%= 'bg-gray-200' if current_page?(countries_path) %> flex items-center p-2 text-base font-normal text-gray-900 rounded-lg dark:text-white hover:bg-gray-200 dark:hover:bg-gray-700">
+               <i class="fa fa-flag"></i>
+               <span class="flex-1 ml-3 whitespace-nowrap">Countries</span>
+            </a>
+         </li>
       </ul>
          <span class="text-sm text-gray-500"> Cases By Category </span>
       <ul class="space-y-2 border-gray-200 dark:border-gray-700">

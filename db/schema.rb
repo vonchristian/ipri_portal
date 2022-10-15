@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_09_19_104126) do
+ActiveRecord::Schema[7.0].define(version: 2022_10_15_093106) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
   enable_extension "plpgsql"
@@ -82,9 +82,9 @@ ActiveRecord::Schema[7.0].define(version: 2022_09_19_104126) do
     t.integer "submission_date_year", null: false
     t.integer "submission_date_day", null: false
     t.string "submission_date_month", null: false
-    t.integer "incident_start_year", null: false
-    t.integer "incident_start_day", null: false
-    t.string "incident_start_month", null: false
+    t.integer "incident_start_year"
+    t.integer "incident_start_day"
+    t.string "incident_start_month"
     t.integer "incident_end_year"
     t.integer "incident_end_day"
     t.string "incident_end_month"
@@ -115,6 +115,15 @@ ActiveRecord::Schema[7.0].define(version: 2022_09_19_104126) do
     t.index ["data_sharing"], name: "index_case_details_on_data_sharing"
     t.index ["documenter_id"], name: "index_case_details_on_documenter_id"
     t.index ["reference_number"], name: "index_case_details_on_reference_number", unique: true
+  end
+
+  create_table "case_imports", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.string "spreadsheet_file_name"
+    t.string "spreadsheet_content_type"
+    t.bigint "spreadsheet_file_size"
+    t.datetime "spreadsheet_updated_at"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "case_projects", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
@@ -169,6 +178,9 @@ ActiveRecord::Schema[7.0].define(version: 2022_09_19_104126) do
   create_table "countries", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.string "name", null: false
     t.integer "case_count"
+    t.integer "killings_count"
+    t.integer "criminalizations_count"
+    t.integer "other_violations_count"
     t.index ["case_count"], name: "index_countries_on_case_count"
   end
 

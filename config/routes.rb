@@ -32,6 +32,7 @@ Rails.application.routes.draw do
   end
 
   namespace :documenters do
+    resources :case_imports, only: [:new, :create]
     resources :documenter, only: [] do
       resource :locale
     end
@@ -49,7 +50,7 @@ Rails.application.routes.draw do
     end
   end
 
-  resources :countries, only: [:index]
+  resources :countries, only: [:index, :show]
 
   namespace :portal do
     resources :guests, only: [:create] do
