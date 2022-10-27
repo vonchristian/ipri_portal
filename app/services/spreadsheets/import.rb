@@ -21,6 +21,8 @@ module Spreadsheets
       ApplicationRecord.transaction do
         @case_detail = create_case_detail(case_data)
         create_victims(case_data)
+        create_criminalizations(case_detail_id: @case_detail.id,
+          case_data: case_data) if criminalizations_category?(case_data["Categories of Incidents of Human Rights Violations"])
       end
     end
 
@@ -49,6 +51,10 @@ module Spreadsheets
       Spreadsheets::Imports::CollectiveVictim.run(case_detail_id: case_detail_id, case_data: case_data)
     end
 
+    def create_criminalizations(case_detail_id:, case_data:)
+      Spreadsheets::Imports::Criminalization.run(case_detail_id: case_detail_id, case_data: case_data)
+    end
+
     def individual_victims?(case_data)
       value = case_data["Does the case involve individual/s or group/s of people (E.g., an entire village, members of an ethnic community, etc.)?"]
 
@@ -59,6 +65,18 @@ module Spreadsheets
       value = case_data["Does the case involve individual/s or group/s of people (E.g., an entire village, members of an ethnic community, etc.)?"]
 
       value.to_s == "Group of People - (Choose this category if the name/s of the victims are too many to identify and are not known, e.g., 100 of members of an entire indigenous community or an entire village etc)"
+    end
+
+    def criminalizations_category?(value)
+      value.to_s == "Criminalization - defined as the misuse of criminal laws that involves the manipulation of the punitive power of the State and non-state actors in order to control, punish and/or prevent the exercise of the right to defend human rights. It can also occur when state and non-state actors use and misuse their position of power, even without using any laws/policies, to control, punish and/or prevent the exercise of Indigenous Peoples’ right to defend their individual and collective rights (E.g. trumped-up charges, red-tagging, or accusing of individuals/organizations as terrorist groups/as enemy of the State, illegal detention, etc.)"
+    end
+
+    def killings_category?(value)
+      value.to_s == "Killing"
+    end
+
+    def other_violations_category?(value)
+      value.to_s == "Other Type of Human Rights Violation - refers to any other incident of human rights violations that are neither criminalization nor killing, and are linked to the protection and defense of Indigenous Peoples’ on their rights to lands, territories and natural resources, self-government, cultural integrity. (E.g., attacks against life and security (except killings) like torture, enforced disappearance, kidnapping, illegal detention, sexual harassment, violation of collective right to free, prior and informed consent (FPIC), forced eviction, displacement, land grabbing etc.)"
     end
   end
 end

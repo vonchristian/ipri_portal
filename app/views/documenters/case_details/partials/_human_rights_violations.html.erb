@@ -1,0 +1,76 @@
+<div class="flex w-full mx-auto mt-4 justify-between">
+  <h2 class="font-bold text-l text-gray-900 mt-4">Criminalizations</h2>
+</div>
+<% @criminalizations.each do |criminalization| %>
+  <div class="grid grid-cols-1 md:grid-cols-12">
+    <div class="col-span-3 ml-4 mt-2">
+      <p class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300"> Why was/were the victim/s criminalized? </p>
+    </div>
+    <div class="col-span-1">
+    </div>
+    <div class="col-span-7 mt-2">
+      <p class="text-gray-500"> <%= criminalization.criminalization_details %> </p>
+    </div>
+  </div>
+  <div class="grid grid-cols-1 md:grid-cols-12 mt-2">
+    <div class="col-span-3 ml-4 mt-2 mr-2">
+      <p class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300"> Did the victim/s experience any form of harassment or intimidation prior to criminalization? </p>
+    </div>
+    <div class="col-span-1">
+    </div>
+    <div class="col-span-7 mt-2">
+      <p class="text-gray-500"> <%= criminalization.experienced_harrassment_or_intimidation %> </p>
+      <p class="text-gray-500"> <%= criminalization.harrassment_or_intimidation_details %> </p>
+    </div>
+  </div>
+
+  <div class="grid grid-cols-1 md:grid-cols-12 mt-2">
+    <div class="col-span-3 ml-4 mt-2 mr-2">
+      <p class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300"> What was/were the accusation/s or charge/s filed against the victim/s?</p>
+    </div>
+    <div class="col-span-1">
+    </div>
+    <div class="col-span-7 mt-2">
+      <p class="text-gray-500"> <%= criminalization.accusation_or_charges_details %> </p>
+    </div>
+  </div>
+
+  <div class="grid grid-cols-1 md:grid-cols-12 mt-2">
+    <div class="col-span-3 ml-4 mt-2 mr-2">
+      <p class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300"> What was/were the policy/ies or law/s or institutional justification/s used against the victim/s?</p>
+    </div>
+    <div class="col-span-1">
+    </div>
+    <div class="col-span-7 mt-2">
+      <p class="text-gray-500"> <%= criminalization.policies_or_laws_used %> </p>
+    </div>
+  </div>
+
+  <div class="grid grid-cols-1 md:grid-cols-12 mt-2">
+    <div class="col-span-3 ml-4 mt-2 mr-2">
+      <p class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300"> Who put forward the accusation/s or charge/s against the victim/s?</p>
+    </div>
+    <div class="col-span-1">
+    </div>
+    <div class="col-span-7 mt-2">
+      <p class="text-gray-500"> <%= criminalization.accuser_details %> </p>
+    </div>
+  </div>
+
+<% end %>
+ <div class="border-t border-gray-200 my-5"></div>
+<div class="flex w-full mx-auto mt-4 justify-between">
+  <h2 class="font-bold text-l text-gray-900 mt-4">Killings</h2>
+</div>
+
+<% @killings.each do |killing| %>
+  <div class="grid grid-cols-1 md:grid-cols-12">
+    <div class="col-span-3 ml-4 mt-2">
+      <p class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300"> Details </p>
+    </div>
+    <div class="col-span-1">
+    </div>
+    <div class="col-span-8 mt-2">
+      <p class="text-gray-500"> <%= killing.documenter_first_name %> </p>
+    </div>
+<% end %>

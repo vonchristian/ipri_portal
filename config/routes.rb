@@ -47,6 +47,7 @@ Rails.application.routes.draw do
 
     resources :case_details, only: [:index, :new, :show] do
       resources :victims, only: [:index], controller: "case_details/victims"
+      resources :human_rights_violations, only: [:index], controller: "case_details/human_rights_violations"
     end
   end
 

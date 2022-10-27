@@ -1,6 +1,5 @@
 # frozen_string_literal: true
 
-
 module Criminalizations
   class Accuserization < ApplicationRecord
     self.table_name = "criminalization_accuserizations"
