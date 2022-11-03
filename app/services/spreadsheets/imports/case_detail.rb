@@ -32,6 +32,7 @@ module Spreadsheets
           documenter_first_name: case_data["First Name"],
           documenter_last_name: case_data["Last Name"],
           documenter_email: case_data["Email"],
+          documenter_id: Users::Documenter.last.id,
           documenter_phone_number: case_data["Phone Number"],
           data_sources: case_data["Provide relevant website/link"],
           impact_to_victim_details: case_data["How did the incident/s affect the victim/s and his/her/their family?"],
