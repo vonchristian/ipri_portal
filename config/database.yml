@@ -82,5 +82,5 @@ test:
 production:
   <<: *default
   database: ipri_production
-  username: deploy
+  username: postgres
   password: <%= ENV["IPRI_PORTAL_DATABASE_PASSWORD"] %>
