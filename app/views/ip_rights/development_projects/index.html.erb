@@ -1,7 +1,7 @@
 <%= render '/ip_rights/shared/sidebar', current_step: 7, step_name: "Related Development Projects", percent_finished: 100 %>
   <div data-controller="impact-and-action-form" class="col-span-9">
 
-    <div class="flex justify-between mt-5 mr-5">
+    <div class="flex justify-between px-4 mt-5 mr-5">
     <h2 class="font-bold text-xl text-gray-900">Development Projects</h2>
 
      <a href="/ip_rights/case_details/<%=@case_detail.id%>/development_projects/new"type="submit" class="inline-flex py-2 px-2 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-green-600 hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500">
@@ -9,6 +9,35 @@
             </a>
     </div>
   </div>
+   <table class="mt-2 min-w-full">
+    <thead class="border-b bg-gray-500">
+      <tr>
+        <th scope="col" class="text-sm font-bold text-gray-900 px-6 py-4 text-left"> Name </th>
+        <th scope="col" class="text-sm font-bold text-gray-900 px-6 py-4 text-left"> Description </th>
+        <th scope="col" class="text-sm font-bold text-gray-900 px-6 py-4 text-left"> Start Year </th>
+        <th scope="col" class="text-sm font-bold text-gray-900 px-6 py-4 text-left"> Sources </th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @case_detail.development_projects.each do |project| %>
+        <tr class="border-b">
+          <td scope="row" class="py-4 px-6 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+            <%= project.name %>
+          </td>
+           <td scope="row" class="py-4 px-6 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+            <%= project.description %>
+          </td>
+           <td scope="row" class="py-4 px-6 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+            <%= project.project_start_year %>
+          </td>
+           <td scope="row" class="py-4 px-6 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+            <%= project.website_sources %>
+          </td>
+
+        </tr>
+      <% end %>
+    </tbody>
+    </table>
     <div class="border-t border-gray-200 mt-5"></div>
 <div class="flex flex-col justify-center items-center pt-10">
     <a href="/documenters/case_details" class="inline-flex py-4 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-green-900 hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-700"> Submit Case Factsheet </a>

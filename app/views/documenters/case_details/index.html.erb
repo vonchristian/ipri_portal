@@ -1,62 +1,15 @@
 <header>
-    <div class="flex w-full mx-auto pt-6 justify-items-end">
+    <div class="grid grid-cols-4 gap-1 mt-6 mb-5">
+      <div class="col-span-3">
       <h1 class="text-2xl font-bold text-gray-900">Case Factsheets</h1>
-       <%= link_to "New Case", new_ip_rights_documenter_detail_path, class: "text-white bg-green-700 hover:bg-green-800 focus:ring-4 focus:ring-green-800 font-medium rounded-lg text-sm px-5 py-3 mr-2 mb-2 dark:bg-green-600 dark:hover:bg-green-700 focus:outline-none dark:focus:ring-green-800" %>
-<%= link_to 'Import', new_documenters_case_import_path, class:"py-2.5 px-5 mr-2 mb-2 text-sm font-medium text-gray-900 focus:outline-none bg-white rounded-lg border border-gray-200 hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-4 focus:ring-gray-200 dark:focus:ring-gray-700 dark:bg-gray-800 dark:text-gray-400 dark:border-gray-600 dark:hover:text-white dark:hover:bg-gray-700" %>
-<button type="button" class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800">Default</button>
-<button type="button" class=">Alternative</button>
-<button type="button" class="text-white bg-gray-800 hover:bg-gray-900 focus:outline-none focus:ring-4 focus:ring-gray-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-gray-800 dark:hover:bg-gray-700 dark:focus:ring-gray-700 dark:border-gray-700">Dark</button>
-<button type="button" class="text-gray-900 bg-white border border-gray-300 focus:outline-none hover:bg-gray-100 focus:ring-4 focus:ring-gray-200 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-gray-800 dark:text-white dark:border-gray-600 dark:hover:bg-gray-700 dark:hover:border-gray-600 dark:focus:ring-gray-700">Light</button>
-<button type="button" class="focus:outline-none text-white bg-green-700 hover:bg-green-800 focus:ring-4 focus:ring-green-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-800">Green</button>
-<button type="button" class="focus:outline-none text-white bg-red-700 hover:bg-red-800 focus:ring-4 focus:ring-red-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-900">Red</button>
-<button type="button" class="focus:outline-none text-white bg-yellow-400 hover:bg-yellow-500 focus:ring-4 focus:ring-yellow-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 dark:focus:ring-yellow-900">Yellow</button>
-<button type="button" class="focus:outline-none text-white bg-purple-700 hover:bg-purple-800 focus:ring-4 focus:ring-purple-300 font-medium rounded-lg text-sm px-5 py-2.5 mb-2 dark:bg-purple-600 dark:hover:bg-purple-700 dark:focus:ring-purple-900">Purple</button>
-    </div>
-    <div class="text-sm font-medium text-center text-gray-500 border-b border-gray-200 dark:text-gray-400 dark:border-gray-700 mb-2">
-    <ul class="flex flex-wrap -mb-px">
-
-        <li class="mr-2">
-            <a href="#" class="inline-block p-4 text-blue-600 rounded-t-lg border-b-2 border-blue-600 active dark:text-blue-500 dark:border-blue-500" aria-current="page">Data</a>
-        </li>
-        <li class="mr-2">
-            <a href="/admin/case_factsheets/dashboard" class="inline-block p-4 rounded-t-lg border-b-2 border-transparent hover:text-gray-600 hover:border-gray-300 dark:hover:text-gray-300">Dashboard</a>
-        </li>
-        <li class="mr-2">
-            <a href="#" class="inline-block p-4 rounded-t-lg border-b-2 border-transparent hover:text-gray-600 hover:border-gray-300 dark:hover:text-gray-300">Reports</a>
-        </li>
-    </ul>
-</div>
-</header>
-    <div class="flex mb-4 align-center">
-      <span class="font-medium pr-4 pt-2"> Search Filter: </span>
-      <div x-data="{dropdownMenu: false}" class="relative">
-        <!-- Dropdown toggle button -->
-        <button @click="dropdownMenu = ! dropdownMenu" @click.away="dropdownMenu = false" class="flex items-center p-2 bg-gray-100 rounded-md">
-            <span class="mr-4">Submission Date <i class="faat fa-chevron-down"></i></span>
-        </button>
-        <!-- Dropdown list -->
-        <div x-show="dropdownMenu" class="absolute right-0 py-2 mt-2 bg-white bg-gray-100 rounded-md shadow-xl w-44 z-50">
-        <a href="#" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-400 hover:text-white">
-                Today
-            </a>
-            <a href="#" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-400 hover:text-white">
-                This Week
-            </a>
-            <a href="#" class="block px-4 py-2 text-sm  text-gray-700 hover:bg-gray-400 hover:text-white">
-                This Month
-            </a>
-            <a href="#" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-400 hover:text-white">
-                This Year
-            </a>
-        </div>
       </div>
-
-
-    </div>
-
-
-
-      <%=form_tag documenters_case_details_path, method: :get do %>
+      <div class="col-span-1 float-right">
+       <%= link_to "New Case", new_ip_rights_documenter_detail_path, class: "text-white bg-green-700 hover:bg-green-800 focus:ring-4 focus:ring-green-800 font-medium rounded-lg text-sm px-5 py-3 mr-2 mb-2 dark:bg-green-600 dark:hover:bg-green-700 focus:outline-none dark:focus:ring-green-800" %>
+       <%= link_to 'Upload Spreadsheet', new_documenters_case_import_path, class:"py-2.5 px-5 mr-2 mb-2 text-sm font-medium text-gray-900 focus:outline-none bg-white rounded-lg border border-gray-200 hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-4 focus:ring-gray-200 dark:focus:ring-gray-700 dark:bg-gray-800 dark:text-gray-400 dark:border-gray-600 dark:hover:text-white dark:hover:bg-gray-700" %>
+      </div>
+      </div>
+</header>
+      <%= form_tag documenters_case_details_path, method: :get do %>
         <div class="relative">
           <div class="flex absolute inset-y-0 left-0 items-center pl-3 pointer-events-none">
               <svg aria-hidden="true" class="w-5 h-5 text-gray-500 dark:text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path></svg>

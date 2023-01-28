@@ -18,10 +18,10 @@
                 <label for="first-name" class="text-base font-bold text-gray-700 mt-8">Who put forward the accusation/s or charge/s against the victim/s?</label>
 
               <% Criminalizations::AccuserCategory.all.each do |accuser_category| %>
-                <%= f.fields_for :criminalization_accuser_categories do |ff| %>
+                <%= f.fields_for :accuserizations do |ff| %>
                 <div class="col-span-6 sm:col-span-3">
 
-                  <%= ff.check_box :accuser_category_id, value: accuser_category.id, class: "focus:ring-indigo-500 h-4 w-4 text-indigo-600 border-gray-300 rounded" %>
+                  <%= ff.check_box :accuser_category_id, { class: "focus:ring-indigo-500 h-4 w-4 text-indigo-600 border-gray-300 rounded" }, accuser_category.id, nil %>
                   <label for="first-name" class="text-base font-medium text-gray-700 pt-4 pl-4"><%= accuser_category.title %></label>
                   </div>
                 <% end %>

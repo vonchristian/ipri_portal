@@ -1,32 +1,69 @@
 
   <%=render '/ip_rights/shared/sidebar', current_step: 5, step_name: 'Categories of Incidents of Human Rights Violations', percent_finished: 70 %>
 
-  <div class="col-span-9 bg-white py-10 px-5">
+  <div class="col-span-9 py-5 px-4">
     <h2 class="font-bold text-xl text-gray-900">Categories of Incidents of Human Rights Violations </h2>
+    <div class="border-t border-gray-200 mt-4"></div>
 
     <div class="items-center px-4 py-4">
-    <h2 class="font-bold text-xl text-gray-900">Criminalization </h2>
+      <div class='flex justify-between mt-4 mb-4'>
+        <h2 class="font-bold text-xl text-gray-900">Criminalization </h2>
+        <a href="/ip_rights/case_details/<%=@case_detail.id%>/criminalizations/new"type="submit" class="inline-flex py-2 px-2 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-green-600 hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500">
+          Add Details
+        </a>
+      </div>
       <p class="mt-1 text-sm text-gray-600 my-4"> Defined as the misuse of criminal laws that involves the manipulation of the punitive power of the State and non-state actors in order to control, punish and/or prevent the exercise of the right to defend human rights. It can also occur when state and non-state actors use and misuse their position of power, even without using any laws/policies, to control, punish and/or prevent the exercise of Indigenous Peoples’ right to defend their individual and collective rights (E.g. trumped-up charges, red-tagging, or accusing of individuals/organizations as terrorist groups/as enemy of the State, illegal detention, etc.) </p>
-        <a href="/ip_rights/case_details/<%=@case_detail.id%>/criminalizations/new"type="submit" class="inline-flex py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-green-600 hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500">
+    </div>
+    <div class="border-t border-gray-200 mt-4"></div>
+     <div class="items-center px-4 py-4">
+      <div class='flex justify-between mt-4'>
+        <h2 class="font-bold text-xl text-gray-900">Killing </h2>
+        <a href="/ip_rights/case_details/<%=@case_detail.id%>/killings/new"type="submit" class="inline-flex py-2 px-2 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-green-600 hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500">
           Add Details
         </a>
     </div>
-          <div class="border-t border-gray-200 mt-4"></div>
-
-    <div class="items-center px-4 py-4">
-    <h2 class="font-bold text-xl text-gray-900 py-4">Killing </h2>
-        <a href="/ip_rights/case_details/<%=@case_detail.id%>/killings/new"type="submit" class="inline-flex py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-green-600 hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500">
-          Add Details
-        </a>
     </div>
-          <div class="border-t border-gray-200 mt-4"></div>
+    <table class="mt-2 min-w-full">
+    <thead class="border-b bg-gray-500">
+      <tr>
+        <th scope="col" class="text-sm font-bold text-gray-900 px-6 py-4 text-left"> Details </th>
+        <th scope="col" class="text-sm font-bold text-gray-900 px-6 py-4 text-left"> Killing Carried Out </th>
+        <th scope="col" class="text-sm font-bold text-gray-900 px-6 py-4 text-left"> Alleged Perpetrators </th>
+        <th scope="col" class="text-sm font-bold text-gray-900 px-6 py-4 text-left"> Case Filing Status </th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @case_detail.killings.each do |killing| %>
+        <tr class="border-b">
+          <td scope="row" class="py-4 px-6 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+            <%= killing.killing_details %>
+          </td>
+          <td scope="row" class="py-4 px-6 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+            <%= killing.killing_carried_out %>
+          </td>
+          <td scope="row" class="py-4 px-6 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+            <%= killing.perpetrator_categories.pluck(:title).join(",") %>
+          </td>
+          <td scope="row" class="py-4 px-6 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+            <%= killing.case_filing_status %>
+          </td>
+        </tr>
+      <% end %>
+    </tbody>
+    </table>
+    <div class="border-t border-gray-200 mt-4"></div>
 
     <div class="items-center px-4 py-4">
+     <div class='flex justify-between mt-4 mb-4'>
     <h2 class="font-bold text-xl text-gray-900">Other Types of Human Rights Violation </h2>
-      <p class="mt-1 text-sm text-gray-600 my-4">  Refers to any other incident of human rights violations that are neither criminalization nor killing, and are linked to the protection and defense of Indigenous Peoples’ on their rights to lands, territories and natural resources, self-government, cultural integrity. (E.g., attacks against life and security (except killings) like torture, enforced disappearance, kidnapping, illegal detention, sexual harassment, violation of collective right to free, prior and informed consent (FPIC), forced eviction, displacement, land grabbing etc.) </p>
-        <a href="/ip_rights/case_details/<%=@case_detail.id%>/human_rights_violations/new"type="submit" class="inline-flex py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-green-600 hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500">
+
+      <a href="/ip_rights/case_details/<%=@case_detail.id%>/human_rights_violations/new"type="submit" class="inline-flex py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-green-600 hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500">
           Add Details
         </a>
+    </div>
+
+      <p class="mt-1 text-sm text-gray-600 my-4">  Refers to any other incident of human rights violations that are neither criminalization nor killing, and are linked to the protection and defense of Indigenous Peoples’ on their rights to lands, territories and natural resources, self-government, cultural integrity. (E.g., attacks against life and security (except killings) like torture, enforced disappearance, kidnapping, illegal detention, sexual harassment, violation of collective right to free, prior and informed consent (FPIC), forced eviction, displacement, land grabbing etc.) </p>
+
     </div>
 
 <div class="px-4 py-3 bg-gray-100 text-right sm:px-6">

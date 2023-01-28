@@ -7,13 +7,16 @@ module IpRights
     def new
       @case_detail = CaseDetails::CaseDetail.find(params.fetch(:case_detail_id))
       @killing     = @case_detail.killings.build
+      @killing.perpetratorizations.build
+      @perpetrator_categories = Killings::PerpetratorCategory.all
     end
 
     def create
       @case_detail = CaseDetails::CaseDetail.find(params.fetch(:case_detail_id))
       @killing     = @case_detail.killings.build(killing_params)
-      if @killing.valid?
-        @killing.save!
+      @perpetrator_categories = Killings::PerpetratorCategory.all
+      if @killing.save!
+        # @killing.save!
 
         respond_to do |format|
           format.html do
@@ -33,21 +36,21 @@ module IpRights
 
     def killing_params
       params.require(:killings_killing)
-      .permit(
-        :killing_details,
-        :killing_carried_out,
-        :experienced_harrassment_or_intimidation,
-        :harrassment_or_intimidation_details,
-        :alleged_perpetrators_known,
-        :alleged_perpetrator_details,
-        :case_filing_status,
-        :case_filing_details,
-        :state_action_to_address_killing,
-        :state_action_to_address_killing_details,
-        :investigation_on_killing,
-        :investigation_on_killing_details,
-        killing_perpetrator_categories_attributes: []
-      )
+        .permit(
+          :killing_details,
+          :killing_carried_out,
+          :experienced_harrassment_or_intimidation,
+          :harrassment_or_intimidation_details,
+          :alleged_perpetrators_known,
+          :alleged_perpetrator_details,
+          :case_filing_status,
+          :case_filing_details,
+          :state_action_to_address_killing,
+          :state_action_to_address_killing_details,
+          :investigation_on_killing,
+          :investigation_on_killing_details,
+          perpetratorizations_attributes: [:perpetrator_category_id],
+        )
     end
   end
 end

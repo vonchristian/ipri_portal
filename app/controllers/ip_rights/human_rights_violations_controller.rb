@@ -11,6 +11,8 @@ module IpRights
     def new
       @case_detail            = CaseDetails::CaseDetail.find(params.fetch(:case_detail_id))
       @human_rights_violation = @case_detail.human_rights_violations.build
+      @human_rights_violation.categorizations.build
+      @human_rights_violation.perpetratorizations.build
     end
 
     def create
@@ -37,21 +39,21 @@ module IpRights
 
     def violation_params
       params.require(:human_rights_violations_human_rights_violation)
-      .permit(
-        :violation_details,
-        :alleged_perpetrators_known,
-        :alleged_perpetrator_details,
-        :case_filing_status,
-        :case_filing_details,
-        :state_action_to_address_violation,
-        :state_action_to_address_violation_details,
-        :investigation_on_violation,
-        :investigation_on_violation_details,
-        :impact_to_victim_details,
-        :impact_to_community_details,
-        human_rights_violation_categories_attributes: [],
-        human_rights_violation_perpetrator_categories_attributes: [],
-      )
+        .permit(
+          :violation_details,
+          :alleged_perpetrators_known,
+          :alleged_perpetrator_details,
+          :case_filing_status,
+          :case_filing_details,
+          :state_action_to_address_violation,
+          :state_action_to_address_violation_details,
+          :investigation_on_violation,
+          :investigation_on_violation_details,
+          :impact_to_victim_details,
+          :impact_to_community_details,
+          categorizations_attributes: [:human_rights_violation_category_id],
+          perpetratorizations_attributes: [:perpetrator_category_id],
+        )
     end
   end
 end

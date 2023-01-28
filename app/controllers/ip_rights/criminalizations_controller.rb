@@ -7,6 +7,7 @@ module IpRights
     def new
       @case_detail     = CaseDetails::CaseDetail.find(params.fetch(:case_detail_id))
       @criminalization = @case_detail.criminalizations.build
+      @criminalization.accuserizations.build
     end
 
     def create
@@ -33,29 +34,29 @@ module IpRights
 
     def criminalization_params
       params.require(:criminalizations_criminalization)
-      .permit(
-        :criminalization_details,
-        :experienced_harrassment_or_intimidation,
-        :harrassment_or_intimidation_details,
-        :accusation_or_charges_details,
-        :policies_or_laws_used,
-        :accuser_details,
-        :case_filing_status,
-        :case_filing_details,
-        :case_decision_status,
-        :case_decision_details,
-        :victims_in_detention,
-        :victims_in_detention_details,
-        :case_filing_against_perpetrator,
-        :case_filing_against_perpetrator_details,
-        :state_action_to_address_criminalization,
-        :state_action_to_address_criminalization_details,
-        :investigation_on_criminalization,
-        :investigation_on_criminalization_details,
-        :impact_to_victim_details,
-        :impact_to_community_details,
-        criminalization_accuser_categories_attributes: []
-      )
+        .permit(
+          :criminalization_details,
+          :experienced_harrassment_or_intimidation,
+          :harrassment_or_intimidation_details,
+          :accusation_or_charges_details,
+          :policies_or_laws_used,
+          :accuser_details,
+          :case_filing_status,
+          :case_filing_details,
+          :case_decision_status,
+          :case_decision_details,
+          :victims_in_detention,
+          :victims_in_detention_details,
+          :case_filing_against_perpetrator,
+          :case_filing_against_perpetrator_details,
+          :state_action_to_address_criminalization,
+          :state_action_to_address_criminalization_details,
+          :investigation_on_criminalization,
+          :investigation_on_criminalization_details,
+          :impact_to_victim_details,
+          :impact_to_community_details,
+          accuserizations_attributes: [:accuser_category_id],
+        )
     end
   end
 end

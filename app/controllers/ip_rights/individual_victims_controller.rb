@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 module IpRights
-  class IndividualVictimsController < ApplicationController
+  class IndividualVictimsController < Documenters::BaseController
     layout "documenter"
 
     def new
@@ -33,9 +33,17 @@ module IpRights
 
     def individual_victim_params
       params.require(:case_details_victims_individual)
-      .permit(:gender, :full_name, :dependent_type, :ethnic_identity, :victim_role, :dependent_details,
-        :age_bracket_id, :date_of_birth_day, :date_of_birth_month, :date_of_birth_year)
-      .merge!(case_detail_id: @case_detail.id)
+        .permit(:gender,
+          :full_name,
+          :dependent_type,
+          :ethnic_identity,
+          :victim_role,
+          :dependent_details,
+          :age_bracket_id,
+          :date_of_birth_day,
+          :date_of_birth_month,
+          :date_of_birth_year)
+        .merge!(case_detail_id: @case_detail.id)
     end
   end
 end
