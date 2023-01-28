@@ -52,7 +52,8 @@ task deploy: :remote_environment do
     invoke :"deploy:cleanup"
 
     on :launch do
-      invoke :"puma:smart_restart"
+      invoke :"rbenv:load"
+      invoke :"puma:hard_restart"
     end
   end
 end
