@@ -248,9 +248,11 @@ ActiveRecord::Schema[7.0].define(version: 2022_10_15_093106) do
     t.string "first_name", null: false
     t.string "last_name", null: false
     t.string "phone_number"
+    t.uuid "country_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string "locale"
+    t.index ["country_id"], name: "index_documenters_on_country_id"
     t.index ["email"], name: "index_documenters_on_email", unique: true
   end
 
@@ -417,6 +419,7 @@ ActiveRecord::Schema[7.0].define(version: 2022_10_15_093106) do
   add_foreign_key "criminalization_accuserizations", "accuser_categories"
   add_foreign_key "criminalization_accuserizations", "criminalizations"
   add_foreign_key "criminalizations", "case_details"
+  add_foreign_key "documenters", "countries"
   add_foreign_key "human_rights_violation_categorizations", "human_rights_violation_categories"
   add_foreign_key "human_rights_violation_categorizations", "human_rights_violations"
   add_foreign_key "human_rights_violation_perpetratorizations", "human_rights_violation_perpetrator_categories", column: "perpetrator_category_id"

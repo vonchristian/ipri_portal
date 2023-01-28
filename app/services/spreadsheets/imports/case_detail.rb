@@ -43,9 +43,7 @@ module Spreadsheets
       end
 
       def primary_data(value)
-        return true if value.to_s.downcase == "yes"
-
-        false
+        value.to_s.downcase == "yes" ? true : false
       end
 
       def data_sharing(value)

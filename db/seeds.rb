@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # This file should contain all the record creation needed to seed the database with its default values.
 # The data can then be loaded with the bin/rails db:seed command (or created alongside the database with db:setup).
 #
@@ -23,7 +25,6 @@ Criminalizations::AccuserCategory.create!(title: "Guerilla armies officials")
 Criminalizations::AccuserCategory.create!(title: "National or local corporation")
 Criminalizations::AccuserCategory.create!(title: "Transnational corporation")
 
-
 Killings::PerpetratorCategory.create!(title: "National Level Government Official")
 Killings::PerpetratorCategory.create!(title: "Federal Level Government Official")
 Killings::PerpetratorCategory.create!(title: "Local Government Official")
@@ -47,7 +48,6 @@ HumanRightsViolations::Category.create!(title: "Physical injury/Beatings/Torture
 HumanRightsViolations::Category.create!(title: "Forced eviction")
 HumanRightsViolations::Category.create!(title: "Kidnapping")
 
-
 HumanRightsViolations::PerpetratorCategory.create!(title: "National Level Government Official")
 HumanRightsViolations::PerpetratorCategory.create!(title: "Federal Level Government Official")
 HumanRightsViolations::PerpetratorCategory.create!(title: "Local Government Official")
@@ -61,4 +61,4 @@ HumanRightsViolations::PerpetratorCategory.create!(title: "Guerilla armies offic
 HumanRightsViolations::PerpetratorCategory.create!(title: "National or local corporation")
 HumanRightsViolations::PerpetratorCategory.create!(title: "Transnational corporation")
 
-
+ISO3166::Country.all.collect(&:iso_short_name).each { |name| Country.create!(name: name) }

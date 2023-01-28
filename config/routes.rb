@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 Rails.application.routes.draw do
+  root "documenters/sessions#new"
   namespace :ip_rights do
     resources :case_details, only: [:show] do
       resources :data_sharings,           only: [:new, :create]
@@ -65,4 +66,6 @@ Rails.application.routes.draw do
 
     resources :documenter_details, only: [:new, :create]
   end
+
+  resources :case_details, only: [:edit, :update]
 end
