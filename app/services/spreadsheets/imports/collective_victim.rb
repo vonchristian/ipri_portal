@@ -15,7 +15,7 @@ module Spreadsheets
       def create_collective_victim
         collective_victim = Victims::CollectiveVictim.create!(
           case_detail_id:      case_detail_id,
-          affected_total:      case_data["Number of affected people"].gsub(",", ""),
+          affected_total:      case_data["Number of affected people"].to_s.gsub(",", ""),
           refer_to_individuals: refer_to_individuals?(case_data["Does the number of affected people refer to individuals"]),
           male_total:          case_data["Write the number of male from the total number of individuals affected:"].to_s.gsub(
             ",", ""

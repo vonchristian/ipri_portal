@@ -62,3 +62,10 @@ HumanRightsViolations::PerpetratorCategory.create!(title: "National or local cor
 HumanRightsViolations::PerpetratorCategory.create!(title: "Transnational corporation")
 
 ISO3166::Country.all.collect(&:iso_short_name).each { |name| Country.create!(name: name) }
+
+DevelopmentProjects::Category.create!(name: "Infrastructure")
+DevelopmentProjects::Category.create!(name: "Conservation")
+DevelopmentProjects::Category.create!(name: "Agribusiness")
+DevelopmentProjects::Category.create!(name: "Energy")
+DevelopmentProjects::Category.create!(name: "Mining")
+DevelopmentProjects::Category.create!(name: "Tourism")

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_10_15_093106) do
+ActiveRecord::Schema[7.0].define(version: 2023_02_13_023148) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
   enable_extension "plpgsql"
@@ -163,6 +163,7 @@ ActiveRecord::Schema[7.0].define(version: 2022_10_15_093106) do
     t.string "description"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.text "information_source"
     t.index ["country_id"], name: "index_companies_on_country_id"
   end
 
@@ -231,6 +232,16 @@ ActiveRecord::Schema[7.0].define(version: 2022_10_15_093106) do
     t.string "name"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+  end
+
+  create_table "development_project_categorizations", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.uuid "project_id", null: false
+    t.uuid "category_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["category_id"], name: "index_development_project_categorizations_on_category_id"
+    t.index ["project_id", "category_id"], name: "index_project_and_category_in_project_categorizations", unique: true
+    t.index ["project_id"], name: "index_development_project_categorizations_on_project_id"
   end
 
   create_table "development_projects", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
@@ -419,6 +430,8 @@ ActiveRecord::Schema[7.0].define(version: 2022_10_15_093106) do
   add_foreign_key "criminalization_accuserizations", "accuser_categories"
   add_foreign_key "criminalization_accuserizations", "criminalizations"
   add_foreign_key "criminalizations", "case_details"
+  add_foreign_key "development_project_categorizations", "development_project_categories", column: "category_id"
+  add_foreign_key "development_project_categorizations", "development_projects", column: "project_id"
   add_foreign_key "documenters", "countries"
   add_foreign_key "human_rights_violation_categorizations", "human_rights_violation_categories"
   add_foreign_key "human_rights_violation_categorizations", "human_rights_violations"
