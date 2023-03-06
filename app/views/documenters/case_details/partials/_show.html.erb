@@ -12,7 +12,7 @@
           <a href="/documenters/case_details/<%=@case_detail.id %>/human_rights_violations" class="<%= "inline-block p-4 text-blue-600 rounded-t-lg border-b-2 border-blue-600 active dark:text-blue-500 dark:border-blue-500" if current_page?(documenters_case_detail_human_rights_violations_path(@case_detail.id)) %>inline-block p-4 rounded-t-lg border-b-2 border-transparent hover:text-gray-600 hover:border-gray-300 dark:hover:text-gray-300">Human Rights Violations</a>
       </li>
       <li class="mr-2">
-          <a href="/documenters/case_details/<%=@case_detail.id %>/development_projects" class="<%= "inline-block p-4 text-blue-600 rounded-t-lg border-b-2 border-blue-600 active dark:text-blue-500 dark:border-blue-500" if current_page?(documenters_individual_victim_case_details_path(@case_detail.id)) %>inline-block p-4 rounded-t-lg border-b-2 border-transparent hover:text-gray-600 hover:border-gray-300 dark:hover:text-gray-300">Development Projects</a>
+          <a href="/documenters/case_details/<%=@case_detail.id %>/development_projects" class="<%= "inline-block p-4 text-blue-600 rounded-t-lg border-b-2 border-blue-600 active dark:text-blue-500 dark:border-blue-500" if current_page?(documenters_case_detail_development_projects_path(@case_detail.id)) %>inline-block p-4 rounded-t-lg border-b-2 border-transparent hover:text-gray-600 hover:border-gray-300 dark:hover:text-gray-300">Development Projects</a>
       </li>
     </ul>
 
@@ -25,4 +25,7 @@
 <% end %>
 <% if current_page?(documenters_case_detail_human_rights_violations_path(case_detail)) %>
   <%= render 'documenters/case_details/partials/human_rights_violations', case_detail: case_detail %>
+<% end %>
+<% if current_page?(documenters_case_detail_development_projects_path(case_detail)) %>
+  <%= render 'documenters/case_details/partials/development_projects', case_detail: case_detail %>
 <% end %>
