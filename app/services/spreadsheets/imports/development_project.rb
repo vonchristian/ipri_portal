@@ -29,7 +29,7 @@ module Spreadsheets
           associate_companies(development_project)
         end
 
-        if funding_sources.present?
+        if related_funding_sources.present?
           associate_funding_sources(development_project)
         end
 
@@ -59,6 +59,9 @@ module Spreadsheets
         if company.present?
           development_project.companies << company
         end
+      end
+
+      def associate_funding_sources(development_project)
       end
 
       def related_funding_sources

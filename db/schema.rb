@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_02_13_023148) do
+ActiveRecord::Schema[7.0].define(version: 2023_03_09_054657) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
   enable_extension "plpgsql"
@@ -158,7 +158,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_02_13_023148) do
   end
 
   create_table "companies", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
-    t.uuid "country_id", null: false
+    t.uuid "country_id"
     t.string "name"
     t.string "description"
     t.datetime "created_at", null: false
@@ -182,6 +182,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_02_13_023148) do
     t.integer "killings_count"
     t.integer "criminalizations_count"
     t.integer "other_violations_count"
+    t.boolean "priority", default: false
     t.index ["case_count"], name: "index_countries_on_case_count"
   end
 

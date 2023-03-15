@@ -1,5 +1,5 @@
 <div class="flex w-full mx-auto mt-4 justify-between">
-  <h2 class="font-bold text-l text-gray-900 mt-4">Criminalizations</h2>
+  <h2 class="font-bold text-l text-gray-900 mt-4">Human Rights Violations</h2>
 </div>
 <% @criminalizations.each do |criminalization| %>
   <div class="grid grid-cols-1 md:grid-cols-12">
@@ -58,19 +58,4 @@
   </div>
 
 <% end %>
- <div class="border-t border-gray-200 my-5"></div>
-<div class="flex w-full mx-auto mt-4 justify-between">
-  <h2 class="font-bold text-l text-gray-900 mt-4">Killings</h2>
-</div>
 
-<% @killings.each do |killing| %>
-  <div class="grid grid-cols-1 md:grid-cols-12">
-    <div class="col-span-3 ml-4 mt-2">
-      <p class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300"> Details </p>
-    </div>
-    <div class="col-span-1">
-    </div>
-    <div class="col-span-8 mt-2">
-      <p class="text-gray-500"> <%= killing.documenter_first_name %> </p>
-    </div>
-<% end %>

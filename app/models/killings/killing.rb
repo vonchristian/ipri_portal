@@ -11,5 +11,9 @@ module Killings
     def self.submitted_current_year
       joins(:case_detail).where("case_details.submission_date_year" => Date.current.year)
     end
+
+    def victim
+      case_detail.individual_victims.first
+    end
   end
 end

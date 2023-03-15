@@ -24,8 +24,8 @@
           <tbody>
 <% @countries.each do |country| %>
   <tr class="border-b">
-    <td scope="row" class="py-4 px-6 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-      <%= link_to country.name, country_path(country) %>
+    <td scope="row" class="py-4 px-6 font-medium whitespace-nowrap dark:text-white">
+      <span class="<%= 'fa fa-flag text-blue-600' if country.priority %>"></span> <%= link_to country.name, country_path(country) %>
     </td>
     <td scope="row" class="py-4 px-6 font-medium text-gray-900 whitespace-nowrap dark:text-white">
       <%= country.case_count %>
@@ -40,3 +40,8 @@
       <%= country.other_violations_count %>
     </td>
 <% end %>
+</tbody>
+</table>
+ <div class="mt-5">
+          <%== pagy_nav(@pagy) %>
+        </div>

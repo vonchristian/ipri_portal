@@ -53,7 +53,11 @@ Rails.application.routes.draw do
     end
   end
 
-  resources :countries, only: [:index, :show]
+  resources :countries, only: [:index, :show] do
+    resources :killings, only: [:index], controller: "countries/killings"
+  end
+
+  resources :killings, only: [:index]
 
   namespace :portal do
     resources :guests, only: [:create] do

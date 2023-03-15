@@ -3,7 +3,7 @@
 class CountriesController < Documenters::BaseController
   layout "documenter"
   def index
-    @countries = Country.all.order(case_count: :desc)
+    @pagy, @countries = pagy(Country.all.order(priority: :desc).order(case_count: :desc))
   end
 
   def show

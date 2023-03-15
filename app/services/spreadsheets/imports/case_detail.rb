@@ -16,10 +16,10 @@ module Spreadsheets
       def create_case_detail
         @case_detail = CaseDetails::CaseDetail.create!(
           reference_number: SecureRandom.uuid,
-          organization_name: case_data["Organization / Affiliation"],
-          submission_date_year: case_data["Submission Date"]&.split&.last,
-          submission_date_day: case_data["Submission Date"]&.split&.second,
-          submission_date_month: case_data["Submission Date"]&.split&.first,
+          organization_name: case_data["Organization / Affiliation"] || "No Organization",
+          submission_date_year: parse_submission_date(case_data["Submission Date"]).year,
+          submission_date_day: parse_submission_date(case_data["Submission Date"]).day,
+          submission_date_month: parse_submission_date(case_data["Submission Date"]).strftime("%B"),
           primary_data: primary_data(case_data["Is the documenter submitting this case factsheet as primary data?"]),
           data_sharing: data_sharing(case_data["As the documenter, I understand that Indigenous Peoples Rights International (IPRI) will record the information detailed in this case factsheet in its database. I am submitting this case factsheet with the following restrictions: (tick as preferred)"]),
           country: find_country(case_data["Country of incident"]),
@@ -59,6 +59,12 @@ module Spreadsheets
       def actions_taken_details(case_data)
         case_data["Please elaborate on any action/s at national level and indicate the actor who initiated the action/s."].presence ||
           case_data["If no, please provide more information on actions undertaken."]
+      end
+
+      def parse_submission_date(date)
+        puts "DATA: #{date}"
+
+        date.is_a?(String) ? Date.parse(date) : date
       end
     end
   end

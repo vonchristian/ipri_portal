@@ -7,6 +7,7 @@ class Country < ApplicationRecord
   has_many :human_rights_violations, class_name: "HumanRightsViolations::HumanRightsViolation", through: :case_details
 
   validates :name, presence: true, uniqueness: true
+  before_save :update_counts
 
   def self.with_top_cases(limit: 10)
     order(case_count: :desc).first(limit)
@@ -14,5 +15,14 @@ class Country < ApplicationRecord
 
   def cases_this_year
     case_details.submitted_current_year
+  end
+
+  private
+
+  def update_counts
+    self.case_count = case_details.size
+    self.killings_count = killings.size
+    self.criminalizations_count = criminalizations.size
+    self.other_violations_count = human_rights_violations.size
   end
 end
