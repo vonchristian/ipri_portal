@@ -36,7 +36,6 @@ gem "redis", "~> 4.0"
 # gem "kredis"
 
 # Use Active Model has_secure_password [https://guides.rubyonrails.org/active_model_basics.html#securepassword]
-gem "bcrypt", "~> 3.1.7"
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
 gem "tzinfo-data", platforms: %i[ mingw mswin x64_mingw jruby ]
@@ -59,10 +58,10 @@ group :development, :test do
   gem "pry-rails"
   gem "factory_bot_rails"
   gem "faker"
+  gem "rspec-rails"
 end
 
 group :development do
-  gem "rspec-rails"
   gem "rack-mini-profiler"
 end
 
@@ -81,3 +80,7 @@ gem "groupdate"
 gem "roo", "~> 2.9.0"
 gem 'active_interaction', '~> 5.1'
 gem "kt-paperclip", "~> 6.4", ">= 6.4.1"
+
+gem "pundit", "~> 2.3"
+gem 'activeadmin'
+gem 'devise'

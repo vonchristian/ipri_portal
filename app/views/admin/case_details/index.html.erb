@@ -18,47 +18,35 @@
             <button type="submit" class="text-white absolute right-2.5 bottom-2.5 bg-green-700 hover:bg-green-800 focus:ring-4 focus:outline-none focus:ring-green-800 font-medium rounded-lg text-sm px-4 py-2 dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-800">Search</button>
         </div>
       <% end %>
-<div class="grid grid-cols-4 gap-4">
-  <div class="col-span-1 bg-gray-50 mt-4">
-   <label for="countries" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Select an option</label>
-<select id="countries" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
-  <option selected>Choose a country</option>
-  <option value="US">United States</option>
-  <option value="CA">Canada</option>
-  <option value="FR">France</option>
-  <option value="DE">Germany</option>
-</select>
-  </div>
-  <div class="col-span-3">
-    <div class="overflow-x-auto sm:-mx-6 lg:-mx-8">
-      <div class="py-2 inline-block min-w-full sm:px-6 lg:px-8">
-        <div class="overflow-hidden">
-          <table class="mt-2 min-w-full">
-            <thead class="border-b bg-gray-50">
-              <tr>
-                <th scope="col" class="text-sm font-bold text-gray-900 px-6 py-4 text-left">
-                  Organization
-                </th>
-                <th scope="col" class="text-sm font-bold text-gray-900 px-6 py-4 text-left">
-                  Country
-                </th>
-                <th scope="col" class="text-sm font-bold text-gray-900 px-6 py-4 text-left">
-                  Location 1
-                </th>
-                <th scope="col" class="text-sm font-bold text-gray-900 px-6 py-4 text-left">
-                  Location 2
-                </th>
-                <th scope="col" class="text-sm font-bold text-gray-900 px-6 py-4 text-left">
-                  Data Sharing
-                </th>
-              </tr>
-            </thead>
-            <tbody>
-                <% @case_details.each do |case_detail| %>
-                  <%=render 'case_details/tables/row', case_detail: case_detail %>
-                <% end %>
-            </tbody>
-          </table>
-          <div class="mt-5">
-            <%== pagy_nav(@pagy) %>
-          </div>
+  <div class="overflow-x-auto sm:-mx-6 lg:-mx-8">
+    <div class="py-2 inline-block min-w-full sm:px-6 lg:px-8">
+      <div class="overflow-hidden">
+        <table class="mt-2 min-w-full">
+          <thead class="border-b bg-gray-50">
+            <tr>
+              <th scope="col" class="text-sm font-bold text-gray-900 px-6 py-4 text-left">
+                Organization
+              </th>
+              <th scope="col" class="text-sm font-bold text-gray-900 px-6 py-4 text-left">
+                Country
+              </th>
+              <th scope="col" class="text-sm font-bold text-gray-900 px-6 py-4 text-left">
+                Location 1
+              </th>
+              <th scope="col" class="text-sm font-bold text-gray-900 px-6 py-4 text-left">
+                Location 2
+              </th>
+              <th scope="col" class="text-sm font-bold text-gray-900 px-6 py-4 text-left">
+                Data Sharing
+              </th>
+            </tr>
+          </thead>
+          <tbody>
+              <% @case_details.each do |case_detail| %>
+                <%=render 'case_details/tables/row', case_detail: case_detail %>
+              <% end %>
+          </tbody>
+        </table>
+        <div class="mt-5">
+          <%== pagy_nav(@pagy) %>
+        </div>

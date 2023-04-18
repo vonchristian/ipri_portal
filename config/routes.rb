@@ -1,6 +1,9 @@
 # frozen_string_literal: true
 
 Rails.application.routes.draw do
+  devise_for :admin_users, ActiveAdmin::Devise.config
+  ActiveAdmin.routes(self)
+
   root "documenters/sessions#new"
   namespace :ip_rights do
     resources :case_details, only: [:show] do
@@ -30,6 +33,7 @@ Rails.application.routes.draw do
       resources :dashboard, only: [:index], controller: "/admin/case_factsheets/dashboard"
     end
     resources :killings, only: [:index]
+    resources :case_details, only: [:index, :show]
   end
 
   namespace :documenters do

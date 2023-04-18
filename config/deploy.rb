@@ -53,7 +53,7 @@ task deploy: :remote_environment do
 
     on :launch do
       invoke :"rbenv:load"
-      invoke :"puma:hard_restart"
+      # invoke :"puma:hard_restart"
     end
   end
 end

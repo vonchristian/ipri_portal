@@ -5,6 +5,7 @@ require "roo"
 module Spreadsheets
   class Import < ActiveInteraction::Base
     string :spreadsheet_path
+    string :documenter_id
 
     def execute
       data = Roo::Spreadsheet.open(spreadsheet_path)
@@ -42,7 +43,7 @@ module Spreadsheets
     end
 
     def create_case_detail(case_data)
-      Spreadsheets::Imports::CaseDetail.run(case_data: case_data).result
+      Spreadsheets::Imports::CaseDetail.run(case_data: case_data, documenter_id: documenter_id).result
     end
 
     def create_individual_victims(case_data)
@@ -90,7 +91,7 @@ module Spreadsheets
     def collective_victims?(case_data)
       value = case_data["Does the case involve individual/s or group/s of people (E.g., an entire village, members of an ethnic community, etc.)?"]
 
-      value.to_s == "Group of People - (Choose this category if the name/s of the victims are too many to identify and are not known, e.g., 100 of members of an entire indigenous community or an entire village etc)"
+      value.to_s.include?("Group of People")
     end
 
     def criminalizations_category?(value)
@@ -98,7 +99,7 @@ module Spreadsheets
     end
 
     def killings_category?(value)
-      value.to_s == "Killing"
+      value.to_s.include?("Killing")
     end
 
     def human_rights_violations_category?(value)

@@ -69,3 +69,4 @@ DevelopmentProjects::Category.create!(name: "Agribusiness")
 DevelopmentProjects::Category.create!(name: "Energy")
 DevelopmentProjects::Category.create!(name: "Mining")
 DevelopmentProjects::Category.create!(name: "Tourism")
+AdminUser.create!(email: 'admin@example.com', password: 'password', password_confirmation: 'password') if Rails.env.development?

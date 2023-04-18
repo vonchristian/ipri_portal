@@ -2,6 +2,8 @@
 
 class ApplicationController < ActionController::Base
   include Pagy::Backend
+  include Pundit::Authorization
+  rescue_from Pundit::NotAuthorizedError, with: :user_not_authorized
   helper_method :current_documenter
 
   around_action :switch_locale
@@ -17,11 +19,19 @@ class ApplicationController < ActionController::Base
     end
   end
 
+  def current_user
+    current_documenter
+  end
+
   def logged_in?
     !!current_documenter
   end
 
   def authenticate_documenter!
     redirect_to documenters_login_path unless logged_in?
+  end
+
+  def user_not_authorized
+    redirect_to '/', notice: 'Not authorized to access this page'
   end
 end
