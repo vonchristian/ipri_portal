@@ -44,7 +44,7 @@ gem "tzinfo-data", platforms: %i[ mingw mswin x64_mingw jruby ]
 gem "bootsnap", require: false
 gem 'pg_search'
 # Use Sass to process CSS
-# gem "sassc-rails"
+gem "sassc-rails"
 gem 'rubocop', require: false
 gem 'rubocop-rails', require: false
 gem 'rubocop-rspec', require: false

@@ -435,6 +435,7 @@ DEPENDENCIES
   rubocop-rails
   rubocop-rspec
   rubocop-shopify
+  sassc-rails
   shoulda-matchers
   simple_form
   sprockets-rails
