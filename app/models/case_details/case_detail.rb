@@ -3,9 +3,17 @@
 module CaseDetails
   class CaseDetail < ApplicationRecord
     include PgSearch::Model
+    acts_as_taggable
+    acts_as_taggable_on :tags
     pg_search_scope :text_search,
-      against: [:organization_name, :subnational_location, :location_details_1, :location_details_2,
-                :impact_to_victim_details, :impact_to_community_details,],
+      against: [
+        :organization_name,
+        :subnational_location,
+        :location_details_1,
+        :location_details_2,
+        :impact_to_victim_details,
+        :impact_to_community_details,
+      ],
       associated_against: { country: [:name] },
       using: { tsearch: { prefix: true } }
 

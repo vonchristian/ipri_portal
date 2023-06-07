@@ -4,8 +4,9 @@ module Documenters
   class CaseDetailsController < BaseController
     def index
       outcome = ::CaseDetails::Index.run(documenter: current_documenter, search: params[:search])
-
-      @pagy, @case_details = pagy(outcome.result)
+      if outcome.valid?
+        @pagy, @case_details = pagy(outcome.result)
+      end
     end
 
     def show
