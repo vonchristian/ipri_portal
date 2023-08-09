@@ -82,7 +82,7 @@ gem 'active_interaction', '~> 5.1'
 gem "kt-paperclip", "~> 6.4", ">= 6.4.1"
 
 gem "pundit", "~> 2.3"
-gem 'activeadmin'
+gem 'activeadmin', '2.13.1'
 gem 'devise'
 gem 'acts-as-taggable-on', '~> 9.0'
 gem 'activeadmin_addons'
