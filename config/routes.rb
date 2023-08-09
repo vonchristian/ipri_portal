@@ -62,6 +62,8 @@ Rails.application.routes.draw do
   end
 
   resources :killings, only: [:index]
+  resources :criminalizations, only: [:index]
+  resources :human_rights_violations, only: [:index]
 
   namespace :portal do
     resources :guests, only: [:create] do

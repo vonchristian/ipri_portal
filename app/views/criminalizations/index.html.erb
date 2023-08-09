@@ -1,0 +1,37 @@
+<header>
+  <div class="grid grid-cols-4 gap-1 mt-6 mb-5">
+    <div class="col-span-3">
+      <h1 class="text-2xl font-bold text-gray-900"> Criminalizations </h1>
+    </div>
+  </div>
+</header>
+ <%= form_tag criminalizations_path, method: :get do %>
+        <div class="relative">
+          <div class="flex absolute inset-y-0 left-0 items-center pl-3 pointer-events-none">
+              <svg aria-hidden="true" class="w-5 h-5 text-gray-500 dark:text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path></svg>
+          </div>
+          <%= text_field_tag :search, params[:search], class: "block p-4 pl-10 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-green-700 focus:border-green-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-green-500 dark:focus:border-green-700", placeholder: "Search", type: "search" %>
+            <button type="submit" class="text-white absolute right-2.5 bottom-2.5 bg-green-700 hover:bg-green-800 focus:ring-4 focus:outline-none focus:ring-green-800 font-medium rounded-lg text-sm px-4 py-2 dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-800">Search</button>
+        </div>
+      <% end %>
+  <div class="overflow-x-auto sm:-mx-6 lg:-mx-8">
+    <div class="py-2 inline-block min-w-full sm:px-6 lg:px-8">
+      <div class="overflow-hidden">
+        <table class="mt-2 min-w-full">
+          <thead class="border-b bg-gray-50">
+            <tr>
+              <th scope="col" class="text-sm font-bold text-gray-900 px-6 py-4 text-left">
+                Details
+              </th>
+
+            </tr>
+          </thead>
+          <tbody>
+              <% @criminalizations.each do |criminalization| %>
+                <%= turbo_frame_tag criminalization do %>
+                  <%=render 'criminalizations/partials/tables/row', criminalization: criminalization %>
+                <% end %>
+              <% end %>
+          </tbody>
+        </table>
+        <%== pagy_nav(@pagy) %>
