@@ -24,19 +24,19 @@
           <tbody>
 <% @countries.each do |country| %>
   <tr class="border-b">
-    <td scope="row" class="py-4 px-6 font-medium whitespace-nowrap dark:text-white">
+    <td scope="row" class="py-4 px-6 font-medium whitespace-nowrap">
       <span class="<%= 'fa fa-flag text-blue-600' if country.priority %>"></span> <%= link_to country.name, country_path(country) %>
     </td>
-    <td scope="row" class="py-4 px-6 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+    <td scope="row" class="py-4 px-6 font-medium text-gray-900 whitespace-nowrap">
       <%= country.case_count %>
     </td>
-    <td scope="row" class="py-4 px-6 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+    <td scope="row" class="py-4 px-6 font-medium text-gray-900 whitespace-nowrap">
       <%= country.killings_count %>
     </td>
-    <td scope="row" class="py-4 px-6 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+    <td scope="row" class="py-4 px-6 font-medium text-gray-900 whitespace-nowrap">
       <%= country.criminalizations_count %>
     </td>
-    <td scope="row" class="py-4 px-6 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+    <td scope="row" class="py-4 px-6 font-medium text-gray-900 whitespace-nowrap">
       <%= country.other_violations_count %>
     </td>
 <% end %>

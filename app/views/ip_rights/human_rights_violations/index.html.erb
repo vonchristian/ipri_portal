@@ -35,16 +35,16 @@
     <tbody>
       <% @case_detail.killings.each do |killing| %>
         <tr class="border-b">
-          <td scope="row" class="py-4 px-6 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+          <td scope="row" class="py-4 px-6 font-medium text-gray-900 whitespace-nowrap">
             <%= killing.killing_details %>
           </td>
-          <td scope="row" class="py-4 px-6 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+          <td scope="row" class="py-4 px-6 font-medium text-gray-900 whitespace-nowrap">
             <%= killing.killing_carried_out %>
           </td>
-          <td scope="row" class="py-4 px-6 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+          <td scope="row" class="py-4 px-6 font-medium text-gray-900 whitespace-nowrap">
             <%= killing.perpetrator_categories.pluck(:title).join(",") %>
           </td>
-          <td scope="row" class="py-4 px-6 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+          <td scope="row" class="py-4 px-6 font-medium text-gray-900 whitespace-nowrap">
             <%= killing.case_filing_status %>
           </td>
         </tr>

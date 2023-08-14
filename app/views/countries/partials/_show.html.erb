@@ -1,13 +1,13 @@
 <div class="md:col-span-6 mt-6 ml-2">
             <h2 class="font-bold text-xl text-gray-900"><%= country.name.upcase %></h2>
             <div>
-<div class="text-sm font-medium text-center text-gray-500 border-b border-gray-200 dark:text-gray-400 dark:border-gray-700">
+<div class="text-sm font-medium text-center text-gray-500 border-b border-gray-200">
     <ul class="flex flex-wrap -mb-px">
        <li class="mr-2">
-          <a href="/countries/<%=country.id %>" class="<%= "inline-block p-4 text-blue-600 rounded-t-lg border-b-2 border-blue-600 active dark:text-blue-500 dark:border-blue-500" if current_page?(country_path(country.id)) %> inline-block p-4 rounded-t-lg border-b-2 border-transparent hover:text-gray-600 hover:border-gray-300 dark:hover:text-gray-300">Cases</a>
+          <a href="/countries/<%=country.id %>" class="<%= "inline-block p-4 text-blue-600 rounded-t-lg border-b-2 border-blue-600 active" if current_page?(country_path(country.id)) %> inline-block p-4 rounded-t-lg border-b-2 border-transparent hover:text-gray-600 hover:border-gray-300">Cases</a>
       </li>
       <li class="mr-2">
-          <a href="/countries/<%=country.id %>/killings" class="<%= "inline-block p-4 text-blue-600 rounded-t-lg border-b-2 border-blue-600 active dark:text-blue-500 dark:border-blue-500" if current_page?(country_killings_path(country.id)) %> inline-block p-4 rounded-t-lg border-b-2 border-transparent hover:text-gray-600 hover:border-gray-300 dark:hover:text-gray-300">Killings</a>
+          <a href="/countries/<%=country.id %>/killings" class="<%= "inline-block p-4 text-blue-600 rounded-t-lg border-b-2 border-blue-600 active" if current_page?(country_killings_path(country.id)) %> inline-block p-4 rounded-t-lg border-b-2 border-transparent hover:text-gray-600 hover:border-gray-300">Killings</a>
       </li>
     </ul>
   </div>

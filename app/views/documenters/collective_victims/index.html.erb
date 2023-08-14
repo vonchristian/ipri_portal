@@ -5,8 +5,8 @@
   </header>
 <div class="border-t border-gray-200 mb-5"></div>
 <div class="overflow-x-auto relative shadow-md sm:rounded-lg">
-    <table class="w-full text-sm text-left text-gray-500 dark:text-gray-400">
-        <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
+    <table class="w-full text-sm text-left text-gray-500">
+        <thead class="text-xs text-gray-700 uppercase bg-gray-50">
         <tr>
         <th scope="col" class="py-3 px-6">
             Total Affected
@@ -27,8 +27,8 @@
         </thead>
         <tbody>
           <% @victims.each do |victim| %>
-            <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
-                <td scope="row" class="py-4 px-6 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+            <tr class="bg-white border-b hover:bg-gray-50">
+                <td scope="row" class="py-4 px-6 font-medium text-gray-900 whitespace-nowrap">
                   <%= link_to victim.affected_total, documenters_collective_victim_path(victim.id) %>
                 </td>
                 <td class="py-4 px-6">

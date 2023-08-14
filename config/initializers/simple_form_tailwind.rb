@@ -78,7 +78,7 @@ SimpleForm.setup do |config|
     end
 
     b.use(:input,
-      class: "mb-2 mt-2  w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600", error_class: "text-red-700", valid_class: "text-green-400")
+      class: "mb-2 mt-2  w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500focus:ring-2", error_class: "text-red-700", valid_class: "text-green-400")
     b.use(:error, wrap_with: { tag: "p", class: "block mt-2 text-red-700 text-xs italic" })
     b.use(:hint, wrap_with: { tag: "p", class: "mt-2 text-grey-700 text-xs italic" })
   end
