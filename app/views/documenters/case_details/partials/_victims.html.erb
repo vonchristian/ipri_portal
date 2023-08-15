@@ -1,6 +1,7 @@
 <header>
-  <div class="max-w-7xl py-6">
+  <div class="flex justify-between p-5">
     <h1 class="text-l font-bold text-gray-900">Individual Victims</h1>
+    <%= link_to 'Add Victim', new_documenters_case_detail_individual_victim_path(case_detail), class: "inline-flex py-2 px-2 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-green-600 hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500" %>
   </div>
 </header>
 <div class="overflow-x-auto relative shadow-md sm:rounded-lg">
@@ -29,8 +30,8 @@
     </thead>
     <tbody>
       <% case_detail.individual_victims.each do |individual_victim| %>
-        <tr class="bg-white border-b">
-            <td scope="row" class="py-4 px-6 font-medium text-gray-900 whitespace-nowrap">
+        <tr class="border-b">
+            <td scope="row" class="text-blue-600 py-4 px-6 font-medium whitespace-nowrap">
               <%= link_to individual_victim.full_name, documenters_individual_victim_path(individual_victim.id) %>
             </td>
             <td class="py-4 px-6">
@@ -45,7 +46,7 @@
             <td class="py-4 px-6">
               <%= individual_victim.ethnic_identity %>
             </td>
-              <td class="py-4 px-6">
+            <td class="py-4 px-6">
               <%= individual_victim.date_of_birth %>
             </td>
         </tr>

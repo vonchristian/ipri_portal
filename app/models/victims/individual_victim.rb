@@ -7,6 +7,8 @@ module Victims
 
     delegate :range_name, to: :age_bracket, prefix: true
 
+    validates :full_name, presence: true
+
     enum gender: {
       male: "male",
       female: "female",
