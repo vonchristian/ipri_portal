@@ -1,0 +1,55 @@
+<div class="flex justify-between p-5">
+            <h2 class="font-bold text-xl text-gray-900"><%= @collective_victim.affected_total %></h2>
+<%= link_to 'Edit Details', edit_documenters_collective_victim_path(@collective_victim), class: "inline-flex py-2 px-2 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-yellow-600 hover:bg-yellow-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-yellow-500" %>
+</div>
+<div class="flex w-full mx-auto mt-4 justify-between">
+  <h2 class="font-bold text-l text-gray-900 mt-4">Collective Victim Details</h2>
+  <%#= link_to "Edit", new_ip_rights_documenter_detail_path, class: "mr-4 text-gray-900 bg-white border border-gray-300 focus:outline-none hover:bg-gray-100 focus:ring-4 focus:ring-gray-200 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2" %>
+</div>
+  <div class="grid grid-cols-1 md:grid-cols-12">
+    <div class="col-span-3 ml-4 mt-2">
+      <p class="block mb-2 text-sm font-medium text-gray-900"> Affected Total </p>
+    </div>
+    <div class="col-span-1">
+    </div>
+    <div class="col-span-8 mt-2">
+      <p class="text-gray-500"> <%= @collective_victim.affected_total %> </p>
+    </div>
+
+    <div class="col-span-3 ml-4 mt-2">
+      <p class="block mb-2 text-sm font-medium text-gray-900"> Victim Details </p>
+    </div>
+    <div class="col-span-1">
+    </div>
+    <div class="col-span-8 mt-2">
+      <p class="text-gray-500"> <%= @collective_victim.victim_details %> </p>
+    </div>
+
+    <div class="col-span-3 ml-4 mt-2">
+      <p class="block mb-2 text-sm font-medium text-gray-900"> Refer to Individuals </p>
+    </div>
+    <div class="col-span-1">
+    </div>
+    <div class="col-span-8 mt-2">
+      <p class="text-gray-500"> <%= @collective_victim.refer_to_individuals %> </p>
+    </div>
+
+    <div class="col-span-3 ml-4 mt-2">
+      <p class="block mb-2 text-sm font-medium text-gray-900"> Male Total </p>
+    </div>
+    <div class="col-span-1">
+    </div>
+    <div class="col-span-8 mt-2">
+      <p class="text-gray-500"> <%= @collective_victim.male_total %> </p>
+    </div>
+     <div class="col-span-3 ml-4 mt-2">
+      <p class="block mb-2 text-sm font-medium text-gray-900"> Female Total </p>
+    </div>
+    <div class="col-span-1">
+    </div>
+    <div class="col-span-8 mt-2">
+      <p class="text-gray-500"> <%= @collective_victim.female_total %> </p>
+    </div>
+  </div>
+<div class="border-t border-gray-200 my-4"></div>
+

@@ -18,7 +18,7 @@ module Documenters
 
           respond_to do |format|
             format.html do
-              redirect_to ip_rights_case_detail_victims_url(@case_detail)
+              redirect_to documenters_case_detail_victims_url(@case_detail)
             end
           end
         else

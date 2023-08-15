@@ -55,8 +55,9 @@
   </table>
 </div>
 <header>
-  <div class="max-w-7xl py-6">
+  <div class="flex justify-between p-5">
     <h1 class="text-l font-bold text-gray-900">Collective Victims</h1>
+    <%= link_to 'Add Victim', new_documenters_case_detail_collective_victim_path(case_detail), class: "inline-flex py-2 px-2 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-green-600 hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500" %>
   </div>
 </header>
 <div class="overflow-x-auto relative shadow-md sm:rounded-lg">
@@ -64,7 +65,7 @@
     <thead class="text-xs text-gray-700 uppercase bg-gray-50">
       <tr>
         <th scope="col" class="py-3 px-6">
-            Affected Total
+            Number of Affected People
         </th>
             <th scope="col" class="py-3 px-6">
             Male Total
@@ -80,14 +81,14 @@
     <tbody>
       <% case_detail.collective_victims.each do |collective_victim| %>
         <tr class="bg-white border-b hover:bg-gray-50">
-            <td scope="row" class="py-4 px-6 font-medium text-gray-900 whitespace-nowrap">
+            <td scope="row" class="py-4 px-6 font-medium text-blue-600 whitespace-nowrap">
               <%= link_to collective_victim.affected_total, documenters_collective_victim_path(collective_victim.id) %>
             </td>
             <td class="py-4 px-6">
-              <%= collective_victim.male_total %>
+              <%= collective_victim.male_total || '-' %>
             </td>
             <td class="py-4 px-6">
-              <%= collective_victim.female_total %>
+              <%= collective_victim.female_total || '-' %>
             </td>
             <td class="py-4 px-6">
               <%= collective_victim.victim_details %>
