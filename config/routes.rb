@@ -22,20 +22,6 @@ Rails.application.routes.draw do
     resources :documenter_details, only: [:new, :create]
   end
 
-  namespace :admin do
-    get "/login", to: "sessions#new"
-    post "/sessions", to: "sessions#create"
-    delete "/sessions", to: "sessions#destroy"
-    resources :dashboard, only: [:index]
-    resources :documenters, only: [:index, :show, :new, :create]
-    resources :admin_users, only: [:index, :show, :new, :create]
-    namespace :case_factsheets do
-      resources :dashboard, only: [:index], controller: "/admin/case_factsheets/dashboard"
-    end
-    resources :killings, only: [:index]
-    resources :case_details, only: [:index, :show]
-  end
-
   namespace :documenters do
     resources :case_imports, only: [:new, :create]
     resources :documenter, only: [] do
