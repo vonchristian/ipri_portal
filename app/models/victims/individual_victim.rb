@@ -23,7 +23,10 @@ module Victims
     }
 
     def date_of_birth
-      "#{date_of_birth_month}/#{date_of_birth_day}/#{date_of_birth_year}"
+      return if date_of_birth_month.blank? || date_of_birth_day.blank? || date_of_birth_year.blank?
+
+      [date_of_birth_month, date_of_birth_day, date_of_birth_year].join("/")
+      # "#{date_of_birth_month}/#{date_of_birth_day}/#{date_of_birth_year}"
     end
   end
 end

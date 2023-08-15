@@ -127,3 +127,5 @@ Style/MultilineBlockChain:
 
 Style/ClassMethodsDefinitions:
   Enabled: false
+Style/TrailingCommaInHashLiteral:
+  Enabled: false

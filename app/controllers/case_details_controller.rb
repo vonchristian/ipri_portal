@@ -35,6 +35,20 @@ class CaseDetailsController < Documenters::BaseController
         :documenter_email,
         :documenter_phone_number,
         :data_sources,
+        :data_sharing,
+        :primary_data,
+        :country_id,
+        :subnational_location,
+        :location_details_1,
+        :location_details_2,
+        :incident_start_month,
+        :incident_start_day,
+        :incident_start_year,
+        :incident_end_month,
+        :incident_end_day,
+        :incident_end_year,
+        :incident_hour,
+        :incident_minute
       )
   end
 end
