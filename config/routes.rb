@@ -65,18 +65,5 @@ Rails.application.routes.draw do
   resources :criminalizations, only: [:index]
   resources :human_rights_violations, only: [:index]
 
-  namespace :portal do
-    resources :guests, only: [:create] do
-      resource :locale, controller: "guests/locale"
-    end
-    resources :case_details, only: [:show] do
-      resources :data_sharings, only: [:new, :create]
-      resources :incident_details, only: [:new, :create]
-      resources :victims, only: [:index]
-    end
-
-    resources :documenter_details, only: [:new, :create]
-  end
-
   resources :case_details, only: [:edit, :update]
 end
