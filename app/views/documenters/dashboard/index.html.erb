@@ -6,7 +6,7 @@
   <div class="border-t border-gray-200 mb-5"></div>
   <div>
     <a href="/documenters/case_details" class="mb-4 flex flex-col items-center bg-white rounded-lg border shadow-md md:flex-row md:max-w-xl hover:bg-gray-100">
-              <h1 class="text-5xl font-bold text-red-700 my-5 mx-8"><%= CaseDetails::CaseDetail.all.size %></h1>
+              <h1 class="text-5xl font-bold text-red-700 my-5 mx-8"><%= @cases_count %></h1>
         <div class="flex flex-col justify-between p-4 leading-normal">
             <h5 class="mb-2 text-1xl font-bold tracking-tight text-gray-900">Total Cases</h5>
             <p class="mb-3 text-sm text-gray-700"> <%= Criminalizations::Criminalization.submitted_current_year.size %> Submitted this year</p>
@@ -15,8 +15,8 @@
   </div>
   <div class="grid grid-cols-3 gap-4">
   <div>
-    <a href="#" class="flex flex-col items-center bg-white rounded-lg border shadow-md md:flex-row md:max-w-xl hover:bg-gray-100">
-              <h1 class="text-5xl font-bold text-gray-900 my-5 mx-8"><%= Criminalizations::Criminalization.all.size %></h1>
+    <a href="/criminalizations" class="flex flex-col items-center bg-white rounded-lg border shadow-md md:flex-row md:max-w-xl hover:bg-gray-100">
+              <h1 class="text-5xl font-bold text-gray-900 my-5 mx-8"><%= @criminalizations_count %></h1>
         <div class="flex flex-col justify-between p-4 leading-normal">
             <h5 class="mb-2 text-1xl font-bold tracking-tight text-gray-900">Criminalizations</h5>
             <p class="mb-3 text-sm text-gray-700"> <%= Criminalizations::Criminalization.submitted_current_year.size %> Submitted this year</p>
@@ -25,8 +25,8 @@
   </div>
 
   <div>
-    <a href="#" class="flex flex-col items-center bg-white rounded-lg border shadow-md md:flex-row md:max-w-xl hover:bg-gray-100">
-              <h1 class="text-5xl font-bold text-gray-900 my-5 mx-8"><%= Killings::Killing.all.size %></h1>
+    <a href="/killings" class="flex flex-col items-center bg-white rounded-lg border shadow-md md:flex-row md:max-w-xl hover:bg-gray-100">
+              <h1 class="text-5xl font-bold text-gray-900 my-5 mx-8"><%= @killings_count %></h1>
         <div class="flex flex-col justify-between p-4 leading-normal">
             <h5 class="mb-2 text-1xl font-bold tracking-tight text-gray-900">Killings</h5>
             <p class="mb-3 text-sm font-normal text-gray-700"> <%= Killings::Killing.submitted_current_year.size %> Submitted this year</p>
@@ -35,8 +35,8 @@
   </div>
 
   <div>
-    <a href="#" class="flex flex-col items-center bg-white rounded-lg border shadow-md md:flex-row md:max-w-xl hover:bg-gray-100">
-              <h1 class="text-5xl font-bold text-gray-900 my-5 mx-8"><%= HumanRightsViolations::HumanRightsViolation.all.size %></h1>
+    <a href="/human_rights_violations" class="flex flex-col items-center bg-white rounded-lg border shadow-md md:flex-row md:max-w-xl hover:bg-gray-100">
+              <h1 class="text-5xl font-bold text-gray-900 my-5 mx-8"><%=  @human_rights_violations_count %></h1>
         <div class="flex flex-col justify-between p-4 leading-normal">
             <h5 class="mb-2 text-1xl font-bold tracking-tight text-gray-900">Other Human Rights Violations</h5>
             <p class="mb-3 text-sm font-normal text-gray-700"> <%= HumanRightsViolations::HumanRightsViolation.submitted_current_year.size %> Submitted this year</p>
@@ -44,5 +44,5 @@
     </a>
   </div>
 </div>
-    <div class="border-t border-gray-200 mt-4 mb-4"></div>
+<div class="border-t border-gray-200 mt-4 mb-4 mt-4"></div>
  <%= geo_chart CaseDetails::CaseDetail.joins(:country).group('countries.name').count, width: 200, height: 50, label: 'Cases', options: {background_color: '#548999'} %>

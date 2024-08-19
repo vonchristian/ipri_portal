@@ -1,6 +1,10 @@
 # frozen_string_literal: true
 
 class Country < ApplicationRecord
+  include PgSearch::Model
+
+  pg_search_scope :text_search, against: [:name], using: { tsearch: { prefix: true } }
+
   has_many :case_details, class_name: "CaseDetails::CaseDetail"
   has_many :killings, class_name: "Killings::Killing", through: :case_details
   has_many :criminalizations, class_name: "Criminalizations::Criminalization", through: :case_details

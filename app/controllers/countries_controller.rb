@@ -3,9 +3,12 @@
 class CountriesController < Documenters::BaseController
   layout "documenter"
   def index
-    authorize Country
-
-    @pagy, @countries = pagy(Country.all.order(priority: :desc).order(case_count: :desc))
+    authorize(Country)
+    if params[:search].present?
+      @pagy, @countries = pagy(Country.text_search(params[:search]))
+    else
+      @pagy, @countries = pagy(Country.all.order(name: :asc))
+    end
   end
 
   def show
