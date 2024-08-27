@@ -32,6 +32,6 @@ class ApplicationController < ActionController::Base
   end
 
   def user_not_authorized
-    redirect_to '/', notice: 'Not authorized to access this page'
+    redirect_to "/", notice: "Not authorized to access this page"
   end
 end

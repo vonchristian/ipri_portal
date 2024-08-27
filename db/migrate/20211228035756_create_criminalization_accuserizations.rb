@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class CreateCriminalizationAccuserizations < ActiveRecord::Migration[7.0]
   def change
     create_table :criminalization_accuserizations, id: :uuid do |t|

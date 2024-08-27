@@ -11,6 +11,6 @@ module Users
 
     validates :email, :first_name, :last_name, presence: true
 
-    has_many :case_details, class_name: "CaseDetails::CaseDetail", foreign_key: 'documenter_id'
+    has_many :case_details, class_name: "CaseDetails::CaseDetail", dependent: :nullify
   end
 end

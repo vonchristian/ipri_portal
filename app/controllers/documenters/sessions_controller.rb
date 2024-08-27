@@ -36,7 +36,7 @@ module Documenters
 
     def session_params
       params.require(:documenters_session)
-      .permit(:email, :password)
+        .permit(:email, :password)
     end
   end
 end

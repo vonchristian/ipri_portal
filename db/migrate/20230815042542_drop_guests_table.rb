@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class DropGuestsTable < ActiveRecord::Migration[7.0]
   def up
     drop_table :guests

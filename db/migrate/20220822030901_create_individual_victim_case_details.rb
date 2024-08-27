@@ -3,7 +3,10 @@
 class CreateIndividualVictimCaseDetails < ActiveRecord::Migration[7.0]
   def change
     create_table :individual_victim_case_details, id: :uuid do |t|
-      t.belongs_to :victim, null: false, foreign_key: { to_table: :individual_victims }, type: :uuid,
+      t.belongs_to :victim,
+        null: false,
+        foreign_key: { to_table: :individual_victims },
+        type: :uuid,
         index: { name: "index_victim_on_individual_victim_details" }
       t.belongs_to :case_detail, null: false, foreign_key: true, type: :uuid
 

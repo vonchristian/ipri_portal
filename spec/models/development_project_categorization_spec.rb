@@ -1,5 +1,7 @@
-require 'rails_helper'
+# frozen_string_literal: true
 
-RSpec.describe DevelopmentProjectCategorization, type: :model do
+require "rails_helper"
+
+RSpec.describe DevelopmentProjectCategorization do
   pending "add some examples to (or delete) #{__FILE__}"
 end

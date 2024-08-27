@@ -129,3 +129,5 @@ Style/ClassMethodsDefinitions:
   Enabled: false
 Style/TrailingCommaInHashLiteral:
   Enabled: false
+Layout/LineLength:
+  Enabled: false

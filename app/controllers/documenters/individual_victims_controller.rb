@@ -30,16 +30,16 @@ module Documenters
 
     def individual_victim_params
       params.require(:victims_individual_victim)
-          .permit(:gender,
-            :full_name,
-            :dependent_type,
-            :ethnic_identity,
-            :victim_role,
-            :dependent_details,
-            :age_bracket_id,
-            :date_of_birth_day,
-            :date_of_birth_month,
-            :date_of_birth_year)
+        .permit(:gender,
+          :full_name,
+          :dependent_type,
+          :ethnic_identity,
+          :victim_role,
+          :dependent_details,
+          :age_bracket_id,
+          :date_of_birth_day,
+          :date_of_birth_month,
+          :date_of_birth_year)
     end
   end
 end

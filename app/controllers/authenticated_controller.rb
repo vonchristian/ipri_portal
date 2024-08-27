@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-class AuthenticatedController < ActionController::Base
+class AuthenticatedController < ApplicationController
   before_action :authenticate_documenter!
 
   def logged_in?

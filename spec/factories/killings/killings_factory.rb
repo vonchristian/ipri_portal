@@ -2,6 +2,6 @@
 
 FactoryBot.define do
   factory :killing, class: "Killings::Killing" do
-    association :case_detail
+    case_detail
   end
 end

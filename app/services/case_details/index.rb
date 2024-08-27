@@ -9,7 +9,7 @@ module CaseDetails
     def execute
       @case_details = case_details.text_search(search) if search.present?
 
-      case_details
+      case_details.order(submission_date_year: :desc, submission_date_month: :desc, submission_date_day: :desc)
     end
 
     private

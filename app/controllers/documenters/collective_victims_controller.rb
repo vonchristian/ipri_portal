@@ -30,12 +30,12 @@ module Documenters
 
     def victim_params
       params.require(:victims_collective_victim)
-          .permit(:affected_total,
-            :refer_to_individuals,
-            :victim_details,
-            :male_total,
-            :female_total,
-            age_bracket_breakdowns: [])
-          end
+        .permit(:affected_total,
+          :refer_to_individuals,
+          :victim_details,
+          :male_total,
+          :female_total,
+          age_bracket_breakdowns: [])
+    end
   end
 end

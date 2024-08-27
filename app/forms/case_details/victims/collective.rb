@@ -5,7 +5,14 @@ module CaseDetails
     class Collective
       include ActiveModel::Model
 
-      attr_accessor :case_detail_id, :affected_total, :refer_to_individuals, :victim_details, :male_total, :female_total, :age_bracket_breakdowns
+      attr_accessor :case_detail_id,
+        :affected_total,
+        :refer_to_individuals,
+        :victim_details,
+        :male_total,
+        :female_total,
+        :age_bracket_breakdowns
+
       validates :affected_total, presence: true
 
       def process!
@@ -23,14 +30,14 @@ module CaseDetails
           refer_to_individuals: refer_to_individuals,
           victim_details: victim_details,
           male_total: male_total,
-          female_total: female_total
+          female_total: female_total,
         )
 
         if age_bracket_breakdowns.present?
           age_bracket_breakdowns.each do |age_bracket_breakdown|
             collective_victim.age_bracket_breakdowns.create!(
               age_bracket_id: age_bracket_breakdown.age_bracket_id,
-              total: age_bracket_breakdown.total
+              total: age_bracket_breakdown.total,
             )
           end
         end

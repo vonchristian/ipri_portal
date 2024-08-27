@@ -24,25 +24,7 @@
       <div class="py-2 inline-block min-w-full sm:px-6 lg:px-8">
         <div class="overflow-hidden">
           <table class="mt-2 min-w-full">
-            <thead class="border-b bg-gray-50">
-              <tr>
-                <th scope="col" class="text-sm font-bold text-gray-900 px-6 py-4 text-left">
-                  Organization
-                </th>
-                <th scope="col" class="text-sm font-bold text-gray-900 px-6 py-4 text-left">
-                  Country
-                </th>
-                <th scope="col" class="text-sm font-bold text-gray-900 px-6 py-4 text-left">
-                  Location 1
-                </th>
-                <th scope="col" class="text-sm font-bold text-gray-900 px-6 py-4 text-left">
-                  Location 2
-                </th>
-                <th scope="col" class="text-sm font-bold text-gray-900 px-6 py-4 text-left">
-                  Data Sharing
-                </th>
-              </tr>
-            </thead>
+           <%= render 'case_details/tables/headers' %>
             <tbody>
                 <% @case_details.each do |case_detail| %>
                   <%=render 'case_details/tables/row', case_detail: case_detail %>

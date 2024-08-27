@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class CreateHumanRightsViolations < ActiveRecord::Migration[7.0]
   def change
     create_table :human_rights_violations, id: :uuid do |t|
@@ -18,7 +20,9 @@ class CreateHumanRightsViolations < ActiveRecord::Migration[7.0]
     end
     add_index :human_rights_violations, :alleged_perpetrators_known
     add_index :human_rights_violations, :case_filing_status
-    add_index :human_rights_violations, :state_action_to_address_violation, name: "index_hr_violations_on_state_action_to_address_violation"
+    add_index :human_rights_violations,
+      :state_action_to_address_violation,
+      name: "index_hr_violations_on_state_action_to_address_violation"
     add_index :human_rights_violations, :investigation_on_violation
   end
 end

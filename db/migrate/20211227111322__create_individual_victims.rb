@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class CreateIndividualVictims < ActiveRecord::Migration[7.0]
   def change
     create_table :individual_victims, id: :uuid do |t|
@@ -12,7 +14,7 @@ class CreateIndividualVictims < ActiveRecord::Migration[7.0]
       t.text :victim_role
       t.text :dependent_details
 
-      t.belongs_to :case_detail,  foreign_key: true, type: :uuid
+      t.belongs_to :case_detail, foreign_key: true, type: :uuid
 
       t.timestamps
     end

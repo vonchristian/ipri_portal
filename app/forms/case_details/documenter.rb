@@ -20,8 +20,13 @@ module CaseDetails
       :documenter_id,
       :locale
 
-    validates :first_name, :last_name, :organization_name, :email,
-      :submission_date_month, :submission_date_day, :submission_date_year,
+    validates :first_name,
+      :last_name,
+      :organization_name,
+      :email,
+      :submission_date_month,
+      :submission_date_day,
+      :submission_date_year,
       presence: true
 
     def process!

@@ -1,0 +1,53 @@
+<% if development_projects.present? %>
+  <div class="col-span-3">
+    <div class="overflow-x-auto sm:-mx-6 lg:-mx-8">
+      <div class="py-2 inline-block min-w-full sm:px-6 lg:px-8">
+        <div class="overflow-hidden">
+          <table class="mt-2 min-w-full">
+            <thead class="border-b bg-gray-50">
+              <tr>
+                <th scope="col" class="text-sm font-bold text-gray-900 px-6 py-4 text-left">
+                  Project Name
+                </th>
+                <th scope="col" class="text-sm font-bold text-gray-900 px-6 py-4 text-left">
+                  Description
+                </th>
+                <th scope="col" class="text-sm font-bold text-gray-900 px-6 py-4 text-left">
+                  Year Started
+                </th>
+              </tr>
+            </thead>
+            <tbody>
+                <% development_projects.each do |development_project| %>
+                <%= link_to development_project_path(development_project) do %>
+                  <tr class="border-b">
+                    <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
+                      <%= link_to development_project.name, development_project_path(development_project) %>
+                    </td>
+                    <td scope="row" class="py-4 px-6 font-medium text-gray-900 whitespace-nowrap">
+                      <%= link_to development_project.description.truncate(35), development_project_path(development_project) %>
+                    </td>
+                    <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
+                      <%=development_project.project_start_year %>
+                    </td>
+                  </tr>
+                <% end %>
+              <% end %>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+<% else %>
+  <div class="max-w-[85rem] px-4 py-10 sm:px-6 lg:px-8 lg:py-14 mx-auto">
+    <div class="max-w-xl mx-auto">
+      <div class="text-center">
+        <p class="mt-1 text-gray-600 dark:text-neutral-400">
+          No related development projects found.
+        </p>
+      </div>
+    </div>
+  </div>
+<% end %>
+

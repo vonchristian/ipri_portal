@@ -1,19 +1,26 @@
-<tr class="border-b">
-  <td scope="row" class="py-4 px-6 font-medium text-gray-900 whitespace-nowrap">
-    <%= link_to case_detail.organization_name.truncate(35), documenters_case_detail_path(case_detail) %>
-  </td>
-  <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
-    <%= case_detail.country_name %>
-  </td>
-  <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
-    <%= case_detail.location_details_1 %>
-  </td>
+<%= link_to documenters_case_detail_path(case_detail) do %>
+  <tr class="border-b">
+    <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
+      <%= link_to case_detail.submission_date, documenters_case_detail_path(case_detail) %>
+    </td>
+     <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
+      <%= link_to case_detail.incident_date, documenters_case_detail_path(case_detail) %>
+    </td>
+    <td scope="row" class="py-4 px-6 font-medium text-gray-900 whitespace-nowrap">
+      <%= link_to case_detail.organization_name.truncate(35), documenters_case_detail_path(case_detail) %>
+    </td>
+    <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
+      <%= case_detail.country_name %>
+    </td>
+    <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
+      <%= case_detail.location_details_1 %>
+    </td>
 
-  <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
-    <%= case_detail.location_details_2 %>
-  </td>
-
-  <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
-    <%= case_detail.data_sharing %>
-  </td>
-</tr>
+    <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
+      <%= case_detail.location_details_2 %>
+    </td>
+    <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
+      <%= case_detail.data_sharing %>
+    </td>
+  </tr>
+<% end %>

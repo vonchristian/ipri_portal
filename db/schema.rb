@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_08_15_042542) do
+ActiveRecord::Schema[7.0].define(version: 2024_08_27_024519) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
   enable_extension "plpgsql"
@@ -271,6 +271,13 @@ ActiveRecord::Schema[7.0].define(version: 2023_08_15_042542) do
     t.text "website_sources"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "parent_company_country_id"
+    t.string "parent_company_name"
+    t.text "parent_company_description"
+    t.string "parent_company_data_sources"
+    t.text "funding_source_description"
+    t.text "funding_source_data_sources"
+    t.index ["parent_company_country_id"], name: "index_development_projects_on_parent_company_country_id"
   end
 
   create_table "documenters", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|

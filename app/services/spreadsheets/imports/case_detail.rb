@@ -62,7 +62,7 @@ module Spreadsheets
       end
 
       def parse_submission_date(date)
-        puts "DATA: #{date}"
+        Rails.logger.debug { "DATA: #{date}" }
 
         date.is_a?(String) ? Date.parse(date) : date
       end
