@@ -5,6 +5,9 @@ Rails.application.routes.draw do
   ActiveAdmin.routes(self)
 
   root "documenters/sessions#new"
+
+  resources :development_projects, only: [:show, :edit, :update]
+
   namespace :ip_rights do
     resources :case_details, only: [:show] do
       resources :data_sharings,           only: [:new, :create]

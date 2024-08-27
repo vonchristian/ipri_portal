@@ -1,0 +1,37 @@
+<div data-controller="development-project-form" class="col-span-9 bg-white py-10">
+    <%= simple_form_for @development_project, url: :development_project do |f| %>
+    <div class="max-w-7xl mx-auto lg:px-0">
+      <h2 class="font-bold text-xl text-gray-900">Details of Development Project</h2>
+      <div class="border-t border-gray-200 mt-4"></div>
+        <div class="px-4 py-5  space-y-4 sm:p-6">
+        <%= f.input :name, label: "Name of development project" %>
+        <%= f.input :description, label: "Description of development project", as: :text, input_html: { rows: 10 } %>
+        <%= f.input :project_start_year, label: "Indicate year of project's start of operation on the country where the incident of human rights violation happened" %>
+        <%= f.input :website_sources, label: "Website Sources", as: :text %>
+        <h2 class="font-bold text-xl text-gray-900">Parent Company Profile</h2>
+        <%= f.input :parent_company_name, label: "Company Name" %>
+        <%= f.input :parent_company_description, label: "Description of parent company", as: :text, input_html: { rows: 10 } %>
+          <p class="font-bold text-gray-900">Source of Information on Parent Company</p>
+          <label for="about" class="block text-sm font-medium text-gray-700">
+            Other relevant websites/links
+          </label>
+          <div class="mt-1">
+            <%= f.input :parent_company_data_sources, label: false, as: :text,  input_html: { class: "shadow-sm focus:ring-indigo-500 focus:border-indigo-500 mt-1 block w-full sm:text-sm border border-gray-300 rounded-md" } %>
+          </div>
+        <%= f.input :parent_company_country_id, label: "Country of parent company", collection: Country.all.map{|country| [country.name, country.id] } %>
+ <h2 class="font-bold text-xl text-gray-900 pt-2">Source of Funding Profile</h2>
+   <div class="mt-1">
+     <%= f.input :funding_source_description, label: "Description of Source/s of Funding", as: :text, input_html: { rows: 10 } %>
+     <p class="font-bold text-gray-900">Source of Information on Funding Source</p>
+          <label for="about" class="block text-sm font-medium text-gray-700">
+            Other relevant websites/links
+          </label>
+            <%= f.input :funding_source_data_sources, label: false, as: :text,  input_html: { class: "shadow-sm focus:ring-indigo-500 focus:border-indigo-500 mt-1 block w-full sm:text-sm border border-gray-300 rounded-md" } %>
+          </div>
+        <div class="border-t border-gray-200 mt-4"></div>
+          <%= f.submit "Update Project", class: 'float-right class="w-full h-12 px-6 text-white transition-colors duration-150 bg-green-700 rounded-lg focus:shadow-outline hover:bg-green-800 mt-4' %>
+        </div>
+      <% end %>
+    </div>
+  </div>
+</div>

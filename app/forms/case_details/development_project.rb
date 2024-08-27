@@ -22,6 +22,7 @@ module CaseDetails
       :funding_source_description,
       :funding_source_documents,
       :funding_source_data_sources,
+      :parent_company_name,
       :case_detail_id
 
     validates :project_name, :project_description, presence: true
@@ -42,6 +43,12 @@ module CaseDetails
         description: project_description,
         project_start_year: start_of_operation_year,
         website_sources: project_data_sources,
+        parent_company_name: parent_company_name,
+        parent_company_description: parent_company_description,
+        parent_company_data_sources: parent_company_data_sources,
+        funding_source_description: funding_source_description,
+        funding_source_data_sources: funding_source_data_sources,
+        parent_company_country_id: parent_company_country_id,
       )
       attach_to_case(development_project)
     end

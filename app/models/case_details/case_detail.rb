@@ -53,6 +53,10 @@ module CaseDetails
       "#{submission_date_month} #{submission_date_day}, #{submission_date_year}"
     end
 
+    def incident_date
+      [incident_start_month, incident_start_day, incident_start_year].compact_blank.join(",")
+    end
+
     def data_sharing_content
       return restricted_content if restricted?
 
