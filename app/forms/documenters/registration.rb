@@ -22,9 +22,9 @@ module Documenters
         first_name: first_name,
         last_name: last_name,
         email: email,
-        password: 'Simple123',
+        password: "Simple123",
         password_confirmation: "Simple123",
-        phone_number: phone_number
+        phone_number: phone_number,
       )
     end
 

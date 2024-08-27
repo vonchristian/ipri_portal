@@ -44,7 +44,7 @@ module Spreadsheets
         categories.each do |category_name|
           category = DevelopmentProjects::Category.find_by(name: category_name)
           if category.present?
-            development_project.categorizations.find_or_create_by(category:  category)
+            development_project.categorizations.find_or_create_by(category: category)
           end
         end
       end

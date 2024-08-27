@@ -1,6 +1,8 @@
+# frozen_string_literal: true
+
 FactoryBot.define do
   factory :human_rights_violation, class: "HumanRightsViolations::HumanRightsViolation" do
-    association :case_detail
+    case_detail
     violation_details { "MyText" }
     alleged_perpetrators_known { "MyString" }
     alleged_perpetrator_details { "MyText" }

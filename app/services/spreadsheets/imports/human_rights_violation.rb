@@ -26,7 +26,6 @@ module Spreadsheets
           investigation_on_violation_details: nil,
           impact_to_victim_details: case_data["How did the incident/s affect the victim/s and his/her/their family?"],
           impact_to_community_details: case_data["How did the incident/s affect the Indigenous Peoples group/s or community/ies and/or organization of the victim/s?"],
-
         )
         if categories.present?
           associate_categories(human_rights_violation)

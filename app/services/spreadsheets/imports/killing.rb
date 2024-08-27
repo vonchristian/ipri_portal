@@ -26,7 +26,7 @@ module Spreadsheets
           state_action_to_address_killing_details: case_data["If yes, please provide further information: Where is/are the case/s filed? Who filed the case? E.g., victim, family of the victim, support organizations, etc.; any other details of the case/s filed, please share."],
           investigation_on_killing: case_data["Has there been any investigation/s on the incident of killing?"],
           investigation_on_killing_details: case_data["If yes, please provide additional information on the investigation, including relevant date/s and institutions/ office/s or representative/s involved, e.g., national human rights institution, United Nations body,
-            etc."]
+            etc."],
         )
       end
     end

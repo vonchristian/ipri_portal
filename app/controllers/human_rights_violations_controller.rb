@@ -1,7 +1,6 @@
 # frozen_string_literal: true
 
 class HumanRightsViolationsController < ApplicationController
-
   layout "documenter"
 
   def index

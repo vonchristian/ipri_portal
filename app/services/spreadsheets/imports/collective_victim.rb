@@ -30,13 +30,17 @@ module Spreadsheets
 
       def create_age_bracket_breakdowns(collective_victim)
         if zero_to_fourteen_age_bracket_breakdown > 0
-          collective_victim.age_bracket_breakdowns.create!(age_bracket: AgeBracket.find_by(name: "A"),
-            total: zero_to_fourteen_age_bracket_breakdown)
+          collective_victim.age_bracket_breakdowns.create!(
+            age_bracket: AgeBracket.find_by(name: "A"),
+            total: zero_to_fourteen_age_bracket_breakdown,
+          )
         end
 
         if sixty_and_above_age_bracket_breakdown > 0
-          collective_victim.age_bracket_breakdowns.create!(age_bracket: AgeBracket.find_by(name: "D"),
-            total: sixty_and_above_age_bracket_breakdown)
+          collective_victim.age_bracket_breakdowns.create!(
+            age_bracket: AgeBracket.find_by(name: "D"),
+            total: sixty_and_above_age_bracket_breakdown,
+          )
         end
       end
 
@@ -47,13 +51,17 @@ module Spreadsheets
       end
 
       def zero_to_fourteen_age_bracket_breakdown
-        case_data["Write the number of 0-14 years old from the total number of individuals affected:"].to_s.gsub(",",
-          "").to_f
+        case_data["Write the number of 0-14 years old from the total number of individuals affected:"].to_s.gsub(
+          ",",
+          "",
+        ).to_f
       end
 
       def sixty_and_above_age_bracket_breakdown
-        case_data["Write the number of 0-14 years old from the total number of individuals affected:"].to_s.gsub(",",
-          "").to_f
+        case_data["Write the number of 0-14 years old from the total number of individuals affected:"].to_s.gsub(
+          ",",
+          "",
+        ).to_f
       end
     end
   end

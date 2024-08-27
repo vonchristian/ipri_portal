@@ -1,1 +1,3 @@
-require 'pagy/extras/navs'
+# frozen_string_literal: true
+
+require "pagy/extras/navs"

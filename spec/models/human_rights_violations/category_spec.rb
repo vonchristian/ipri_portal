@@ -3,7 +3,7 @@
 require "rails_helper"
 
 module HumanRightsViolations
-  RSpec.describe Category, type: :model do
+  RSpec.describe Category do
     describe "validations" do
       it { is_expected.to validate_presence_of :title }
     end

@@ -1,9 +1,12 @@
+# frozen_string_literal: true
+
 class CreateCriminalizations < ActiveRecord::Migration[7.0]
   def change
     create_table :criminalizations, id: :uuid do |t|
       t.belongs_to :case_detail, foreign_key: true, type: :uuid
       t.text :criminalization_details
-      t.string :experienced_harrassment_or_intimidation, index: { name: "index_criminalizations_on_harrassment_or_intimidation"}
+      t.string :experienced_harrassment_or_intimidation,
+        index: { name: "index_criminalizations_on_harrassment_or_intimidation" }
       t.text :harrassment_or_intimidation_details
       t.text :accusation_or_charges_details
       t.text :policies_or_laws_used
@@ -16,7 +19,8 @@ class CreateCriminalizations < ActiveRecord::Migration[7.0]
       t.text :victims_in_detention_details
       t.string :case_filing_against_perpetrator
       t.text :case_filing_against_perpetrator_details
-      t.string :state_action_to_address_criminalization, index: { name: "index_criminalizations_on_state_action_to_address"}
+      t.string :state_action_to_address_criminalization,
+        index: { name: "index_criminalizations_on_state_action_to_address" }
       t.text :state_action_to_address_criminalization_details
       t.string :investigation_on_criminalization
       t.text :investigation_on_criminalization_details

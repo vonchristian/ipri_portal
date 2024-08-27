@@ -1,4 +1,6 @@
-ActiveAdmin.register AdminUser do
+# frozen_string_literal: true
+
+ActiveAdmin.register(AdminUser) do
   permit_params :email, :password, :password_confirmation
 
   index do
@@ -18,11 +20,10 @@ ActiveAdmin.register AdminUser do
 
   form do |f|
     f.inputs do
-      f.input :email
-      f.input :password
-      f.input :password_confirmation
+      f.input(:email)
+      f.input(:password)
+      f.input(:password_confirmation)
     end
     f.actions
   end
-
 end

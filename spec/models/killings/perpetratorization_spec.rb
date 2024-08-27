@@ -3,7 +3,7 @@
 require "rails_helper"
 
 module Killings
-  describe Perpetratorization, type: :model do
+  describe Perpetratorization do
     describe "associations" do
       it { is_expected.to belong_to :killing }
       it { is_expected.to belong_to :perpetrator_category }

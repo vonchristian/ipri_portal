@@ -5,4 +5,3 @@ module DevelopmentProjects
     self.table_name = "development_project_categories"
   end
 end
-

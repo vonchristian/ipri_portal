@@ -3,7 +3,7 @@
 module Admin
   class DocumentersController < AdminController
     def index
-      @documenters       = Users::Documenter.all
+      @documenters = Users::Documenter.all
       @admin_users = Users::AdminUser.all
     end
 
@@ -29,7 +29,7 @@ module Admin
 
     def user_params
       params.require(:documenters_registration)
-      .permit(:first_name, :last_name, :organization_name, :phone_number, :email)
+        .permit(:first_name, :last_name, :organization_name, :phone_number, :email)
     end
   end
 end

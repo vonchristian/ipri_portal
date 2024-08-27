@@ -66,7 +66,7 @@ module Spreadsheets
 
       def full_name(data)
         data["Name/s (Write Full Name)"] ||
-        data["Name/s (Write Full Name) (If more than one individual, indicate a number for each name, e.g. 1. John Doe ; 2. Jane Doe.)"=>"Jesús María Morales Morales"]
+          data["Name/s (Write Full Name) (If more than one individual, indicate a number for each name, e.g. 1. John Doe ; 2. Jane Doe.)" => "Jesús María Morales Morales"]
       end
     end
   end

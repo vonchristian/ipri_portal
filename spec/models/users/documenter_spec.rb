@@ -3,7 +3,7 @@
 require "rails_helper"
 
 module Users
-  describe Documenter, type: :model do
+  describe Documenter do
     pending "add some examples to (or delete) #{__FILE__}"
   end
 end

@@ -5,6 +5,7 @@ module AdminUsers
     include ActiveModel::Model
 
     attr_accessor :email, :password
+
     validates :email, email: true
     validates :email, :password, presence: true
 

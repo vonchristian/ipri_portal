@@ -1,4 +1,5 @@
 # frozen_string_literal: true
+
 module Documenters
   module CaseDetails
     class CollectiveVictimsController < Documenters::BaseController

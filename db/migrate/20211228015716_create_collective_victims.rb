@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class CreateCollectiveVictims < ActiveRecord::Migration[7.0]
   def change
     create_table :collective_victims, id: :uuid do |t|

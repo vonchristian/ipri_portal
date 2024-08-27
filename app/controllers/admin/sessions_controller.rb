@@ -36,7 +36,7 @@ module Admin
 
     def session_params
       params.require(:admin_users_session)
-      .permit(:email, :password)
+        .permit(:email, :password)
     end
   end
 end

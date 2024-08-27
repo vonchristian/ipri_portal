@@ -14,6 +14,7 @@ module CaseDetails
       subject(:case_detail) { build(:case_detail) }
 
       it { expect(case_detail).to validate_presence_of(:reference_number) }
+
       it "unique reference number" do
         create(:case_detail, reference_number: "12345")
         record = build(:case_detail, reference_number: "12345")

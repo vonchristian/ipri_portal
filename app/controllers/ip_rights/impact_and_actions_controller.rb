@@ -32,13 +32,13 @@ module IpRights
     private
 
     def impact_and_action_params
-      params.require(:case_details_impact_and_action).
-      permit(
-        :impact_to_victim_details,
-        :impact_to_community_details,
-        :actions_taken_status,
-        :actions_taken_details
-      ).merge!(case_detail_id: @case_detail.id)
+      params.require(:case_details_impact_and_action)
+        .permit(
+          :impact_to_victim_details,
+          :impact_to_community_details,
+          :actions_taken_status,
+          :actions_taken_details,
+        ).merge!(case_detail_id: @case_detail.id)
     end
   end
 end

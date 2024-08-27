@@ -48,7 +48,7 @@ class CaseDetailsController < Documenters::BaseController
         :incident_end_day,
         :incident_end_year,
         :incident_hour,
-        :incident_minute
+        :incident_minute,
       )
   end
 end

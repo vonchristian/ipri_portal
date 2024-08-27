@@ -28,8 +28,8 @@ module IpRights
 
     def data_sharing_params
       params.require(:case_details_data_sharing)
-      .permit(:data_sharing)
-      .merge!(case_detail_id: @case_detail.id)
+        .permit(:data_sharing)
+        .merge!(case_detail_id: @case_detail.id)
     end
   end
 end
