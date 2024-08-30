@@ -130,6 +130,7 @@ ActiveRecord::Schema[7.0].define(version: 2024_08_27_024519) do
     t.string "documenter_email"
     t.string "documenter_phone_number"
     t.string "documenter_organization"
+    t.index ["actions_taken_status"], name: "index_case_details_on_actions_taken_status"
     t.index ["country_id"], name: "index_case_details_on_country_id"
     t.index ["data_sharing"], name: "index_case_details_on_data_sharing"
     t.index ["documenter_id"], name: "index_case_details_on_documenter_id"
@@ -203,6 +204,7 @@ ActiveRecord::Schema[7.0].define(version: 2024_08_27_024519) do
     t.integer "other_violations_count"
     t.boolean "priority", default: false
     t.index ["case_count"], name: "index_countries_on_case_count"
+    t.index ["priority"], name: "index_countries_on_priority"
   end
 
   create_table "criminalization_accuserizations", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|

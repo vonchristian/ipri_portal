@@ -1,3 +1,4 @@
+
 require:
   - rubocop-rails
   - rubocop-rspec
@@ -130,4 +131,6 @@ Style/ClassMethodsDefinitions:
 Style/TrailingCommaInHashLiteral:
   Enabled: false
 Layout/LineLength:
+  Enabled: false
+Style/OpenStructUs:
   Enabled: false

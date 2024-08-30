@@ -35,6 +35,7 @@ module CaseDetails
     has_many :development_projects,    class_name: "DevelopmentProjects::DevelopmentProject", through: :case_projects
 
     delegate :name, to: :country, prefix: true, allow_nil: true
+
     DATA_SHARING_OPTIONS = [
       OpenStruct.new(
         name: "restricted",

@@ -12,5 +12,9 @@ module Users
     validates :email, :first_name, :last_name, presence: true
 
     has_many :case_details, class_name: "CaseDetails::CaseDetail", dependent: :nullify
+
+    def full_name
+      "#{first_name} #{last_name}"
+    end
   end
 end
