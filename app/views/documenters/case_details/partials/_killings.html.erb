@@ -1,0 +1,115 @@
+<% if @killings.present? %>
+  <% @killings.each do |killing| %>
+    <div class="flex w-full mx-auto mt-4 justify-between mt-5">
+      <h2 class="font-bold text-l text-gray-900 mt-4">Details of Killing</h2>
+      <%= link_to "Edit", edit_killing_path(killing), class: "mr-4 text-gray-900 bg-white border border-gray-300 focus:outline-none hover:bg-gray-100 focus:ring-4 focus:ring-gray-200 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2" %>
+    </div>
+    <div class="grid grid-cols-1 md:grid-cols-12">
+      <div class="col-span-3 ml-4 mt-2">
+        <p class="block mb-2 text-sm font-medium text-gray-900"> Victim </p>
+      </div>
+      <div class="col-span-1">
+
+      </div>
+      <div class="col-span-7 mt-2">
+        <b><%= killing.victim.try(:full_name) || "No Information" %></b>
+      </div>
+    </div>
+
+    <div class="grid grid-cols-1 md:grid-cols-12">
+      <div class="col-span-3 ml-4 mt-2">
+        <p class="block mb-2 text-sm font-medium text-gray-900"> Why was/were the victim/s killed? </p>
+      </div>
+      <div class="col-span-1">
+
+      </div>
+      <div class="col-span-7 mt-2">
+        <p class="text-gray-500"><%= killing.killing_details %></p>
+      </div>
+    </div>
+
+    <div class="grid grid-cols-1 md:grid-cols-12">
+      <div class="col-span-3 ml-4 mt-2">
+        <p class="block mb-2 text-sm font-medium text-gray-900"> How was the killing carried out? </p>
+      </div>
+      <div class="col-span-1">
+
+      </div>
+      <div class="col-span-7 mt-2">
+        <p class="text-gray-500"><%= killing.killing_carried_out %></p>
+      </div>
+    </div>
+
+    <div class="grid grid-cols-1 md:grid-cols-12">
+      <div class="col-span-3 ml-4 mt-2">
+        <p class="block mb-2 text-sm font-medium text-gray-900"> Did the victim/s experience any form of harassment or intimidation prior to criminalization? </p>
+      </div>
+      <div class="col-span-1">
+
+      </div>
+      <div class="col-span-7 mt-2">
+        <p class="text-gray-500"><%= killing.experienced_harrassment_or_intimidation %></p>
+      </div>
+    </div>
+
+    <div class="grid grid-cols-1 md:grid-cols-12">
+      <div class="col-span-3 ml-4 mt-2">
+        <p class="block mb-2 text-sm font-medium text-gray-900"> Please provide more information about the harassment or intimidation prior to criminalization </p>
+      </div>
+      <div class="col-span-1">
+
+      </div>
+      <div class="col-span-7 mt-2">
+        <p class="text-gray-500"><%= killing.harrassment_or_intimidation_details %></p>
+      </div>
+    </div>
+
+    <div class="grid grid-cols-1 md:grid-cols-12">
+      <div class="col-span-3 ml-4 mt-2">
+        <p class="block mb-2 text-sm font-medium text-gray-900"> Is/Are the alleged perpetrator/s known? </p>
+      </div>
+      <div class="col-span-1">
+
+      </div>
+      <div class="col-span-7 mt-2">
+        <p class="text-gray-500"><%= killing.alleged_perpetrators_known %></p>
+      </div>
+    </div>
+
+    <div class="grid grid-cols-1 md:grid-cols-12">
+      <div class="col-span-3 ml-4 mt-2">
+        <p class="block mb-2 text-sm font-medium text-gray-900"> Who put forward the accusation/s or charge/s against the victim/s? </p>
+      </div>
+      <div class="col-span-1">
+
+      </div>
+      <div class="col-span-7 mt-2">
+        <p class="text-gray-500"><%= killing.perpetrator_categories.pluck(:title).join(", ") %></p>
+      </div>
+    </div>
+
+    <h2 class="font-bold text-xl text-gray-900 mt-5">Status of Incident of Killing </h2>
+    <div class="grid grid-cols-1 md:grid-cols-12">
+      <div class="col-span-3 ml-4 mt-2">
+        <p class="block mb-2 text-sm font-medium text-gray-900"> Was/Were there (a) legal case/s filed against the alleged perpetrators on behalf of the victim/s killed? </p>
+      </div>
+      <div class="col-span-1">
+
+      </div>
+      <div class="col-span-7 mt-2">
+        <p class="text-gray-500"><%= killing.case_filing_status %></p>
+      </div>
+    </div>
+  <% end %>
+  <% else %>
+  <div class="max-w-[85rem] px-4 py-10 sm:px-6 lg:px-8 lg:py-14 mx-auto">
+    <div class="max-w-xl mx-auto">
+      <div class="text-center">
+        <p class="mt-1 text-gray-600 dark:text-neutral-400">
+          No related killings found.
+        </p>
+      </div>
+    </div>
+  </div>
+<% end %>
+

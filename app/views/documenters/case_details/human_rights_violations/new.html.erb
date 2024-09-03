@@ -1,14 +1,13 @@
-  <%=render '/ip_rights/shared/sidebar', current_step: 5, step_name: 'Categories of Incidents of Human Rights Violations', percent_finished: 50 %>
 
-  <div data-controller="human-rights-violation-form" class="col-span-9 bg-white mt-5 px-5">
-    <%= simple_form_for @human_rights_violation, url: :ip_rights_case_detail_human_rights_violations do |f| %>
+
+    <%= simple_form_for @human_rights_violation, url: :documenters_case_detail_human_rights_violations do |f| %>
     <div class="max-w-7xl mx-auto lg:px-0">
       <h2 class="font-bold text-xl text-gray-900">Human Rights Violation Details</h2>
             <div class="px-4 py-5  space-y-4 sm:p-6">
               <div class="col-span-6 sm:col-span-3">
                <label class="text-sm font-medium text-gray-600 block">What was/were the human rights violation/s?</label>
                 <p class="text-gray-600 text-sm font-medium pb-4"> Tick as many as possible </p>
-                <% HumanRightsViolations::Category.all.each do |category| %>
+                <% @categories.each do |category| %>
                   <%= f.fields_for :categorizations do |ff| %>
                   <div class="col-span-6 sm:col-span-3">
 
@@ -18,7 +17,7 @@
                   <% end %>
                 <% end %>
                 <div class="pt-5">
-                <%= f.input :violation_details, as: :text, label: "Why did the victim/s suffer from the human rights violation/s?", hint: "(E.g., S/he or they are defending their lands from being grabbed. S/he or they are protecting their traditional livelihood of pastoralism or defending their right to self-government, etc.)" %>
+                  <%= f.input :violation_details, as: :text, label: "Why did the victim/s suffer from the human rights violation/s?", hint: "(E.g., S/he or they are defending their lands from being grabbed. S/he or they are protecting their traditional livelihood of pastoralism or defending their right to self-government, etc.)" %>
                 </div>
                 <%= f.input :alleged_perpetrators_known, label: "Is/Are the alleged perpetrator/s known?", collection: [['No', 'No'], ['Yes', 'Yes'] ], label_method: :second, value_method: :first, selected: "No", input_html: { data: { action: "human-rights-violation-form#togglePerpetratorCategories" } }  %>
                 <div class="hidden" data-human-rights-violation-form-target="perpetratorCategoryGroup">

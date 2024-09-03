@@ -15,7 +15,7 @@
                 <div class="mt-4 space-y-4">
                    <div class="mt-4 space-y-4">
                     <div class="flex items-center" data-documenter-form-target="referToIndividuals">
-                      <%= f.input :refer_to_individuals, label: "Does the number of affected people refer to individuals?", collection: [['0', 'No'], ['1', 'Yes']], label_method: :second, value_method: :first, selected: "0", input_html: { data: { action: "collective-victim-form#toggleReferToIndividuals" } }  %>
+                      <%= f.input :refer_to_individuals, label: "Does the number of affected people refer to individuals?", collection: [['No', 'No'], ['Yes', 'Yes']], label_method: :second, value_method: :first, selected: "No", input_html: { data: { action: "collective-victim-form#toggleReferToIndividuals" } }  %>
 
                   </div>
                   </div>

@@ -9,8 +9,8 @@ module HumanRightsViolations
     has_many :perpetrator_categories,
       through: :perpetratorizations,
       class_name: "HumanRightsViolations::PerpetratorCategory"
-    accepts_nested_attributes_for :categorizations, reject_if: :all_blank, allow_destroy: true
-    accepts_nested_attributes_for :perpetratorizations, reject_if: :all_blank, allow_destroy: true
+    accepts_nested_attributes_for :categorizations, allow_destroy: true
+    accepts_nested_attributes_for :perpetratorizations, allow_destroy: true
 
     def self.submitted_current_year
       joins(:case_detail).where("case_details.submission_date_year" => Date.current.year)

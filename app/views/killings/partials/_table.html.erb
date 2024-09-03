@@ -1,0 +1,43 @@
+<% if killings.present? %>
+  <div class="col-span-3">
+    <div class="overflow-x-auto sm:-mx-6 lg:-mx-8">
+      <div class="py-2 inline-block min-w-full sm:px-6 lg:px-8">
+        <div class="overflow-hidden">
+          <table class="mt-2 min-w-full">
+            <thead class="border-b bg-gray-50">
+              <tr>
+                <th scope="col" class="text-sm font-bold text-gray-900 px-6 py-4 text-left">
+                  Victim
+                </th>
+                <th scope="col" class="text-sm font-bold text-gray-900 px-6 py-4 text-left">
+                  Details
+                </th>
+                <th scope="col" class="text-sm font-bold text-gray-900 px-6 py-4 text-left">
+                  Year Started
+                </th>
+              </tr>
+            </thead>
+            <tbody>
+                <% killings.each do |killing| %>
+                <%= link_to killing_path(killing) do %>
+                  <%=render 'killings/partials/tables/row', killing: killing %>
+                <% end %>
+              <% end %>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+<% else %>
+  <div class="max-w-[85rem] px-4 py-10 sm:px-6 lg:px-8 lg:py-14 mx-auto">
+    <div class="max-w-xl mx-auto">
+      <div class="text-center">
+        <p class="mt-1 text-gray-600 dark:text-neutral-400">
+          No related development projects found.
+        </p>
+      </div>
+    </div>
+  </div>
+<% end %>
+

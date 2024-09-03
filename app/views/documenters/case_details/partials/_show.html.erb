@@ -9,7 +9,13 @@
           <a href="/documenters/case_details/<%=@case_detail.id %>/victims" class="<%= "inline-block p-4 text-blue-600 rounded-t-lg border-b-2 border-blue-600 active" if current_page?(documenters_case_detail_victims_path(@case_detail.id)) %>inline-block p-4 rounded-t-lg border-b-2 border-transparent hover:text-gray-600 hover:border-gray-300">Victims</a>
       </li>
       <li class="mr-2">
-          <a href="/documenters/case_details/<%=@case_detail.id %>/human_rights_violations" class="<%= "inline-block p-4 text-blue-600 rounded-t-lg border-b-2 border-blue-600 active" if current_page?(documenters_case_detail_human_rights_violations_path(@case_detail.id)) %>inline-block p-4 rounded-t-lg border-b-2 border-transparent hover:text-gray-600 hover:border-gray-300">Human Rights Violations</a>
+          <a href="/documenters/case_details/<%=@case_detail.id %>/criminalizations" class="<%= "inline-block p-4 text-blue-600 rounded-t-lg border-b-2 border-blue-600 active" if current_page?(documenters_case_detail_criminalizations_path(@case_detail.id)) %>inline-block p-4 rounded-t-lg border-b-2 border-transparent hover:text-gray-600 hover:border-gray-300">Criminalizations</a>
+      </li>
+      <li class="mr-2">
+          <a href="/documenters/case_details/<%=@case_detail.id %>/killings" class="<%= "inline-block p-4 text-blue-600 rounded-t-lg border-b-2 border-blue-600 active" if current_page?(documenters_case_detail_killings_path(@case_detail.id)) %>inline-block p-4 rounded-t-lg border-b-2 border-transparent hover:text-gray-600 hover:border-gray-300"> Killings</a>
+      </li>
+      <li class="mr-2">
+          <a href="/documenters/case_details/<%=@case_detail.id %>/human_rights_violations" class="<%= "inline-block p-4 text-blue-600 rounded-t-lg border-b-2 border-blue-600 active" if current_page?(documenters_case_detail_human_rights_violations_path(@case_detail.id)) %>inline-block p-4 rounded-t-lg border-b-2 border-transparent hover:text-gray-600 hover:border-gray-300">Other Human Rights Violations </a>
       </li>
       <li class="mr-2">
           <a href="/documenters/case_details/<%=@case_detail.id %>/development_projects" class="<%= "inline-block p-4 text-blue-600 rounded-t-lg border-b-2 border-blue-600 active" if current_page?(documenters_case_detail_development_projects_path(@case_detail.id)) %>inline-block p-4 rounded-t-lg border-b-2 border-transparent hover:text-gray-600 hover:border-gray-300">Development Projects</a>
@@ -23,9 +29,19 @@
 <% if current_page?(documenters_case_detail_victims_path(case_detail)) %>
   <%= render 'documenters/case_details/partials/victims', case_detail: case_detail %>
 <% end %>
+
+<% if current_page?(documenters_case_detail_criminalizations_path(case_detail)) %>
+  <%= render 'documenters/case_details/partials/criminalizations', case_detail: case_detail %>
+<% end %>
+
 <% if current_page?(documenters_case_detail_human_rights_violations_path(case_detail)) %>
   <%= render 'documenters/case_details/partials/human_rights_violations', case_detail: case_detail %>
 <% end %>
+
+<% if current_page?(documenters_case_detail_killings_path(case_detail)) %>
+  <%= render 'documenters/case_details/partials/killings', case_detail: case_detail %>
+<% end %>
+
 <% if current_page?(documenters_case_detail_development_projects_path(case_detail)) %>
   <%= render 'documenters/case_details/partials/development_projects', case_detail: case_detail %>
 <% end %>
