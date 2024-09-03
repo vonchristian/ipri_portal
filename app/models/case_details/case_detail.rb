@@ -25,11 +25,11 @@ module CaseDetails
 
     belongs_to :documenter,            class_name: "Users::Documenter", optional: true
     belongs_to :country,               optional: true, touch: true
-    has_many :individual_victims,      class_name: "Victims::IndividualVictim", dependent: :destroy
-    has_many :collective_victims,      class_name: "Victims::CollectiveVictim", dependent: :destroy
-    has_many :criminalizations,        class_name: "Criminalizations::Criminalization", dependent: :destroy
-    has_many :human_rights_violations, class_name: "HumanRightsViolations::HumanRightsViolation", dependent: :destroy
-    has_many :killings,                class_name: "Killings::Killing", dependent: :destroy
+    has_many :individual_victims,      class_name: "Victims::IndividualVictim", dependent: :destroy, counter_cache: true
+    has_many :collective_victims,      class_name: "Victims::CollectiveVictim", dependent: :destroy, counter_cache: true
+    has_many :criminalizations,        class_name: "Criminalizations::Criminalization", dependent: :destroy, counter_cache: true
+    has_many :human_rights_violations, class_name: "HumanRightsViolations::HumanRightsViolation", dependent: :destroy, counter_cache: true
+    has_many :killings,                class_name: "Killings::Killing", dependent: :destroy, counter_cache: true
     has_many_attached                  :documents, dependent: :destroy
     has_many :case_projects,           class_name: "DevelopmentProjects::CaseProject", dependent: :destroy
     has_many :development_projects,    class_name: "DevelopmentProjects::DevelopmentProject", through: :case_projects

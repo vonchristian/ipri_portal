@@ -2,7 +2,7 @@
 
 module Killings
   class Killing < ApplicationRecord
-    belongs_to :case_detail, class_name: "CaseDetails::CaseDetail"
+    belongs_to :case_detail, class_name: "CaseDetails::CaseDetail", counter_cache: :killings_count
     has_many :perpetratorizations, class_name: "Killings::Perpetratorization", dependent: :destroy
     has_many :perpetrator_categories, through: :perpetratorizations
 

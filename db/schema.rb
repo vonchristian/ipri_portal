@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2024_08_27_024519) do
+ActiveRecord::Schema[7.0].define(version: 2024_09_03_103223) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
   enable_extension "plpgsql"
@@ -130,10 +130,22 @@ ActiveRecord::Schema[7.0].define(version: 2024_08_27_024519) do
     t.string "documenter_email"
     t.string "documenter_phone_number"
     t.string "documenter_organization"
+    t.integer "killings_count"
+    t.integer "individual_victims_count"
+    t.integer "collective_victims_count"
+    t.integer "criminalizations_count"
+    t.integer "human_rights_violations_count"
+    t.integer "development_projects_count"
     t.index ["actions_taken_status"], name: "index_case_details_on_actions_taken_status"
+    t.index ["collective_victims_count"], name: "index_case_details_on_collective_victims_count"
     t.index ["country_id"], name: "index_case_details_on_country_id"
+    t.index ["criminalizations_count"], name: "index_case_details_on_criminalizations_count"
     t.index ["data_sharing"], name: "index_case_details_on_data_sharing"
+    t.index ["development_projects_count"], name: "index_case_details_on_development_projects_count"
     t.index ["documenter_id"], name: "index_case_details_on_documenter_id"
+    t.index ["human_rights_violations_count"], name: "index_case_details_on_human_rights_violations_count"
+    t.index ["individual_victims_count"], name: "index_case_details_on_individual_victims_count"
+    t.index ["killings_count"], name: "index_case_details_on_killings_count"
     t.index ["reference_number"], name: "index_case_details_on_reference_number", unique: true
   end
 

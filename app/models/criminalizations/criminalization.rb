@@ -2,7 +2,7 @@
 
 module Criminalizations
   class Criminalization < ApplicationRecord
-    belongs_to :case_detail, class_name: "CaseDetails::CaseDetail"
+    belongs_to :case_detail, class_name: "CaseDetails::CaseDetail", counter_cache: :criminalizations_count
     has_many :accuserizations, class_name: "Criminalizations::Accuserization", dependent: :destroy
     has_many :accuser_categories, class_name: "Criminalizations::AccuserCategory", through: :accuserizations
     accepts_nested_attributes_for :accuserizations, reject_if: :all_blank, allow_destroy: true

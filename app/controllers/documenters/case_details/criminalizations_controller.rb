@@ -10,6 +10,32 @@ module Documenters
         @criminalizations = @case_detail.criminalizations
       end
 
+      def new
+        @case_detail     = ::CaseDetails::CaseDetail.find(params.fetch(:case_detail_id))
+        @criminalization = @case_detail.criminalizations.build
+        @criminalization.accuserizations.build
+      end
+
+      def create
+        @case_detail     = ::CaseDetails::CaseDetail.find(params.fetch(:case_detail_id))
+        @criminalization = @case_detail.criminalizations.create(criminalization_params)
+        if @criminalization.valid?
+          @criminalization.save!
+
+          respond_to do |format|
+            format.html do
+              redirect_to documenters_case_detail_human_rights_violations_url(@case_detail)
+            end
+          end
+        else
+          respond_to do |format|
+            format.html do
+              render :new, status: :unprocessable_entity
+            end
+          end
+        end
+      end
+
       def edit
         @case_detail = ::CaseDetails::CaseDetail.find(params[:case_detail_id])
         @criminalization = @case_detail.criminalizations.find(params[:id])
@@ -60,7 +86,8 @@ module Documenters
             :investigation_on_criminalization,
             :investigation_on_criminalization_details,
             :impact_to_victim_details,
-            :impact_to_community_details
+            :impact_to_community_details,
+            accuserizations_attributes: [:accuser_category_id],
           )
       end
     end
