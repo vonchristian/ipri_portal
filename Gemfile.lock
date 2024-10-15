@@ -49,6 +49,10 @@ GEM
     active_interaction (5.3.0)
       activemodel (>= 5.2, < 8)
       activesupport (>= 5.2, < 8)
+    active_interaction-extras (1.1.0)
+      active_interaction (>= 5.0, < 6.0)
+      activemodel (>= 6.0)
+      activesupport (>= 6.0)
     active_material (1.5.2)
     activeadmin (2.13.1)
       arbre (~> 1.2, >= 1.2.1)
@@ -415,6 +419,7 @@ PLATFORMS
 
 DEPENDENCIES
   active_interaction (~> 5.1)
+  active_interaction-extras
   activeadmin (= 2.13.1)
   activeadmin_addons
   acts-as-taggable-on (~> 9.0)

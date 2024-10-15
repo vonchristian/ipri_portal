@@ -86,6 +86,7 @@ gem "chartkick"
 gem "groupdate"
 gem "roo", "~> 2.9.0"
 gem "active_interaction", "~> 5.1"
+gem 'active_interaction-extras'
 gem "kt-paperclip", "~> 6.4", ">= 6.4.1"
 
 gem "pundit", "~> 2.3"
