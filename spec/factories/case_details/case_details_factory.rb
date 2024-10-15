@@ -3,7 +3,7 @@
 FactoryBot.define do
   factory :case_detail, class: "CaseDetails::CaseDetail" do
     reference_number { SecureRandom.hex(8) }
-    documenter factory: [:user]
+    documenter factory: [:documenter]
     organization_name { Faker::Company.name }
     submission_date_year { Date.current.year }
     submission_date_day { Date.current.day }

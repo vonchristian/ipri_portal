@@ -1,0 +1,35 @@
+<header>
+  <div class="grid grid-cols-4 gap-1 mt-6 mb-5">
+    <div class="col-span-3">
+      <h1 class="text-2xl font-bold text-gray-900"> Tags </h1>
+    </div>
+  </div>
+</header>
+<div class="border-t border-gray-200 mb-5"></div>
+<% ActsAsTaggableOn::Tag.order(:name).each do |tag| %>
+<%= tag.name %>
+<% if @case_detail.tag_list.exclude?(tag.name) %>
+  <%= simple_form_for :tagging, url: documenters_case_detail_tags_url do |f| %>
+  <div class="flex justify-center">
+  <%= f.input :tag_name, input_html: { value: tag.name },as: :hidden %>
+  <%= f.input :action_type, input_html: { value: 'add' },as: :hidden %>
+  <button type="submit" class="inline-flex py-2 px-3 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-green-600 hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500">
+                  Add
+                </button>
+  </div>
+  <% end %>
+<% else %>
+<%= simple_form_for :tagging, url: documenters_case_detail_tags_url do |f| %>
+    <div class="flex justify-center">
+  <%= f.input :tag_name, input_html: { value: tag.name },as: :hidden %>
+  <%= f.input :action_type, input_html: { value: 'remove' },as: :hidden %>
+
+  <button type="submit" class="inline-flex py-2 px-3 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-red-600 hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-500">
+                  Remove
+                </button>
+  <% end %>
+  </div>
+<% end %>
+<div class="border-t border-gray-200 mb-5"></div>
+
+<% end %>

@@ -2,7 +2,7 @@
 
 Rails.application.routes.draw do
   devise_for :admin_users, ActiveAdmin::Devise.config
-  ActiveAdmin.routes(self)
+  ActiveAdmin.routes(self) rescue ActiveAdmin::DatabaseHitDuringLoad
 
   root "documenters/sessions#new"
 
@@ -47,6 +47,7 @@ Rails.application.routes.draw do
       resources :human_rights_violations, only: [:index, :new, :create, :edit, :update], controller: "case_details/human_rights_violations"
       resources :killings, only: [:index, :new, :create, :edit, :update], controller: "case_details/killings"
       resources :development_projects, only: [:index], controller: "case_details/development_projects"
+      resources :tags, only: [:index, :create], controller: "case_details/tags"
     end
   end
 

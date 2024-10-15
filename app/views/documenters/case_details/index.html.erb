@@ -18,7 +18,20 @@
             <button type="submit" class="text-white absolute right-2.5 bottom-2.5 bg-green-700 hover:bg-green-800 focus:ring-4 focus:outline-none focus:ring-green-800 font-medium rounded-lg text-sm px-4 py-2">Search</button>
         </div>
       <% end %>
+<div class="my-4">
 
+  <%= form_tag documenters_case_details_path, method: :get do %>
+    <b><%= label_tag "Country" %></b>
+    <%= select_tag :country_id, options_for_select(Country.order(name: :asc).map{ |country| [country.name, country.id] }, params[:country_id]), {:prompt => "--select country--" }%>
+    <span class="pl-2"><b><%= label_tag "Incident Date" %></b></span>
+    <%= select_tag :incident_start_year, options_for_select(20.years.ago.year..Date.current.year, params[:incident_start_year]), {:prompt => "--select year--" } %>
+    <span class="pl-2"><b><%= label_tag "Tag" %></b></span>
+
+    <%= select_tag :tag, options_for_select(ActsAsTaggableOn::Tag.order(name: :asc).map{ |tag| [tag.name, tag.name] }, params[:tag]), {:prompt => "--select tag--" }%>
+
+    <span class="pl-2"><button type="submit" class="py-2.5 px-5 mr-2 mb-2 text-sm font-medium text-gray-900 focus:outline-none bg-white rounded-lg border border-gray-200 hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-4 focus:ring-gray-200">Filter Cases</button></span>
+  <% end %>
+</div>
   <div class="col-span-3">
     <div class="overflow-x-auto sm:-mx-6 lg:-mx-8">
       <div class="py-2 inline-block min-w-full sm:px-6 lg:px-8">

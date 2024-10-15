@@ -3,7 +3,6 @@
 module CaseDetails
   class CaseDetail < ApplicationRecord
     include PgSearch::Model
-    acts_as_taggable
     acts_as_taggable_on :tags
     pg_search_scope :text_search,
       against: [
@@ -48,6 +47,10 @@ module CaseDetails
     ]
     def self.submitted_current_year
       where(submission_date_year: Date.current.year)
+    end
+
+    def self.incident_year(year)
+      where(incident_start_year: year)
     end
 
     def submission_date
