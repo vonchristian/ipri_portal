@@ -46,7 +46,7 @@ Rails.application.routes.draw do
       resources :criminalizations, only: [:index, :new, :create, :edit, :update], controller: "case_details/criminalizations"
       resources :human_rights_violations, only: [:index, :new, :create, :edit, :update], controller: "case_details/human_rights_violations"
       resources :killings, only: [:index, :new, :create, :edit, :update], controller: "case_details/killings"
-      resources :development_projects, only: [:index], controller: "case_details/development_projects"
+      resources :development_projects, only: [:index, :new, :create], controller: "case_details/development_projects"
       resources :tags, only: [:index, :create], controller: "case_details/tags"
     end
   end
@@ -59,5 +59,7 @@ Rails.application.routes.draw do
   resources :criminalizations, only: [:index]
   resources :human_rights_violations, only: [:index]
 
-  resources :case_details, only: [:edit, :update]
+  resources :case_details, only: [:edit, :update] do
+    resources :development_projects, only: [:new, :create], controller: 'case_details/development_projects'
+  end
 end
