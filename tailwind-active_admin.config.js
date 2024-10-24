@@ -1,5 +1,5 @@
 const execSync = require('child_process').execSync;
-const activeAdminPath = execSync('bundle show activeadmin', { encoding: 'utf-8' });
+const activeAdminPath = execSync('bundle show activeadmin', { encoding: 'utf-8' }).trim();
 
 module.exports = {
   content: [
@@ -14,6 +14,6 @@ module.exports = {
   ],
   darkMode: "selector",
   plugins: [
-    // require(`@activeadmin/activeadmin/plugin`)
+    require(`@activeadmin/activeadmin/plugin`)
   ]
 }
