@@ -12,11 +12,12 @@
     <% if content_for? :head %>
       <%= yield :head %>
     <% end %>
-    <%= turbo_refreshes_with method: :morph, scroll: :preserve %>
   </head>
 
   <body>
     <main>
+      <%= turbo_refresh_method_tag :morph %>
+      <%= turbo_refresh_scroll_tag :preserve %>
       <%= render "layouts/documenter/header" %>
       <div class="grid grid-cols-1 md:grid-cols-12">
 

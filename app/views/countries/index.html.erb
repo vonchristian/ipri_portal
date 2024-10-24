@@ -1,6 +1,5 @@
 <div class="overflow-x-auto sm:-mx-6 lg:-mx-8">
     <div class="py-2 inline-block min-w-full sm:px-6 lg:px-8">
-
       <div class="overflow-hidden">
         <%= form_tag countries_path, method: :get do %>
         <div class="relative">
@@ -15,11 +14,11 @@
           <thead class="border-b bg-gray-50">
             <tr>
               <th id="country-name" scope="col" class="text-sm font-bold text-gray-900 px-6 py-4 text-left">
-                <%= show_sort_indicator_for("name") %>
-                <%= sort_link(column: "name", label: "Country") %>
+                <span>
+                  <%= sort_link(column: "name", label: "Country") %>
+                </span>
               </th>
               <th id="country-case-details-count" scope="col" class="text-sm font-bold text-gray-900 px-6 py-4 text-left">
-                <%= show_sort_indicator_for("case_details_count") %>
                 <%= sort_link(column: "case_details_count", label: "Total Cases") %>
               </th>
               <th id="country-killings-count" scope="col" class="text-sm font-bold text-gray-900 px-6 py-4 text-left">
