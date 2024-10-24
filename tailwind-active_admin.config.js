@@ -1,5 +1,5 @@
 const execSync = require('child_process').execSync;
-const activeAdminPath = execSync('bundle show activeadmin', { encoding: 'utf-8' }).trim();
+const activeAdminPath = execSync('bundle show activeadmin', { encoding: 'utf-8' });
 
 module.exports = {
   content: [

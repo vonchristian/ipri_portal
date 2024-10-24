@@ -5,6 +5,7 @@ require "mina/bundler"
 require "mina/git"
 require "mina/puma"
 require "mina/version_managers/rbenv"
+require 'mina/yarn'
 
 Dir["/lib/mina/*.rb"].each { |file| require file }
 
@@ -47,6 +48,7 @@ task deploy: :remote_environment do
     invoke :"git:clone"
     invoke :"deploy:link_shared_paths"
     invoke :"bundle:install"
+    invoke :"yarn:install"
     invoke :"rails:db_migrate"
     invoke :"rails:assets_precompile"
     invoke :"deploy:cleanup"
