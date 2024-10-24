@@ -3,9 +3,9 @@ const activeAdminPath = execSync('bundle show activeadmin', { encoding: 'utf-8' 
 
 module.exports = {
   content: [
-    // `${activeAdminPath}/vendor/javascript/flowbite.js`,
-    // `${activeAdminPath}/plugin.js`,
-    // `${activeAdminPath}/app/views/**/*.{arb,erb,html,rb}`,
+    `${activeAdminPath}/vendor/javascript/flowbite.js`,
+    `${activeAdminPath}/plugin.js`,
+    `${activeAdminPath}/app/views/**/*.{arb,erb,html,rb}`,
     './app/admin/**/*.{arb,erb,html,rb}',
     './app/views/active_admin/**/*.{arb,erb,html,rb}',
     './app/views/admin/**/*.{arb,erb,html,rb}',
@@ -14,6 +14,6 @@ module.exports = {
   ],
   darkMode: "selector",
   plugins: [
-    require(`@activeadmin/activeadmin/plugin`)
+    // require(`@activeadmin/activeadmin/plugin`)
   ]
 }
