@@ -6,7 +6,7 @@ module Documenters
       @criminalizations_count = Criminalizations::Criminalization.all.size
       @killings_count = Killings::Killing.all.size
       @human_rights_violations_count = HumanRightsViolations::HumanRightsViolation.all.size
-      @cases_count = @criminalizations_count + @killings_count + @human_rights_violations_count
+      @cases_count = ::CaseDetails::CaseDetail.all.size
     end
   end
 end

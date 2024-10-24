@@ -9,7 +9,7 @@
               <h1 class="text-5xl font-bold text-red-700 my-5 mx-8"><%= @cases_count %></h1>
         <div class="flex flex-col justify-between p-4 leading-normal">
             <h5 class="mb-2 text-1xl font-bold tracking-tight text-gray-900">Total Cases</h5>
-            <p class="mb-3 text-sm text-gray-700"> <%= Criminalizations::Criminalization.submitted_current_year.size %> Submitted this year</p>
+            <p class="mb-3 text-sm text-gray-700"> <%= CaseDetails::CaseDetail.submitted_current_year.size %> Submitted this year</p>
         </div>
     </a>
   </div>

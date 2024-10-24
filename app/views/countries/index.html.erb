@@ -1,4 +1,4 @@
- <div class="overflow-x-auto sm:-mx-6 lg:-mx-8">
+<div class="overflow-x-auto sm:-mx-6 lg:-mx-8">
     <div class="py-2 inline-block min-w-full sm:px-6 lg:px-8">
 
       <div class="overflow-hidden">
@@ -14,20 +14,20 @@
         <table class="mt-2 min-w-full">
           <thead class="border-b bg-gray-50">
             <tr>
-              <th scope="col" class="text-sm font-bold text-gray-900 px-6 py-4 text-left">
-                Country
+              <th id="country-name" scope="col" class="text-sm font-bold text-gray-900 px-6 py-4 text-left">
+                <%= sort_link(column: "name", label: "Country") %>
               </th>
-              <th scope="col" class="text-sm font-bold text-gray-900 px-6 py-4 text-left">
-                Total Cases
+              <th id="country-case-details-count" scope="col" class="text-sm font-bold text-gray-900 px-6 py-4 text-left">
+                <%= sort_link(column: "case_details_count", label: "Total Cases") %>
               </th>
-              <th scope="col" class="text-sm font-bold text-gray-900 px-6 py-4 text-left">
-                Killings
+              <th id="country-killings-count" scope="col" class="text-sm font-bold text-gray-900 px-6 py-4 text-left">
+                <%= sort_link(column: "killings_count", label: "Killings") %>
               </th>
-              <th scope="col" class="text-sm font-bold text-gray-900 px-6 py-4 text-left">
-                Criminalizations
+              <th id="country-criminalizations-count" scope="col" class="text-sm font-bold text-gray-900 px-6 py-4 text-left">
+                <%= sort_link(column: "criminalizations_count", label: "Criminalizations") %>
               </th>
-              <th scope="col" class="text-sm font-bold text-gray-900 px-6 py-4 text-left">
-                Other Violations
+              <th id="country-human-rights-violations-count" scope="col" class="text-sm font-bold text-gray-900 px-6 py-4 text-left">
+                <%= sort_link(column: "human_rights_violations_count", label: "Other Violations") %>
               </th>
             </tr>
           </thead>
@@ -38,7 +38,7 @@
       <span class="<%= 'fa fa-flag text-blue-600' if country.priority %>"></span> <%= link_to country.name, country_path(country) %>
     </td>
     <td scope="row" class="py-4 px-6 font-medium text-gray-900 whitespace-nowrap">
-      <%= country.case_count %>
+      <%= country.case_details_count %>
     </td>
     <td scope="row" class="py-4 px-6 font-medium text-gray-900 whitespace-nowrap">
       <%= country.killings_count %>
@@ -47,7 +47,7 @@
       <%= country.criminalizations_count %>
     </td>
     <td scope="row" class="py-4 px-6 font-medium text-gray-900 whitespace-nowrap">
-      <%= country.other_violations_count %>
+      <%= country.human_rights_violations_count %>
     </td>
 <% end %>
 </tbody>

@@ -6,7 +6,7 @@ git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 ruby "3.1.2"
 
 # Bundle edge Rails instead: gem "rails", github: "rails/rails", branch: "main"
-gem "rails", "~> 7.0.2", ">= 7.0.2.4"
+gem 'rails', '~> 7.2', '>= 7.2.1.2'
 gem "rails-i18n", "~> 7.0.0"
 gem "countries"
 gem "email_validator"
@@ -77,7 +77,6 @@ group :test do
   gem "database_cleaner-active_record"
 end
 
-gem "tailwindcss-rails"
 gem "font-awesome-sass", "~> 6.1.2"
 gem "heroicon"
 gem "mina-ng-puma", require: false
@@ -90,7 +89,8 @@ gem 'active_interaction-extras'
 gem "kt-paperclip", "~> 6.4", ">= 6.4.1"
 
 gem "pundit", "~> 2.3"
-gem "activeadmin", "2.13.1"
+gem "activeadmin", "4.0.0.beta13"
 gem "devise"
-gem "acts-as-taggable-on", "~> 9.0"
-gem "activeadmin_addons"
+gem "acts-as-taggable-on"
+gem 'counter_culture', '~> 3.2'
+gem "cssbundling-rails"

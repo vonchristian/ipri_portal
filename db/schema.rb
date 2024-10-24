@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2024_09_03_103223) do
+ActiveRecord::Schema[7.2].define(version: 2024_10_24_043812) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
   enable_extension "plpgsql"
@@ -210,12 +210,12 @@ ActiveRecord::Schema[7.0].define(version: 2024_09_03_103223) do
 
   create_table "countries", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.string "name", null: false
-    t.integer "case_count"
-    t.integer "killings_count"
-    t.integer "criminalizations_count"
-    t.integer "other_violations_count"
+    t.integer "case_details_count", default: 0, null: false
+    t.integer "killings_count", default: 0, null: false
+    t.integer "criminalizations_count", default: 0, null: false
+    t.integer "human_rights_violations_count", default: 0, null: false
     t.boolean "priority", default: false
-    t.index ["case_count"], name: "index_countries_on_case_count"
+    t.index ["case_details_count"], name: "index_countries_on_case_details_count"
     t.index ["priority"], name: "index_countries_on_priority"
   end
 

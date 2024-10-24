@@ -14,6 +14,8 @@ class ApplicationController < ActionController::Base
   end
 
   def current_documenter
+    true
+
     if session[:user_id]
       @documenter = Users::Documenter.find(session[:user_id])
     end

@@ -23,17 +23,19 @@ module CaseDetails
     validates :reference_number, presence: true, uniqueness: true
 
     belongs_to :documenter,            class_name: "Users::Documenter", optional: true
-    belongs_to :country,               optional: true, touch: true
-    has_many :individual_victims,      class_name: "Victims::IndividualVictim", dependent: :destroy, counter_cache: true
-    has_many :collective_victims,      class_name: "Victims::CollectiveVictim", dependent: :destroy, counter_cache: true
-    has_many :criminalizations,        class_name: "Criminalizations::Criminalization", dependent: :destroy, counter_cache: true
-    has_many :human_rights_violations, class_name: "HumanRightsViolations::HumanRightsViolation", dependent: :destroy, counter_cache: true
-    has_many :killings,                class_name: "Killings::Killing", dependent: :destroy, counter_cache: true
+    belongs_to :country,               optional: true
+    has_many :individual_victims,      class_name: "Victims::IndividualVictim", dependent: :destroy
+    has_many :collective_victims,      class_name: "Victims::CollectiveVictim", dependent: :destroy
+    has_many :criminalizations,        class_name: "Criminalizations::Criminalization", dependent: :destroy
+    has_many :human_rights_violations, class_name: "HumanRightsViolations::HumanRightsViolation", dependent: :destroy
+    has_many :killings,                class_name: "Killings::Killing", dependent: :destroy
     has_many_attached                  :documents, dependent: :destroy
     has_many :case_projects,           class_name: "DevelopmentProjects::CaseProject", dependent: :destroy
     has_many :development_projects,    class_name: "DevelopmentProjects::DevelopmentProject", through: :case_projects
 
     delegate :name, to: :country, prefix: true, allow_nil: true
+
+    counter_culture :country
 
     DATA_SHARING_OPTIONS = [
       OpenStruct.new(
@@ -87,6 +89,14 @@ module CaseDetails
     end
 
     def unrestricted_content
+    end
+
+    def self.ransackable_associations(auth_object = nil)
+      ["base_tags", "case_projects", "collective_victims", "country", "criminalizations", "development_projects", "documenter", "documents_attachments", "documents_blobs", "human_rights_violations", "individual_victims", "killings", "tag_taggings", "taggings", "tags"]
+    end
+
+    def self.ransackable_attributes(auth_object = nil)
+      ["actions_taken_details", "actions_taken_status", "collective_victims_count", "country_id", "created_at", "criminalizations_count", "data_sharing", "data_sources", "development_projects_count", "documenter_email", "documenter_first_name", "documenter_id", "documenter_last_name", "documenter_organization", "documenter_phone_number", "human_rights_violations_count", "id", "id_value", "impact_to_community_details", "impact_to_victim_details", "incident_end_day", "incident_end_month", "incident_end_year", "incident_hour", "incident_minute", "incident_start_day", "incident_start_month", "incident_start_year", "individual_victims_count", "killings_count", "location_details_1", "location_details_2", "organization_name", "primary_data", "reference_number", "submission_date_day", "submission_date_month", "submission_date_year", "subnational_location", "time_period", "updated_at"]
     end
   end
 end

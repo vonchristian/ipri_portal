@@ -16,5 +16,13 @@ module Users
     def full_name
       "#{first_name} #{last_name}"
     end
+
+    def self.ransackable_associations(auth_object = nil)
+      ["case_details"]
+    end
+
+    def self.ransackable_attributes(auth_object = nil)
+      ["country_id", "created_at", "email", "first_name", "id", "id_value", "last_name", "locale", "password_digest", "phone_number", "role", "updated_at"]
+    end
   end
 end
