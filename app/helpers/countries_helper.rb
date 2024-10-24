@@ -7,4 +7,12 @@ module CountriesHelper
   def next_direction
     params[:direction] == 'asc' ? 'desc' : 'asc'
   end
+
+  def sort_indicator
+    tag.span(class: "sort sort-#{params[:direction]}")
+  end
+
+  def show_sort_indicator_for(column)
+    sort_indicator if params[:column] == column
+  end
 end
