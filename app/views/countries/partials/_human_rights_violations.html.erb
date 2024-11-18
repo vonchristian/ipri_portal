@@ -1,0 +1,50 @@
+<% if human_rights_violations.present? %>
+  <div class="col-span-3">
+    <div class="overflow-x-auto sm:-mx-6 lg:-mx-8">
+      <div class="py-2 inline-block min-w-full sm:px-6 lg:px-8">
+        <div class="overflow-hidden">
+          <table class="mt-2 min-w-full">
+            <thead class="border-b bg-gray-50">
+              <tr>
+                <th scope="col" class="text-sm font-bold text-gray-900 px-6 py-4 text-left">
+                  Submission Date
+                </th>
+                <th scope="col" class="text-sm font-bold text-gray-900 px-6 py-4 text-left">
+                  Details
+                </th>
+              </tr>
+            </thead>
+            <tbody>
+                <% human_rights_violations.each do |human_rights_violation| %>
+                <%= link_to documenters_case_detail_path(human_rights_violation.case_detail) do %>
+                  <tr class="border-b">
+                    <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
+                      <%=  link_to human_rights_violation.case_detail.submission_date, documenters_case_detail_human_rights_violations_path(human_rights_violation.case_detail) %>
+                    </td>
+                    <td scope="row" class="py-4 px-6 font-medium text-gray-900 whitespace-nowrap">
+                      <%= link_to human_rights_violation.violation_details.to_s.truncate(160), documenters_case_detail_human_rights_violations_path(human_rights_violation.case_detail) %>
+                    </td>
+                  </tr>
+                <% end %>
+              <% end %>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="mt-5">
+    <%== pagy_nav(@pagy) %>
+  </div>
+<% else %>
+  <div class="max-w-[85rem] px-4 py-10 sm:px-6 lg:px-8 lg:py-14 mx-auto">
+    <div class="max-w-xl mx-auto">
+      <div class="text-center">
+        <p class="mt-1 text-gray-600 dark:text-neutral-400">
+          No related human rights violations found. <br><br>
+        </p>
+      </div>
+    </div>
+  </div>
+<% end %>
+

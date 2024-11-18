@@ -9,8 +9,11 @@
       <li class="mr-2">
           <a href="/countries/<%=country.id %>/criminalizations" class="<%= "inline-block p-4 text-blue-600 rounded-t-lg border-b-2 border-blue-600 active" if current_page?(country_criminalizations_path(country.id)) %> inline-block p-4 rounded-t-lg border-b-2 border-transparent hover:text-gray-600 hover:border-gray-300">Criminalizations</a>
       </li>
-       <li class="mr-2">
+      <li class="mr-2">
           <a href="/countries/<%=country.id %>/killings" class="<%= "inline-block p-4 text-blue-600 rounded-t-lg border-b-2 border-blue-600 active" if current_page?(country_killings_path(country.id)) %> inline-block p-4 rounded-t-lg border-b-2 border-transparent hover:text-gray-600 hover:border-gray-300">Killings</a>
+      </li>
+       <li class="mr-2">
+          <a href="/countries/<%=country.id %>/human_rights_violations" class="<%= "inline-block p-4 text-blue-600 rounded-t-lg border-b-2 border-blue-600 active" if current_page?(country_human_rights_violations_path(country.id)) %> inline-block p-4 rounded-t-lg border-b-2 border-transparent hover:text-gray-600 hover:border-gray-300">Human Rights Violations</a>
       </li>
     </ul>
   </div>
@@ -22,6 +25,9 @@
     <% end %>
     <% if current_page?(country_killings_path(country)) %>
       <%= render 'countries/partials/killings', killings: country.killings %>
+    <% end %>
+    <% if current_page?(country_human_rights_violations_path(country)) %>
+      <%= render 'countries/partials/human_rights_violations', human_rights_violations: human_rights_violations %>
     <% end %>
 </div>
 

@@ -9,7 +9,7 @@ class Country < ApplicationRecord
   has_many :killings, class_name: "Killings::Killing", through: :case_details
   has_many :criminalizations, class_name: "Criminalizations::Criminalization", through: :case_details
   has_many :human_rights_violations, class_name: "HumanRightsViolations::HumanRightsViolation", through: :case_details
-
+  has_many :development_projects, class_name: "DevelopmentProjects::DevelopmentProject", foreign_key: "parent_company_country_id"
   validates :name, presence: true, uniqueness: true
 
   def self.with_top_cases(limit: 10)
