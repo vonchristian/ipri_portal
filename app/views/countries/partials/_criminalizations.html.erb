@@ -14,14 +14,14 @@
                 </th>
               </tr>
             </thead>
-            <tbody>
+          <tbody>
                 <% criminalizations.each do |criminalization| %>
                   <tr class="border-b">
                     <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
                       <%= link_to criminalization.case_detail.submission_date, documenters_case_detail_criminalizations_path(criminalization.case_detail) %>
                     </td>
                     <td scope="row" class="py-4 px-6 font-medium text-gray-900 whitespace-nowrap">
-                      <%= link_to criminalization.criminalization_details.to_s.truncate(35), documenters_case_detail_criminalizations_path(criminalization.case_detail) %>
+                      <%= link_to criminalization.criminalization_details.to_s.truncate(160), documenters_case_detail_criminalizations_path(criminalization.case_detail) %>
                     </td>
                   </tr>
                 <% end %>
