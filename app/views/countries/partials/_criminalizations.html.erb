@@ -1,4 +1,4 @@
-<% if killings.present? %>
+<% if criminalizations.present? %>
   <div class="col-span-3">
     <div class="overflow-x-auto sm:-mx-6 lg:-mx-8">
       <div class="py-2 inline-block min-w-full sm:px-6 lg:px-8">
@@ -15,18 +15,16 @@
               </tr>
             </thead>
             <tbody>
-                <% killings.each do |killing| %>
-                <%= link_to documenters_case_detail_path(killing.case_detail) do %>
+                <% criminalizations.each do |criminalization| %>
                   <tr class="border-b">
                     <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
-                      <%=  link_to killing.case_detail.submission_date, documenters_case_detail_killings_path(killing.case_detail) %>
+                      <%= link_to criminalization.case_detail.submission_date, documenters_case_detail_criminalizations_path(criminalization.case_detail) %>
                     </td>
                     <td scope="row" class="py-4 px-6 font-medium text-gray-900 whitespace-nowrap">
-                      <%= link_to killing.killing_details.to_s.truncate(35), documenters_case_detail_killings_path(killing.case_detail) %>
+                      <%= link_to criminalization.criminalization_details.to_s.truncate(35), documenters_case_detail_criminalizations_path(criminalization.case_detail) %>
                     </td>
                   </tr>
                 <% end %>
-              <% end %>
             </tbody>
           </table>
         </div>
@@ -41,7 +39,7 @@
     <div class="max-w-xl mx-auto">
       <div class="text-center">
         <p class="mt-1 text-gray-600 dark:text-neutral-400">
-          No related killings found. <br><br>
+          No related criminalizations found. <br><br>
         </p>
       </div>
     </div>

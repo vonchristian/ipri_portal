@@ -54,6 +54,7 @@ Rails.application.routes.draw do
 
   resources :countries, only: [:index, :show] do
     resources :killings, only: [:index], controller: "countries/killings"
+    resources :criminalizations, only: [:index], controller: "countries/criminalizations"
   end
 
   resources :killings, only: [:index, :show, :edit, :update]

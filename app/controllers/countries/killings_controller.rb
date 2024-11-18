@@ -5,7 +5,7 @@ module Countries
     layout "documenter"
     def index
       @country = Country.find(params[:country_id])
-      @killings = @country.killings
+      @pagy, @killings = pagy(@country.killings.includes(:case_detail).order(:created_at))
     end
   end
 end

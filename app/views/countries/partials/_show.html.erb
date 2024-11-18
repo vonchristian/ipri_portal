@@ -7,12 +7,18 @@
           <a href="/countries/<%=country.id %>" class="<%= "inline-block p-4 text-blue-600 rounded-t-lg border-b-2 border-blue-600 active" if current_page?(country_path(country.id)) %> inline-block p-4 rounded-t-lg border-b-2 border-transparent hover:text-gray-600 hover:border-gray-300">Cases</a>
       </li>
       <li class="mr-2">
+          <a href="/countries/<%=country.id %>/criminalizations" class="<%= "inline-block p-4 text-blue-600 rounded-t-lg border-b-2 border-blue-600 active" if current_page?(country_criminalizations_path(country.id)) %> inline-block p-4 rounded-t-lg border-b-2 border-transparent hover:text-gray-600 hover:border-gray-300">Criminalizations</a>
+      </li>
+       <li class="mr-2">
           <a href="/countries/<%=country.id %>/killings" class="<%= "inline-block p-4 text-blue-600 rounded-t-lg border-b-2 border-blue-600 active" if current_page?(country_killings_path(country.id)) %> inline-block p-4 rounded-t-lg border-b-2 border-transparent hover:text-gray-600 hover:border-gray-300">Killings</a>
       </li>
     </ul>
   </div>
     <% if current_page?(country_path(country)) %>
      <%= render 'countries/case_details/index', case_details: country.case_details %>
+    <% end %>
+     <% if current_page?(country_criminalizations_path(country)) %>
+      <%= render 'countries/partials/criminalizations', criminalizations: criminalizations %>
     <% end %>
     <% if current_page?(country_killings_path(country)) %>
       <%= render 'countries/partials/killings', killings: country.killings %>
