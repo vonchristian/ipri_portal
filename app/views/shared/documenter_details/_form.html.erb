@@ -54,10 +54,9 @@
                     <label class="block text-sm font-bold text-gray-900">
                       <%= t(:is_the_documenter_submitting_this_case_factsheet_as_primary_data) %>
                     </label>
-                    <p class="text-sm text-gray-500">
-                       <%= t(:primary_data_hint) %>
-                      </p>
-                        <%= f.input :primary_data, label: '', collection: ['Yes', 'No'], checked: 'Yes', input_html: { class: "w-5 h-5", data: { source_of_data_target: "input", action: "click->source-of-data#toggle" } }, as: :radio_buttons  %>
+
+                        <%= f.input :primary_data, label: false,
+                          collection: ['Yes - (Primary data refers to data that are gathered directly from the victim/s, family/ies of the victim/s, member/s of the Indigenous Peoples that were affected.)', 'No, not directly from the source (information is gathered from news outlets, etc.)'], checked: 'Yes', input_html: { class: "w-5 h-5", data: { source_of_data_target: "input", action: "click->source-of-data#toggle" } }, as: :radio_buttons  %>
                   <div data-source-of-data-target="output">
                     <span class="block text-sm font-bold text-gray-900 mb-5"><%=t(:please_provide_information_on_source_of_data) %></span>
                     <label for="about" class="block text-sm font-bold text-gray-700">

@@ -6,11 +6,24 @@
       <h2 class="font-bold text-xl text-gray-900">Group of People Victim Details</h2>
       <div class="md:mt-0 md:col-span-2 bg-white px-4">
           <div>
-            <div class="px-4 py-5  space-y-4 sm:p-6">
-              <div class="col-span-6 sm:col-span-3">
-                <%= f.input :affected_total, as: :text, label: "Number of Affected People", hint: "Specify if number refers to individuals, families, homes, groups, communities, villages etc. (E.g., 100 families, 250 homes)" %>
 
+            <div class="px-4 py-5  space-y-4 sm:p-6">
+               <div class="col-span-6 sm:col-span-3">
+                <%= f.input :indigenous_group_description, as: :text, label: "Name/s of Indigenous Peoples’ group or Ethnic Identity/ies of peoples affected (If more than one Indigenous Peoples' group, list the name of each group.) " %>
               </div>
+              <fieldset>
+              <div class="mt-4 space-y-4">
+                <div class="flex items-center">
+                  <%= f.input :collective_victim_category_id, label: "Category of affected people", collection: Victims::CollectiveVictimCategory.all.map{|a| [a.name, a.id] } %>
+                </div>
+                </div>
+
+            </fieldset>
+              <div class="col-span-6 sm:col-span-3">
+                <%= f.input :affected_total, as: :text, label: "Number of affected people" %>
+              </div>
+
+
               <fieldset>
                 <div class="mt-4 space-y-4">
                    <div class="mt-4 space-y-4">

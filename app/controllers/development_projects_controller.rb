@@ -33,6 +33,7 @@ class DevelopmentProjectsController < ApplicationController
 
   def development_project_params
     params.require(:development_projects_development_project).permit(
+      :development_project_category_id,
       :name,
       :description,
       :project_start_year,

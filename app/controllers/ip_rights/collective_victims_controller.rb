@@ -35,6 +35,8 @@ module IpRights
     def collective_victim_params
       params.require(:case_details_victims_collective)
         .permit(:affected_total,
+          :collective_victim_category_id,
+          :indigenous_group_description,
           :refer_to_individuals,
           :victim_details,
           :male_total,

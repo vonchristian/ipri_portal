@@ -93,10 +93,10 @@
             </tr>
           </thead>
           <tbody>
-            <% @case_detail.collective_victims.each do |victim| %>
+            <% @case_detail.collective_victims.includes(:collective_victim_category).each do |victim| %>
               <tr class="border-b">
                 <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
-                  <%= victim.affected_total %>
+                  <%= victim.affected_total %> <%= victim.try(:collective_victim_category).try(:name) %>
                 </td>
                 <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
                   <%= victim.victim_details %>

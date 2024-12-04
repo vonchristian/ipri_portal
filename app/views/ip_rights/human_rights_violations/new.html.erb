@@ -18,7 +18,7 @@
                   <% end %>
                 <% end %>
                 <div class="pt-5">
-                <%= f.input :violation_details, as: :text, label: "Why did the victim/s suffer from the human rights violation/s?", hint: "(E.g., S/he or they are defending their lands from being grabbed. S/he or they are protecting their traditional livelihood of pastoralism or defending their right to self-government, etc.)" %>
+                <%= f.input :violation_details, as: :text, label: "What caused the Human Rights Violation?", hint: "(E.g., S/he or they are defending their lands from being grabbed. S/he or they are protecting their traditional livelihood of pastoralism or defending their right to self-government, etc.)" %>
                 </div>
                 <%= f.input :alleged_perpetrators_known, label: "Is/Are the alleged perpetrator/s known?", collection: [['No', 'No'], ['Yes', 'Yes'] ], label_method: :second, value_method: :first, selected: "No", input_html: { data: { action: "human-rights-violation-form#togglePerpetratorCategories" } }  %>
                 <div class="hidden" data-human-rights-violation-form-target="perpetratorCategoryGroup">
@@ -45,8 +45,7 @@
             <div class="px-4 py-5  space-y-4 sm:p-6">
             <%= f.input :case_filing_status, label: "Was/Were there legal case/s filed against the alleged perpetrators on behalf of the victim/s?", collection: [['No', 'No'], ['Yes', 'Yes'] ], label_method: :second, value_method: :first, selected: "No", input_html: { data: { action: "human-rights-violation-form#toggleCaseFiling" } }  %>
             <div class="hidden" data-human-rights-violation-form-target="caseFilingGroup">
-              <%= f.input :case_filing_details, as: :text, label: "If yes, please provide further information: Where is/are the case/s filed? Who filed the case? E.g., victim, family of the victim, support organizations, etc.; any other details of the case/s filed, please share.",
-              hint: "Please provide details of the legal case against the alleged perpetrator/s" %>
+              <%= f.input :case_filing_details, as: :text, label: "If yes, please provide further information of the state of the case" %>
             </div>
             <div data-human-rights-violation-form-target="caseFilingGroup">
               <%= f.input :case_filing_details, as: :text, label: "If no, please elaborate on your response. (e.g. can you provide probable reasons on why there has been no legal case/s filed against the alleged perpetrators? Etc.)" %>
@@ -60,9 +59,9 @@
               <%= f.input :state_action_to_address_violation_details,  as: :text, label: "If No, please elaborate on your response." %>
             </div>
 
-            <%= f.input :investigation_on_violation, label: "Has there been any investigation/s on the incident of other type of human right violation?", collection: [['No', 'No'], ['Yes', 'Yes'] ], label_method: :second, value_method: :first, selected: "No", input_html: { data: { action: "human-rights-violation-form#toggleInvestigationOnViolation" } }  %>
+            <%= f.input :investigation_on_violation, label: "Has there been any investigations/actions on the incident taken by other actors?", collection: [['No', 'No'], ['Yes', 'Yes'] ], label_method: :second, value_method: :first, selected: "No", input_html: { data: { action: "human-rights-violation-form#toggleInvestigationOnViolation" } }  %>
             <div class="hidden" data-human-rights-violation-form-target="investigationOnViolationGroup">
-              <%= f.input :investigation_on_violation_details, as: :text, label: "If yes, please provide additional information on the investigation, including relevant date/s and institutions/ office/s or representative/s involved, e.g., national human rights institution, United Nations body, etc." %>
+              <%= f.input :investigation_on_violation_details, as: :text, label: "If yes, please provide additional information on the investigation, including relevant date/s and institutions/ office/s or representative/s involved, e.g., national human rights institution, United Nations body, Civil Society, Community, etc.)" %>
             </div>
             <div data-human-rights-violation-form-target="investigationOnViolationGroup">
               <%= f.input :investigation_on_violation_details, as: :text, label: "If no, please elaborate on your response. (e.g. can you provide probable reasons on why there has been no investigation/s conducted? Or, is the case not yet publicly reported? Etc.)" %>

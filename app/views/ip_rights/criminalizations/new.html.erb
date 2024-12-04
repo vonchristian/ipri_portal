@@ -74,14 +74,6 @@
                 <%= f.input :case_filing_against_perpetrator_details, as: :text,  label: "If NO, please elaborate on your response" %>
               </div>
 
-              <%= f.input :investigation_on_criminalization, label: "Has there been any investigation/s on the incident of criminalization?", collection: [['No', 'No'], ['Yes', 'Yes']], label_method: :second, value_method: :first, selected: "No", input_html: { data: { action: "criminalization-form#toggleInvestigation" } } %>
-
-              <div class="hidden" data-criminalization-form-target="investigationGroup">
-                <%= f.input :investigation_on_criminalization_details, as: :text, label: "If yes, please provide additional information on the investigation, including relevant date/s and institutions/ office/s or representative/s involved, e.g., national human rights institutions, United Nations body, etc." %>
-              </div>
-              <div data-criminalization-form-target="investigationGroup">
-                <%= f.input :investigation_on_criminalization_details, as: :text, label: "If no, please elaborate on your response. (e.g. can you provide probable reasons on why there has been no investigation/s conducted? Or, is the case not yet publicly reported? Etc.)" %>
-              </div>
               <h2 class="font-bold text-xl text-gray-900 pt-5">Impact/s of the Incident/s of Human Rights Violation</h2>
           <div class="border-t border-gray-200 mt-4"></div>
 

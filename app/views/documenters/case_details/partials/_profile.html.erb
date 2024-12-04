@@ -38,13 +38,22 @@
     <div class="col-span-8 mt-2">
       <p class="text-gray-500"> <%= @case_detail.documenter_email %> </p>
     </div>
-     <div class="col-span-3 ml-4 mt-2">
+    <div class="col-span-3 ml-4 mt-2">
       <p class="block mb-2 text-sm font-medium text-gray-900"> Phone Number </p>
     </div>
     <div class="col-span-1">
     </div>
     <div class="col-span-8 mt-2">
       <p class="text-gray-500"> <%= @case_detail.documenter_phone_number %> </p>
+    </div>
+
+    <div class="col-span-3 ml-4 mt-2">
+      <p class="block mb-2 text-sm font-medium text-gray-900"> Are you willing to share more information with IPRI? </p>
+    </div>
+    <div class="col-span-1">
+    </div>
+    <div class="col-span-8 mt-2">
+      <p class="text-gray-500"> <%= @case_detail.willing_to_share_more_info ? "Yes" : "No" %> </p>
     </div>
   </div>
 <div class="border-t border-gray-200 my-4"></div>

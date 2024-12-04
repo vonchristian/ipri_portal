@@ -6,6 +6,8 @@ module CaseDetails
       include ActiveModel::Model
 
       attr_accessor :case_detail_id,
+        :collective_victim_category_id,
+        :indigenous_group_description,
         :affected_total,
         :refer_to_individuals,
         :victim_details,
@@ -13,7 +15,7 @@ module CaseDetails
         :female_total,
         :age_bracket_breakdowns
 
-      validates :affected_total, presence: true
+      validates :affected_total, :collective_victim_category_id, :indigenous_group_description, presence: true
 
       def process!
         ApplicationRecord.transaction do
@@ -25,6 +27,8 @@ module CaseDetails
 
       def create_collective_victim
         collective_victim = ::Victims::CollectiveVictim.create!(
+          collective_victim_category_id: collective_victim_category_id,
+          indigenous_group_description: indigenous_group_description,
           case_detail_id: case_detail_id,
           affected_total: affected_total,
           refer_to_individuals: refer_to_individuals,

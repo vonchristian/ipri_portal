@@ -39,6 +39,7 @@ module IpRights
       params
         .require(:case_details_development_project)
         .permit(:project_name,
+          :development_project_category_id,
           :project_description,
           :start_of_operation_year,
           :project_documents,
@@ -55,7 +56,8 @@ module IpRights
           :funding_source_description,
           :funding_source_documents,
           :funding_source_data_sources,
-          :parent_company_name)
+          :parent_company_name,
+          documents: [])
         .merge!(case_detail_id: @case_detail.id)
     end
   end

@@ -27,6 +27,7 @@ module CaseDetails
       :submission_date_month,
       :submission_date_day,
       :submission_date_year,
+      :primary_data,
       presence: true
 
     def process!

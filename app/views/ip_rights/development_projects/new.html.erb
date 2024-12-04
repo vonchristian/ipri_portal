@@ -1,36 +1,25 @@
 <%= render '/ip_rights/shared/sidebar', current_step: 7, step_name: "Related Development Projects", percent_finished: 100 %>
 
-  <div data-controller="development-project-form" class="col-span-9 bg-white py-10">
-    <%= simple_form_for @development_project, url: :ip_rights_case_detail_development_projects do |f| %>
+<div data-controller="development-project-form" class="col-span-9 bg-white py-10">
+  <%= simple_form_for @development_project, url: :ip_rights_case_detail_development_projects do |f| %>
     <div class="max-w-7xl mx-auto lg:px-0">
       <h2 class="font-bold text-xl text-gray-900 pl-6">Details of Development Project</h2>
       <div class="border-t border-gray-200 mt-4"></div>
-        <div class="px-4 py-5  space-y-4 sm:p-6">
+      <div class="px-4 py-5  space-y-4 sm:p-6">
+        <%= f.input :development_project_category_id, label: "Type of Development Project", collection: DevelopmentProjects::Category.all.map{|a| [a.name, a.id] } %>
         <%= f.input :project_name, label: "Name of development project" %>
         <%= f.input :project_description, label: "Description of development project", as: :text %>
         <%= f.input :start_of_operation_year, label: "Indicate year of project's start of operation on the country where the incident of human rights violation happened" %>
-
-<h2 class="font-bold text-xl text-gray-900">Parent Company Profile</h2>
-      <div class="border-t border-gray-200 mt-4"></div>
-        <div data-controller="parent-company">
-         <label class="block text-sm font-bold text-gray-900">
-            Do you know if the development project/s has/have a parent company offshore?
-          </label>
-          <%= f.input :company_profile_known, label: '', collection: ['No','Yes'], checked: 'No', input_html: { data: { parent_company_target: "input", action: "click->parent-company#toggle" } }, as: :radio_buttons  %>
-        <div data-parent-company-target="output">
-          <div class="col-span-2 sm:col-span-2">
-            <%= f.input :parent_company_country_id, label: "Country of parent company", collection: Country.all.map{|country| [country.name, country.id] } %>
-          </div>
-          <%= f.input :parent_company_description, label: "Description of parent company", as: :text %>
-          <p class="font-bold text-gray-900">Source of Information on Parent Company</p>
-          <label for="about" class="block text-sm font-medium text-gray-700">
-            Other relevant websites/links
+        <div data-source-of-data-target="output">
+          <span class="block text-sm font-bold text-gray-900 mb-5">Source of information on development project</span>
+          <label for="about" class="block text-sm font-bold text-gray-700">
+            <%= t(:other_relevant_websites_or_links) %>
           </label>
           <div class="mt-1">
-            <%= f.input :parent_company_data_sources, label: false, as: :text,  input_html: { class: "shadow-sm focus:ring-indigo-500 focus:border-indigo-500 mt-1 block w-full sm:text-sm border border-gray-300 rounded-md" } %>
+            <%= f.input :project_data_sources, label: false, as: :text,  input_html: { class: "shadow-sm focus:ring-indigo-500 focus:border-indigo-500 mt-1 block w-full sm:text-sm border border-gray-300 rounded-md" } %>
           </div>
-          <label class="block text-sm font-medium text-gray-700">
-            Upload Documents
+          <label class="block text-sm font-bold text-gray-700">
+            <%= t(:upload_document)%>
           </label>
           <div class="mt-1 flex justify-center px-6 pt-5 border-2 border-gray-300 border-dashed rounded-md pb-5">
             <div class="space-y-1 text-center">
@@ -40,7 +29,7 @@
               <div class="flex text-sm text-gray-600">
                 <label for="file-upload" class="relative cursor-pointer bg-white rounded-md font-medium text-indigo-600 hover:text-indigo-500 focus-within:outline-none focus-within:ring-2 focus-within:ring-offset-2 focus-within:ring-indigo-500">
                   <span>Upload a file</span>
-                  <%= f.input :parent_company_documents, label: false, input_html: { multiple: true }, as: :file %>
+                  <%= f.input :documents, label: false, input_html: { multiple: true }, as: :file %>
                 </label>
               </div>
               <p class="text-xs text-gray-500">
@@ -49,50 +38,10 @@
             </div>
           </div>
         </div>
-<h2 class="font-bold text-xl text-gray-900 pt-4">Source of Funding Profile</h2>
-      <div class="border-t border-gray-200 mt-4"></div>
-      <div data-controller="funding-source">
-       <label class="block text-sm font-bold text-gray-900 mt-4">
-            Do you know if the development project/s has/have a parent company offshore?
-          </label>
-          <%= f.input :funding_profile_known, label: '', collection: ['No','Yes'], checked: 'No', input_html: { data: { funding_source_target: "input", action: "click->funding-source#toggle" } }, as: :radio_buttons  %>
-        <div data-funding-source-target="output">
-
-          <% DevelopmentProjects::FundingSource.all.each do |category| %>
-            <div class="col-span-6 sm:col-span-3">
-              <%= f.check_box :funding_source_ids, value: category.id, class: "focus:ring-indigo-500 h-4 w-4 text-indigo-600 border-gray-300 rounded" %>
-              <label for="first-name" class="text-base font-medium text-gray-700 pl-4"><%= category.name %></label>
-            </div>
-          <% end %>
-          <%= f.input :funding_source_description, label: "Description of Source/s of Funding", as: :text %>
-          <p class="font-bold text-gray-900">Source of Information on Funding Source</p>
-          <label for="about" class="block text-sm font-medium text-gray-700">
-            Other relevant websites/links
-          </label>
-          <div class="mt-1">
-            <%= f.input :funding_source_data_sources, label: false, as: :text,  input_html: { class: "shadow-sm focus:ring-indigo-500 focus:border-indigo-500 mt-1 block w-full sm:text-sm border border-gray-300 rounded-md" } %>
-          </div>
-          <label class="block text-sm font-medium text-gray-700">
-            Upload Documents
-          </label>
-          <div class="mt-1 flex justify-center px-6 pt-5 border-2 border-gray-300 border-dashed rounded-md pb-5">
-            <div class="space-y-1 text-center">
-              <svg class="mx-auto h-12 w-12 text-gray-400" stroke="currentColor" fill="none" viewBox="0 0 48 48" aria-hidden="true">
-                <path d="M28 8H12a4 4 0 00-4 4v20m32-12v8m0 0v8a4 4 0 01-4 4H12a4 4 0 01-4-4v-4m32-4l-3.172-3.172a4 4 0 00-5.656 0L28 28M8 32l9.172-9.172a4 4 0 015.656 0L28 28m0 0l4 4m4-24h8m-4-4v8m-12 4h.02" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
-              </svg>
-              <div class="flex text-sm text-gray-600">
-                <label for="file-upload" class="relative cursor-pointer bg-white rounded-md font-medium text-indigo-600 hover:text-indigo-500 focus-within:outline-none focus-within:ring-2 focus-within:ring-offset-2 focus-within:ring-indigo-500">
-                  <span>Upload a file</span>
-                  <%= f.input :funding_source_documents, label: false, input_html: { multiple: true }, as: :file %>
-                </label>
-              </div>
-              <p class="text-xs text-gray-500">
-                PDF, PNG, JPG, GIF up to 10MB
-              </p>
-            </div>
-          </div>
+        <div class="border-t border-gray-200 mt-4 pb-5"></div>
+          <%= f.submit "Proceed", class: 'float-right class="w-full h-12 px-6 text-white transition-colors duration-150 bg-green-700 rounded-lg focus:shadow-outline hover:bg-green-800 mt-4' %>
         </div>
       </div>
-      <div class="border-t border-gray-200 mt-4"></div>
-      <%= f.submit "Proceed", class: 'float-right class="w-full h-12 px-6 text-white transition-colors duration-150 bg-green-700 rounded-lg focus:shadow-outline hover:bg-green-800 mt-4' %>
-<% end %>
+    </div>
+  <% end %>
+</div>

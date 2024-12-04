@@ -47,6 +47,9 @@ HumanRightsViolations::Category.create!(title: "Land grabbing")
 HumanRightsViolations::Category.create!(title: "Physical injury/Beatings/Torture")
 HumanRightsViolations::Category.create!(title: "Forced eviction")
 HumanRightsViolations::Category.create!(title: "Kidnapping")
+HumanRightsViolations::Category.create!(title: "State-sponsored Vilification (terrorist-tagging, red-baiting, red-tagging)")
+HumanRightsViolations::Category.create!(title: "Online Attacks (Smear campaign, misinformation)")
+
 
 HumanRightsViolations::PerpetratorCategory.create!(title: "National Level Government Official")
 HumanRightsViolations::PerpetratorCategory.create!(title: "Federal Level Government Official")
@@ -63,12 +66,16 @@ HumanRightsViolations::PerpetratorCategory.create!(title: "Transnational corpora
 
 ISO3166::Country.all.collect(&:iso_short_name).each { |name| Country.create!(name: name) }
 
-DevelopmentProjects::Category.create!(name: "Infrastructure")
-DevelopmentProjects::Category.create!(name: "Conservation")
-DevelopmentProjects::Category.create!(name: "Agribusiness")
-DevelopmentProjects::Category.create!(name: "Energy")
-DevelopmentProjects::Category.create!(name: "Mining")
-DevelopmentProjects::Category.create!(name: "Tourism")
+DevelopmentProjects::Category.create!(name: "Infrastructure (roads, urbanization, water systems, telecommunications, and others)")
+DevelopmentProjects::Category.create!(name: "Conservation (Protected Area Designation, Wildlife, Water, Reforestation and Others)")
+DevelopmentProjects::Category.create!(name: "Agribusiness (corporate, monocrops, plantations, and others)")
+DevelopmentProjects::Category.create!(name: "Energy (Non-renewwable Resources e.g., fossil fuels, coal, Uranium, Fracking, and others)")
+DevelopmentProjects::Category.create!(name: "Mining (gold, silver, diamonds, sands, and other metals and minerals)")
+DevelopmentProjects::Category.create!(name: "Tourism (Ecotourism, and others)")
+DevelopmentProjects::Category.create!(name: "Transition Energy (Solar, Wind, Hydro, Biomass, Geothermal, and others)")
+DevelopmentProjects::Category.create!(name: "Deforestation (Logging, Manufacturing, and others)")
+DevelopmentProjects::Category.create!(name: "No Information")
+
 AdminUser.create!(
   first_name: "Admin",
   last_name: "Admin",
@@ -76,3 +83,10 @@ AdminUser.create!(
   password: "password",
   password_confirmation: "password",
 ) if Rails.env.development?
+
+Victims::CollectiveVictimCategory.create!(name: "Individuals")
+Victims::CollectiveVictimCategory.create!(name: "Families")
+Victims::CollectiveVictimCategory.create!(name: "Homes")
+Victims::CollectiveVictimCategory.create!(name: "Groups")
+Victims::CollectiveVictimCategory.create!(name: "Communities")
+Victims::CollectiveVictimCategory.create!(name: "Villages")

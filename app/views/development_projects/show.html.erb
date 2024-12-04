@@ -1,10 +1,21 @@
 <div class="flex w-full mx-auto mt-4 justify-between mt-5">
-  <h2 class="font-bold text-l text-gray-900 mt-4">Project Details</h2>
+  <h2 class="font-bold text-l text-gray-900 mt-4">Development Project Profile</h2>
   <%= link_to "Edit", edit_development_project_path(@development_project), class: "mr-4 text-gray-900 bg-white border border-gray-300 focus:outline-none hover:bg-gray-100 focus:ring-4 focus:ring-gray-200 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2" %>
 </div>
   <div class="grid grid-cols-1 md:grid-cols-12">
     <div class="col-span-3 ml-4 mt-2">
-      <p class="block mb-2 text-sm font-medium text-gray-900"> Project Name </p>
+      <p class="block mb-2 text-sm font-medium text-gray-900"> Type of Development Project </p>
+    </div>
+    <div class="col-span-1">
+
+    </div>
+    <div class="col-span-7 mt-2">
+      <p class="text-gray-500"><%= @development_project.category&.name %></p>
+    </div>
+  </div>
+  <div class="grid grid-cols-1 md:grid-cols-12">
+    <div class="col-span-3 ml-4 mt-2">
+      <p class="block mb-2 text-sm font-medium text-gray-900"> Name of development project </p>
     </div>
     <div class="col-span-1">
 
@@ -15,7 +26,7 @@
   </div>
   <div class="grid grid-cols-1 md:grid-cols-12">
     <div class="col-span-3 ml-4 mt-2">
-      <p class="block mb-2 text-sm font-medium text-gray-900"> Description </p>
+      <p class="block mb-2 text-sm font-medium text-gray-900"> Description of development project </p>
     </div>
     <div class="col-span-1">
 
@@ -26,7 +37,7 @@
   </div>
   <div class="grid grid-cols-1 md:grid-cols-12">
     <div class="col-span-3 ml-4 mt-2">
-      <p class="block mb-2 text-sm font-medium text-gray-900"> Year Started </p>
+      <p class="block mb-2 text-sm font-medium text-gray-900"> Indicate year of project's start </p>
     </div>
     <div class="col-span-1">
 
@@ -38,7 +49,7 @@
 
    <div class="grid grid-cols-1 md:grid-cols-12">
     <div class="col-span-3 ml-4 mt-2">
-      <p class="block mb-2 text-sm font-medium text-gray-900"> Sources of Information  </p>
+      <p class="block mb-2 text-sm font-medium text-gray-900"> Source of information on development project </p>
     </div>
     <div class="col-span-1">
 
@@ -50,7 +61,7 @@
 
 <div class="border-t border-gray-200 my-4"></div>
     <div class="col-span-3 ml-4 mt-2">
-      <p class="block mb-2 font-bold text-normal text-gray-900"> Parent Company Profile </p>
+      <p class="block mb-2 font-bold text-normal text-gray-900"> Company Profile </p>
     </div>
 
         <div class="grid grid-cols-1 md:grid-cols-12">
@@ -77,7 +88,7 @@
 
         <div class="grid grid-cols-1 md:grid-cols-12">
           <div class="col-span-3 ml-4 mt-2">
-            <p class="block mb-2 text-sm font-medium text-gray-900"> Description of parent company </p>
+            <p class="block mb-2 text-sm font-medium text-gray-900"> Description of company </p>
           </div>
           <div class="col-span-1">
           </div>

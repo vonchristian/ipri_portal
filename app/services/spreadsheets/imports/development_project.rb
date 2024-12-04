@@ -20,10 +20,8 @@ module Spreadsheets
           description: case_data["Description of development project/s"],
           project_start_year: case_data["Indicate year of project's start of operation on the country where the incident of human rights violation happened"],
           website_sources: case_data["Source of information on development project"],
+          development_project_category_id: category&.id
         )
-        if categories.present?
-          associate_categories(development_project)
-        end
 
         if related_company.present?
           associate_companies(development_project)
@@ -37,16 +35,11 @@ module Spreadsheets
       end
 
       def categories
-        case_data["Type of Development Project"].to_s.split("\n")
+        case_data["Type of Development Project"].to_s.split("\n").first
       end
 
-      def associate_categories(development_project)
-        categories.each do |category_name|
-          category = DevelopmentProjects::Category.find_by(name: category_name)
-          if category.present?
-            development_project.categorizations.find_or_create_by(category: category)
-          end
-        end
+      def category
+        DevelopmentProjects::Category.find_by(name:  case_data["Type of Development Project"].to_s.split("\n").first)
       end
 
       def associate_companies(development_project)

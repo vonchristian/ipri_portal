@@ -7,9 +7,10 @@ export default class extends Controller {
   }
 
   toggle(event) {
-    if(event.target.value == "No") {
+    console.log(event);
+    if(event.target.value == "No, not directly from the source (information is gathered from news outlets, etc.)") {
       this.outputTarget.hidden = false
-    } else if(event.target.value != "No") {
+    } else if(!event.target.value != "No, not directly from the source (information is gathered from news outlets, etc.)") {
       this.outputTarget.hidden = true
     }
   }

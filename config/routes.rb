@@ -21,6 +21,7 @@ Rails.application.routes.draw do
       resources :killings,                only: [:new, :create]
       resources :impact_and_actions,      only: [:new, :create]
       resources :development_projects,    only: [:index, :new, :create]
+      resources :submissions, only: [:create]
     end
 
     resources :documenter_details, only: [:new, :create]

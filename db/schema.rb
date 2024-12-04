@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.2].define(version: 2024_10_24_043812) do
+ActiveRecord::Schema[7.2].define(version: 2024_12_04_140845) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
   enable_extension "plpgsql"
@@ -136,6 +136,7 @@ ActiveRecord::Schema[7.2].define(version: 2024_10_24_043812) do
     t.integer "criminalizations_count"
     t.integer "human_rights_violations_count"
     t.integer "development_projects_count"
+    t.boolean "willing_to_share_more_info", default: false
     t.index ["actions_taken_status"], name: "index_case_details_on_actions_taken_status"
     t.index ["collective_victims_count"], name: "index_case_details_on_collective_victims_count"
     t.index ["country_id"], name: "index_case_details_on_country_id"
@@ -177,6 +178,13 @@ ActiveRecord::Schema[7.2].define(version: 2024_10_24_043812) do
     t.index ["collective_victim_id"], name: "index_collective_victim_breakdowns_on_collective_victim_id"
   end
 
+  create_table "collective_victim_categories", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.string "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["name"], name: "index_collective_victim_categories_on_name"
+  end
+
   create_table "collective_victims", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.uuid "case_detail_id", null: false
     t.text "affected_total"
@@ -186,7 +194,10 @@ ActiveRecord::Schema[7.2].define(version: 2024_10_24_043812) do
     t.integer "female_total"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.uuid "collective_victim_category_id"
+    t.string "indigenous_group_description"
     t.index ["case_detail_id"], name: "index_collective_victims_on_case_detail_id"
+    t.index ["collective_victim_category_id"], name: "index_collective_victims_on_collective_victim_category_id"
   end
 
   create_table "companies", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
@@ -266,6 +277,7 @@ ActiveRecord::Schema[7.2].define(version: 2024_10_24_043812) do
     t.string "name"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "description"
   end
 
   create_table "development_project_categorizations", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
@@ -291,6 +303,8 @@ ActiveRecord::Schema[7.2].define(version: 2024_10_24_043812) do
     t.string "parent_company_data_sources"
     t.text "funding_source_description"
     t.text "funding_source_data_sources"
+    t.uuid "development_project_category_id"
+    t.index ["development_project_category_id"], name: "index_development_projects_on_development_project_category_id"
     t.index ["parent_company_country_id"], name: "index_development_projects_on_parent_company_country_id"
   end
 
@@ -492,6 +506,7 @@ ActiveRecord::Schema[7.2].define(version: 2024_10_24_043812) do
   add_foreign_key "collective_victim_age_bracket_breakdowns", "age_brackets"
   add_foreign_key "collective_victim_age_bracket_breakdowns", "collective_victims"
   add_foreign_key "collective_victims", "case_details"
+  add_foreign_key "collective_victims", "collective_victim_categories"
   add_foreign_key "companies", "countries"
   add_foreign_key "company_projects", "companies"
   add_foreign_key "company_projects", "development_projects"
@@ -500,6 +515,7 @@ ActiveRecord::Schema[7.2].define(version: 2024_10_24_043812) do
   add_foreign_key "criminalizations", "case_details"
   add_foreign_key "development_project_categorizations", "development_project_categories", column: "category_id"
   add_foreign_key "development_project_categorizations", "development_projects", column: "project_id"
+  add_foreign_key "development_projects", "development_project_categories"
   add_foreign_key "documenters", "countries"
   add_foreign_key "human_rights_violation_categorizations", "human_rights_violation_categories"
   add_foreign_key "human_rights_violation_categorizations", "human_rights_violations"
