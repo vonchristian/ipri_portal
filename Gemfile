@@ -20,7 +20,7 @@ gem "sprockets-rails"
 
 # Use postgresql as the database for Active Record
 gem "pg"
-gem "pagy", "~> 6.0" # omit patch digit
+gem "pagy"
 # Use the Puma web server [https://github.com/puma/puma]
 gem "puma", "~> 6.0"
 

@@ -1,35 +1,30 @@
-<header>
-    <div class="grid grid-cols-12 gap-1 mt-6 mb-5">
-      <div class="col-span-8">
+
+    <div class="flex justify-between mt-5 mb-5">
+
         <h1 class="text-2xl font-bold text-gray-900">Case Factsheets</h1>
-      </div>
-      <div class="col-span-4 float-right">
+
+      <div class="">
        <%= link_to "New Case", new_ip_rights_documenter_detail_path, class: "text-white bg-green-700 hover:bg-green-800 focus:ring-4 focus:ring-green-800 font-medium rounded-lg text-sm px-5 py-3 mr-2 mb-2" %>
-       <%= link_to 'Upload Spreadsheet', new_documenters_case_import_path, class:"py-2.5 px-5 mr-2 mb-2 text-sm font-medium text-gray-900 focus:outline-none bg-white rounded-lg border border-gray-200 hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-4 focus:ring-gray-200" %>
+       <%= link_to 'Upload', new_documenters_case_import_path, class:"py-2.5 px-5 mr-2 mb-2 text-sm font-medium text-gray-900 focus:outline-none bg-white rounded-lg border border-gray-200 hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-4 focus:ring-gray-200" %>
       </div>
       </div>
-</header>
       <%= form_tag documenters_case_details_path, method: :get do %>
         <div class="relative">
           <div class="flex absolute inset-y-0 left-0 items-center pl-3 pointer-events-none">
               <svg aria-hidden="true" class="w-5 h-5 text-gray-500" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path></svg>
           </div>
-          <%= text_field_tag :search, params[:search], class: "block p-4 pl-10 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-green-700 focus:border-green-500", placeholder: "Search cases", type: "search" %>
-            <button type="submit" class="text-white absolute right-2.5 bottom-2.5 bg-green-700 hover:bg-green-800 focus:ring-4 focus:outline-none focus:ring-green-800 font-medium rounded-lg text-sm px-4 py-2">Search</button>
+          <%= text_field_tag :search, params[:search], class: "block p-4 pl-10 w-full text-sm text-gray-900 rounded-lg border border-gray-300 focus:ring-green-700 focus:border-green-500", placeholder: "Search cases", type: "search" %>
+            <button type="submit" class="absolute right-2.5 bottom-2.5  hover:bg-gray-100 focus:ring-4 focus:outline-none bg-gray-100 focus:ring-gray-200 font-medium rounded-lg text-sm px-4 py-2">Search</button>
         </div>
       <% end %>
 <div class="my-4">
 
   <%= form_tag documenters_case_details_path, method: :get do %>
-    <b><%= label_tag "Country" %></b>
-    <%= select_tag :country_id, options_for_select(Country.order(name: :asc).map{ |country| [country.name, country.id] }, params[:country_id]), {:prompt => "--select country--" }%>
-    <span class="pl-2"><b><%= label_tag "Incident Date" %></b></span>
-    <%= select_tag :incident_start_year, options_for_select(20.years.ago.year..Date.current.year, params[:incident_start_year]), {:prompt => "--select year--" } %>
-    <span class="pl-2"><b><%= label_tag "Tag" %></b></span>
+    <%= select_tag(:country_id, options_for_select(Country.order(name: :asc).map{ |country| [country.name, country.id] }, params[:country_id]), prompt: "--select country--", class: "w-80 shadow appearance-none border border-gray-300 rounded py-2 px-3 bg-white focus:outline-none focus:ring-0 focus:border-blue-500 text-gray-700 leading-6 transition-colors duration-200 ease-in-out") %>
+    <%= select_tag :incident_start_year, options_for_select(20.years.ago.year..Date.current.year, params[:incident_start_year]), prompt: "--select year--", class: "w-64 shadow appearance-none border border-gray-300 rounded py-2 px-3 bg-white focus:outline-none focus:ring-0 focus:border-blue-500 text-gray-700 leading-6 transition-colors duration-200 ease-in-out" %>
+    <%= select_tag :tag, options_for_select(ActsAsTaggableOn::Tag.order(name: :asc).map{ |tag| [tag.name, tag.name] }, params[:tag]), prompt: "--select tag--", class: "w-64 shadow appearance-none border border-gray-300 rounded py-2 px-3 bg-white focus:outline-none focus:ring-0 focus:border-blue-500 text-gray-700 leading-6 transition-colors duration-200 ease-in-out" %>
 
-    <%= select_tag :tag, options_for_select(ActsAsTaggableOn::Tag.order(name: :asc).map{ |tag| [tag.name, tag.name] }, params[:tag]), {:prompt => "--select tag--" }%>
-
-    <span class="pl-2"><button type="submit" class="py-2.5 px-5 mr-2 mb-2 text-sm font-medium text-gray-900 focus:outline-none bg-white rounded-lg border border-gray-200 hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-4 focus:ring-gray-200">Filter Cases</button></span>
+    <span class="pl-2"><button type="submit" class="py-2.5 px-5 mr-2 mb-2 text-sm font-medium text-gray-900 focus:outline-none bg-white rounded-lg border border-gray-200 hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-4 focus:ring-gray-200">Filter</button></span>
   <% end %>
 </div>
   <div class="col-span-3">
@@ -45,5 +40,5 @@
             </tbody>
           </table>
           <div class="mt-5">
-            <%== pagy_nav(@pagy) %>
+            <%== pagy_nav(@pagy) if @pagy.pages > 1 %>
           </div>

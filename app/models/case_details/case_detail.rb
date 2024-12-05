@@ -56,7 +56,7 @@ module CaseDetails
     end
 
     def submission_date
-      "#{submission_date_month} #{submission_date_day}, #{submission_date_year}"
+      "#{Date::MONTHNAMES[submission_date_month.to_i]} #{submission_date_day}, #{submission_date_year}"
     end
 
     def incident_date
