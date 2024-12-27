@@ -35,7 +35,7 @@
               <%= f.fields_for :age_bracket_breakdowns do |ff| %>
                <%= ff.hidden_field :age_bracket_id, value: age_bracket.id %>
                <div class="col-span-6 sm:col-span-3 hidden" data-collective-victim-form-target="referToIndividualGroup">
-                <%= ff.input :total, label: "Write the number of #{age_bracket.range_name}  from the total number of individuals affected" %>
+                <%= ff.input :total, label: "Write the number of #{age_bracket.description}  from the total number of individuals affected" %>
               </div>
               <% end %>
               <% end %>

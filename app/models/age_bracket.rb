@@ -13,7 +13,7 @@ class AgeBracket < ApplicationRecord
   def self.chart_data
     self.all.order(:min_age).includes(:individual_victims).map do |age_bracket|
       [
-        age_bracket.range_name,  age_bracket.individual_victims_count
+        age_bracket.description,  age_bracket.individual_victims_count
 
     ]
     end
@@ -21,13 +21,5 @@ class AgeBracket < ApplicationRecord
 
   def range
     min_age..max_age
-  end
-
-  def range_name
-    if range.include?(100)
-      "#{min_age} years old and above"
-    else
-      "#{min_age} - #{max_age} years old"
-    end
   end
 end

@@ -5,8 +5,6 @@ module Victims
     belongs_to :case_detail, class_name: "CaseDetails::CaseDetail"
     belongs_to :age_bracket, counter_cache: :individual_victims_count
 
-    delegate :range_name, to: :age_bracket, prefix: true
-
     validates :full_name, presence: true
 
     enum gender: {

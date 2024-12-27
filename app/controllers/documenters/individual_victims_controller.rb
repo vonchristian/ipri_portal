@@ -3,7 +3,7 @@
 module Documenters
   class IndividualVictimsController < BaseController
     def index
-      @individual_victims = Victims::IndividualVictim.all
+      @individual_victims = Victims::IndividualVictim.all.includes(:age_bracket)
     end
 
     def show

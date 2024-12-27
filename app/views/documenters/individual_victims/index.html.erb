@@ -35,7 +35,7 @@
                   <%= link_to individual_victim.full_name, documenters_individual_victim_path(individual_victim.id) %>
                 </td>
                 <td class="py-4 px-6">
-                  <%= individual_victim.age_bracket_range_name %>
+                  <%= individual_victim.age_bracket.description %>
                 </td>
                 <td class="py-4 px-6">
                   <%= individual_victim.gender&.titleize %>

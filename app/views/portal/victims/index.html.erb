@@ -35,7 +35,7 @@
             </tr>
           </thead>
           <tbody>
-              <% @case_detail.individual_victims.each do |victim| %>
+              <% @case_detail.individual_victims.includes(:age_bracket).each do |victim| %>
                           <tr class="border-b">
                 <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
                   <%= victim.full_name %>
@@ -47,7 +47,7 @@
                   <%= victim.dependent_type %>
                 </td>
                  <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
-                  <%= victim.age_bracket_range_name %>
+                  <%= victim.age_bracket.description %>
                 </td>
                 </tr>
               <% end %>

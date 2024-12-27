@@ -16,7 +16,7 @@
                     <%= f.input :date_of_birth_day, label: false, collection: 1..(Date.current.all_month.count), selected: Date.current.day %>
                     <%= f.input :date_of_birth_year, label: false, collection: (Date.current - 100.year).year..(Time.zone.now.year), selected: Date.current.year %>
                   </div>
-                 <%= f.input :age_bracket_id, label: "Age Bracket", collection: AgeBracket.all.map{|a| [a.range_name, a.id] } %>
+                 <%= f.input :age_bracket_id, label: "Age Bracket", collection: AgeBracket.all.map{|a| [a.description, a.id] } %>
 
 
 
