@@ -11,10 +11,12 @@ class AgeBracket < ApplicationRecord
   has_many :individual_victims, class_name: "Victims::IndividualVictim", dependent: :restrict_with_exception
 
   def self.chart_data
-    self.joins(:individual_victims)
-                   .group('age_brackets.name')
-                   .pluck('UPPER(age_brackets.name), COUNT(individual_victims.id)')
-                   .to_h
+    self.all.order(:min_age).includes(:individual_victims).map do |age_bracket|
+      [
+        age_bracket.range_name,  age_bracket.individual_victims_count
+
+    ]
+    end
   end
 
   def range
