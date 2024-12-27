@@ -7,6 +7,16 @@ class AgeBracket < ApplicationRecord
     "C" => 25..59,
     "D" => 60..,
   }
+
+  has_many :individual_victims, class_name: "Victims::IndividualVictim", dependent: :restrict_with_exception
+
+  def self.chart_data
+    self.joins(:individual_victims)
+                   .group('age_brackets.name')
+                   .pluck('UPPER(age_brackets.name), COUNT(individual_victims.id)')
+                   .to_h
+  end
+
   def range
     min_age..max_age
   end

@@ -1,35 +1,34 @@
-<div class="max-w-9xl ml-2 mx-auto py-6 sm:px-6 lg:px-8">
+<div class="container mx-auto px-4">
   <header>
-    <h1 class="text-2xl font-bold text-gray-900 mb-2">Dashboard IPRI</h1>
+    <h1 class="text-2xl font-bold text-gray-900 pt-5 mb-2">Key Data Points</h1>
   </header>
-
   <div class="border-t border-gray-200 mb-5"></div>
   <div>
     <a href="/documenters/case_details" class="mb-4 flex flex-col items-center bg-white rounded-lg border shadow-md md:flex-row md:max-w-xl hover:bg-gray-100">
-              <h1 class="text-5xl font-bold text-red-700 my-5 mx-8"><%= @cases_count %></h1>
+              <h1 class="text-5xl font-bold text-red-700 my-5 mx-8"><%= @dashboard[:case_details_count] %></h1>
         <div class="flex flex-col justify-between p-4 leading-normal">
             <h5 class="mb-2 text-1xl font-bold tracking-tight text-gray-900">Total Cases</h5>
-            <p class="mb-3 text-sm text-gray-700"> <%= CaseDetails::CaseDetail.submitted_current_year.size %> Submitted this year</p>
+            <p class="mb-3 text-sm text-gray-700"> <%= @dashboard[:current_year_case_details_count] %> Submitted this year</p>
         </div>
     </a>
   </div>
   <div class="grid grid-cols-3 gap-4">
   <div>
     <a href="/criminalizations" class="flex flex-col items-center bg-white rounded-lg border shadow-md md:flex-row md:max-w-xl hover:bg-gray-100">
-              <h1 class="text-5xl font-bold text-gray-900 my-5 mx-8"><%= @criminalizations_count %></h1>
+              <h1 class="text-5xl font-bold text-gray-900 my-5 mx-8"><%= @dashboard[:criminalizations_count] %></h1>
         <div class="flex flex-col justify-between p-4 leading-normal">
             <h5 class="mb-2 text-1xl font-bold tracking-tight text-gray-900">Criminalizations</h5>
-            <p class="mb-3 text-sm text-gray-700"> <%= Criminalizations::Criminalization.submitted_current_year.size %> Submitted this year</p>
+            <p class="mb-3 text-sm text-gray-700"> <%= @dashboard[:current_year_criminalizations_count] %> Submitted this year</p>
         </div>
     </a>
   </div>
 
   <div>
     <a href="/killings" class="flex flex-col items-center bg-white rounded-lg border shadow-md md:flex-row md:max-w-xl hover:bg-gray-100">
-              <h1 class="text-5xl font-bold text-gray-900 my-5 mx-8"><%= @killings_count %></h1>
+              <h1 class="text-5xl font-bold text-gray-900 my-5 mx-8"><%= @dashboard[:killings_count] %></h1>
         <div class="flex flex-col justify-between p-4 leading-normal">
             <h5 class="mb-2 text-1xl font-bold tracking-tight text-gray-900">Killings</h5>
-            <p class="mb-3 text-sm font-normal text-gray-700"> <%= Killings::Killing.submitted_current_year.size %> Submitted this year</p>
+            <p class="mb-3 text-sm font-normal text-gray-700"> <%= @dashboard[:current_year_killings_count] %> Submitted this year</p>
         </div>
     </a>
   </div>
@@ -39,10 +38,55 @@
               <h1 class="text-5xl font-bold text-gray-900 my-5 mx-8"><%=  @human_rights_violations_count %></h1>
         <div class="flex flex-col justify-between p-4 leading-normal">
             <h5 class="mb-2 text-1xl font-bold tracking-tight text-gray-900">Other Human Rights Violations</h5>
-            <p class="mb-3 text-sm font-normal text-gray-700"> <%= HumanRightsViolations::HumanRightsViolation.submitted_current_year.size %> Submitted this year</p>
+            <p class="mb-3 text-sm font-normal text-gray-700"> <%= @dashboard[:current_year_human_rights_violations_count] %> Submitted this year</p>
         </div>
     </a>
   </div>
 </div>
 <div class="border-t border-gray-200 mt-4 mb-4 mt-4"></div>
+    <div class="grid grid-cols-4 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6">
+      <% @dashboard[:human_rights_violations].sort_by(&:sort_order).each do |human_rights_violation| %>
+        <div class="flex flex-col border rounded-xl dark:border-neutral-800">
+          <div class="p-4 md:p-5">
+            <div class="flex items-center gap-x-2">
+              <p class="text-sm font-semibold text-gray-500 dark:text-neutral-500">
+                <%= human_rights_violation.title %>
+              </p>
+            </div>
+
+            <h3 class="mt-2 text-2xl sm:text-3xl lg:text-4xl text-gray-800 dark:text-neutral-200">
+              <div class="grid grid-cols-3 mg:grid-cols-6 gap-2">
+                <div>
+                  <span class="font-semibold"><%= human_rights_violation.count %></span>
+                </div>
+              </div>
+            </h3>
+          </div>
+        </div>
+      <% end %>
+    <!-- Card -->
+  </div>
+  <!-- End Grid -->
+</div>
+<!-- End Card Section -->
+
+<header class="pt-5">
+  <h1 class="text-2xl font-bold text-gray-900 mt-2 mb-2">Individual Victims</h1>
+</header>
+<div class="border-t border-gray-200 mb-5"></div>
+
+<div class="grid grid-cols-12 gap-2">
+  <div class="col-span-6">
+    <h1 class="font-semibold text-gray-900">By Gender</h1>
+    <%= pie_chart Victims::IndividualVictim.group(:gender).count %>
+  </div>
+  <div class="col-span-6">
+    <h1 class="font-semibold text-gray-900">By Age Bracket</h1>
+    <%= bar_chart AgeBracket.chart_data %>
+  </div>
+</div>
+<header class="pt-5">
+  <h1 class="text-2xl font-bold text-gray-900 mt-2 mb-2">Cases By Country </h1>
+</header>
+<div class="border-t border-gray-200 mb-5"></div>
  <%= geo_chart CaseDetails::CaseDetail.joins(:country).group('countries.name').count, width: 200, height: 50, label: 'Cases', options: {background_color: '#548999'} %>

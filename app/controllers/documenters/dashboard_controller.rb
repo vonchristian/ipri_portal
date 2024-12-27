@@ -3,10 +3,7 @@
 module Documenters
   class DashboardController < BaseController
     def index
-      @criminalizations_count = Criminalizations::Criminalization.all.size
-      @killings_count = Killings::Killing.all.size
-      @human_rights_violations_count = HumanRightsViolations::HumanRightsViolation.all.size
-      @cases_count = ::CaseDetails::CaseDetail.all.size
+      @dashboard = "#{current_user.role.titleize.delete(" ")}Dashboard".constantize.run!
     end
   end
 end
