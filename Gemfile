@@ -78,7 +78,6 @@ group :test do
 end
 
 gem "font-awesome-sass", "~> 6.1.2"
-gem "heroicon"
 gem "mina-ng-puma", require: false
 gem "mina-version_managers"
 gem "chartkick"
