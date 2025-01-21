@@ -29,6 +29,7 @@ module IpriPortal
     config.i18n.available_locales = [:en, :es]
     config.i18n.default_locale = :en
     config.autoload_lib(ignore: %w[assets tasks])
+
     # Configuration for the application, engines, and railties goes here.
     #
     # These settings can be overridden in specific environments using the files
@@ -41,3 +42,5 @@ module IpriPortal
     config.generators.system_tests = nil
   end
 end
+
+Rails.autoloaders.main.ignore(Rails.root.join('app/admin/'))
