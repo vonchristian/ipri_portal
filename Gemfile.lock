@@ -144,6 +144,7 @@ GEM
       railties (>= 5.0.0)
     faker (3.5.1)
       i18n (>= 1.8.11, < 2)
+    ffi (1.17.1)
     ffi (1.17.1-aarch64-linux-gnu)
     ffi (1.17.1-aarch64-linux-musl)
     ffi (1.17.1-arm-linux-gnu)
@@ -418,6 +419,7 @@ GEM
     tailwindcss-rails (3.3.0)
       railties (>= 7.0.0)
       tailwindcss-ruby
+    tailwindcss-ruby (3.4.17)
     tailwindcss-ruby (3.4.17-aarch64-linux)
     tailwindcss-ruby (3.4.17-arm-linux)
     tailwindcss-ruby (3.4.17-arm64-darwin)
