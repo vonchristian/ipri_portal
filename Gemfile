@@ -65,7 +65,7 @@ group :development, :test do
   gem "pry-rails"
   gem "factory_bot_rails"
   gem "faker"
-  gem "rspec-rails"
+  gem 'rspec-rails', '~> 7.0.0'
 end
 
 group :development do
@@ -96,4 +96,3 @@ gem 'counter_culture', '~> 3.2'
 gem "cssbundling-rails"
 
 gem "tailwindcss-rails", "~> 3.0"
-gem "nokogiri", "~> 1.18.2"
