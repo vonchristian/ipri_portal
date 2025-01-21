@@ -6,7 +6,7 @@ ActiveAdmin.setup do |config|
   # by extracting the _site_header partial into your project
   # to use your own logo, styles, etc.
   #
-  config.site_title = "<%= Rails.application.class.name.split("::").first.titlecase %>"
+  config.site_title = "Ipri Portal"
 
   # == Load Paths
   #
@@ -61,7 +61,7 @@ ActiveAdmin.setup do |config|
   #
   # This setting changes the method which Active Admin calls
   # within the application controller.
-  <% unless @use_authentication_method %># <% end %>config.authentication_method = :authenticate_<%= @underscored_user_name %>!
+  config.authentication_method = :authenticate_admin_user!
 
   # == User Authorization
   #
@@ -100,7 +100,7 @@ ActiveAdmin.setup do |config|
   #
   # This setting changes the method which Active Admin calls
   # (within the application controller) to return the currently logged in user.
-  <% unless @use_authentication_method %># <% end %>config.current_user_method = :current_<%= @underscored_user_name %>
+  config.current_user_method = :current_admin_user
 
   # == Logging Out
   #
@@ -112,7 +112,7 @@ ActiveAdmin.setup do |config|
   # will call the method to return the path.
   #
   # Default:
-  config.logout_link_path = :destroy_<%= @underscored_user_name %>_session_path
+  config.logout_link_path = :destroy_admin_user_session_path
 
   # == Root
   #
@@ -127,7 +127,7 @@ ActiveAdmin.setup do |config|
   # This allows your users to comment on any resource registered with Active Admin.
   #
   # You can completely disable comments:
-  <% unless @skip_comments %># <% end %>config.comments = false
+  # config.comments = false
   #
   # You can change the name under which comments are registered:
   # config.comments_registration_name = 'AdminComment'
