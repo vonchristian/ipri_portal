@@ -473,7 +473,6 @@ DEPENDENCIES
   mina-ng-puma
   mina-version_managers
   mutex_m
-  nokogiri
   observer
   pagy
   pg
