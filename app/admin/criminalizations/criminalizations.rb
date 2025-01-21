@@ -1,7 +1,6 @@
 # frozen_string_literal: true
-#
 
-ActiveAdmin.register Criminalizations::Criminalization, as: "Criminalizations" do
+ActiveAdmin.register(Criminalizations::Criminalization, as: "Criminalizations") do
   menu false
   actions :all, except: [:new, :destroy]
   permit_params :criminalization_details,
