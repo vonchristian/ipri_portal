@@ -13,20 +13,6 @@ GIT
       railties (>= 7.0)
       ransack (>= 4.0)
 
-GIT
-  remote: https://github.com/ffi/ffi.git
-  revision: 1715332d553d53fae13fd9fcbbd9d2c1982a5c2f
-  specs:
-    ffi (1.17.1)
-    ffi (1.17.1-aarch64-linux-gnu)
-    ffi (1.17.1-aarch64-linux-musl)
-    ffi (1.17.1-arm-linux-gnu)
-    ffi (1.17.1-arm-linux-musl)
-    ffi (1.17.1-arm64-darwin)
-    ffi (1.17.1-x86_64-darwin)
-    ffi (1.17.1-x86_64-linux-gnu)
-    ffi (1.17.1-x86_64-linux-musl)
-
 GEM
   remote: https://rubygems.org/
   specs:
@@ -121,6 +107,14 @@ GEM
     bootsnap (1.18.4)
       msgpack (~> 1.2)
     builder (3.3.0)
+    caxlsx (3.4.1)
+      htmlentities (~> 4.3, >= 4.3.4)
+      marcel (~> 1.0)
+      nokogiri (~> 1.10, >= 1.10.4)
+      rubyzip (>= 1.3.0, < 3)
+    caxlsx_rails (0.6.4)
+      actionpack (>= 3.1)
+      caxlsx (>= 3.0)
     chartkick (5.1.2)
     climate_control (0.2.0)
     coderay (1.1.3)
@@ -158,6 +152,15 @@ GEM
       railties (>= 5.0.0)
     faker (3.5.1)
       i18n (>= 1.8.11, < 2)
+    ffi (1.17.1)
+    ffi (1.17.1-aarch64-linux-gnu)
+    ffi (1.17.1-aarch64-linux-musl)
+    ffi (1.17.1-arm-linux-gnu)
+    ffi (1.17.1-arm-linux-musl)
+    ffi (1.17.1-arm64-darwin)
+    ffi (1.17.1-x86_64-darwin)
+    ffi (1.17.1-x86_64-linux-gnu)
+    ffi (1.17.1-x86_64-linux-musl)
     font-awesome-sass (6.1.2)
       sassc (~> 2.0)
     formtastic (5.0.0)
@@ -170,6 +173,7 @@ GEM
     has_scope (0.8.2)
       actionpack (>= 5.2)
       activesupport (>= 5.2)
+    htmlentities (4.3.4)
     i18n (1.14.7)
       concurrent-ruby (~> 1.0)
     image_processing (1.13.0)
@@ -253,6 +257,8 @@ GEM
     nio4r (2.7.4)
     nokogiri (1.18.2)
       mini_portile2 (~> 2.8.2)
+      racc (~> 1.4)
+    nokogiri (1.18.2-x86_64-darwin)
       racc (~> 1.4)
     observer (0.1.2)
     orm_adapter (0.5.0)
@@ -458,6 +464,8 @@ DEPENDENCIES
   acts-as-taggable-on
   bigdecimal
   bootsnap
+  caxlsx
+  caxlsx_rails
   chartkick
   counter_culture (~> 3.2)
   countries
@@ -469,7 +477,7 @@ DEPENDENCIES
   email_validator
   factory_bot_rails
   faker
-  ffi!
+  ffi
   font-awesome-sass (~> 6.1.2)
   groupdate
   image_processing (~> 1.2)

@@ -1,0 +1,20 @@
+wb = xlsx_package.workbook
+wb.add_worksheet(name: "Dashboard") do |sheet|
+  sheet.add_row ["Key Data Points"]
+
+  sheet.add_row ["Total Cases", @dashboard[:case_details_count]]
+  sheet.add_row ["Cases Submitted This Year #{Time.zone.now.year}", @dashboard[:current_year_case_details_count]]
+  sheet.add_row ["Total Criminalizations", @dashboard[:criminalizations_count]]
+  sheet.add_row ["Criminalizations Submitted This Year #{Time.zone.now.year}", @dashboard[:current_year_criminalizations_count]]
+  sheet.add_row ["Total Killings", @dashboard[:killings_count]]
+  sheet.add_row ["Killings Submitted This Year #{Time.zone.now.year}", @dashboard[:current_year_killings_count]]
+  sheet.add_row ["Other Human Rights Violations", @dashboard[:human_rights_violations_count]]
+  sheet.add_row ["Other Human Rights Violations Submitted This Year #{Time.zone.now.year}", @dashboard[:current_year_human_rights_violations_count]]
+  sheet.add_row [""]
+  sheet.add_row ["Human Rights Violations Focus Areas"]
+  @dashboard[:human_rights_violations].sort_by(&:sort_order).each do |human_rights_violation|
+    sheet.add_row [human_rights_violation.title, human_rights_violation.count]
+  end
+
+
+end
