@@ -37,7 +37,7 @@ en:
   last_name: "Last Name"
   organization_or_affiliation: "Organization/Affiliation"
   organization_or_affiliation_help_text: "Write the full name of your Organization / Affiliation"
-  date_of_submission: "Dat of Submission"
+  date_of_submission: "Date of Submission"
   contact_details: "Contact Details"
   phone_number: "Phone Number / WhatsApp / Signal"
   is_the_documenter_submitting_this_case_factsheet_as_primary_data: "Is the documenter submitting this case factsheet as primary data?"

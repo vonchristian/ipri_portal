@@ -4,13 +4,15 @@ module CaseDetails
   class Index < ActiveInteraction::Base
     object :documenter, class: Users::Documenter
 
-    string :search, :incident_start_year, :tag, default: nil
+    string :search, :incident_start_year, :submission_date_year, :tag, default: nil
     uuid :country_id, default: nil
 
     def execute
       @case_details = case_details.text_search(search) if search.present?
       @case_details = case_details.where(country_id: country_id) if country_id.present?
       @case_details = case_details.where(incident_start_year: incident_start_year) if incident_start_year.present?
+      @case_details = case_details.where(submission_date_year: submission_date_year) if submission_date_year.present?
+
       @case_details = case_details.tagged_with(tag) if tag.present?
 
       case_details.order(submission_date_year: :desc, submission_date_month: :desc, submission_date_day: :desc)
