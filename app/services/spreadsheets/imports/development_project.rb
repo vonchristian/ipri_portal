@@ -23,10 +23,6 @@ module Spreadsheets
           development_project_category_id: category&.id
         )
 
-        if related_company.present?
-          associate_companies(development_project)
-        end
-
         if related_funding_sources.present?
           associate_funding_sources(development_project)
         end
@@ -40,18 +36,6 @@ module Spreadsheets
 
       def category
         DevelopmentProjects::Category.find_by(name:  case_data["Type of Development Project"].to_s.split("\n").first)
-      end
-
-      def associate_companies(development_project)
-        company = DevelopmentProjects::Company.create(
-          country_id: Country.find_by(name: case_data["Country of parent company"])&.id,
-          description: case_data["Description of parent company"],
-          information_source: case_data["Source of information on parent company"],
-        )
-
-        if company.present?
-          development_project.companies << company
-        end
       end
 
       def associate_funding_sources(development_project)
