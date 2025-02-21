@@ -95,6 +95,6 @@ gem 'counter_culture', '~> 3.2'
 gem "cssbundling-rails"
 
 gem "tailwindcss-rails", "~> 3.0"
-gem "ffi"
+gem "ffi", github: "ffi/ffi"
 gem 'caxlsx'
 gem 'caxlsx_rails'

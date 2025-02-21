@@ -13,6 +13,20 @@ GIT
       railties (>= 7.0)
       ransack (>= 4.0)
 
+GIT
+  remote: https://github.com/ffi/ffi.git
+  revision: 1715332d553d53fae13fd9fcbbd9d2c1982a5c2f
+  specs:
+    ffi (1.17.1)
+    ffi (1.17.1-aarch64-linux-gnu)
+    ffi (1.17.1-aarch64-linux-musl)
+    ffi (1.17.1-arm-linux-gnu)
+    ffi (1.17.1-arm-linux-musl)
+    ffi (1.17.1-arm64-darwin)
+    ffi (1.17.1-x86_64-darwin)
+    ffi (1.17.1-x86_64-linux-gnu)
+    ffi (1.17.1-x86_64-linux-musl)
+
 GEM
   remote: https://rubygems.org/
   specs:
@@ -152,15 +166,6 @@ GEM
       railties (>= 5.0.0)
     faker (3.5.1)
       i18n (>= 1.8.11, < 2)
-    ffi (1.17.1)
-    ffi (1.17.1-aarch64-linux-gnu)
-    ffi (1.17.1-aarch64-linux-musl)
-    ffi (1.17.1-arm-linux-gnu)
-    ffi (1.17.1-arm-linux-musl)
-    ffi (1.17.1-arm64-darwin)
-    ffi (1.17.1-x86_64-darwin)
-    ffi (1.17.1-x86_64-linux-gnu)
-    ffi (1.17.1-x86_64-linux-musl)
     font-awesome-sass (6.1.2)
       sassc (~> 2.0)
     formtastic (5.0.0)
@@ -258,7 +263,21 @@ GEM
     nokogiri (1.18.2)
       mini_portile2 (~> 2.8.2)
       racc (~> 1.4)
+    nokogiri (1.18.2-aarch64-linux-gnu)
+      racc (~> 1.4)
+    nokogiri (1.18.2-aarch64-linux-musl)
+      racc (~> 1.4)
+    nokogiri (1.18.2-arm-linux-gnu)
+      racc (~> 1.4)
+    nokogiri (1.18.2-arm-linux-musl)
+      racc (~> 1.4)
+    nokogiri (1.18.2-arm64-darwin)
+      racc (~> 1.4)
     nokogiri (1.18.2-x86_64-darwin)
+      racc (~> 1.4)
+    nokogiri (1.18.2-x86_64-linux-gnu)
+      racc (~> 1.4)
+    nokogiri (1.18.2-x86_64-linux-musl)
       racc (~> 1.4)
     observer (0.1.2)
     orm_adapter (0.5.0)
@@ -477,7 +496,7 @@ DEPENDENCIES
   email_validator
   factory_bot_rails
   faker
-  ffi
+  ffi!
   font-awesome-sass (~> 6.1.2)
   groupdate
   image_processing (~> 1.2)
