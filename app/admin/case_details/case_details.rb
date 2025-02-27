@@ -4,7 +4,7 @@ ActiveAdmin.register(CaseDetails::CaseDetail, as: "Case Details") do
   belongs_to :country, optional: true
 
   actions :all, except: [:new]
-  filter :country_id, as: :select, collection: Country.all.map { |country| [country.name, country.id] }
+  filter :country_id, as: :select, collection: Country.all.order(name: :asc).map { |country| [country.name, country.id] }
   filter :submission_date_year, as: :select, collection: 20.years.ago.year..Date.current.year, label: "Submission Year"
   filter :incident_start_year, as: :select, collection: 20.years.ago.year..Date.current.year, label: "Incident Year"
   filter :data_sharing, as: :select, collection: CaseDetails::CaseDetail.data_sharings.keys
