@@ -1,8 +1,9 @@
 # frozen_string_literal: true
 
 ActiveAdmin.register(Criminalizations::Criminalization, as: "Criminalizations") do
+  belongs_to :case_detail, class_name: "CaseDetails::CaseDetail"
   menu false
-  actions :all, except: [:new, :destroy]
+
   permit_params :criminalization_details,
                 :accusation_or_charges_details,
                 :experienced_harrassment_or_intimidation,
@@ -23,7 +24,7 @@ ActiveAdmin.register(Criminalizations::Criminalization, as: "Criminalizations") 
                 :impact_to_community_details
 
   action_item :back do
-    link_to "Back to Case Factsheet", admin_case_factsheet_path(resource.case_detail_id), method: :get
+    link_to "Back to Case Detail", admin_case_detail_path(resource.case_detail_id), method: :get
   end
 
   show do |criminalization|

@@ -2,6 +2,20 @@
 
 Rails.application.routes.draw do
   ActiveAdmin.routes(self)
+
+  namespace :admin do
+    resources :case_details do
+      resources :rights_violations, only: [:index, :show, :new, :create, :edit, :update, :destroy]
+      resources :collective_victims
+      resources :individual_victims
+      resources :criminalizations
+      resources :killings
+    end
+    resources :rights_violations, shallow: true do
+      resources :perpetratorizations
+    end
+  end
+
   devise_for :admin_users, ActiveAdmin::Devise.config
   ActiveAdmin.routes(self) rescue ActiveAdmin::DatabaseHitDuringLoad
 

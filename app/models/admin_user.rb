@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 class AdminUser < ApplicationRecord
+  DEFAULT_EMAIL = "admin@iprights.org"
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
   devise :database_authenticatable,

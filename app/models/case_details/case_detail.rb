@@ -60,8 +60,18 @@ module CaseDetails
       "#{month} #{submission_date_day}, #{submission_date_year}"
     end
 
-    def incident_date
-      [incident_start_month, incident_start_day, incident_start_year].compact_blank.join(",")
+    def incident_start_date
+      month = incident_start_month.to_i.zero? ? incident_start_month : "#{Date::MONTHNAMES[incident_start_month.to_i]}"
+      "#{month} #{incident_start_day}, #{incident_start_year}"
+    end
+
+    def rights_violations
+      human_rights_violations
+    end
+
+    def incident_end_date
+      month = incident_end_month.to_i.zero? ? incident_end_month : "#{Date::MONTHNAMES[incident_end_month.to_i]}"
+      "#{month} #{incident_end_day}, #{incident_end_year}"
     end
 
     def data_sharing_content
@@ -90,6 +100,10 @@ module CaseDetails
     end
 
     def unrestricted_content
+    end
+
+    def ongoing_case
+      incident_end_day.present?
     end
 
     def self.ransackable_associations(auth_object = nil)

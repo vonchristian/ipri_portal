@@ -26,5 +26,9 @@ module Victims
       [date_of_birth_month, date_of_birth_day, date_of_birth_year].join("/")
       # "#{date_of_birth_month}/#{date_of_birth_day}/#{date_of_birth_year}"
     end
+
+    def self.ransackable_attributes(auth_object = nil)
+      ["age_bracket_id", "case_detail_id", "created_at", "date_of_birth_day", "date_of_birth_month", "date_of_birth_year", "dependent_details", "dependent_type", "ethnic_identity", "full_name", "gender", "id", "updated_at", "victim_role"]
+    end
   end
 end

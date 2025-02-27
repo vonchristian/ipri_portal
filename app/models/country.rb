@@ -19,4 +19,12 @@ class Country < ApplicationRecord
   def cases_this_year
     case_details.submitted_current_year
   end
+
+  def self.ransackable_associations(auth_object = nil)
+    ["case_details", "criminalizations", "development_projects", "human_rights_violations", "killings"]
+  end
+
+  def self.ransackable_attributes(auth_object = nil)
+    ["case_details_count", "criminalizations_count", "human_rights_violations_count", "id", "id_value", "killings_count", "name", "priority"]
+  end
 end
