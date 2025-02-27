@@ -2,6 +2,7 @@
 
 ActiveAdmin.register(Criminalizations::Criminalization, as: "Criminalizations") do
   belongs_to :case_detail, class_name: "CaseDetails::CaseDetail"
+  config.batch_actions = false
   menu false
 
   permit_params :criminalization_details,
@@ -23,8 +24,16 @@ ActiveAdmin.register(Criminalizations::Criminalization, as: "Criminalizations") 
                 :impact_to_victim_details,
                 :impact_to_community_details
 
-  action_item :back do
-    link_to "Back to Case Detail", admin_case_detail_path(resource.case_detail_id), method: :get
+
+  controller do
+    def destroy
+      criminalization = Criminalizations::Criminalization.find(params[:id])
+      case_detail = criminalization.case_detail
+
+      super do |format|
+        redirect_to admin_case_detail_path(case_detail), notice: "Criminalization deleted successfully." and return
+      end
+    end
   end
 
   show do |criminalization|

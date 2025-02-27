@@ -2,6 +2,8 @@ ActiveAdmin.register HumanRightsViolations::HumanRightsViolation, as: "RightsVio
   belongs_to :case_detail, class_name: "CaseDetails::CaseDetail"
   menu false
   actions :all
+  config.batch_actions = false
+
 
   permit_params :violation_details,
     :alleged_perpetrators_known,
@@ -10,6 +12,18 @@ ActiveAdmin.register HumanRightsViolations::HumanRightsViolation, as: "RightsVio
     :case_filing_details,
     :state_action_to_address_violation,
     :state_action_to_address_violation_details
+
+  controller do
+    def destroy
+      human_rights_violation = HumanRightsViolations::HumanRightsViolation.find(params[:id])
+      case_detail = human_rights_violation.case_detail
+
+      super do |format|
+        redirect_to admin_case_detail_path(case_detail), notice: "Human rights violation deleted successfully." and return
+      end
+    end
+  end
+
   show do |human_rights_violation|
     panel "Human Rights Violation Details" do
       attributes_table do

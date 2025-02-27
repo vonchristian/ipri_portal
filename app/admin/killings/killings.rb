@@ -1,6 +1,8 @@
 ActiveAdmin.register(Killings::Killing, as: "Killings") do
   belongs_to :case_detail, class_name: "CaseDetails::CaseDetail"
   menu false
+  config.batch_actions = false
+
   permit_params :killing_details,
     :killing_carried_out,
     :experienced_harrassment_or_intimidation,
@@ -12,6 +14,17 @@ ActiveAdmin.register(Killings::Killing, as: "Killings") do
     :state_action_to_address_killing,
     :state_action_to_address_killing_details,
     :investigation_on_killing_details
+
+  controller do
+    def destroy
+      killing = Killings::Killing.find(params[:id])
+      case_detail = killing.case_detail
+
+      super do |format|
+        redirect_to admin_case_detail_path(case_detail), notice: "Killing deleted successfully." and return
+      end
+    end
+  end
 
   show do |killing|
     panel "Details of Killing" do

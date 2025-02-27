@@ -26,4 +26,15 @@ ActiveAdmin.register(Victims::IndividualVictim, as: "Individual Victims") do
     f.actions
   end
 
+  controller do
+    def destroy
+    individual_victim = Victims::IndividualVictim.find(params[:id])
+      case_detail = individual_victim.case_detail
+
+      super do |format|
+        redirect_to admin_case_detail_path(case_detail), notice: "Human rights violation deleted successfully." and return
+      end
+    end
+  end
+
 end
