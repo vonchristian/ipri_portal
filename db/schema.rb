@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.2].define(version: 2024_12_27_090811) do
+ActiveRecord::Schema[7.2].define(version: 2025_03_11_102104) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
   enable_extension "plpgsql"
@@ -281,6 +281,8 @@ ActiveRecord::Schema[7.2].define(version: 2024_12_27_090811) do
     t.datetime "updated_at", null: false
     t.string "description"
     t.integer "case_details_count", default: 0, null: false
+    t.integer "development_projects_count"
+    t.index ["development_projects_count"], name: "idx_on_development_projects_count_433453f818"
   end
 
   create_table "development_project_categorizations", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
