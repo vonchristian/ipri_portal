@@ -1,5 +1,6 @@
 # frozen_string_literal: true
 
+require 'ostruct'
 module CaseDetails
   class CaseDetail < ApplicationRecord
     include PgSearch::Model
@@ -14,6 +15,7 @@ module CaseDetails
         :impact_to_community_details,
       ],
       associated_against: { country: [:name] },
+      associated_against: { individual_victims: [:full_name] },
       using: { tsearch: { prefix: true } }
 
     enum data_sharing: {
