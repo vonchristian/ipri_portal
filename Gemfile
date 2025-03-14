@@ -97,3 +97,4 @@ gem "cssbundling-rails"
 gem "ffi"
 gem 'caxlsx'
 gem 'caxlsx_rails'
+gem 'tailwindcss-ruby'
