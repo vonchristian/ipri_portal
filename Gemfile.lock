@@ -491,6 +491,7 @@ DEPENDENCIES
   email_validator
   factory_bot_rails
   faker
+  ffi
   font-awesome-sass (~> 6.1.2)
   groupdate
   image_processing (~> 1.2)
@@ -522,7 +523,8 @@ DEPENDENCIES
   simple_form
   sprockets-rails
   stimulus-rails
-  tailwindcss-rails
+  tailwindcss-rails (~> 3.0)
+  tailwindcss-ruby (~> 3.4)
   turbo-rails
   tzinfo-data
 
