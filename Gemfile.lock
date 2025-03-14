@@ -522,7 +522,7 @@ DEPENDENCIES
   simple_form
   sprockets-rails
   stimulus-rails
-  tailwindcss-rails (~> 3.0)
+  tailwindcss-rails
   turbo-rails
   tzinfo-data
 
