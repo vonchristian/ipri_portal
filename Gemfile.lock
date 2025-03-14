@@ -13,20 +13,6 @@ GIT
       railties (>= 7.0)
       ransack (>= 4.0)
 
-GIT
-  remote: https://github.com/ffi/ffi.git
-  revision: 1715332d553d53fae13fd9fcbbd9d2c1982a5c2f
-  specs:
-    ffi (1.17.1)
-    ffi (1.17.1-aarch64-linux-gnu)
-    ffi (1.17.1-aarch64-linux-musl)
-    ffi (1.17.1-arm-linux-gnu)
-    ffi (1.17.1-arm-linux-musl)
-    ffi (1.17.1-arm64-darwin)
-    ffi (1.17.1-x86_64-darwin)
-    ffi (1.17.1-x86_64-linux-gnu)
-    ffi (1.17.1-x86_64-linux-musl)
-
 GEM
   remote: https://rubygems.org/
   specs:
@@ -166,6 +152,15 @@ GEM
       railties (>= 5.0.0)
     faker (3.5.1)
       i18n (>= 1.8.11, < 2)
+    ffi (1.17.1)
+    ffi (1.17.1-aarch64-linux-gnu)
+    ffi (1.17.1-aarch64-linux-musl)
+    ffi (1.17.1-arm-linux-gnu)
+    ffi (1.17.1-arm-linux-musl)
+    ffi (1.17.1-arm64-darwin)
+    ffi (1.17.1-x86_64-darwin)
+    ffi (1.17.1-x86_64-linux-gnu)
+    ffi (1.17.1-x86_64-linux-musl)
     font-awesome-sass (6.1.2)
       sassc (~> 2.0)
     formtastic (5.0.0)
@@ -496,7 +491,6 @@ DEPENDENCIES
   email_validator
   factory_bot_rails
   faker
-  ffi!
   font-awesome-sass (~> 6.1.2)
   groupdate
   image_processing (~> 1.2)
@@ -536,4 +530,4 @@ RUBY VERSION
    ruby 3.4.1p0
 
 BUNDLED WITH
-   2.6.3
+   2.6.6
