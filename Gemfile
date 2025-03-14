@@ -93,9 +93,6 @@ gem "devise"
 gem "acts-as-taggable-on"
 gem 'counter_culture', '~> 3.2'
 gem "cssbundling-rails"
-
-gem "tailwindcss-rails", "~> 3.0"
 gem "ffi"
 gem 'caxlsx'
 gem 'caxlsx_rails'
-gem "tailwindcss-ruby", "~> 3.4"
