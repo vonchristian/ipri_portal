@@ -13,6 +13,7 @@ module CaseDetails
         :victim_role,
         :dependent_details,
         :age_bracket_id,
+        :date_of_birth_known,
         :date_of_birth_day,
         :date_of_birth_month,
         :date_of_birth_year

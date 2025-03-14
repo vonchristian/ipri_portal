@@ -12,7 +12,8 @@ module CaseDetails
         :refer_to_individuals,
         :male_total,
         :female_total,
-        :age_bracket_breakdowns
+        :age_bracket_breakdowns,
+        :indigenous_group_description
 
       validates :affected_total, :victim_details, presence: true
 
