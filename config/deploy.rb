@@ -48,8 +48,8 @@ task deploy: :remote_environment do
     invoke :"deploy:link_shared_paths"
     invoke :"bundle:install"
     command " bundle config set force_ruby_platform true"
-
     invoke :"rails:db_migrate"
+    command "export TAILWINDCSS_INSTALL_DIR=node_modules/.bin"
     invoke :"rails:assets_precompile"
     invoke :"deploy:cleanup"
 
