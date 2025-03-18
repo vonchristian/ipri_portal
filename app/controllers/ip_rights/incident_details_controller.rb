@@ -43,7 +43,8 @@ module IpRights
           :incident_end_year,
           :incident_end_day,
           :incident_hour,
-          :incident_minute)
+          :incident_minute,
+          :incident_time)
         .merge!(case_detail_id: @case_detail.id)
     end
   end

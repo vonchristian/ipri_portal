@@ -27,7 +27,7 @@ module CaseDetails
       :willing_to_share_more_info,
       :documents
 
-    validates :project_name, :project_description, :development_project_category_id, presence: true
+    validates :development_project_category_id, presence: true
 
     def save!
       if valid?
@@ -43,8 +43,8 @@ module CaseDetails
     def create_development_project
       development_project = DevelopmentProjects::DevelopmentProject.create!(
         development_project_category_id: development_project_category_id,
-        name: project_name,
-        description: project_description,
+        name: project_name.presence || 'No Information',
+        description: project_description.presence || 'No Information',
         project_start_year: start_of_operation_year,
         website_sources: project_data_sources,
         parent_company_name: parent_company_name,

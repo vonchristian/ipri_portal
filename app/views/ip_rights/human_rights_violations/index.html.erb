@@ -65,6 +65,124 @@
       <p class="mt-1 text-sm text-gray-600 my-4">  Refers to any other incident of human rights violations that are neither criminalization nor killing, and are linked to the protection and defense of Indigenous Peoples’ on their rights to lands, territories and natural resources, self-government, cultural integrity. (E.g., attacks against life and security (except killings) like torture, enforced disappearance, kidnapping, illegal detention, sexual harassment, violation of collective right to free, prior and informed consent (FPIC), forced eviction, displacement, land grabbing etc.) </p>
 
     </div>
+  <% if @case_detail.human_rights_violations.present? %>
+    <% @case_detail.human_rights_violations.each_with_index do |human_rights_violation, indx| %>
+      <div class="flex w-full mx-auto justify-between">
+        <h2 class="font-bold text-l text-gray-900 mt-4">Case #<%= indx.succ %> </h2>
+      </div>
+      <div class="grid grid-cols-1 md:grid-cols-12">
+        <div class="col-span-3 ml-4 mt-2">
+          <p class="block mb-2 text-sm font-medium text-gray-900"> What was/were the human rights violation/s? </p>
+        </div>
+        <div class="col-span-1">
+        </div>
+        <div class="col-span-7 mt-2">
+          <p class="text-gray-500"> <%= human_rights_violation.categories.pluck(:title).join(", ") %> </p>
+        </div>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-12">
+        <div class="col-span-3 ml-4 mt-2">
+          <p class="block mb-2 text-sm font-medium text-gray-900"> Why was/were the victim/s criminalized? </p>
+        </div>
+        <div class="col-span-1">
+        </div>
+        <div class="col-span-7 mt-2">
+          <p class="text-gray-500"> <%= human_rights_violation.violation_details %> </p>
+        </div>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-12">
+        <div class="col-span-3 ml-4 mt-2">
+          <p class="block mb-2 text-sm font-medium text-gray-900"> Is/Are the alleged perpetrator/s known? </p>
+        </div>
+        <div class="col-span-1">
+        </div>
+        <div class="col-span-7 mt-2">
+          <p class="text-gray-500"> <%= human_rights_violation.alleged_perpetrators_known %> </p>
+        </div>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-12">
+        <div class="col-span-3 ml-4 mt-2">
+          <p class="block mb-2 text-sm font-medium text-gray-900"> Please provide more information for the alleged perpetrators </p>
+        </div>
+        <div class="col-span-1">
+        </div>
+        <div class="col-span-7 mt-2">
+          <p class="text-gray-500"> <%= human_rights_violation.alleged_perpetrator_details %> </p>
+        </div>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-12">
+        <div class="col-span-3 ml-4 mt-2">
+          <p class="block mb-2 text-sm font-medium text-gray-900"> Was/Were there legal case/s filed against the alleged perpetrators on behalf of the victim/s? </p>
+        </div>
+        <div class="col-span-1">
+        </div>
+        <div class="col-span-7 mt-2">
+          <p class="text-gray-500"> <%= human_rights_violation.case_filing_status %> </p>
+        </div>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-12">
+        <div class="col-span-3 ml-4 mt-2">
+          <p class="block mb-2 text-sm font-medium text-gray-900"> Please provide further information: Where is/are the case/s filed? Who filed the case? </p>
+        </div>
+        <div class="col-span-1">
+        </div>
+        <div class="col-span-7 mt-2">
+          <p class="text-gray-500"> <%= human_rights_violation.case_filing_details %> </p>
+        </div>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-12">
+        <div class="col-span-3 ml-4 mt-2">
+          <p class="block mb-2 text-sm font-medium text-gray-900"> Has the State undertaken any action/s to address the incident of human rights violation/s? </p>
+        </div>
+        <div class="col-span-1">
+        </div>
+        <div class="col-span-7 mt-2">
+          <p class="text-gray-500"> <%= human_rights_violation.state_action_to_address_violation %> </p>
+        </div>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-12">
+        <div class="col-span-3 ml-4 mt-2">
+          <p class="block mb-2 text-sm font-medium text-gray-900">Please provide more information on the action/s undertaken, including any relevant results </p>
+        </div>
+        <div class="col-span-1">
+        </div>
+        <div class="col-span-7 mt-2">
+          <p class="text-gray-500"> <%= human_rights_violation.state_action_to_address_violation_details %> </p>
+        </div>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-12">
+        <div class="col-span-3 ml-4 mt-2">
+          <p class="block mb-2 text-sm font-medium text-gray-900">Has there been any investigation/s on the incident of other type of human right violation? </p>
+        </div>
+        <div class="col-span-1">
+        </div>
+        <div class="col-span-7 mt-2">
+          <p class="text-gray-500"> <%= human_rights_violation.investigation_on_violation %> </p>
+        </div>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-12">
+        <div class="col-span-3 ml-4 mt-2">
+          <p class="block mb-2 text-sm font-medium text-gray-900"> Please provide additional information on the investigation, including relevant date/s and institutions/ office/s or representative/s involved </p>
+        </div>
+        <div class="col-span-1">
+        </div>
+        <div class="col-span-7 mt-2">
+          <p class="text-gray-500"> <%= human_rights_violation.investigation_on_violation_details %> </p>
+        </div>
+      </div>
+
+      <div class="border-t border-gray-200 my-4"></div>
+    <% end %>
+<% end %>
 
 <div class="px-4 py-3 bg-gray-100 text-right sm:px-6">
                  <a href="/ip_rights/case_details/<%=@case_detail.id%>/impact_and_actions/new"type="submit" class="inline-flex py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-green-600 hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500">

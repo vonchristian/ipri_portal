@@ -38,6 +38,8 @@ module IpRights
           :impact_to_community_details,
           :actions_taken_status,
           :actions_taken_details,
+          :incident_investigation_status,
+          :incident_investigation_details
         ).merge!(case_detail_id: @case_detail.id)
     end
   end

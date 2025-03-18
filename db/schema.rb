@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.2].define(version: 2025_03_11_102104) do
+ActiveRecord::Schema[7.2].define(version: 2025_03_18_065954) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
   enable_extension "plpgsql"
@@ -139,6 +139,8 @@ ActiveRecord::Schema[7.2].define(version: 2025_03_11_102104) do
     t.integer "human_rights_violations_count"
     t.integer "development_projects_count"
     t.boolean "willing_to_share_more_info", default: false
+    t.boolean "incident_investigation_status"
+    t.text "incident_investigation_details"
     t.index ["actions_taken_status"], name: "index_case_details_on_actions_taken_status"
     t.index ["collective_victims_count"], name: "index_case_details_on_collective_victims_count"
     t.index ["country_id"], name: "index_case_details_on_country_id"

@@ -38,6 +38,7 @@ ActiveAdmin.register(CaseDetails::CaseDetail, as: "Case Details") do
     :impact_to_victim_details,
     :impact_to_community_details,
     :actions_taken_details,
+    :incident_investigation_details,
     :actions_taken_status,
     :documenter_first_name,
     :documenter_last_name,
@@ -95,7 +96,8 @@ ActiveAdmin.register(CaseDetails::CaseDetail, as: "Case Details") do
       f.inputs do
         f.input :impact_to_victim_details, as: :text, label: "How did the incident/s affect the victim/s and his/her/their family?"
         f.input :impact_to_community_details, as: :text, label: "How did the incident/s affect the Indigenous Peoples group/s or community/ies and/or organization of the victim/s?"
-        f.input :actions_taken_details, as: :text, label: "Advocacies and/or action/s undertaken"
+        f.input :actions_taken_details, as: :text, label: "Is/Are there any other advocacy and/or action/s undertaken ?"
+        f.input :incident_investigation_details, as: :text, label: "Has there been any investigation/s on the incident of other type of human right violation ?"
       end
     end
 

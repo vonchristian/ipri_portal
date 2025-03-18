@@ -15,9 +15,8 @@ module CaseDetails
       :incident_end_month,
       :incident_end_year,
       :incident_end_day,
-      :incident_hour,
-      :incident_minute,
-      :ongoing_case
+      :ongoing_case,
+      :incident_time
 
     validates :country_id, :subnational_location, presence: true
 
@@ -41,8 +40,8 @@ module CaseDetails
         incident_end_month:   incident_end_month,
         incident_end_year:    incident_end_year,
         incident_end_day:     incident_end_day,
-        incident_hour:        incident_hour,
-        incident_minute:      incident_minute,
+        incident_hour:        incident_time.present? ? incident_time.split(":").first : nil,
+        incident_minute:      incident_time.present? ? incident_time.split(":").last : nil,
       )
     end
   end
