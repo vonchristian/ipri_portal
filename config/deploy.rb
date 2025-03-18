@@ -47,8 +47,9 @@ task deploy: :remote_environment do
     invoke :"git:clone"
     invoke :"deploy:link_shared_paths"
     invoke :"bundle:install"
+    command " bundle config set force_ruby_platform true"
+
     invoke :"rails:db_migrate"
-    command "bundle config unset force_ruby_platform"
     invoke :"rails:assets_precompile"
     invoke :"deploy:cleanup"
 
