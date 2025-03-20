@@ -7,6 +7,5 @@ FactoryBot.define do
     email { Faker::Internet.email }
     password { "secret123" }
     password_confirmation { "secret123" }
-    association :country
   end
 end

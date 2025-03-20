@@ -8,11 +8,19 @@
                 <%= f.input :gender, collection: Victims::IndividualVictim.genders.map {|key, value| [value.upcase, Victims::IndividualVictim.genders.key(value)]} %>
                 <%= f.input :dependent_type, collection: Victims::IndividualVictim.dependent_types.map {|key, value| [key.titleize, Victims::IndividualVictim.dependent_types.key(value)] } %>
                 <label class="block text-sm font-bold text-gray-700">Date of Birth</label>
-                <div class="grid grid-cols-3 gap-4">
-                    <%= f.input :date_of_birth_month, label: false, collection: Date::MONTHNAMES, selected: Date.current.strftime("%B")  %>
-                    <%= f.input :date_of_birth_day, label: false, collection: 1..(Date.current.all_month.count), selected: Date.current.day %>
-                    <%= f.input :date_of_birth_year, label: false, collection: (Date.current - 100.year).year..(Time.zone.now.year), selected: Date.current.year %>
+                <div data-controller="individual-victim">
+                  <label class="block text-sm font-bold text-gray-900">
+                    Is the victim's date of birth known?
+                  </label>
+                  <%= f.input :date_of_birth_known, label: '', collection: ['No Information','Yes'], checked: 'No Information', input_html: { data: { individual_victim_target: "input", action: "click->individual-victim#toggle" } }, as: :radio_buttons  %>
+                  <div data-individual-victim-target="output">
+                    <div class="grid grid-cols-3 gap-4">
+                      <%= f.input :date_of_birth_month, label: false, collection: Date::MONTHNAMES, selected: Date.current.strftime("%B")  %>
+                      <%= f.input :date_of_birth_day, label: false, collection: 1..(Date.current.all_month.count), selected: Date.current.day %>
+                      <%= f.input :date_of_birth_year, label: false, collection: (Date.current - 100.year).year..(Time.zone.now.year), selected: Date.current.year %>
+                    </div>
                   </div>
+                </div>
                  <%= f.input :age_bracket_id, label: "Age Bracket", collection: AgeBracket.all.map{|a| [a.description, a.id] } %>
 
 

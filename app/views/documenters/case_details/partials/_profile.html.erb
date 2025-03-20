@@ -185,14 +185,27 @@
   <div class="col-span-8 mt-2">
     <p class="text-gray-500"> <%= @case_detail.impact_to_community_details %> </p>
   </div>
+</div>
+<div class="border-t border-gray-200 my-4"></div>
 
+<h2 class="font-bold text-l text-gray-900 mt-4">Other Actions and Investigations Undertaken</h2>
+<div class="grid grid-cols-1 md:grid-cols-12">
   <div class="col-span-3 ml-4 mt-2">
-    <p class="block mb-2 text-sm font-medium text-gray-900"> Advocacies and/or action/s undertaken</p>
+    <p class="block mb-2 text-sm font-medium text-gray-900">Is/Are there any other advocacy and/or action/s undertaken ?</p>
   </div>
   <div class="col-span-1">
   </div>
   <div class="col-span-8 mt-2">
     <p class="text-gray-500"> <%= @case_detail.actions_taken_details %> </p>
   </div>
+  <div class="col-span-3 ml-4 mt-2">
+    <p class="block mb-2 text-sm font-medium text-gray-900">Has there been any investigation/s on the incident of other type of human right violation ?</p>
+  </div>
+  <div class="col-span-1">
+  </div>
+  <div class="col-span-8 mt-2">
+    <p class="text-gray-500"> <%= @case_detail.incident_investigation_details %> </p>
+  </div>
+</div>
 </div>
 <div class="border-t border-gray-200 my-4"></div>

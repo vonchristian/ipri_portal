@@ -47,8 +47,10 @@ task deploy: :remote_environment do
     invoke :"git:clone"
     invoke :"deploy:link_shared_paths"
     invoke :"bundle:install"
+    command " bundle config set force_ruby_platform true"
     invoke :"rails:db_migrate"
-    # invoke :"rails:assets_precompile"
+    command "export TAILWINDCSS_INSTALL_DIR=node_modules/.bin"
+    invoke :"rails:assets_precompile"
     invoke :"deploy:cleanup"
 
     on :launch do

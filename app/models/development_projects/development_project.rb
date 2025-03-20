@@ -5,6 +5,8 @@ module DevelopmentProjects
     belongs_to :parent_company_country, class_name: "Country", optional: true
     belongs_to :category, class_name: 'DevelopmentProjects::Category', optional: true, foreign_key: "development_project_category_id", counter_cache: :development_projects_count
     has_many_attached                  :documents, dependent: :destroy
+    has_many :case_projects,           class_name: "DevelopmentProjects::CaseProject", dependent: :destroy
+    has_many :case_details, through: :case_projects
 
     delegate :name, to: :parent_company_country, prefix: true, allow_nil: true
 
