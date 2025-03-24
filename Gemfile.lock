@@ -225,6 +225,7 @@ GEM
       net-pop
       net-smtp
     marcel (1.0.4)
+    matrix (0.4.2)
     method_source (1.1.0)
     mime-types (3.6.0)
       logger
@@ -281,10 +282,15 @@ GEM
     parser (3.3.7.0)
       ast (~> 2.4.1)
       racc
+    pdf-core (0.10.0)
     pg (1.5.9)
     pg_search (2.3.7)
       activerecord (>= 6.1)
       activesupport (>= 6.1)
+    prawn (2.5.0)
+      matrix (~> 0.4)
+      pdf-core (~> 0.10.0)
+      ttfunk (~> 1.8)
     pry (0.15.2)
       coderay (~> 1.1)
       method_source (~> 1.0)
@@ -432,6 +438,8 @@ GEM
     thor (1.3.2)
     tilt (2.6.0)
     timeout (0.4.3)
+    ttfunk (1.8.0)
+      bigdecimal (~> 3.1)
     turbo-rails (2.0.11)
       actionpack (>= 6.0.0)
       railties (>= 6.0.0)
@@ -498,6 +506,7 @@ DEPENDENCIES
   pagy
   pg
   pg_search
+  prawn
   pry-rails
   puma (~> 6.0)
   pundit (~> 2.3)

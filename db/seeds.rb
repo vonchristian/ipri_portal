@@ -7,10 +7,12 @@
 #
 #   movies = Movie.create([{ name: "Star Wars" }, { name: "Lord of the Rings" }])
 #   Character.create(name: "Luke", movie: movies.first)
-AgeBracket.create!(name: "A", min_age: 0, max_age: 14,  description: "0 - 14 years old")
-AgeBracket.create!(name: "B", min_age: 15, max_age: 24, description: "15 - 24 years old")
-AgeBracket.create!(name: "C", min_age: 25, max_age: 59, description: "25 - 59 years old")
-AgeBracket.create!(name: "D", min_age: 60, max_age: 200, description: "60 years old and above")
+AgeBracket.create!(name: "A", min_age: 0, max_age: 12,  description: "0 - 12 years old")
+AgeBracket.create!(name: "B", min_age: 13, max_age: 25, description: "13 - 25 years old")
+AgeBracket.create!(name: "C", min_age: 26, max_age: 35, description: "26 - 35 years old")
+AgeBracket.create!(name: "D", min_age: 36, max_age: 59, description: "36 - 59 years old")
+AgeBracket.create!(name: "E", min_age: 60, max_age: 200, description: "60 years old and above")
+
 
 Criminalizations::AccuserCategory.create!(title: "National Level Government Official")
 Criminalizations::AccuserCategory.create!(title: "Federal Level Government Official")
