@@ -1,6 +1,6 @@
 <tr class="border-b">
   <td scope="row" class="py-4 px-6 font-medium text-gray-900 whitespace-nowrap">
-    <%= link_to human_rights_violation.violation_details.truncate(60), documenters_case_detail_path(human_rights_violation.case_detail) %>
+    <%= link_to human_rights_violation.violation_details.to_s.truncate(60), documenters_case_detail_path(human_rights_violation.case_detail) %>
   </td>
   <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
 
