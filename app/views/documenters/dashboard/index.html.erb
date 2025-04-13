@@ -81,7 +81,7 @@
 <div class="grid grid-cols-12 gap-2">
   <div class="col-span-6">
     <h1 class="font-semibold text-gray-900">By Gender</h1>
-    <%= pie_chart Victims::IndividualVictim.group(:gender).count %>
+    <%= pie_chart Victims::IndividualVictim.where.not(gender: nil).group(:gender).count %>
   </div>
   <div class="col-span-6">
     <h1 class="font-semibold text-gray-900">By Age Bracket</h1>
