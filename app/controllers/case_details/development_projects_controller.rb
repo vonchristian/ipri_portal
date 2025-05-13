@@ -11,7 +11,7 @@ class CaseDetails::DevelopmentProjectsController < ApplicationController
   def create
     @case_detail = CaseDetails::CaseDetail.find(params.fetch(:case_detail_id))
     @development_project = CaseDetails::DevelopmentProject.new(development_project_params)
-    if @development_project.save!
+    if @development_project.valid?
       @development_project.save!
 
       respond_to do |format|
