@@ -101,3 +101,4 @@ gem "tailwindcss-ruby", "~> 3.4"
 # gem "tailwindcss-rails"
 
 gem "prawn"
+gem "prawn-table"
