@@ -12,13 +12,13 @@ class IpriEmployeeDashboard < ActiveInteraction::Base
       human_rights_violations_count: human_rights_violations_count,
       current_year_human_rights_violations_count: current_year_human_rights_violations_count,
       human_rights_violations: [
-        OpenStruct.new(sort_order: 1, title: "Violations of FPIC", count: fpic_count),
-        OpenStruct.new(sort_order: 2, title: "Arbitrary Detention", count: arbitrary_detention_count),
-        OpenStruct.new(sort_order: 3, title: "Sexual Violence", count: sexual_violence_count),
-        OpenStruct.new(sort_order: 4, title: "Kidnapping", count: kidnapping_count),
-        OpenStruct.new(sort_order: 5, title: "Transition Energy", count: transition_energy_count),
-        OpenStruct.new(sort_order: 6, title: "Transition Mineral Mining", count: mining_count),
-        OpenStruct.new(sort_order: 7, title: "Conservation", count: conservation_count)
+        OpenStruct.new(sort_order: 1, category_class: "HumanRightsViolations::Category", id: fpic.id, title: "Violations of FPIC", count: fpic.case_details.count),
+        OpenStruct.new(sort_order: 2, category_class: "HumanRightsViolations::Category", id: arbitrary_detention.id, title: arbitrary_detention.title, count: arbitrary_detention.case_details.count),
+        OpenStruct.new(sort_order: 3, category_class: "HumanRightsViolations::Category", id: sexual_violence.id, title: 'Sexual Violence', count: sexual_violence.case_details.count),
+        OpenStruct.new(sort_order: 4, category_class: "HumanRightsViolations::Category", id: kidnapping.id, title: kidnapping.title, count: kidnapping.case_details.count),
+        OpenStruct.new(sort_order: 5, category_class: "DevelopmentProjects::Category", id: transition_energy.id, title: "Transition Energy", count: transition_energy.case_details_count),
+        OpenStruct.new(sort_order: 6, category_class: "DevelopmentProjects::Category", id: mining.id, title: "Transition Mineral Mining", count: mining.case_details_count),
+        OpenStruct.new(sort_order: 7, category_class: "DevelopmentProjects::Category", id: conservation.id, title: "Conservation", count: conservation.case_details_count)
       ]
     }
   end
@@ -64,31 +64,31 @@ class IpriEmployeeDashboard < ActiveInteraction::Base
     HumanRightsViolations::HumanRightsViolation.submitted_current_year.size
   end
 
-  def fpic_count
-    HumanRightsViolations::Category.find_by(title: "Violation of collective right to free, prior and informed consent")&.human_rights_violations_count
+  def fpic
+    @fpic ||= HumanRightsViolations::Category.fpic
   end
 
-  def arbitrary_detention_count
-    HumanRightsViolations::Category.find_by!(title: "Arbitrary detention")&.human_rights_violations_count
+  def arbitrary_detention
+    @arbitrary_detention ||= HumanRightsViolations::Category.find_by!(title: "Arbitrary detention")
   end
 
-  def sexual_violence_count
-    HumanRightsViolations::Category.find_by(title: "Sexual Violence and other forms of gender-based violence")&.human_rights_violations_count
+  def sexual_violence
+    @sexual_violence ||= HumanRightsViolations::Category.sexual_violence
   end
 
-  def kidnapping_count
-    HumanRightsViolations::Category.find_by(title: "Kidnapping")&.human_rights_violations_count
+  def kidnapping
+    @kidnapping ||= HumanRightsViolations::Category.kidnapping
   end
 
-  def transition_energy_count
-    DevelopmentProjects::Category.find_by(name: "Transition Energy (Solar, Wind, Hydro, Biomass, Geothermal, and others)")&.case_details_count
+  def transition_energy
+    @transition_energy ||= DevelopmentProjects::Category.transition_energy
   end
 
-  def mining_count
-    DevelopmentProjects::Category.find_by(name: "Mining (gold, silver, diamonds, sands, and other metals and minerals)")&.case_details_count
+  def mining
+    @mining ||= DevelopmentProjects::Category.mining
   end
 
-  def conservation_count
-    DevelopmentProjects::Category.find_by!(name: "Conservation (Protected Area Designation, Wildlife, Water, Reforestation and Others)")&.case_details_count
+  def conservation
+    @conservation ||= DevelopmentProjects::Category.conservation
   end
 end

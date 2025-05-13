@@ -1,5 +1,10 @@
 <div class="md:col-span-6 mt-6 ml-2">
-            <h2 class="font-bold text-xl text-gray-900">Case Details</h2>
+<div class="flex justify-between items-center mr-4">
+  <h2 class="font-bold text-xl text-gray-900">Case Factsheet</h2>
+  <%= link_to documenters_case_detail_path(@case_detail, format: "pdf"), class: "inline-flex items-center px-4 py-2 text-sm font-medium text-gray-700 bg-white border border-gray-300 rounded-md shadow-sm hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-500" do %>
+    <i class="fas fa-download mr-2"></i> Download PDF
+  <% end %>
+</div>
 <div class="text-sm font-medium text-center text-gray-500 border-b border-gray-200">
     <ul class="flex flex-wrap -mb-px">
       <li class="mr-2">
@@ -29,8 +34,12 @@
             <% end %>
           </a>
       </li>
-      <li class="mr-2">
+      <li class="">
+        
           <a href="/documenters/case_details/<%=@case_detail.id %>/development_projects" class="<%= "inline-block p-4 text-blue-600 rounded-t-lg border-b-2 border-blue-600 active" if current_page?(documenters_case_detail_development_projects_path(@case_detail.id)) %>inline-block p-4 rounded-t-lg border-b-2 border-transparent hover:text-gray-600 hover:border-gray-300">Development Projects</a>
+          <% if @case_detail.development_projects_count.to_i.positive? %>
+              <span class="inline-flex items-center gap-x-1.5 py-1.5 px-3 rounded-full text-xs font-medium bg-red-500 text-white"><%= @case_detail.development_projects_count %></span>
+            <% end %>
       </li>
     </ul>
 

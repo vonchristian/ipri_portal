@@ -14,8 +14,7 @@ module CaseDetails
         :impact_to_victim_details,
         :impact_to_community_details,
       ],
-      associated_against: { country: [:name] },
-      associated_against: { individual_victims: [:full_name] },
+      associated_against: { individual_victims: [:full_name], ountry: [:name] },
       using: { tsearch: { prefix: true } }
 
     enum data_sharing: {
@@ -38,6 +37,8 @@ module CaseDetails
     delegate :name, to: :country, prefix: true, allow_nil: true
 
     counter_culture :country
+
+    before_save :update_statistics
 
     DATA_SHARING_OPTIONS = [
       OpenStruct.new(
@@ -114,6 +115,17 @@ module CaseDetails
 
     def self.ransackable_attributes(auth_object = nil)
       ["actions_taken_details", "actions_taken_status", "collective_victims_count", "country_id", "created_at", "criminalizations_count", "data_sharing", "data_sources", "development_projects_count", "documenter_email", "documenter_first_name", "documenter_id", "documenter_last_name", "documenter_organization", "documenter_phone_number", "human_rights_violations_count", "id", "id_value", "impact_to_community_details", "impact_to_victim_details", "incident_end_day", "incident_end_month", "incident_end_year", "incident_hour", "incident_minute", "incident_start_day", "incident_start_month", "incident_start_year", "individual_victims_count", "killings_count", "location_details_1", "location_details_2", "organization_name", "primary_data", "reference_number", "submission_date_day", "submission_date_month", "submission_date_year", "subnational_location", "time_period", "updated_at"]
+    end
+
+    private 
+
+    def update_statistics
+      self.individual_victims_count = individual_victims.size
+      self.collective_victims_count = collective_victims.size
+      self.criminalizations_count = criminalizations.size
+      self.human_rights_violations_count = human_rights_violations.size
+      self.killings_count = killings.size
+      self.development_projects_count = development_projects.size
     end
   end
 end
