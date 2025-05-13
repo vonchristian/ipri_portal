@@ -55,10 +55,10 @@
                 <%= f.input :case_filing_against_perpetrator, label: "Was/Were there (a) legal case/s filed against the alleged perpetrators on behalf of the victim/s criminalized?", collection: [['No', 'No'], ['Yes', 'Yes']], label_method: :second, value_method: :first, selected: "No", input_html: { data: { action: "criminalization-form#toggleCaseFilingAgainstPerpetrator" } } %>
 
               <div class="hidden" data-criminalization-form-target="caseFilingAgainstPerpetratorGroup">
-                <%= f.input :case_filing_against_perpetrator_details, as: :text, label: "If yes, please provide further information: Where is/are the case/s filed? Who filed the case? E.g., victim, family of the victim, support organizations, etc.; any other details of the case/s filed, please share." %>
+                <%= f.input :case_filing_against_perpetrator_details, as: :text, label: "If Yes, please provide further information: Where is/are the case/s filed? Who filed the case? E.g., victim, family of the victim, support organizations, etc.; any other details of the case/s filed, please share." %>
               </div>
                <div data-criminalization-form-target="caseFilingAgainstPerpetratorGroup">
-                <%= f.input :case_filing_against_perpetrator_details, as: :text,  label: "If no, please elaborate on your response (e.g. can you provide probable reasons on why there has been no legal case/s filed against the alleged perpetrators? Etc.)" %>
+                <%= f.input :case_filing_against_perpetrator_details, as: :text,  label: "If No, please elaborate on your response (e.g. can you provide probable reasons on why there has been no legal case/s filed against the alleged perpetrators? Etc.)" %>
               </div>
 
               <%= f.input :state_action_to_address_criminalization, label: "Has the State undertaken any action/s to address the incident of criminalization?", collection: [['No', 'No'], ['Yes', 'Yes']], label_method: :second, value_method: :first, selected: "No", input_html: { data: { action: "criminalization-form#toggleStateAction" } } %>

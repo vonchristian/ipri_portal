@@ -9,6 +9,7 @@ module Criminalizations
 
     counter_culture [:case_detail, :country]
 
+
     BOOLEAN_STATUSES = {
       "yes" => "Yes",
       "no" => "No",

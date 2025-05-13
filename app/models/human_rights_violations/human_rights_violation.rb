@@ -2,7 +2,7 @@
 
 module HumanRightsViolations
   class HumanRightsViolation < ApplicationRecord
-    belongs_to :case_detail, class_name: "CaseDetails::CaseDetail"
+    belongs_to :case_detail, class_name: "CaseDetails::CaseDetail", touch: true
     has_many :categorizations, class_name: "HumanRightsViolations::Categorization", dependent: :destroy
     has_many :categories, through: :categorizations
     has_many :perpetratorizations, class_name: "HumanRightsViolations::Perpetratorization", dependent: :destroy
