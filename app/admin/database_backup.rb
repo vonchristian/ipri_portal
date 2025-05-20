@@ -2,7 +2,7 @@
 require 'shellwords'
 require 'tempfile'
 
-ActiveAdmin.register_page "DatabaseBackup" do
+ActiveAdmin.register_page "Database Backup" do
   page_action :download, method: :get do
     # Database config
     db_config = Rails.configuration.database_configuration[Rails.env]
