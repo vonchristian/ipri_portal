@@ -17,7 +17,12 @@ ActiveAdmin.register_page "Database Backup" do
     temp_file.close # Close the file so pg_dump can write to it
 
     # Absolute path to pg_dump
-    pg_dump_path = `which pg_dump`.strip
+    pg_dump_path = if Rails.env.production?
+      '/usr/pgsql-14/bin/pg_dump'
+    else
+      `which pg_dump`.strip
+    end
+
     raise "pg_dump not found" if pg_dump_path.empty?
 
     # Build shell-safe command
@@ -43,7 +48,7 @@ ActiveAdmin.register_page "Database Backup" do
   end
 
   content do
-    para "Click the button below to download a PostgreSQL database dump."
+    para "Click the button below to download a PostgreSQL database dump in SQL format."
 
     div do
       # Correct URL generation inside Arbre context
