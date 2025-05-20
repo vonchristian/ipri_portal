@@ -7,7 +7,7 @@ ActiveAdmin.register_page "Database Backup" do
     # Database config
     db_config = Rails.configuration.database_configuration[Rails.env]
     user     = db_config['username']
-    host     = db_config['host'] || 'localhost'
+    host     = db_config['host']
     db_name  = db_config['database']
     password = db_config['password']
 

@@ -49,6 +49,7 @@ task deploy: :remote_environment do
     invoke :"bundle:install"
     command "bundle config set force_ruby_platform true"
     invoke :"rails:db_migrate"
+    command "npm install tailwindcss@3.4.16 -i"
     command "export TAILWINDCSS_INSTALL_DIR=/var/www/ipri/current/node_modules/.bin"
     invoke :"rails:assets_precompile"
     invoke :"deploy:cleanup"
