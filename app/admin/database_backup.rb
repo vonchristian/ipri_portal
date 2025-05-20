@@ -25,7 +25,7 @@ ActiveAdmin.register_page "Database Backup" do
       "PGPASSWORD=#{password.to_s.shellescape}",
       pg_dump_path.shellescape,
       '-U', user.to_s.shellescape,
-      '-h', host.shellescape,
+      '-h', host.to_s.shellescape,
       '-f', temp_path.shellescape,
       db_name.shellescape
     ].join(' ')
