@@ -7,9 +7,14 @@
           <div>
             <div class="px-4 py-5  space-y-4 sm:p-6">
                 <%= f.input :criminalization_details, label: "Why was/were the victim/s criminalized?" %>
-                <%= f.input :experienced_harrassment_or_intimidation, label: "Did the victim/s experience any form of harassment or intimidation prior to criminalization?", collection: [['No', 'No'], ['Yes', 'Yes'], ['No Information', 'No Information']], label_method: :second, value_method: :first, selected: "No", input_html: { data: { action: "criminalization-form#toggleExperienceHarrassment" } }  %>
+                <%= f.input :experienced_harrassment_or_intimidation, 
+                            label: "Did the victim/s experience any form of harassment or intimidation prior to criminalization?", 
+                            collection: yes_no_options, 
+                            label_method: :second, value_method: :first, 
+                            include_blank: "Please select", 
+                            input_html: { data: { action: "criminalization-form#toggleExperienceHarrassment" } }  %>
 
-              <div class="hidden" data-criminalization-form-target="experienceHarrassmentGroup">
+              <div class="hidden" data-criminalization-form-target="experienceHarrassmentYes">
                 <%= f.input :harrassment_or_intimidation_details, as: :text, label: "If YES, please provide more information" %>
               </div>
                 <%= f.input :accusation_or_charges_details, label: "What was/were the accusation/s or charge/s filed against the victim/s?" %>
@@ -31,45 +36,67 @@
                 <label for="first-name" class="text-base font-medium text-gray-700 pt-4"></label>
                 <%= f.input :accuser_details,  label: "Please provide more information about the accuser/s" %>
               </div>
-                <%= f.input :case_filing, label: "Was/were the accusation/s or charge/s against the victim legally or formally filed?", collection: [['No', 'No'], ['Yes', 'Yes'], ['No Information', 'No Information']], label_method: :second, value_method: :first, selected: "No", input_html: { data: { action: "criminalization-form#toggleCaseFiling" } }  %>
+                <%= f.input :case_filing_status, label: "Was/were the accusation/s or charge/s against the victim legally or formally filed?", 
+                collection: yes_no_options, 
+                label_method: :second, value_method: :first, 
+                include_blank: "Please select",
+                input_html: { data: { action: "criminalization-form#toggleCaseFiling" } }  %>
 
-               <div class="hidden" data-criminalization-form-target="caseFilingGroup">
+               <div class="hidden" data-criminalization-form-target="caseFilingYes">
                 <%= f.input :case_filing_details, as: :text, label: "If YES, where was the case/s filed? (e.g., regional court, military court, supreme court, etc.)" %>
               </div>
-               <div class="col-span-6 sm:col-span-3" data-criminalization-form-target="caseFilingGroup">
+               <div class="hidden" data-criminalization-form-target="caseFilingNo">
                 <%= f.input :case_filing_details, as: :text,  label: "If NO, Please provide more information" %>
               </div>
 
-                <%= f.input :case_decision_status, label: "Is there a decision on the legal or formal accusation/s or charge/s filed against the victim/s?", collection: [['No', 'No'], ['Yes', 'Yes'], ['No Information', 'No Information']], label_method: :second, value_method: :first, selected: "2", input_html: { data: { action: "criminalization-form#toggleCaseDecision" } } %>
+                <%= f.input :case_decision_status, 
+                            label: "Is there a decision on the legal or formal accusation/s or charge/s filed against the victim/s?", 
+                            collection: yes_no_options, 
+                            label_method: :second, value_method: :first, 
+                            include_blank: "Please select",
+                            input_html: { data: { action: "criminalization-form#toggleCaseDecision" } } %>
 
-              <div class="hidden" data-criminalization-form-target="caseFilingGroup">
+              <div class="hidden" data-criminalization-form-target="caseDecisionGroup">
                 <%= f.input :case_decision_details,  label: "Please provide more information" %>
               </div>
-                <%= f.input :victims_in_detention, label: "Is/Are the victim/s in prison or detention facility?", collection: [['No', 'No'], ['Yes', 'Yes']], label_method: :second, value_method: :first, selected: "No", input_html: { data: { action: "criminalization-form#toggleVictimInDetention" } } %>
-               <div class="hidden" data-criminalization-form-target="victimInDetentionGroup">
+                <%= f.input :victims_in_detention, 
+                            label: "Is/Are the victim/s in prison or detention facility?", 
+                            collection: yes_no_options, 
+                            label_method: :second, value_method: :first, 
+                            include_blank: "Please select",
+                            input_html: { data: { action: "criminalization-form#toggleVictimInDetention" } } %>
+              <div class="hidden" data-criminalization-form-target="victimInDetentionYes">
                 <%= f.input :victims_in_detention_details, as: :text,  label: "If yes, please provide more information on their conditions or situation in the prison or detention facility—do they know where is the prison or detention facility located? Are they allowed visitors?" %>
               </div>
-
-              <div data-criminalization-form-target="victimInDetentionGroup">
+              <div class="hidden" data-criminalization-form-target="victimInDetentionNo">
                 <%= f.input :victims_in_detention_details, as: :text, label: "If no, please provide more information on the current situation of the victim/s—Is/Are s/he/they in hiding? Released on bail? Awaiting court trial? On house arrest? etc" %>
               </div>
+              <%= f.input :case_filing_against_perpetrator, 
+                          label: "Was/Were there (a) legal case/s filed against the alleged perpetrators on behalf of the victim/s criminalized?", 
+                          collection: yes_no_options, 
+                          label_method: :second, value_method: :first, 
+                          include_blank: "Please select",
+                          input_html: { data: { action: "criminalization-form#toggleCaseFilingAgainstPerpetrator" } } %>
 
-                <%= f.input :case_filing_against_perpetrator, label: "Was/Were there (a) legal case/s filed against the alleged perpetrators on behalf of the victim/s criminalized?", collection: [['No', 'No'], ['Yes', 'Yes']], label_method: :second, value_method: :first, selected: "No", input_html: { data: { action: "criminalization-form#toggleCaseFilingAgainstPerpetrator" } } %>
-
-              <div class="hidden" data-criminalization-form-target="caseFilingAgainstPerpetratorGroup">
+              <div class="hidden" data-criminalization-form-target="caseFilingAgainstPerpetratorYes">
                 <%= f.input :case_filing_against_perpetrator_details, as: :text, label: "If yes, please provide further information: Where is/are the case/s filed? Who filed the case? E.g., victim, family of the victim, support organizations, etc.; any other details of the case/s filed, please share." %>
               </div>
-               <div data-criminalization-form-target="caseFilingAgainstPerpetratorGroup">
+               <div class="hidden" data-criminalization-form-target="caseFilingAgainstPerpetratorNo">
                 <%= f.input :case_filing_against_perpetrator_details, as: :text,  label: "If no, please elaborate on your response (e.g. can you provide probable reasons on why there has been no legal case/s filed against the alleged perpetrators? Etc.)" %>
               </div>
 
-              <%= f.input :state_action_to_address_criminalization, label: "Has the State undertaken any action/s to address the incident of criminalization?", collection: [['No', 'No'], ['Yes', 'Yes']], label_method: :second, value_method: :first, selected: "No", input_html: { data: { action: "criminalization-form#toggleStateAction" } } %>
+              <%= f.input :state_action_to_address_criminalization, 
+                          label: "Has the State undertaken any action/s to address the incident of criminalization?", 
+                          collection: yes_no_options, 
+                          label_method: :second, value_method: :first, 
+                          include_blank: "Please select",
+                          input_html: { data: { action: "criminalization-form#toggleStateAction" } } %>
 
-               <div class="hidden" data-criminalization-form-target="stateActionGroup">
+               <div class="hidden" data-criminalization-form-target="stateActionYes">
                 <label for="first-name" class="text-base font-medium text-gray-700 pt-4"></label>
                 <%= f.input :case_filing_against_perpetrator_details, as: :text,  label: "If YES, please provide more information on the action/s undertaken, including any relevant results." %>
               </div>
-              <div data-criminalization-form-target="stateActionGroup">
+              <div class="hidden" data-criminalization-form-target="stateActionNo">
                 <label for="first-name" class="text-base font-medium text-gray-700 pt-4"></label>
                 <%= f.input :case_filing_against_perpetrator_details, as: :text,  label: "If NO, please elaborate on your response" %>
               </div>
@@ -77,8 +104,7 @@
               <h2 class="font-bold text-xl text-gray-900 pt-5">Impact/s of the Incident/s of Human Rights Violation</h2>
           <div class="border-t border-gray-200 mt-4"></div>
 
-              <div class="md:mt-0 md:col-span-2 bg-white px-4">
-
+    
               <div class="col-span-6 sm:col-span-3">
                 <%= f.input :impact_to_victim_details, as: :text, hint: "E.g., the family members had to relocate for safety. Or, the family lost a breadwinner, etc.", label: "How did the incident/s affect the victim/s and his/her/their family?" %>
               </div>

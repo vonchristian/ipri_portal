@@ -5,82 +5,55 @@ export default class extends Controller {
     console.log("Connected");
   }
   static targets = [
-    "experienceHarrassmentGroup",
-    "caseFilingGroup",
+    "experienceHarrassmentYes",
+    "caseFilingYes",
+    "caseFilingNo",
     "caseDecisionGroup",
-    "victimInDetentionGroup",
-    "caseFilingAgainstPerpetratorGroup",
-    "stateActionGroup",
-    "investigationGroup"
+    "victimInDetentionYes",
+    "victimInDetentionNo",
+    "caseFilingAgainstPerpetratorYes",
+    "caseFilingAgainstPerpetratorNo",
+    "stateActionYes",
+    "stateActionNo",
   ]
 
-  toggleExperienceHarrassment() {
-    this.experienceHarrassmentGroupTargets.forEach((el) => {
-      if(el.classList.value.includes("hidden")) {
-        el.classList.remove("hidden");
-      } else {
-        el.classList.add("hidden");
-      };
-    });
+   toggleTargetsByValue(selectedValue, target, showValue) {
+    if (Array.isArray(showValue)) {
+      target.classList.toggle("hidden", !showValue.includes(selectedValue));
+    } else {
+      target.classList.toggle("hidden", selectedValue !== showValue);
+    }
   }
 
-  toggleCaseFiling() {
-    this.caseFilingGroupTargets.forEach((el) => {
-      if(el.classList.value.includes("hidden")) {
-        el.classList.remove("hidden");
-      } else {
-        el.classList.add("hidden");
-      };
-    });
+  toggleExperienceHarrassment(event) {
+     this.toggleTargetsByValue(event.target.value, this.experienceHarrassmentYesTarget, "Yes");
   }
 
-  toggleCaseDecision() {
-    this.caseDecisionGroupTargets.forEach((el) => {
-      if(el.classList.value.includes("hidden")) {
-        el.classList.remove("hidden");
-      } else {
-        el.classList.add("hidden");
-      };
-    });
+  toggleCaseFiling(event) {
+    const value = event.target.value;
+    this.toggleTargetsByValue(value, this.caseFilingYesTarget, "Yes");
+    this.toggleTargetsByValue(value, this.caseFilingNoTarget, "No");
   }
 
-  toggleVictimInDetention() {
-    this.victimInDetentionGroupTargets.forEach((el) => {
-      if(el.classList.value.includes("hidden")) {
-        el.classList.remove("hidden");
-      } else {
-        el.classList.add("hidden");
-      };
-    });
+  toggleCaseDecision(event) {
+    this.toggleTargetsByValue(event.target.value, this.caseDecisionGroupTarget, ["Yes", "No"]);
   }
 
-  toggleCaseFilingAgainstPerpetrator() {
-    this.caseFilingAgainstPerpetratorGroupTargets.forEach((el) => {
-      if(el.classList.value.includes("hidden")) {
-        el.classList.remove("hidden");
-      } else {
-        el.classList.add("hidden");
-      };
-    });
+  toggleVictimInDetention(event) { 
+    const value = event.target.value;
+    this.toggleTargetsByValue(value, this.victimInDetentionYesTarget, "Yes");
+    this.toggleTargetsByValue(value, this.victimInDetentionNoTarget, "No");
   }
 
-  toggleStateAction() {
-    this.stateActionGroupTargets.forEach((el) => {
-      if(el.classList.value.includes("hidden")) {
-        el.classList.remove("hidden");
-      } else {
-        el.classList.add("hidden");
-      };
-    });
+  toggleCaseFilingAgainstPerpetrator(event) {
+    const value = event.target.value;
+    this.toggleTargetsByValue(value, this.caseFilingAgainstPerpetratorYesTarget, "Yes");
+    this.toggleTargetsByValue(value, this.caseFilingAgainstPerpetratorNoTarget, "No");
   }
 
-  toggleInvestigation() {
-    this.investigationGroupTargets.forEach((el) => {
-      if(el.classList.value.includes("hidden")) {
-        el.classList.remove("hidden");
-      } else {
-        el.classList.add("hidden");
-      };
-    });
+  toggleStateAction(event) {
+    const value = event.target.value;
+    this.toggleTargetsByValue(value, this.stateActionYesTarget, "Yes");
+    this.toggleTargetsByValue(value, this.stateActionNoTarget, "No");
   }
 }
