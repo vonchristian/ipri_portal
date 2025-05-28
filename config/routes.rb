@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 Rails.application.routes.draw do
+  ActiveAdmin.routes(self)
   namespace :admin do
     resources :case_details do
       resources :rights_violations, only: [:index, :show, :new, :create, :edit, :update, :destroy]

@@ -1,5 +1,5 @@
 import { Controller } from "@hotwired/stimulus"
-
+import { toggleTargetsByValue } from "../utils/toggle_visibility"
 export default class extends Controller {
   connect () {
     console.log("Connected");
@@ -14,37 +14,23 @@ export default class extends Controller {
     "stateActionToAddressNo"
   ]
 
-  toggleTargetsByValue(selectedValue, target, showValue) {
-    if (Array.isArray(showValue)) {
-      target.classList.toggle("hidden", !showValue.includes(selectedValue));
-    } else {
-      target.classList.toggle("hidden", selectedValue !== showValue);
-    }
-  }
-
   toggleExperienceHarrassment(event) {
-    this.toggleTargetsByValue(event.target.value, this.experienceHarrassmentYesTarget, "Yes");
+    toggleTargetsByValue(event.target.value, this.experienceHarrassmentYesTarget, "Yes");
   }
 
   togglePerpetratorCategories(event) {
-    this.toggleTargetsByValue(event.target.value, this.perpetratorCategoryGroupTarget, "Yes");
+    toggleTargetsByValue(event.target.value, this.perpetratorCategoryGroupTarget, "Yes");
   }
 
   togglestateActionToAddressKilling(event) {
     const value = event.target.value;
-    this.toggleTargetsByValue(value, this.stateActionToAddressYesTarget, "Yes");
-    this.toggleTargetsByValue(value, this.stateActionToAddressNoTarget, "No");
+    toggleTargetsByValue(value, this.stateActionToAddressYesTarget, "Yes");
+    toggleTargetsByValue(value, this.stateActionToAddressNoTarget, "No");
   }
 
   toggleCaseFiling(event) {
     const value = event.target.value;
-    this.toggleTargetsByValue(value, this.caseFilingYesTarget, "Yes");
-    this.toggleTargetsByValue(value, this.caseFilingNoTarget, "No");
-  }
-
-  toggleInvestigationOnKilling() {
-    this.investigationOnKillingGroupTargets.forEach(el => {
-      el.classList.toggle("hidden");
-    });
+    toggleTargetsByValue(value, this.caseFilingYesTarget, "Yes");
+    toggleTargetsByValue(value, this.caseFilingNoTarget, "No");
   }
 }
