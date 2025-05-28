@@ -15,7 +15,7 @@ module CaseDetails
         :age_bracket_breakdowns,
         :indigenous_group_description
 
-      validates :affected_total, :victim_details, presence: true
+      validates :affected_total, presence: true
 
       def process!
         ApplicationRecord.transaction do
@@ -34,6 +34,7 @@ module CaseDetails
           victim_details: victim_details,
           male_total: male_total,
           female_total: female_total,
+          ethnicity_list: ethnicity_list
         )
 
         if age_bracket_breakdowns.present?

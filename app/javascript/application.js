@@ -7,11 +7,6 @@ import "Chart.bundle"
 import Alpine from "alpinejs"
 window.Alpine = Alpine
 
-document.addEventListener("DOMContentLoaded", function(event) {
-  window.Alpine.start();
-  console.log('est')
-});
-
 import { Application } from "@hotwired/stimulus"
 
 const application = Application.start()

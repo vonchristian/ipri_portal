@@ -3,6 +3,10 @@
 module ApplicationHelper
   include Pagy::Frontend
 
+  def yes_no_options
+    [['No', 'No'], ['Yes', 'Yes'], ['No Information', 'No Information']]
+  end
+
   def pagy_nav_custom(pagy)
     link_class = "px-4 py-2 border rounded-md hover:bg-gray-100"
     active_class = "bg-gray-200 text-white font-bold"

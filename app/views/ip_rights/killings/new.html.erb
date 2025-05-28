@@ -7,12 +7,19 @@
             <div class="px-4 py-5  space-y-4 sm:p-6">
                 <%= f.input :killing_details, as: :text, label: "Why was/were the victim/s killed?", hint: "E.g., S/he or they are defending their lands from being grabbed. S/he or they are protecting their traditional livelihood of pastoralism or defending their right to self-government, etc." %>
                 <%= f.input :killing_carried_out, as: :text, label: "How was the killing carried out?", hint: "E.g., shooting, bombing, resulted from torture, etc." %>
-                <%= f.input :experienced_harrassment_or_intimidation, label: "Did the victim/s experience any form of harassment or intimidation prior to criminalization?", collection: [['No', 'No'], ['Yes', 'Yes'] ], label_method: :second, value_method: :first, selected: "No", input_html: { data: { action: "killing-form#toggleExperienceHarrassment" } }  %>
-
-              <div class="hidden" data-killing-form-target="experienceHarrassmentGroup">
+               <%= f.input :experienced_harrassment_or_intimidation,
+            label: "Did the victim/s experience any form of harassment or intimidation prior to criminalization?",
+            collection: yes_no_options,
+            label_method: :second,
+            value_method: :first,
+            include_blank: "Please select",
+            input_html: {
+              data: { action: "killing-form#toggleExperienceHarrassment" }
+            } %>
+              <div class="hidden" data-killing-form-target="experienceHarrassmentYes">
                 <%= f.input :harrassment_or_intimidation_details, label: "If YES, please provide more information" %>
               </div>
-                <%= f.input :alleged_perpetrators_known, label: "Is/Are the alleged perpetrator/s known?", collection: [['No', 'No'], ['Yes', 'Yes'] ], label_method: :second, value_method: :first, selected: "No", input_html: { data: { action: "killing-form#togglePerpetratorCategories" } }  %>
+                <%= f.input :alleged_perpetrators_known, label: "Is/Are the alleged perpetrator/s known?", collection: [['No', 'No'], ['Yes', 'Yes'] ], label_method: :second, value_method: :first, include_blank: "Please select", input_html: { data: { action: "killing-form#togglePerpetratorCategories" } }  %>
 <div class="hidden" data-killing-form-target="perpetratorCategoryGroup">
 <div class="col-span-6 sm:col-span-3">
                 <label class="text-sm font-medium text-gray-600 block">Who put forward the accusation/s or charge/s against the victim/s?</label>
@@ -34,21 +41,44 @@
             <h2 class="font-bold text-xl text-gray-900">Status of Incident of Killing </h2>
             <div class="border-t border-gray-200 my-4"></div>
             <div class="px-4 py-5  space-y-4 sm:p-6">
-            <%= f.input :case_filing_status, label: "Was/Were there (a) legal case/s filed against the alleged perpetrators on behalf of the victim/s killed?", collection: [['No', 'No'], ['Yes', 'Yes'] ], label_method: :second, value_method: :first, selected: "No", input_html: { data: { action: "killing-form#toggleCaseFiling" } }  %>
-            <div class="hidden" data-killing-form-target="caseFilingGroup">
+
+            <%= f.input :case_filing_status, 
+                        label: "Was/Were there (a) legal case/s filed against the alleged perpetrators on behalf of the victim/s killed?", 
+                        collection: yes_no_options, label_method: :second, value_method: :first, 
+                        include_blank: "Please select", 
+                        input_html: { data: { action: "killing-form#toggleCaseFiling" } }  %>
+            <div class="hidden" data-killing-form-target="caseFilingYes">
               <%= f.input :case_filing_details, as: :text, label: "If YES, please provide further information: Where is/are the case/s filed? Who filed the case? E.g., victim, family of the victim, support organizations, etc.; any other details of the case/s filed, please share.",
               hint: "Where is/are the case/s filed? Who filed the case? E.g., victim, family of the victim, support organization, etc.; any other details of the case/s filed, please share." %>
             </div>
-            <div data-killing-form-target="caseFilingGroup">
+            <div data-killing-form-target="caseFilingNo">
               <%= f.input :case_filing_details, as: :text, label: "If No, please elaborate on your response. (e.g. can you provide probable reasons on why there has been no legal case/s filed against the alleged perpetrators? Etc.)" %>
             </div>
-            <%= f.input :state_action_to_address_killing, label: "Has the State undertaken any action/s to address the incident of killing?", collection: [['No', 'No'], ['Yes', 'Yes'] ], label_method: :second, value_method: :first, selected: "No", input_html: { data: { action: "killing-form#togglestateActionToAddressKilling" } }  %>
-            <div class="hidden" data-killing-form-target="stateActionToAddressGroup">
-              <%= f.input :state_action_to_address_killing_details,  as: :text, label: "If yes, please provide more information on the action/s undertaken, including any relevant results." %>
-            </div>
-            <div data-killing-form-target="stateActionToAddressGroup">
-              <%= f.input :state_action_to_address_killing_details,  as: :text, label: "If No, please elaborate on your response. (e.g. can you provide probable reasons on why there has been no legal case/s filed against the alleged perpetrators? Etc.)" %>
-            </div>
+
+<%= f.input :state_action_to_address_killing,
+              label: "Has the State undertaken any action/s to address the incident of killing?",
+              collection: yes_no_options,
+              label_method: :second,
+              value_method: :first,
+              include_blank: "Please select",
+              input_html: {
+                data: {
+                  action: "killing-form#togglestateActionToAddressKilling"
+                }
+              } %>
+
+  <div class="hidden" data-killing-form-target="stateActionToAddressYes">
+    <%= f.input :state_action_to_address_killing_details,
+                as: :text,
+                label: "If yes, please provide more information on the action/s undertaken, including any relevant results." %>
+  </div>
+
+  <div class="hidden" data-killing-form-target="stateActionToAddressNo">
+    <%= f.input :state_action_to_address_killing_details,
+                as: :text,
+                label: "If No, please elaborate on your response. (e.g. can you provide probable reasons on why there has been no legal case/s filed against the alleged perpetrators? Etc.)" %>
+  </div>
+
             <div class="px-4 py-3 bg-gray-100 text-right sm:px-6">
               <button type="submit" class="inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-green-600 hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500">
                 Save and Proceed

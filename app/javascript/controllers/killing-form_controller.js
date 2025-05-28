@@ -5,60 +5,46 @@ export default class extends Controller {
     console.log("Connected");
   }
   static targets = [
-    "experienceHarrassmentGroup",
+    "experienceHarrassmentYes",
     "perpetratorCategoryGroup",
-    "caseFilingGroup",
-    "stateActionToAddressGroup",
-    "investigationOnKillingGroup"
+    "caseFilingYes",
+    "caseFilingNo",
+    "investigationOnKillingGroup",
+    "stateActionToAddressYes", 
+    "stateActionToAddressNo"
   ]
 
-  toggleExperienceHarrassment() {
-    this.experienceHarrassmentGroupTargets.forEach((el) => {
-      if(el.classList.value.includes("hidden")) {
-        el.classList.remove("hidden");
-      } else {
-        el.classList.add("hidden");
-      };
-    });
+  toggleTargetsByValue(selectedValue, target, showValue) {
+    if (Array.isArray(showValue)) {
+      target.classList.toggle("hidden", !showValue.includes(selectedValue));
+    } else {
+      target.classList.toggle("hidden", selectedValue !== showValue);
+    }
   }
 
-  togglePerpetratorCategories() {
-    this.perpetratorCategoryGroupTargets.forEach((el) => {
-      if(el.classList.value.includes("hidden")) {
-        el.classList.remove("hidden");
-      } else {
-        el.classList.add("hidden");
-      };
-    });
+  toggleExperienceHarrassment(event) {
+    this.toggleTargetsByValue(event.target.value, this.experienceHarrassmentYesTarget, "Yes");
   }
 
-  togglestateActionToAddressKilling() {
-    this.stateActionToAddressGroupTargets.forEach((el) => {
-      if(el.classList.value.includes("hidden")) {
-        el.classList.remove("hidden");
-      } else {
-        el.classList.add("hidden");
-      };
-    });
+  togglePerpetratorCategories(event) {
+    this.toggleTargetsByValue(event.target.value, this.perpetratorCategoryGroupTarget, "Yes");
   }
 
-  toggleCaseFiling() {
-    this.caseFilingGroupTargets.forEach((el) => {
-      if(el.classList.value.includes("hidden")) {
-        el.classList.remove("hidden");
-      } else {
-        el.classList.add("hidden");
-      };
-    });
+  togglestateActionToAddressKilling(event) {
+    const value = event.target.value;
+    this.toggleTargetsByValue(value, this.stateActionToAddressYesTarget, "Yes");
+    this.toggleTargetsByValue(value, this.stateActionToAddressNoTarget, "No");
+  }
+
+  toggleCaseFiling(event) {
+    const value = event.target.value;
+    this.toggleTargetsByValue(value, this.caseFilingYesTarget, "Yes");
+    this.toggleTargetsByValue(value, this.caseFilingNoTarget, "No");
   }
 
   toggleInvestigationOnKilling() {
-    this.investigationOnKillingGroupTargets.forEach((el) => {
-      if(el.classList.value.includes("hidden")) {
-        el.classList.remove("hidden");
-      } else {
-        el.classList.add("hidden");
-      };
+    this.investigationOnKillingGroupTargets.forEach(el => {
+      el.classList.toggle("hidden");
     });
   }
 }
