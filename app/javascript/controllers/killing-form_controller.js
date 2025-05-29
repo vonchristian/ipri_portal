@@ -1,5 +1,6 @@
 import { Controller } from "@hotwired/stimulus"
-import { toggleTargetsByValue } from "./toggle_visibility"
+import { toggleTargetsByValue } from "utils/toggle_visibility"
+
 export default class extends Controller {
   connect () {
     console.log("Connected");

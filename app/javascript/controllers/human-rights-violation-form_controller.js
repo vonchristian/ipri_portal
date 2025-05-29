@@ -1,5 +1,6 @@
 import { Controller } from "@hotwired/stimulus"
-import { toggleTargetsByValue } from "./toggle_visibility"
+import { toggleTargetsByValue } from "utils/toggle_visibility"
+
 export default class extends Controller {
   connect () {
     console.log("Connected");
@@ -8,8 +9,10 @@ export default class extends Controller {
     "perpetratorCategoryGroup",
     "caseFilingYes",
     "caseFilingNo",
-    "stateActionToAddressViolationGroup",
-    "investigationOnViolationGroup"
+    "stateActionToAddressViolationYes",
+    "stateActionToAddressViolationNo",
+    "investigationOnViolationYes",
+    "investigationOnViolationNo"
   ]
 
   togglePerpetratorCategories(event) {
@@ -22,23 +25,15 @@ export default class extends Controller {
     toggleTargetsByValue(value, this.caseFilingNoTarget, "No");
   }
 
-  togglestateActionToAddressViolation() {
-    this.stateActionToAddressViolationGroupTargets.forEach((el) => {
-      if(el.classList.value.includes("hidden")) {
-        el.classList.remove("hidden");
-      } else {
-        el.classList.add("hidden");
-      };
-    });
+  togglestateActionToAddressViolation(event) {
+    const value = event.target.value;
+    toggleTargetsByValue(value, this.stateActionToAddressViolationYesTarget, "Yes");
+    toggleTargetsByValue(value, this.stateActionToAddressViolationNoTarget, "No");
   }
 
-  toggleInvestigationOnViolation() {
-    this.investigationOnViolationGroupTargets.forEach((el) => {
-      if(el.classList.value.includes("hidden")) {
-        el.classList.remove("hidden");
-      } else {
-        el.classList.add("hidden");
-      };
-    });
+  toggleInvestigationOnViolation(event) {
+    const value = event.target.value;
+    toggleTargetsByValue(value, this.investigationOnViolationYesTarget, "Yes");
+    toggleTargetsByValue(value, this.investigationOnViolationNoTarget, "No");
   }
 }
