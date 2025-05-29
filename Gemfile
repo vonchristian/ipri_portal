@@ -102,3 +102,4 @@ gem "tailwindcss-ruby", "~> 3.4"
 
 gem "prawn"
 gem "prawn-table"
+gem 'ostruct'
