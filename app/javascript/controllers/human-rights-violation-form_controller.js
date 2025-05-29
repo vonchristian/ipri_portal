@@ -1,5 +1,5 @@
 import { Controller } from "@hotwired/stimulus"
-import { toggleTargetsByValue } from "../utils/toggle_visibility"
+import { toggleTargetsByValue } from "./toggle_visibility"
 export default class extends Controller {
   connect () {
     console.log("Connected");
@@ -15,7 +15,7 @@ export default class extends Controller {
   togglePerpetratorCategories(event) {
     toggleTargetsByValue(event.target.value, this.perpetratorCategoryGroupTarget, ["Yes"]);
   }
-  
+
   toggleCaseFiling(event) {
     const value = event.target.value;
     toggleTargetsByValue(value, this.caseFilingYesTarget, "Yes");
