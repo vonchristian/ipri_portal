@@ -20,7 +20,12 @@
                 <div class="pt-5">
                 <%= f.input :violation_details, as: :text, label: "What caused the Human Rights Violation?", hint: "(E.g., S/he or they are defending their lands from being grabbed. S/he or they are protecting their traditional livelihood of pastoralism or defending their right to self-government, etc.)" %>
                 </div>
-                <%= f.input :alleged_perpetrators_known, label: "Is/Are the alleged perpetrator/s known?", collection: [['No', 'No'], ['Yes', 'Yes'] ], label_method: :second, value_method: :first, selected: "No", input_html: { data: { action: "human-rights-violation-form#togglePerpetratorCategories" } }  %>
+                <%= f.input :alleged_perpetrators_known, 
+                            label: "Is/Are the alleged perpetrator/s known?", 
+                            collection: yes_no_options, 
+                            label_method: :second, value_method: :first, 
+                            include_blank: "Please select", 
+                            input_html: { data: { action: "human-rights-violation-form#togglePerpetratorCategories" } }  %>
                 <div class="hidden" data-human-rights-violation-form-target="perpetratorCategoryGroup">
                   <div class="col-span-6 sm:col-span-3">
                   <p class="text-gray-600 text-sm font-medium pb-4"> Tick as many as possible </p>
@@ -43,11 +48,16 @@
             <h2 class="font-bold text-xl text-gray-900">Status of Incident of Human Rights Violation </h2>
             <div class="border-t border-gray-200 my-4"></div>
             <div class="px-4 py-5  space-y-4 sm:p-6">
-            <%= f.input :case_filing_status, label: "Was/Were there legal case/s filed against the alleged perpetrators on behalf of the victim/s?", collection: [['No', 'No'], ['Yes', 'Yes'] ], label_method: :second, value_method: :first, selected: "No", input_html: { data: { action: "human-rights-violation-form#toggleCaseFiling" } }  %>
-            <div class="hidden" data-human-rights-violation-form-target="caseFilingGroup">
+            <%= f.input :case_filing_status, 
+                        label: "Was/Were there legal case/s filed against the alleged perpetrators on behalf of the victim/s?", 
+                        collection: yes_no_options, 
+                        label_method: :second, value_method: :first, 
+                        include_blank: "Please select", 
+                        input_html: { data: { action: "human-rights-violation-form#toggleCaseFiling" } }  %>
+            <div class="hidden" data-human-rights-violation-form-target="caseFilingYes">
               <%= f.input :case_filing_details, as: :text, label: "If yes, please provide further information of the state of the case" %>
             </div>
-            <div data-human-rights-violation-form-target="caseFilingGroup">
+            <div class="hidden" data-human-rights-violation-form-target="caseFilingNo">
               <%= f.input :case_filing_details, as: :text, label: "If no, please elaborate on your response. (e.g. can you provide probable reasons on why there has been no legal case/s filed against the alleged perpetrators? Etc.)" %>
             </div>
 

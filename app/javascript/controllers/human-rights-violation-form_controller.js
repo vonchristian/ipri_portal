@@ -1,33 +1,25 @@
 import { Controller } from "@hotwired/stimulus"
-
+import { toggleTargetsByValue } from "../utils/toggle_visibility"
 export default class extends Controller {
   connect () {
     console.log("Connected");
   }
   static targets = [
     "perpetratorCategoryGroup",
-    "caseFilingGroup",
+    "caseFilingYes",
+    "caseFilingNo",
     "stateActionToAddressViolationGroup",
     "investigationOnViolationGroup"
   ]
 
-  togglePerpetratorCategories() {
-    this.perpetratorCategoryGroupTargets.forEach((el) => {
-      if(el.classList.value.includes("hidden")) {
-        el.classList.remove("hidden");
-      } else {
-        el.classList.add("hidden");
-      };
-    });
+  togglePerpetratorCategories(event) {
+    toggleTargetsByValue(event.target.value, this.perpetratorCategoryGroupTarget, ["Yes"]);
   }
-  toggleCaseFiling() {
-    this.caseFilingGroupTargets.forEach((el) => {
-      if(el.classList.value.includes("hidden")) {
-        el.classList.remove("hidden");
-      } else {
-        el.classList.add("hidden");
-      };
-    });
+  
+  toggleCaseFiling(event) {
+    const value = event.target.value;
+    toggleTargetsByValue(value, this.caseFilingYesTarget, "Yes");
+    toggleTargetsByValue(value, this.caseFilingNoTarget, "No");
   }
 
   togglestateActionToAddressViolation() {
