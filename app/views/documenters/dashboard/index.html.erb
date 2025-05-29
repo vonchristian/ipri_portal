@@ -92,36 +92,50 @@
   <h1 class="text-2xl font-bold text-gray-900 mt-2 mb-2">Cases By Country </h1>
 </header>
 <div class="border-t border-gray-200 mb-5"></div>
-<div id="geo_chart_div" style="width: 1200px; height: 500px;"></div>
+<div id="geo_chart_div" style="width: 1300px; height: 800px;"></div>
 
 <script src="https://www.gstatic.com/charts/loader.js"></script>
 <script>
-  // Load the Google GeoChart package
   google.charts.load('current', { packages: ['geochart'] });
   google.charts.setOnLoadCallback(drawRegionsMap);
 
-  // Build a JS map: country name => country id
+  // Map country name to UUID (if needed)
   var countryMap = {
-    <% Country.all.each do |country| %>
-      "<%= j country.name %>": "<%= j country.id %>",
+    <% Country.all.each_with_index do |country, idx| %>
+      "<%= j country.name %>": "<%= country.id %>"<%= ',' unless idx == Country.count - 1 %>
     <% end %>
   };
 
-  // Prepare the URL template, with placeholder __ID__
   var countryShowUrlTemplate = "<%= country_path('__ID__') %>";
 
   function drawRegionsMap() {
     var data = google.visualization.arrayToDataTable([
-      ['Country', 'Cases'],
-      <% CaseDetails::CaseDetail.joins(:country).group('countries.name').count.each do |country, count| %>
-        ['<%= j country %>', <%= count %>],
+      ['Country', 'Cases', { role: 'tooltip', p: {html: true} }],
+      <% CaseDetails::CaseDetail
+          .joins(:country)
+          .group('countries.name', 'countries.id', 'countries.killings_count', 'countries.criminalizations_count', 'countries.human_rights_violations_count')
+          .select('countries.name, countries.id, countries.killings_count, countries.criminalizations_count, countries.human_rights_violations_count, COUNT(case_details.id) as cases_count')
+          .each do |record| %>
+        [
+          '<%= j record.name %>', 
+          <%= record.cases_count %>, 
+          `<div style="min-width: 150px; padding: 2px;">
+             Cases: <%= record.cases_count %><br>
+             Killings: <%= record.killings_count || 0 %><br>
+             Criminalizations: <%= record.criminalizations_count || 0 %><br>
+             Other Violations: <%= record.human_rights_violations_count || 0 %>
+
+
+           </div>`
+        ]<%= ',' unless record == CaseDetails::CaseDetail.last %>
       <% end %>
     ]);
 
     var options = {
-  backgroundColor: '#ffffff',    // chart background (white here)
-  colorAxis: { colors: ['#ffd6d6', '#8A0303'] }
-};
+      backgroundColor: '#ffffff',
+      colorAxis: { colors: ['#ffd6d6', '#8A0303'] },
+      tooltip: { isHtml: true }
+    };
 
     var chart = new google.visualization.GeoChart(document.getElementById('geo_chart_div'));
 
@@ -129,9 +143,9 @@
       var selection = chart.getSelection();
       if (selection.length > 0) {
         var countryName = data.getValue(selection[0].row, 0);
-        var countryId = countryMap[countryName];
-        if (countryId) {
-          var url = countryShowUrlTemplate.replace('__ID__', countryId);
+        var countryUUID = countryMap[countryName];
+        if (countryUUID) {
+          var url = countryShowUrlTemplate.replace('__ID__', countryUUID);
           window.location.href = url;
         } else {
           alert("No country ID found for: " + countryName);
