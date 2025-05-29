@@ -3,7 +3,7 @@
     <h1 class="text-2xl font-bold text-gray-900 pt-5 mb-2">Key Data Points</h1>
     <div class="mt-4">
       <%= link_to 'Download', documenters_dashboard_index_path(format: 'xlsx'), class:"py-2.5 px-5 mr-2 mb-2 text-sm font-medium text-gray-900 focus:outline-none bg-white rounded-lg border border-gray-200 hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-4 focus:ring-gray-200" %>
-      </div>
+    </div>
   </div>
   <div class="border-t border-gray-200 mb-5"></div>
   <div>
@@ -92,4 +92,53 @@
   <h1 class="text-2xl font-bold text-gray-900 mt-2 mb-2">Cases By Country </h1>
 </header>
 <div class="border-t border-gray-200 mb-5"></div>
- <%= geo_chart CaseDetails::CaseDetail.joins(:country).group('countries.name').count, width: 200, height: 50, label: 'Cases', options: {background_color: '#548999'} %>
+<div id="geo_chart_div" style="width: 1200px; height: 500px;"></div>
+
+<script src="https://www.gstatic.com/charts/loader.js"></script>
+<script>
+  // Load the Google GeoChart package
+  google.charts.load('current', { packages: ['geochart'] });
+  google.charts.setOnLoadCallback(drawRegionsMap);
+
+  // Build a JS map: country name => country id
+  var countryMap = {
+    <% Country.all.each do |country| %>
+      "<%= j country.name %>": "<%= j country.id %>",
+    <% end %>
+  };
+
+  // Prepare the URL template, with placeholder __ID__
+  var countryShowUrlTemplate = "<%= country_path('__ID__') %>";
+
+  function drawRegionsMap() {
+    var data = google.visualization.arrayToDataTable([
+      ['Country', 'Cases'],
+      <% CaseDetails::CaseDetail.joins(:country).group('countries.name').count.each do |country, count| %>
+        ['<%= j country %>', <%= count %>],
+      <% end %>
+    ]);
+
+    var options = {
+  backgroundColor: '#ffffff',    // chart background (white here)
+  colorAxis: { colors: ['#ffd6d6', '#8A0303'] }
+};
+
+    var chart = new google.visualization.GeoChart(document.getElementById('geo_chart_div'));
+
+    google.visualization.events.addListener(chart, 'select', function() {
+      var selection = chart.getSelection();
+      if (selection.length > 0) {
+        var countryName = data.getValue(selection[0].row, 0);
+        var countryId = countryMap[countryName];
+        if (countryId) {
+          var url = countryShowUrlTemplate.replace('__ID__', countryId);
+          window.location.href = url;
+        } else {
+          alert("No country ID found for: " + countryName);
+        }
+      }
+    });
+
+    chart.draw(data, options);
+  }
+</script>
