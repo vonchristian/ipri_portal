@@ -20,6 +20,16 @@ Rails.application.routes.draw do
   root "documenters/sessions#new"
 
   resources :development_projects, only: [:show, :edit, :update]
+  resources :case_details, except: [:destroy] do 
+    resources :victims, only: [:index], controller: "case_details/victims"
+    resources :individual_victims, only: [:new, :create], controller: "case_details/individual_victims"
+    resources :collective_victims, only: [:new, :create], controller: "case_details/collective_victims"
+    resources :criminalizations, only: [:index, :new, :create, :edit, :update], controller: "case_details/criminalizations"
+    resources :human_rights_violations, only: [:index, :new, :create, :edit, :update], controller: "case_details/human_rights_violations"
+    resources :killings, only: [:index, :new, :create, :edit, :update], controller: "case_details/killings"
+    resources :development_projects, only: [:index, :new, :create], controller: "case_details/development_projects"
+    resources :tags, only: [:index, :create], controller: "case_details/tags"
+  end
 
   namespace :ip_rights do
     resources :case_details, only: [:show] do

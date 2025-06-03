@@ -100,7 +100,7 @@
           <table class="mt-2 min-w-full">
            <%= render 'case_details/tables/headers' %>
             <tbody>
-                <% @case_details.each do |case_detail| %>
+                <% case_details.each do |case_detail| %>
                   <%=render 'case_details/tables/row', case_detail: case_detail %>
                 <% end %>
             </tbody>

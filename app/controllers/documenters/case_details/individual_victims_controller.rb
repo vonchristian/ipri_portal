@@ -14,7 +14,7 @@ module Documenters
         @case_detail = ::CaseDetails::CaseDetail.find(params.fetch(:case_detail_id))
         @individual_victim = ::CaseDetails::Victims::Individual.new(individual_victim_params)
         if @individual_victim.valid?
-          @individual_victim.process!
+          @individual_victim.execute
 
           respond_to do |format|
             format.html do
@@ -44,7 +44,7 @@ module Documenters
             :date_of_birth_day,
             :date_of_birth_month,
             :date_of_birth_year)
-          .merge!(case_detail_id: @case_detail.id)
+          .merge!(case_detail: @case_detail)
       end
     end
   end
