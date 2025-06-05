@@ -77,7 +77,7 @@
                           label_method: :second, value_method: :first, 
                           include_blank: "Please select",
                           input_html: { data: { action: "criminalization-form#toggleCaseFilingAgainstPerpetrator" } } %>
-
+                          
               <div class="hidden" data-criminalization-form-target="caseFilingAgainstPerpetratorYes">
                 <%= f.input :case_filing_against_perpetrator_details, as: :text, label: "If yes, please provide further information: Where is/are the case/s filed? Who filed the case? E.g., victim, family of the victim, support organizations, etc.; any other details of the case/s filed, please share." %>
               </div>
