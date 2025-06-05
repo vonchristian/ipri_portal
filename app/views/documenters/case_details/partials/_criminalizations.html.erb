@@ -6,9 +6,9 @@
   <div class="border-t border-gray-200 my-4"></div>
 
   <% @criminalizations.each_with_index do |criminalization, indx| %>
+  <%= link_to documenters_case_detail_criminalization_path(case_detail_id: case_detail.id, id: criminalization.id) do %>
   <div class="flex w-full mx-auto justify-between">
     <h2 class="font-bold text-l text-gray-900 mt-4">Case #<%=indx.succ %> </h2>
-    <%= link_to "Edit", edit_documenters_case_detail_criminalization_path(case_detail_id: case_detail.id, id: criminalization.id), class: "mr-4 text-gray-900 bg-white border border-gray-300 focus:outline-none hover:bg-gray-100 focus:ring-4 focus:ring-gray-200 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2" %>
   </div>
     <div class="grid grid-cols-1 md:grid-cols-12">
       <div class="col-span-3 ml-4 mt-2">
@@ -231,6 +231,7 @@
     </div>
 
     <div class="border-t border-gray-200 my-4"></div>
+    <% end %>
   <% end %>
 <% else %>
   <div class="max-w-[85rem] px-4 py-10 sm:px-6 lg:px-8 lg:py-14 mx-auto">

@@ -1,0 +1,106 @@
+<div class="min-h-screen bg-gray-50 py-10 px-4">
+  <div class="max-w-4xl mx-auto bg-white shadow-md rounded-lg p-6 sm:p-10">
+    <!-- Buttons on top right -->
+    <div class="flex justify-end space-x-4 mb-8">
+      <%= link_to "Back to Case Detail", documenters_case_detail_victims_path(@case_detail), class: "inline-block px-4 py-2 text-gray-700 bg-gray-200 rounded hover:bg-gray-300" %>
+      <%= link_to "Edit", edit_documenters_case_detail_collective_victim_path(@case_detail, @collective_victim), class: "px-4 py-2 bg-orange-500 text-white rounded hover:bg-orange-600" %>
+    </div>
+
+    <h2 class="text-xl font-extrabold text-gray-900 mb-8">Collective Victim Details</h2>
+
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-x-12 gap-y-6">
+      <!-- Indigenous Group -->
+      <div>
+        <p class="text-sm font-semibold text-gray-500">Indigenous Group Description</p>
+        <p class="mt-1 text-gray-900 whitespace-pre-wrap"><%= @collective_victim.indigenous_group_description.presence || "-" %></p>
+      </div>
+
+      <!-- Victim Category -->
+      <div>
+        <p class="text-sm font-semibold text-gray-500">Category of Affected People</p>
+        <p class="mt-1 text-gray-900"><%= @collective_victim.collective_victim_category&.name || "-" %></p>
+      </div>
+
+      <!-- Total Affected -->
+      <div>
+        <p class="text-sm font-semibold text-gray-500">Total Number of Affected People</p>
+        <p class="mt-1 text-gray-900"><%= @collective_victim.affected_total || 0 %></p>
+      </div>
+
+      <!-- Gender Breakdown -->
+      <div>
+        <p class="text-sm font-semibold text-gray-500">Male</p>
+        <p class="mt-1 text-gray-900"><%= @collective_victim.male_total || 0 %></p>
+      </div>
+
+      <div>
+        <p class="text-sm font-semibold text-gray-500">Female</p>
+        <p class="mt-1 text-gray-900"><%= @collective_victim.female_total || 0 %></p>
+      </div>
+
+      <!-- Refer to Individuals -->
+      <div class="md:col-span-2">
+        <p class="text-sm font-semibold text-gray-500">Referred to Individuals?</p>
+        <p class="mt-1 text-gray-900"><%= @collective_victim.refer_to_individuals ? "Yes" : "No" %></p>
+      </div>
+
+      <!-- Victim Details -->
+      <div class="md:col-span-2">
+        <p class="text-sm font-semibold text-gray-500">Victim Details</p>
+        <p class="mt-1 text-gray-900 whitespace-pre-wrap"><%= @collective_victim.victim_details.presence || "-" %></p>
+      </div>
+    </div>
+
+    <!-- Age Bracket Breakdown -->
+    <div data-controller="inline-edit">
+
+  <div class="flex justify-between items-center mb-6">
+  <h2 class="text-xl font-semibold mb-4">Age Bracket Breakdown</h2>
+   
+    <button type="button"
+            data-action="inline-edit#edit"
+            class="px-4 py-2 bg-orange-500 text-white rounded hover:bg-orange-600">
+      Edit Age Bracket Breakdown
+    </button>
+  </div>
+
+
+  <!-- READ ONLY DISPLAY -->
+  <div data-inline-edit-target="display" class="space-y-3">
+    <% @collective_victim.age_bracket_breakdowns.includes(:age_bracket).each do |breakdown| %>
+      <div class="flex justify-between border-b pb-2">
+        <div><%= breakdown.age_bracket.description %></div>
+        <div><%= breakdown.total || 0 %></div>
+      </div>
+    <% end %>
+  </div>
+
+  <!-- EDIT FORM -->
+  <%= simple_form_for @collective_victim, url: documenters_case_detail_collective_victim_path(@case_detail, @collective_victim), method: :patch, html: { data: { inline_edit_target: "form" }, class: "hidden" } do |f| %>
+    <div class="space-y-3">
+      <% @collective_victim.age_bracket_breakdowns.includes(:age_bracket).each do |breakdown| %>
+        <%= f.fields_for :age_bracket_breakdowns, breakdown do |ff| %>
+          <%= ff.hidden_field :id %>
+          <div class="flex justify-between border-b pb-2 items-center">
+            <div><%= breakdown.age_bracket.description %></div>
+            <div>
+              <%= ff.number_field :total, min: 0, class: "w-20 rounded border-gray-300 border px-2 py-1 text-center" %>
+            </div>
+          </div>
+        <% end %>
+      <% end %>
+    </div>
+
+    <div class="mt-6 flex justify-end space-x-4">
+      <%= f.button :submit, "Save", class: "px-4 py-2 bg-green-600 text-white rounded hover:bg-green-700" %>
+      <button type="button"
+              data-action="inline-edit#cancel"
+              class="px-4 py-2 bg-gray-300 rounded hover:bg-gray-400">
+        Cancel
+      </button>
+    </div>
+  <% end %>
+</div>
+
+  </div>
+</div>

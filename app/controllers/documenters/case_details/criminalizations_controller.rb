@@ -4,27 +4,27 @@ module Documenters
   module CaseDetails
     class CriminalizationsController < Documenters::BaseController
       layout "documenter"
+      
+      before_action :set_case_detail
 
       def index
-        @case_detail = ::CaseDetails::CaseDetail.find(params[:case_detail_id])
         @criminalizations = @case_detail.criminalizations
       end
 
       def new
-        @case_detail     = ::CaseDetails::CaseDetail.find(params.fetch(:case_detail_id))
         @criminalization = @case_detail.criminalizations.build
         @criminalization.accuserizations.build
+       
       end
 
       def create
-        @case_detail     = ::CaseDetails::CaseDetail.find(params.fetch(:case_detail_id))
-        @criminalization = @case_detail.criminalizations.create(criminalization_params)
+        @criminalization = @case_detail.criminalizations.create!(criminalization_params)
         if @criminalization.valid?
-          @criminalization.save!
+          @criminalization.save
 
           respond_to do |format|
             format.html do
-              redirect_to documenters_case_detail_human_rights_violations_url(@case_detail)
+              redirect_to documenters_case_detail_criminalization_url(case_detail_id: @case_detail.id, id: @criminalization.id)
             end
           end
         else
@@ -36,33 +36,38 @@ module Documenters
         end
       end
 
-      def edit
-        @case_detail = ::CaseDetails::CaseDetail.find(params[:case_detail_id])
+      def show
         @criminalization = @case_detail.criminalizations.find(params[:id])
       end
 
-      def update
-        @case_detail = ::CaseDetails::CaseDetail.find(params[:case_detail_id])
+      def edit
         @criminalization = @case_detail.criminalizations.find(params[:id])
-        @criminalization.update(criminalization_params)
-        if @criminalization.valid?
-          @criminalization.save!
+        Criminalizations::AccuserCategory.all.each do |category|
+    unless @criminalization.accuserizations.exists?(accuser_category_id: category.id)
+      @criminalization.accuserizations.build(accuser_category_id: category.id)
+    end
+  end
+      end
 
-          respond_to do |format|
-            format.html do
-              redirect_to documenters_case_detail_criminalizations_url(@case_detail)
-            end
-          end
+      def update
+        @criminalization = @case_detail.criminalizations.find(params[:id])
+        
+        if @criminalization.update!(criminalization_params)
+          
+              redirect_to documenters_case_detail_criminalization_url(case_detail_id: @case_detail.id, id: @criminalization.id)
+            
         else
-          respond_to do |format|
-            format.html do
+         
               render :edit, status: :unprocessable_entity
-            end
-          end
+           
+
         end
       end
 
       private
+      def set_case_detail
+        @case_detail = ::CaseDetails::CaseDetail.find(params[:case_detail_id])
+      end
 
       def criminalization_params
         params.require(:criminalizations_criminalization)
@@ -87,7 +92,7 @@ module Documenters
             :investigation_on_criminalization_details,
             :impact_to_victim_details,
             :impact_to_community_details,
-            accuserizations_attributes: [:accuser_category_id],
+            accuser_category_ids: []
           )
       end
     end

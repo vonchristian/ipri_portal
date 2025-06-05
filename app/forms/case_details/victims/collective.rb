@@ -27,14 +27,14 @@ module CaseDetails
 
       def create_collective_victim
         collective_victim = ::Victims::CollectiveVictim.create!(
+          indigenous_group_description: indigenous_group_description,
           collective_victim_category_id: collective_victim_category_id,
           case_detail_id: case_detail_id,
           affected_total: affected_total,
           refer_to_individuals: refer_to_individuals,
           victim_details: victim_details,
           male_total: male_total,
-          female_total: female_total,
-          ethnicity_list: ethnicity_list
+          female_total: female_total
         )
 
         if age_bracket_breakdowns.present?

@@ -3,6 +3,11 @@
 module ApplicationHelper
   include Pagy::Frontend
 
+  def humanize_yes_no(value)
+    return '—' if value.blank?
+    value == 'yes' ? 'Yes' : 'No'
+  end
+  
   def yes_no_options
     [['No', 'No'], ['Yes', 'Yes'], ['No Information', 'No Information']]
   end

@@ -60,41 +60,49 @@
     <%= link_to 'Add Victim', new_documenters_case_detail_collective_victim_path(case_detail), class: "inline-flex py-2 px-2 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-green-600 hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500" %>
   </div>
 </header>
-<div class="overflow-x-auto relative shadow-md sm:rounded-lg">
-  <table class="w-full text-sm text-left text-gray-500">
-    <thead class="text-xs text-gray-700 uppercase bg-gray-50">
-      <tr>
-        <th scope="col" class="py-3 px-6">
-            Number of Affected People
-        </th>
-            <th scope="col" class="py-3 px-6">
-            Male Total
-        </th>
-        <th scope="col" class="py-3 px-6">
-            Female Total
-        </th>
-        <th scope="col" class="py-3 px-6">
-            Details
-        </th>
-      </tr>
-    </thead>
-    <tbody>
-      <% case_detail.collective_victims.each do |collective_victim| %>
-        <tr class="bg-white border-b hover:bg-gray-50">
-            <td scope="row" class="py-4 px-6 font-medium text-blue-600 whitespace-nowrap">
-              <%= link_to collective_victim.affected_total, documenters_collective_victim_path(collective_victim.id) %>
-            </td>
-            <td class="py-4 px-6">
-              <%= collective_victim.male_total || '-' %>
-            </td>
-            <td class="py-4 px-6">
-              <%= collective_victim.female_total || '-' %>
-            </td>
-            <td class="py-4 px-6">
-              <%= collective_victim.victim_details %>
-            </td>
-        </tr>
+<div class="max-w-8xl mx-auto mt-2 px-2 sm:px-6 lg:px-2">
+  <% if @case_detail.collective_victims.any? %>
+    <ul>
+      <% @case_detail.collective_victims.each do |victim| %>
+        <%= link_to documenters_case_detail_collective_victim_path(case_detail_id: @case_detail.id, id: victim.id) do %>
+        <li class="mb-5 border border-gray-300 rounded-lg p-6 shadow-sm hover:shadow-md transition relative">
+          <!-- Profile Header -->
+          <div class="flex items-center gap-x-4">
+           
+
+            <div class="grow">
+              <h3 class="text-lg font-medium text-gray-800">
+                <%= victim.affected_total %> <%= victim.collective_victim_category&.name %>
+              </h3>
+              <p class="text-sm text-gray-600 mt-1">
+                <%= victim.indigenous_group_description.presence || "No indigenous group info provided." %>
+              </p>
+            </div>
+          </div>
+
+          <!-- About / Details -->
+          <div class="mt-6 text-gray-700 text-sm space-y-3">
+            <p>
+              <strong>Male Total:</strong> <%= victim.male_total || 0 %>
+            </p>
+            <p>
+              <strong>Female Total:</strong> <%= victim.female_total || 0 %>
+            </p>
+            <p>
+              <strong>Victim Details:</strong> <br>
+              <span class="whitespace-pre-wrap"><%= victim.victim_details.presence || "No additional details." %></span>
+            </p>
+          </div>
+
+          <!-- Actions -->
+          <div class="absolute top-6 right-6 flex space-x-4">
+            
+          </div>
+        </li>
+        <% end %>
       <% end %>
-    </tbody>
-  </table>
+    </ul>
+  <% else %>
+    <p class="text-center text-gray-500 italic">No collective victims added yet.</p>
+  <% end %>
 </div>

@@ -6,6 +6,6 @@ module Victims
     belongs_to :collective_victim_category, class_name: 'Victims::CollectiveVictimCategory', optional: true
     has_many :age_bracket_breakdowns, class_name: "Victims::AgeBracketBreakdown", dependent: :destroy
 
-    accepts_nested_attributes_for :age_bracket_breakdowns
+    accepts_nested_attributes_for :age_bracket_breakdowns, allow_destroy: true
   end
 end
