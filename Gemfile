@@ -6,7 +6,7 @@ git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 ruby "3.4.1"
 
 # Bundle edge Rails instead: gem "rails", github: "rails/rails", branch: "main"
-gem 'rails', '~> 7.2', '>= 7.2.1.2'
+gem "rails", "~> 7.2", ">= 7.2.1.2"
 gem "rails-i18n", "~> 7.0.0"
 gem "countries"
 gem "email_validator"
@@ -65,7 +65,8 @@ group :development, :test do
   gem "pry-rails"
   gem "factory_bot_rails"
   gem "faker"
-  gem 'rspec-rails', '~> 7.0.0'
+  gem "rspec-rails", "~> 7.0.0"
+  gem "cypress-rails", github: "azyzio/cypress-rails", branch: "rails72-readiness"
 end
 
 group :development do
@@ -84,22 +85,22 @@ gem "chartkick"
 gem "groupdate"
 gem "roo", "~> 2.9.0"
 gem "active_interaction", "~> 5.1"
-gem 'active_interaction-extras'
+gem "active_interaction-extras"
 gem "kt-paperclip", "~> 6.4", ">= 6.4.1"
 
 gem "pundit", "~> 2.3"
-gem "activeadmin", "4.0.0.beta15", git: 'https://github.com/activeadmin/activeadmin', branch: :master
+gem "activeadmin", "4.0.0.beta15", git: "https://github.com/activeadmin/activeadmin", branch: :master
 gem "devise"
 gem "acts-as-taggable-on"
-gem 'counter_culture', '~> 3.2'
+gem "counter_culture", "~> 3.2"
 gem "cssbundling-rails"
 
 gem "ffi"
-gem 'caxlsx'
-gem 'caxlsx_rails'
+gem "caxlsx"
+gem "caxlsx_rails"
 gem "tailwindcss-ruby", "~> 3.4"
 # gem "tailwindcss-rails"
 
 gem "prawn"
 gem "prawn-table"
-gem 'ostruct'
+gem "ostruct"

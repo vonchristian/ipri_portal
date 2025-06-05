@@ -10,5 +10,8 @@
   "scripts": {
     "build:css": "tailwindcss -i ./app/assets/stylesheets/active_admin.css -o ./app/assets/builds/active_admin.css --minify -c tailwind-active_admin.config.js"
   },
-  "packageManager": "yarn@1.22.19"
+  "packageManager": "yarn@1.22.19",
+  "devDependencies": {
+    "cypress": "^14.4.1"
+  }
 }

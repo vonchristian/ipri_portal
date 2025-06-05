@@ -132,5 +132,3 @@ Style/TrailingCommaInHashLiteral:
   Enabled: false
 Layout/LineLength:
   Enabled: false
-Style/OpenStructUs:
-  Enabled: false

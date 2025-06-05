@@ -1,6 +1,10 @@
 # frozen_string_literal: true
 
 Rails.application.routes.draw do
+  namespace :test_helpers do
+    post "sign_in", to: "sessions#create"
+  end
+
   namespace :admin do
     resources :case_details do
       resources :rights_violations, only: [:index, :show, :new, :create, :edit, :update, :destroy]
@@ -15,12 +19,16 @@ Rails.application.routes.draw do
   end
 
   devise_for :admin_users, ActiveAdmin::Devise.config
-  ActiveAdmin.routes(self) rescue ActiveAdmin::DatabaseHitDuringLoad
+  begin
+    ActiveAdmin.routes(self)
+  rescue
+    ActiveAdmin::DatabaseHitDuringLoad
+  end
 
   root "documenters/sessions#new"
 
   resources :development_projects, only: [:show, :edit, :update]
-  resources :case_details, except: [:destroy] do 
+  resources :case_details, except: [:destroy] do
     resources :victims, only: [:index], controller: "case_details/victims"
     resources :individual_victims, only: [:new, :create], controller: "case_details/individual_victims"
     resources :collective_victims, only: [:new, :create], controller: "case_details/collective_victims"
@@ -79,7 +87,6 @@ Rails.application.routes.draw do
     resources :killings, only: [:index], controller: "countries/killings"
     resources :criminalizations, only: [:index], controller: "countries/criminalizations"
     resources :human_rights_violations, only: [:index], controller: "countries/human_rights_violations"
-
   end
 
   resources :killings, only: [:index, :show, :edit, :update]
@@ -87,6 +94,6 @@ Rails.application.routes.draw do
   resources :human_rights_violations, only: [:index]
 
   resources :case_details, only: [:edit, :update] do
-    resources :development_projects, only: [:new, :create], controller: 'case_details/development_projects'
+    resources :development_projects, only: [:new, :create], controller: "case_details/development_projects"
   end
 end
