@@ -13,15 +13,6 @@ GIT
       railties (>= 7.0)
       ransack (>= 4.0)
 
-GIT
-  remote: https://github.com/azyzio/cypress-rails.git
-  revision: a54a16140f7b2a0184059f56753d5a17721bdd66
-  branch: rails72-readiness
-  specs:
-    cypress-rails (0.7.1)
-      puma (>= 3.8.0)
-      railties (>= 5.2.0)
-
 GEM
   remote: https://rubygems.org/
   specs:
@@ -138,6 +129,9 @@ GEM
     cssbundling-rails (1.4.1)
       railties (>= 6.0.0)
     csv (3.3.2)
+    cypress-rails (0.8.0.rc1)
+      puma (>= 3.8.0)
+      railties (>= 5.2.0)
     database_cleaner-active_record (2.2.0)
       activerecord (>= 5.a)
       database_cleaner-core (~> 2.0.0)
@@ -498,7 +492,7 @@ DEPENDENCIES
   countries
   cssbundling-rails
   csv
-  cypress-rails!
+  cypress-rails (= 0.8.0.rc1)
   database_cleaner-active_record
   devise
   drb
