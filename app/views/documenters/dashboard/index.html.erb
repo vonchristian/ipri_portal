@@ -1,14 +1,14 @@
-<div class="px-6 md:px-12 lg:px-20">
+<div class="px-4 sm:px-6 md:px-12 lg:px-20">
 
-  <div class="md:col-span-6 mt-6 ml-2">
+  <div class="md:col-span-6 mt-6 ml-0 sm:ml-2">
     <!-- Header and Download Button -->
-    <div class="flex flex-col sm:flex-row sm:justify-between sm:items-center">
-      <h1 class="text-xl font-semibold text-gray-900 mb-2 sm:mb-0">Key Data Points</h1>
-      <%= link_to 'Download', documenters_dashboard_index_path(format: 'xlsx'), class:"py-1.5 px-4 text-sm font-medium text-gray-900 bg-white border border-gray-300 rounded-md hover:bg-gray-100 hover:text-blue-700" %>
+    <div class="flex flex-col sm:flex-row sm:justify-between sm:items-center gap-3">
+      <h1 class="text-2xl font-semibold text-gray-900 mb-0">Key Data Points</h1>
+      <%= link_to 'Download', documenters_dashboard_index_path(format: 'xlsx'), class:"py-2 px-5 text-sm font-semibold text-gray-900 bg-white border border-gray-300 rounded-md hover:bg-gray-100 hover:text-blue-700 transition" %>
     </div>
 
     <!-- Summary Pills Grid -->
-    <div class="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-4 gap-4 mt-4">
+    <div class="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-4 gap-5 mt-5">
       <% summary_data = [
         { path: "/documenters/case_details", label: "Total Cases", count: @dashboard[:case_details_count], sub: @dashboard[:current_year_case_details_count], color: "bg-red-100 text-red-700" },
         { path: "/criminalizations", label: "Criminalizations", count: @dashboard[:criminalizations_count], sub: @dashboard[:current_year_criminalizations_count], color: "bg-yellow-100 text-yellow-700" },
@@ -17,11 +17,11 @@
       ] %>
 
       <% summary_data.each do |item| %>
-        <a href="<%= item[:path] %>" class="p-4 rounded-xl border border-gray-200 hover:shadow-sm transition bg-white">
+        <a href="<%= item[:path] %>" class="p-5 rounded-xl border border-gray-200 hover:shadow-md transition bg-white flex flex-col justify-between">
           <div class="flex flex-col gap-1">
-            <div class="text-xs text-gray-500 tracking-wide uppercase"><%= item[:label] %></div>
-            <div class="text-2xl font-bold text-gray-900 leading-tight"><%= item[:count] %></div>
-            <div class="text-xs <%= item[:color] %> rounded px-2 py-0.5 w-fit mt-1">
+            <div class="text-xs font-semibold text-gray-500 uppercase tracking-wide"><%= item[:label] %></div>
+            <div class="text-3xl font-extrabold text-gray-900 leading-tight"><%= item[:count] %></div>
+            <div class="text-xs <%= item[:color] %> rounded-full px-3 py-1 w-fit mt-2 font-semibold">
               <%= item[:sub] %> this year
             </div>
           </div>
@@ -30,43 +30,92 @@
     </div>
   </div>
 
-  <div class="border-t border-gray-200 mt-4 mb-4"></div>
+  <div class="border-t border-gray-200 mt-6 mb-6"></div>
 
-  <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+  <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
     <!-- Leaderboard Column -->
     <div class="lg:col-span-1">
-      <h2 class="text-xl font-semibold text-gray-800 mb-4">Human Rights Violations</h2>
-      <ul class="space-y-2">
+      <h2 class="text-2xl font-semibold text-gray-800 mb-6">Human Rights Violations</h2>
+      <ul class="space-y-3">
         <% @dashboard[:human_rights_violations].sort_by(&:sort_order).each_with_index do |item, index| %>
-          <li class="flex justify-between items-center bg-white border border-gray-200 rounded-lg px-4 py-3 shadow-sm hover:bg-gray-50 transition">
-            <%= link_to item.title, documenters_case_details_path(category_id: item.id, category_class: item.category_class), class: "text-gray-900 font-medium hover:underline" %>
-            <span class="text-lg font-bold text-gray-800"><%= item.count %></span>
+          <li class="flex justify-between items-center bg-white border border-gray-200 rounded-lg px-5 py-4 shadow-sm hover:bg-gray-50 transition">
+            <%= link_to item.title, documenters_case_details_path(category_id: item.id, category_class: item.category_class), class: "text-gray-900 font-semibold hover:underline text-base" %>
+            <span class="text-xl font-bold text-gray-800"><%= item.count %></span>
           </li>
         <% end %>
       </ul>
     </div>
 
-    <!-- Charts Column -->
-    <div class="lg:col-span-2 space-y-4">
-      <h2 class="text-xl font-semibold text-gray-800">Individual Victims</h2>
-      <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-        <div>
-          <h3 class="font-semibold text-gray-900 mb-2">By Gender</h3>
-          <%= pie_chart Victims::IndividualVictim.where.not(gender: nil).group(:gender).count %>
-        </div>
-        <div>
-          <h3 class="font-semibold text-gray-900 mb-2">By Age Bracket</h3>
-          <%= bar_chart AgeBracket.chart_data %>
-        </div>
+   <!-- Charts Column -->
+<div class="lg:col-span-2 space-y-8 ml-5">
+  <h2 class="text-2xl font-semibold text-gray-800">Individual Victims</h2>
+
+  <!-- Both charts stacked vertically -->
+  <div class="flex flex-col gap-8">
+
+    <div>
+      <h3 class="font-semibold text-gray-900 mb-4 flex items-center gap-4 text-lg">
+        By Gender
+        <% total_victims = Victims::IndividualVictim.count %>
+        <span class="inline-block bg-blue-100 text-blue-800 text-xs font-semibold px-3 py-1 rounded-full whitespace-nowrap">
+          Total: <%= total_victims %>
+        </span>
+      </h3>
+
+      <% gender_counts = Victims::IndividualVictim.group(:gender).count %>
+
+      <% male_count = gender_counts["male"] || 0 %>
+      <% female_count = gender_counts["female"] || 0 %>
+      <% lgbtqia_count = gender_counts["lgbtqia"] || 0 %>
+
+      <% total_count = Victims::IndividualVictim.count.nonzero? || 1 %>
+      <% others_count = total_count - male_count - female_count - lgbtqia_count %>
+      <% others_count = 0 if others_count.negative? %>
+
+      <% segments = [
+        { label: "Male", count: male_count, color: "bg-blue-600" },
+        { label: "Female", count: female_count, color: "bg-pink-600" },
+        { label: "LGBTQIA", count: lgbtqia_count, color: "bg-purple-600" },
+        { label: "No Information", count: others_count, color: "bg-gray-400" }
+      ] %>
+
+      <div class="w-full bg-gray-200 rounded-lg h-8 overflow-hidden flex shadow-inner">
+        <% segments.each do |segment| %>
+          <% next if segment[:count] == 0 %>
+          <% width_percent = (segment[:count].to_f / total_count) * 100 %>
+          <div
+            class="<%= segment[:color] %> h-8"
+            style="width: <%= width_percent %>%;"
+            title="<%= "#{segment[:label]}: #{segment[:count]} (#{width_percent.round(1)}%)" %>"
+          ></div>
+        <% end %>
+      </div>
+
+      <div class="flex flex-wrap justify-start gap-6 mt-4 text-sm text-gray-700 font-medium">
+        <% segments.each do |segment| %>
+          <% next if segment[:count] == 0 %>
+          <div class="flex items-center space-x-2 whitespace-nowrap">
+            <div class="w-5 h-5 <%= segment[:color] %> rounded"></div>
+            <span><%= segment[:label] %> (<%= segment[:count] %>)</span>
+          </div>
+        <% end %>
       </div>
     </div>
-  </div>
 
-  <header class="pt-8">
-    <h1 class="text-2xl font-bold text-gray-900 mt-2 mb-4">Cases By Country</h1>
+    <div>
+      <h3 class="font-semibold text-gray-900 mb-2 text-lg">By Age Bracket</h3>
+      <%= bar_chart AgeBracket.chart_data, height: '280px' %>
+    </div>
+
+  </div>
+</div>
+
+
+  <header class="pt-12">
+    <h1 class="text-3xl font-bold text-gray-900 mb-6">Cases By Country</h1>
   </header>
-  <div class="border-t border-gray-200 mb-6"></div>
-  <div id="geo_chart_div" style="width: 100%; height: 800px; max-width: 1300px;"></div>
+  <div class="border-t border-gray-200 mb-8"></div>
+  <div id="geo_chart_div" class="w-full max-w-[1300px] h-[800px] mx-auto"></div>
 
 </div>
 
@@ -105,27 +154,29 @@
     ]);
 
     var options = {
-      backgroundColor: '#ffffff',
-      colorAxis: { colors: ['#ffd6d6', '#8A0303'] },
-      tooltip: { isHtml: true }
+      colorAxis: { colors: ["#ffd6d6", "#8A0303"] },
+      backgroundColor: '#f9fafb',
+      datalessRegionColor: '#eee',
+      tooltip: { isHtml: true },
+      legend: 'none'
     };
 
     var chart = new google.visualization.GeoChart(document.getElementById('geo_chart_div'));
 
-    google.visualization.events.addListener(chart, 'select', function() {
+    google.visualization.events.addListener(chart, 'select', function () {
       var selection = chart.getSelection();
-      if (selection.length > 0) {
-        var countryName = data.getValue(selection[0].row, 0);
-        var countryUUID = countryMap[countryName];
-        if (countryUUID) {
-          var url = countryShowUrlTemplate.replace('__ID__', countryUUID);
-          window.location.href = url;
-        } else {
-          alert("No country ID found for: " + countryName);
+      if (selection.length) {
+        var selectedItem = selection[0];
+        var countryName = data.getValue(selectedItem.row, 0);
+        var countryId = countryMap[countryName];
+        if (countryId) {
+          window.location.href = countryShowUrlTemplate.replace('__ID__', countryId);
         }
       }
     });
 
     chart.draw(data, options);
   }
+
+  window.addEventListener('resize', drawRegionsMap);
 </script>
