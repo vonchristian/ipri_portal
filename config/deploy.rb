@@ -41,16 +41,19 @@ end
 desc "Deploys the current version to the server."
 task deploy: :remote_environment do
   deploy do
-    # Put things that will set up an empty directory into a fully set-up
-    # instance of your project.
     invoke :"rbenv:load"
     invoke :"git:clone"
     invoke :"deploy:link_shared_paths"
     invoke :"bundle:install"
     command "bundle config set force_ruby_platform true"
     invoke :"rails:db_migrate"
-    command "npm install tailwindcss@3.4.16 -i"
-    command "export TAILWINDCSS_INSTALL_DIR=/var/www/ipri/current/node_modules/.bin"
+
+    # Use yarn to install all dependencies, including tailwindcss
+    command "cd #{fetch(:current_path)} && yarn install --frozen-lockfile"
+
+    # Build the Tailwind CSS file using npx (works with yarn-installed binaries)
+    command "cd #{fetch(:current_path)} && npx tailwindcss -c tailwind.config.js -o app/assets/builds/application.css --minify"
+
     invoke :"rails:assets_precompile"
     invoke :"deploy:cleanup"
 

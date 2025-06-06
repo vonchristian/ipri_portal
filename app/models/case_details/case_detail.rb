@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-require 'ostruct'
+require "ostruct"
 module CaseDetails
   class CaseDetail < ApplicationRecord
     include PgSearch::Model
@@ -14,10 +14,10 @@ module CaseDetails
         :impact_to_victim_details,
         :impact_to_community_details,
       ],
-      associated_against: { individual_victims: [:full_name], ountry: [:name] },
+      associated_against: { individual_victims: [:full_name], country: [:name] },
       using: { tsearch: { prefix: true } }
 
-    enum data_sharing: {
+    enum :data_sharing, {
       restricted: "restricted",
       unrestricted: "unrestricted",
     }
@@ -117,7 +117,7 @@ module CaseDetails
       ["actions_taken_details", "actions_taken_status", "collective_victims_count", "country_id", "created_at", "criminalizations_count", "data_sharing", "data_sources", "development_projects_count", "documenter_email", "documenter_first_name", "documenter_id", "documenter_last_name", "documenter_organization", "documenter_phone_number", "human_rights_violations_count", "id", "id_value", "impact_to_community_details", "impact_to_victim_details", "incident_end_day", "incident_end_month", "incident_end_year", "incident_hour", "incident_minute", "incident_start_day", "incident_start_month", "incident_start_year", "individual_victims_count", "killings_count", "location_details_1", "location_details_2", "organization_name", "primary_data", "reference_number", "submission_date_day", "submission_date_month", "submission_date_year", "subnational_location", "time_period", "updated_at"]
     end
 
-    private 
+    private
 
     def update_statistics
       self.individual_victims_count = individual_victims.size

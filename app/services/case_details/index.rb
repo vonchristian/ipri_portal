@@ -13,10 +13,10 @@ module CaseDetails
       @case_details = case_details.where(incident_start_year: incident_start_year) if incident_start_year.present?
       @case_details = case_details.where(submission_date_year: submission_date_year) if submission_date_year.present?
       @case_details = case_details.tagged_with(tag) if tag.present?
-      @case_details = case_details.joins(:human_rights_violations => :categories).where('human_rights_violation_categories.id' => category_id) if category_id.present? && category_class.to_s == "HumanRightsViolations::Category"
-      @case_details = case_details.joins(:development_projects => :category).where('development_project_categories.id' => category_id) if category_id.present? && category_class.to_s == "DevelopmentProjects::Category"
+      @case_details = case_details.joins(human_rights_violations: :categories).where("human_rights_violation_categories.id" => category_id) if category_id.present? && category_class.to_s == "HumanRightsViolations::Category"
+      @case_details = case_details.joins(development_projects: :category).where("development_project_categories.id" => category_id) if category_id.present? && category_class.to_s == "DevelopmentProjects::Category"
 
-      case_details.order(submission_date_year: :desc, submission_date_month: :desc, submission_date_day: :desc).distinct
+      case_details.reorder(submission_date_year: :desc, submission_date_month: :desc, submission_date_day: :desc).distinct
     end
 
     private
