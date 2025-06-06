@@ -1,211 +1,112 @@
-<div class="flex w-full mx-auto mt-4 justify-between">
-  <h2 class="font-bold text-l text-gray-900 mt-4">Documenter Details</h2>
-  <%= link_to "Edit", edit_case_detail_path(@case_detail), class: "mr-4 text-gray-900 bg-white border border-gray-300 focus:outline-none hover:bg-gray-100 focus:ring-4 focus:ring-gray-200 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2" %>
-</div>
-  <div class="grid grid-cols-1 md:grid-cols-12">
-    <div class="col-span-3 ml-4 mt-2">
-      <p class="block mb-2 text-sm font-medium text-gray-900"> First Name </p>
-    </div>
-    <div class="col-span-1">
-    </div>
-    <div class="col-span-8 mt-2">
-      <p class="text-gray-500"> <%= @case_detail.documenter_first_name %> </p>
-    </div>
-
-    <div class="col-span-3 ml-4 mt-2">
-      <p class="block mb-2 text-sm font-medium text-gray-900"> Last Name </p>
-    </div>
-    <div class="col-span-1">
-    </div>
-    <div class="col-span-8 mt-2">
-      <p class="text-gray-500"> <%= @case_detail.documenter_last_name %> </p>
-    </div>
-
-    <div class="col-span-3 ml-4 mt-2">
-      <p class="block mb-2 text-sm font-medium text-gray-900"> Organization/Affiliation </p>
-    </div>
-    <div class="col-span-1">
-    </div>
-    <div class="col-span-8 mt-2">
-      <p class="text-gray-500"> <%= @case_detail.organization_name %> </p>
-    </div>
-
-    <div class="col-span-3 ml-4 mt-2">
-      <p class="block mb-2 text-sm font-medium text-gray-900"> Email </p>
-    </div>
-    <div class="col-span-1">
-    </div>
-    <div class="col-span-8 mt-2">
-      <p class="text-gray-500"> <%= @case_detail.documenter_email %> </p>
-    </div>
-    <div class="col-span-3 ml-4 mt-2">
-      <p class="block mb-2 text-sm font-medium text-gray-900"> Phone Number </p>
-    </div>
-    <div class="col-span-1">
-    </div>
-    <div class="col-span-8 mt-2">
-      <p class="text-gray-500"> <%= @case_detail.documenter_phone_number %> </p>
-    </div>
-
-    <div class="col-span-3 ml-4 mt-2">
-      <p class="block mb-2 text-sm font-medium text-gray-900"> Are you willing to share more information with IPRI? </p>
-    </div>
-    <div class="col-span-1">
-    </div>
-    <div class="col-span-8 mt-2">
-      <p class="text-gray-500"> <%= @case_detail.willing_to_share_more_info ? "Yes" : "No" %> </p>
-    </div>
-  </div>
-<div class="border-t border-gray-200 my-4"></div>
-
-<div class="flex w-full mx-auto justify-between">
-  <h2 class="font-bold text-l text-gray-900 mt-4">Case Details</h2>
-  <%= link_to "Edit Tags", documenters_case_detail_tags_path(@case_detail), class: "mr-4 text-gray-900 bg-white border border-gray-300 focus:outline-none hover:bg-gray-100 focus:ring-4 focus:ring-gray-200 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2" %>
-</div>
-<div class="grid grid-cols-1 md:grid-cols-12">
-  <div class="col-span-3 ml-4 mt-2">
-    <p class="block mb-2 text-sm font-medium text-gray-900"> Primary Data</p>
-  </div>
-  <div class="col-span-1">
-  </div>
-  <div class="col-span-8 mt-2">
-    <p class="text-gray-500"> <%= @case_detail.primary_data ? "Yes" : "No" %> </p>
+<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mt-6">
+  <!-- Header: Documenter Details -->
+  <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center mb-6">
+    <h2 class="text-2xl font-semibold text-gray-900">Documenter Details</h2>
+    <%= link_to "Edit", edit_case_detail_path(@case_detail), class: "mt-4 sm:mt-0 inline-block text-gray-900 bg-white border border-gray-300 rounded-lg px-5 py-2.5 text-sm font-medium hover:bg-gray-100 focus:outline-none focus:ring-4 focus:ring-gray-200" %>
   </div>
 
-  <div class="col-span-3 ml-4 mt-2">
-    <p class="block mb-2 text-sm font-medium text-gray-900">  Submission Date </p>
-  </div>
-  <div class="col-span-1">
-  </div>
-  <div class="col-span-8 mt-2">
-    <p class="text-gray-500"> <%= @case_detail.submission_date %> </p>
-  </div>
-  <div class="col-span-3 ml-4 mt-2">
-    <p class="block mb-2 text-sm font-medium text-gray-900">  Relevant Links </p>
-  </div>
-  <div class="col-span-1">
-  </div>
-  <div class="col-span-8 mt-2">
-    <p class="text-gray-500"> <%= @case_detail.data_sources %> </p>
+  <!-- Documenter Details Grid -->
+  <div class="grid grid-cols-1 sm:grid-cols-12 gap-y-4 gap-x-6 text-gray-700">
+    <%# Helper partial for each field to avoid repetition could be created for production %>
+
+    <div class="sm:col-span-3 font-medium text-gray-900">First Name</div>
+    <div class="sm:col-span-9"><p><%= @case_detail.documenter_first_name.presence || "-" %></p></div>
+
+    <div class="sm:col-span-3 font-medium text-gray-900">Last Name</div>
+    <div class="sm:col-span-9"><p><%= @case_detail.documenter_last_name.presence || "-" %></p></div>
+
+    <div class="sm:col-span-3 font-medium text-gray-900">Organization/Affiliation</div>
+    <div class="sm:col-span-9"><p><%= @case_detail.organization_name.presence || "-" %></p></div>
+
+    <div class="sm:col-span-3 font-medium text-gray-900">Email</div>
+    <div class="sm:col-span-9"><p><%= @case_detail.documenter_email.presence || "-" %></p></div>
+
+    <div class="sm:col-span-3 font-medium text-gray-900">Phone Number</div>
+    <div class="sm:col-span-9"><p><%= @case_detail.documenter_phone_number.presence || "-" %></p></div>
+
+    <div class="sm:col-span-3 font-medium text-gray-900">Willing to share more info with IPRI?</div>
+    <div class="sm:col-span-9"><p><%= @case_detail.willing_to_share_more_info ? "Yes" : "No" %></p></div>
   </div>
 
-  <div class="col-span-3 ml-4 mt-2">
-    <p class="block mb-2 text-sm font-medium text-gray-900">  Tags </p>
-  </div>
-  <div class="col-span-1">
-  </div>
-  <div class="col-span-8 mt-2">
-    <% @case_detail.tags.each do |tag| %>
-      <span class="inline-flex items-center gap-x-1.5 py-1.5 px-3 rounded-full text-xs font-medium bg-red-500 text-white"><%= tag.name %></span>
-    <% end %>
-  </div>
-</div>
-<div class="border-t border-gray-200 my-4"></div>
+  <hr class="my-8 border-gray-300" />
 
-<h2 class="font-bold text-l text-gray-900 mt-4">Data Sharing Agreement</h2>
-<div class="grid grid-cols-1 md:grid-cols-12">
-  <div class="col-span-3 ml-4 mt-2">
-    <p class="block mb-2 text-sm font-medium text-gray-900"> Agreement</p>
+  <!-- Header: Case Details -->
+  <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center mb-6">
+    <h2 class="text-2xl font-semibold text-gray-900">Case Details</h2>
   </div>
-  <div class="col-span-1">
+
+  <div class="grid grid-cols-1 sm:grid-cols-12 gap-y-4 gap-x-6 text-gray-700">
+    <div class="sm:col-span-3 font-medium text-gray-900">Primary Data</div>
+    <div class="sm:col-span-9"><p><%= @case_detail.primary_data ? "Yes" : "No" %></p></div>
+
+    <div class="sm:col-span-3 font-medium text-gray-900">Submission Date</div>
+    <div class="sm:col-span-9"><p><%= @case_detail.submission_date || "-" %></p></div>
+
+    <div class="sm:col-span-3 font-medium text-gray-900">Relevant Links</div>
+    <div class="sm:col-span-9"><p><%= @case_detail.data_sources.presence || "-" %></p></div>
+
+    <div class="sm:col-span-3 font-medium text-gray-900">Tags</div>
+    <div class="sm:col-span-9">
+      <turbo-frame id="tags_frame">
+        <%= render partial: "documenters/case_details/tags/tags", locals: { case_detail: @case_detail } %>
+      </turbo-frame>
+    </div>
   </div>
-  <div class="col-span-8 mt-2">
-    <label class="font-bold text-sm text-gray-900"><%= @case_detail.data_sharing_title %></label>
-    <p class="text-gray-500"> <%= @case_detail.data_sharing_content %> </p>
+
+  <hr class="my-8 border-gray-300" />
+
+  <!-- Data Sharing Agreement -->
+  <h2 class="text-2xl font-semibold text-gray-900 mb-4">Data Sharing Agreement</h2>
+  <div class="grid grid-cols-1 sm:grid-cols-12 gap-y-4 gap-x-6 text-gray-700 mb-8">
+    <div class="sm:col-span-3 font-medium text-gray-900">Agreement</div>
+    <div class="sm:col-span-9">
+      <label class="block font-bold text-gray-900 mb-1"><%= @case_detail.data_sharing_title.presence || "-" %></label>
+      <p><%= @case_detail.data_sharing_content.presence || "-" %></p>
+    </div>
+  </div>
+
+  <hr class="my-8 border-gray-300" />
+
+  <!-- Place and Date of Incident -->
+  <h2 class="text-2xl font-semibold text-gray-900 mb-4">Place and Date of Incident</h2>
+  <div class="grid grid-cols-1 sm:grid-cols-12 gap-y-4 gap-x-6 text-gray-700 mb-8">
+    <div class="sm:col-span-3 font-medium text-gray-900">Country of Incident</div>
+    <div class="sm:col-span-9"><p><%= @case_detail.country_name.presence || "-" %></p></div>
+
+    <div class="sm:col-span-3 font-medium text-gray-900">Subnational Location</div>
+    <div class="sm:col-span-9"><p><%= @case_detail.subnational_location.presence || "-" %></p></div>
+
+    <div class="sm:col-span-3 font-medium text-gray-900">Other Location Details (1)</div>
+    <div class="sm:col-span-9"><p><%= @case_detail.location_details_1.presence || "-" %></p></div>
+
+    <div class="sm:col-span-3 font-medium text-gray-900">Other Location Details (2)</div>
+    <div class="sm:col-span-9"><p><%= @case_detail.location_details_2.presence || "-" %></p></div>
+
+    <div class="sm:col-span-3 font-medium text-gray-900">Ongoing Case?</div>
+    <div class="sm:col-span-9"><p><%= @case_detail.ongoing_case ? "Yes" : "No" %></p></div>
+  </div>
+
+  <hr class="my-8 border-gray-300" />
+
+  <!-- Impact of Incident -->
+  <h2 class="text-2xl font-semibold text-gray-900 mb-4">Impact of Incident/s of Human Rights Violations</h2>
+  <div class="grid grid-cols-1 sm:grid-cols-12 gap-y-4 gap-x-6 text-gray-700 mb-8">
+    <div class="sm:col-span-3 font-medium text-gray-900">How did the incident/s affect the victim/s and his/her/their family?</div>
+    <div class="sm:col-span-9"><p><%= @case_detail.impact_to_victim_details.presence || "-" %></p></div>
+
+    <div class="sm:col-span-3 font-medium text-gray-900">How did the incident/s affect the Indigenous Peoples group/s or community/ies and/or organization of the victim/s?</div>
+    <div class="sm:col-span-9"><p><%= @case_detail.impact_to_community_details.presence || "-" %></p></div>
+  </div>
+
+  <hr class="my-8 border-gray-300" />
+
+  <!-- Other Actions and Investigations -->
+  <h2 class="text-2xl font-semibold text-gray-900 mb-4">Other Actions and Investigations Undertaken</h2>
+  <div class="grid grid-cols-1 sm:grid-cols-12 gap-y-4 gap-x-6 text-gray-700 mb-8">
+    <div class="sm:col-span-3 font-medium text-gray-900">Other advocacy and/or action/s undertaken?</div>
+    <div class="sm:col-span-9"><p><%= @case_detail.actions_taken_details.presence || "-" %></p></div>
+
+    <div class="sm:col-span-3 font-medium text-gray-900">Investigation/s on the incident of other types of human rights violation?</div>
+    <div class="sm:col-span-9"><p><%= @case_detail.incident_investigation_details.presence || "-" %></p></div>
   </div>
 </div>
-<div class="border-t border-gray-200 my-4"></div>
-
-<h2 class="font-bold text-l text-gray-900 mt-4">Place and Date of Incident</h2>
-<div class="grid grid-cols-1 md:grid-cols-12">
-  <div class="col-span-3 ml-4 mt-2">
-    <p class="block mb-2 text-sm font-medium text-gray-900"> Country of Incident</p>
-  </div>
-  <div class="col-span-1">
-  </div>
-  <div class="col-span-8 mt-2">
-    <p class="text-gray-500"> <%= @case_detail.country_name %> </p>
-  </div>
-
-  <div class="col-span-3 ml-4 mt-2">
-    <p class="block mb-2 text-sm font-medium text-gray-900"> Subnational location</p>
-  </div>
-  <div class="col-span-1">
-  </div>
-  <div class="col-span-8 mt-2">
-    <p class="text-gray-500"> <%= @case_detail.subnational_location %> </p>
-  </div>
-
-  <div class="col-span-3 ml-4 mt-2">
-    <p class="block mb-2 text-sm font-medium text-gray-900"> Other Location Details (1) </p>
-  </div>
-  <div class="col-span-1">
-  </div>
-  <div class="col-span-8 mt-2">
-    <p class="text-gray-500"> <%= @case_detail.location_details_1 %> </p>
-  </div>
-
-  <div class="col-span-3 ml-4 mt-2">
-    <p class="block mb-2 text-sm font-medium text-gray-900"> Other Location Details (2) </p>
-  </div>
-  <div class="col-span-1">
-  </div>
-  <div class="col-span-8 mt-2">
-    <p class="text-gray-500"> <%= @case_detail.location_details_2 %> </p>
-  </div>
-
-  <div class="col-span-3 ml-4 mt-2">
-    <p class="block mb-2 text-sm font-medium text-gray-900"> Ongoing Case ? </p>
-  </div>
-  <div class="col-span-1">
-  </div>
-  <div class="col-span-8 mt-2">
-    <p class="text-gray-500"> <%= @case_detail.ongoing_case ? "Yes" : "No" %> </p>
-  </div>
-</div>
-
-<div class="border-t border-gray-200 my-4"></div>
-
-<h2 class="font-bold text-l text-gray-900 mt-4">Impact of Incident/s of Human Rights Violations</h2>
-<div class="grid grid-cols-1 md:grid-cols-12">
-  <div class="col-span-3 ml-4 mt-2">
-    <p class="block mb-2 text-sm font-medium text-gray-900"> How did the incident/s affect the victim/s and his/her/their family?</p>
-  </div>
-  <div class="col-span-1">
-  </div>
-  <div class="col-span-8 mt-2">
-    <p class="text-gray-500"> <%= @case_detail.impact_to_victim_details %> </p>
-  </div>
-
-  <div class="col-span-3 ml-4 mt-2">
-    <p class="block mb-2 text-sm font-medium text-gray-900"> How did the incident/s affect the Indigenous Peoples group/s or community/ies and/or organization of the victim/s?</p>
-  </div>
-  <div class="col-span-1">
-  </div>
-  <div class="col-span-8 mt-2">
-    <p class="text-gray-500"> <%= @case_detail.impact_to_community_details %> </p>
-  </div>
-</div>
-<div class="border-t border-gray-200 my-4"></div>
-
-<h2 class="font-bold text-l text-gray-900 mt-4">Other Actions and Investigations Undertaken</h2>
-<div class="grid grid-cols-1 md:grid-cols-12">
-  <div class="col-span-3 ml-4 mt-2">
-    <p class="block mb-2 text-sm font-medium text-gray-900">Is/Are there any other advocacy and/or action/s undertaken ?</p>
-  </div>
-  <div class="col-span-1">
-  </div>
-  <div class="col-span-8 mt-2">
-    <p class="text-gray-500"> <%= @case_detail.actions_taken_details %> </p>
-  </div>
-  <div class="col-span-3 ml-4 mt-2">
-    <p class="block mb-2 text-sm font-medium text-gray-900">Has there been any investigation/s on the incident of other type of human right violation ?</p>
-  </div>
-  <div class="col-span-1">
-  </div>
-  <div class="col-span-8 mt-2">
-    <p class="text-gray-500"> <%= @case_detail.incident_investigation_details %> </p>
-  </div>
-</div>
-</div>
-<div class="border-t border-gray-200 my-4"></div>

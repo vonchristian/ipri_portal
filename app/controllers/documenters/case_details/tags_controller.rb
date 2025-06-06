@@ -5,23 +5,32 @@ module Documenters
     class TagsController < Documenters::BaseController
       layout "documenter"
 
-      def index
-        @case_detail = ::CaseDetails::CaseDetail.find(params[:case_detail_id])
-      end
+      before_action :set_case_detail
 
       def create
-        @case_detail = ::CaseDetails::CaseDetail.find(params[:case_detail_id])
-        if params[:tagging][:action_type] == 'add'
-          @case_detail.tag_list.add(params[:tagging][:tag_name])
-        else
-          @case_detail.tag_list.remove(params[:tagging][:tag_name])
-        end
+        tag = params[:tag]
+        @case_detail.tag_list.add(tag)
         @case_detail.save
+
         respond_to do |format|
-          format.html do
-            redirect_to documenters_case_detail_tags_url(@case_detail.reload)
-          end
+          format.turbo_stream
         end
+      end
+
+      def destroy
+        @case_detail.tag_list.remove(params[:id])
+        @case_detail.save!
+
+        respond_to do |format|
+          format.turbo_stream
+          format.html { redirect_to(@case_detail) }
+        end
+      end
+
+      private
+
+      def set_case_detail
+        @case_detail = ::CaseDetails::CaseDetail.find(params[:case_detail_id])
       end
     end
   end

@@ -79,7 +79,7 @@ Rails.application.routes.draw do
       resources :human_rights_violations, only: [:index, :new, :create, :edit, :update], controller: "case_details/human_rights_violations"
       resources :killings, only: [:index, :new, :create, :edit, :update], controller: "case_details/killings"
       resources :development_projects, only: [:index, :new, :create, :show, :edit, :update], controller: "case_details/development_projects"
-      resources :tags, only: [:index, :create], controller: "case_details/tags"
+      resources :tags, only: [:create, :destroy], controller: "case_details/tags"
     end
   end
 

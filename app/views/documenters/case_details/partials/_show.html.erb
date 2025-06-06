@@ -1,68 +1,54 @@
 <div class="md:col-span-6 mt-6 ml-2">
-<div class="flex justify-between items-center mr-4">
-  <h2 class="font-bold text-xl text-gray-900">Case Factsheet</h2>
-  <%= link_to documenters_case_detail_path(@case_detail, format: "pdf"), class: "inline-flex items-center px-4 py-2 text-sm font-medium text-gray-700 bg-white border border-gray-300 rounded-md shadow-sm hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-500" do %>
-    <i class="fas fa-download mr-2"></i> Download PDF
+  <div class="flex justify-between items-center mr-4">
+    <h2 class="font-bold text-xl text-gray-900">Case Factsheet</h2>
+    <%= link_to documenters_case_detail_path(@case_detail, format: "pdf"),
+                class: "inline-flex items-center px-4 py-2 text-sm font-medium text-gray-700 bg-white border border-gray-300 rounded-md shadow-sm hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-500" do %>
+      <i class="fas fa-download mr-2"></i> Download PDF
+    <% end %>
+  </div>
+
+  <!-- Tab Navigation -->
+  <nav class="border-b border-gray-200 mt-4">
+    <ul class="flex overflow-x-auto whitespace-nowrap text-sm font-medium text-gray-500 sm:text-base sm:font-semibold">
+      <% tabs = [
+          {name: 'Data', path: documenters_case_detail_path(@case_detail)},
+          {name: 'Victims', path: documenters_case_detail_victims_path(@case_detail)},
+          {name: 'Criminalizations', path: documenters_case_detail_criminalizations_path(@case_detail), count: @case_detail.criminalizations_count},
+          {name: 'Killings', path: documenters_case_detail_killings_path(@case_detail), count: @case_detail.killings_count},
+          {name: 'Other Human Rights Violations', path: documenters_case_detail_human_rights_violations_path(@case_detail), count: @case_detail.human_rights_violations_count},
+          {name: 'Development Projects', path: documenters_case_detail_development_projects_path(@case_detail), count: @case_detail.development_projects_count}
+        ] %>
+
+      <% tabs.each do |tab| %>
+        <% active = current_page?(tab[:path]) %>
+        <li class="mr-2 last:mr-0">
+          <%= link_to tab[:path],
+                      class: "inline-block p-4 rounded-t-lg border-b-2 " + 
+                             (active ? "text-blue-600 border-blue-600" : "border-transparent hover:text-gray-600 hover:border-gray-300") do %>
+            <span><%= tab[:name] %></span>
+            <% if tab[:count].to_i.positive? %>
+              <span class="inline-flex items-center ml-2 py-1 px-3 rounded-full text-xs font-medium bg-gray-100 text-black">
+                <%= tab[:count] %>
+              </span>
+            <% end %>
+          <% end %>
+        </li>
+      <% end %>
+    </ul>
+  </nav>
+
+  <!-- Content Sections -->
+  <% if current_page?(documenters_case_detail_path(@case_detail)) %>
+    <%= render 'documenters/case_details/partials/profile', case_detail: @case_detail %>
+  <% elsif current_page?(documenters_case_detail_victims_path(@case_detail)) %>
+    <%= render 'documenters/case_details/partials/victims', case_detail: @case_detail %>
+  <% elsif current_page?(documenters_case_detail_criminalizations_path(@case_detail)) %>
+    <%= render 'documenters/case_details/partials/criminalizations', case_detail: @case_detail %>
+  <% elsif current_page?(documenters_case_detail_human_rights_violations_path(@case_detail)) %>
+    <%= render 'documenters/case_details/partials/human_rights_violations', case_detail: @case_detail %>
+  <% elsif current_page?(documenters_case_detail_killings_path(@case_detail)) %>
+    <%= render 'documenters/case_details/partials/killings', case_detail: @case_detail %>
+  <% elsif current_page?(documenters_case_detail_development_projects_path(@case_detail)) %>
+    <%= render 'documenters/case_details/partials/development_projects', case_detail: @case_detail %>
   <% end %>
 </div>
-<div class="text-sm font-medium text-center text-gray-500 border-b border-gray-200">
-    <ul class="flex flex-wrap -mb-px">
-      <li class="mr-2">
-          <a href="/documenters/case_details/<%=@case_detail.id %>" class="<%= "inline-block p-4 text-blue-600 rounded-t-lg border-b-2 border-blue-600 active" if current_page?(documenters_case_detail_path(@case_detail.id)) %>inline-block p-4 rounded-t-lg border-b-2 border-transparent hover:text-gray-600 hover:border-gray-300">Data</a>
-      </li>
-      <li class="mr-2">
-          <a href="/documenters/case_details/<%=@case_detail.id %>/victims" class="<%= "inline-block p-4 text-blue-600 rounded-t-lg border-b-2 border-blue-600 active" if current_page?(documenters_case_detail_victims_path(@case_detail.id)) %>inline-block p-4 rounded-t-lg border-b-2 border-transparent hover:text-gray-600 hover:border-gray-300">Victims</a>
-      </li>
-      <li class="mr-2">
-          <a href="/documenters/case_details/<%=@case_detail.id %>/criminalizations" class="<%= "inline-block p-4 text-blue-600 rounded-t-lg border-b-2 border-blue-600 active" if current_page?(documenters_case_detail_criminalizations_path(@case_detail.id)) %>inline-block p-4 rounded-t-lg border-b-2 border-transparent hover:text-gray-600 hover:border-gray-300">Criminalizations
-            <% if @case_detail.criminalizations_count.to_i.positive? %>
-              <span class="inline-flex items-center gap-x-1.5 py-1.5 px-3 rounded-full text-xs font-medium bg-red-500 text-white"><%= @case_detail.criminalizations_count %></span>
-            <% end %>
-          </a>
-      </li>
-      <li class="mr-2">
-          <a href="/documenters/case_details/<%=@case_detail.id %>/killings" class="<%= "inline-block p-4 text-blue-600 rounded-t-lg border-b-2 border-blue-600 active" if current_page?(documenters_case_detail_killings_path(@case_detail.id)) %>inline-block p-4 rounded-t-lg border-b-2 border-transparent hover:text-gray-600 hover:border-gray-300"> Killings
-            <% if @case_detail.killings_count.to_i.positive? %>
-              <span class="inline-flex items-center gap-x-1.5 py-1.5 px-3 rounded-full text-xs font-medium bg-red-500 text-white"><%= @case_detail.killings_count %></span>
-            <% end %>
-          </a>
-      </li>
-      <li class="mr-2">
-          <a href="/documenters/case_details/<%=@case_detail.id %>/human_rights_violations" class="<%= "inline-block p-4 text-blue-600 rounded-t-lg border-b-2 border-blue-600 active" if current_page?(documenters_case_detail_human_rights_violations_path(@case_detail.id)) %>inline-block p-4 rounded-t-lg border-b-2 border-transparent hover:text-gray-600 hover:border-gray-300">Other Human Rights Violations
-            <% if @case_detail.human_rights_violations_count.to_i.positive? %>
-              <span class="inline-flex items-center gap-x-1.5 py-1.5 px-3 rounded-full text-xs font-medium bg-red-500 text-white"><%= @case_detail.human_rights_violations_count %></span>
-            <% end %>
-          </a>
-      </li>
-      <li class="">
-        
-          <a href="/documenters/case_details/<%=@case_detail.id %>/development_projects" class="<%= "inline-block p-4 text-blue-600 rounded-t-lg border-b-2 border-blue-600 active" if current_page?(documenters_case_detail_development_projects_path(@case_detail.id)) %>inline-block p-4 rounded-t-lg border-b-2 border-transparent hover:text-gray-600 hover:border-gray-300">Development Projects</a>
-          <% if @case_detail.development_projects_count.to_i.positive? %>
-              <span class="inline-flex items-center gap-x-1.5 py-1.5 px-3 rounded-full text-xs font-medium bg-red-500 text-white"><%= @case_detail.development_projects_count %></span>
-            <% end %>
-      </li>
-    </ul>
-
-</div>
-<% if current_page?(documenters_case_detail_path(@case_detail)) %>
-  <%= render 'documenters/case_details/partials/profile', case_detail: @case_detail %>
-<% end %>
-<% if current_page?(documenters_case_detail_victims_path(case_detail)) %>
-  <%= render 'documenters/case_details/partials/victims', case_detail: case_detail %>
-<% end %>
-
-<% if current_page?(documenters_case_detail_criminalizations_path(case_detail)) %>
-  <%= render 'documenters/case_details/partials/criminalizations', case_detail: case_detail %>
-<% end %>
-
-<% if current_page?(documenters_case_detail_human_rights_violations_path(case_detail)) %>
-  <%= render 'documenters/case_details/partials/human_rights_violations', case_detail: case_detail %>
-<% end %>
-
-<% if current_page?(documenters_case_detail_killings_path(case_detail)) %>
-  <%= render 'documenters/case_details/partials/killings', case_detail: case_detail %>
-<% end %>
-
-<% if current_page?(documenters_case_detail_development_projects_path(case_detail)) %>
-  <%= render 'documenters/case_details/partials/development_projects', case_detail: case_detail %>
-<% end %>

@@ -1,0 +1,32 @@
+
+  <turbo-frame id="tags_frame">
+    <div>
+      <!-- Tags list: inline-flex, wraps if too long -->
+      <div class="flex flex-wrap gap-2 mb-3">
+        <% case_detail.tag_list.each do |tag| %>
+          <span id="tag_<%= tag.parameterize %>" 
+                class="inline-flex items-center gap-x-1.5 py-1 px-3 rounded-full text-xs font-medium bg-indigo-600 text-white whitespace-nowrap">
+            <%= tag %>
+            <%= button_to "×",
+                  documenters_case_detail_tag_path(case_detail_id: case_detail.id, id: tag),
+                  method: :delete,
+                  data: { turbo_frame: "tags_frame", turbo_confirm: "Remove #{tag}?" },
+                  class: "ml-2 text-white hover:text-red-300 text-xs font-bold p-0.5" %>
+          </span>
+        <% end %>
+      </div>
+
+      <!-- Add tag form below the tags list -->
+      <%= form_with url: documenters_case_detail_tags_path(case_detail_id: case_detail.id),
+                    method: :post,
+                    data: { turbo_frame: "tags_frame" },
+                    class: "flex gap-3 items-center" do |form| %>
+        <%= form.select :tag, ActsAsTaggableOn::Tag.pluck(:name),
+                        { prompt: "Select a tag" },
+                        class: "border border-gray-300 rounded-lg px-3 py-2 text-sm shadow-sm w-64 focus:outline-none focus:ring-2 focus:ring-indigo-500" %>
+        <%= form.submit "Add",
+                        class: "bg-green-600 text-white px-4 py-2 rounded-lg text-sm font-medium hover:bg-indigo-700 shadow-sm" %>
+      <% end %>
+    </div>
+  </turbo-frame>
+
