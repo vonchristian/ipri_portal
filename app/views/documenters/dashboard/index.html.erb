@@ -1,105 +1,80 @@
-<div class="container mx-auto px-4">
-  <div class="flex justify-between">
-    <h1 class="text-2xl font-bold text-gray-900 pt-5 mb-2">Key Data Points</h1>
-    <div class="mt-4">
-      <%= link_to 'Download', documenters_dashboard_index_path(format: 'xlsx'), class:"py-2.5 px-5 mr-2 mb-2 text-sm font-medium text-gray-900 focus:outline-none bg-white rounded-lg border border-gray-200 hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-4 focus:ring-gray-200" %>
+<div class="px-6 md:px-12 lg:px-20">
+
+  <div class="md:col-span-6 mt-6 ml-2">
+    <!-- Header and Download Button -->
+    <div class="flex flex-col sm:flex-row sm:justify-between sm:items-center">
+      <h1 class="text-xl font-semibold text-gray-900 mb-2 sm:mb-0">Key Data Points</h1>
+      <%= link_to 'Download', documenters_dashboard_index_path(format: 'xlsx'), class:"py-1.5 px-4 text-sm font-medium text-gray-900 bg-white border border-gray-300 rounded-md hover:bg-gray-100 hover:text-blue-700" %>
+    </div>
+
+    <!-- Summary Pills Grid -->
+    <div class="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-4 gap-4 mt-4">
+      <% summary_data = [
+        { path: "/documenters/case_details", label: "Total Cases", count: @dashboard[:case_details_count], sub: @dashboard[:current_year_case_details_count], color: "bg-red-100 text-red-700" },
+        { path: "/criminalizations", label: "Criminalizations", count: @dashboard[:criminalizations_count], sub: @dashboard[:current_year_criminalizations_count], color: "bg-yellow-100 text-yellow-700" },
+        { path: "/killings", label: "Killings", count: @dashboard[:killings_count], sub: @dashboard[:current_year_killings_count], color: "bg-blue-100 text-blue-700" },
+        { path: "/human_rights_violations", label: "Other Violations", count: @dashboard[:human_rights_violations_count], sub: @dashboard[:current_year_human_rights_violations_count], color: "bg-green-100 text-green-700" }
+      ] %>
+
+      <% summary_data.each do |item| %>
+        <a href="<%= item[:path] %>" class="p-4 rounded-xl border border-gray-200 hover:shadow-sm transition bg-white">
+          <div class="flex flex-col gap-1">
+            <div class="text-xs text-gray-500 tracking-wide uppercase"><%= item[:label] %></div>
+            <div class="text-2xl font-bold text-gray-900 leading-tight"><%= item[:count] %></div>
+            <div class="text-xs <%= item[:color] %> rounded px-2 py-0.5 w-fit mt-1">
+              <%= item[:sub] %> this year
+            </div>
+          </div>
+        </a>
+      <% end %>
     </div>
   </div>
-  <div class="border-t border-gray-200 mb-5"></div>
-  <div>
-    <a href="/documenters/case_details" class="mb-4 flex flex-col items-center bg-white rounded-lg border shadow-md md:flex-row md:max-w-xl hover:bg-gray-100">
-              <h1 class="text-5xl font-bold text-red-700 my-5 mx-8"><%= @dashboard[:case_details_count] %></h1>
-        <div class="flex flex-col justify-between p-4 leading-normal">
-            <h5 class="mb-2 text-1xl font-bold tracking-tight text-gray-900">Total Cases</h5>
-            <p class="mb-3 text-sm text-gray-700"> <%= @dashboard[:current_year_case_details_count] %> Submitted this year</p>
+
+  <div class="border-t border-gray-200 mt-4 mb-4"></div>
+
+  <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+    <!-- Leaderboard Column -->
+    <div class="lg:col-span-1">
+      <h2 class="text-xl font-semibold text-gray-800 mb-4">Human Rights Violations</h2>
+      <ul class="space-y-2">
+        <% @dashboard[:human_rights_violations].sort_by(&:sort_order).each_with_index do |item, index| %>
+          <li class="flex justify-between items-center bg-white border border-gray-200 rounded-lg px-4 py-3 shadow-sm hover:bg-gray-50 transition">
+            <%= link_to item.title, documenters_case_details_path(category_id: item.id, category_class: item.category_class), class: "text-gray-900 font-medium hover:underline" %>
+            <span class="text-lg font-bold text-gray-800"><%= item.count %></span>
+          </li>
+        <% end %>
+      </ul>
+    </div>
+
+    <!-- Charts Column -->
+    <div class="lg:col-span-2 space-y-4">
+      <h2 class="text-xl font-semibold text-gray-800">Individual Victims</h2>
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+        <div>
+          <h3 class="font-semibold text-gray-900 mb-2">By Gender</h3>
+          <%= pie_chart Victims::IndividualVictim.where.not(gender: nil).group(:gender).count %>
         </div>
-    </a>
-  </div>
-  <div class="grid grid-cols-3 gap-4">
-  <div>
-    <a href="/criminalizations" class="flex flex-col items-center bg-white rounded-lg border shadow-md md:flex-row md:max-w-xl hover:bg-gray-100">
-              <h1 class="text-5xl font-bold text-gray-900 my-5 mx-8"><%= @dashboard[:criminalizations_count] %></h1>
-        <div class="flex flex-col justify-between p-4 leading-normal">
-            <h5 class="mb-2 text-1xl font-bold tracking-tight text-gray-900">Criminalizations</h5>
-            <p class="mb-3 text-sm text-gray-700"> <%= @dashboard[:current_year_criminalizations_count] %> Submitted this year</p>
+        <div>
+          <h3 class="font-semibold text-gray-900 mb-2">By Age Bracket</h3>
+          <%= bar_chart AgeBracket.chart_data %>
         </div>
-    </a>
+      </div>
+    </div>
   </div>
 
-  <div>
-    <a href="/killings" class="flex flex-col items-center bg-white rounded-lg border shadow-md md:flex-row md:max-w-xl hover:bg-gray-100">
-              <h1 class="text-5xl font-bold text-gray-900 my-5 mx-8"><%= @dashboard[:killings_count] %></h1>
-        <div class="flex flex-col justify-between p-4 leading-normal">
-            <h5 class="mb-2 text-1xl font-bold tracking-tight text-gray-900">Killings</h5>
-            <p class="mb-3 text-sm font-normal text-gray-700"> <%= @dashboard[:current_year_killings_count] %> Submitted this year</p>
-        </div>
-    </a>
-  </div>
+  <header class="pt-8">
+    <h1 class="text-2xl font-bold text-gray-900 mt-2 mb-4">Cases By Country</h1>
+  </header>
+  <div class="border-t border-gray-200 mb-6"></div>
+  <div id="geo_chart_div" style="width: 100%; height: 800px; max-width: 1300px;"></div>
 
-  <div>
-    <a href="/human_rights_violations" class="flex flex-col items-center bg-white rounded-lg border shadow-md md:flex-row md:max-w-xl hover:bg-gray-100">
-      <h1 class="text-5xl font-bold text-gray-900 my-5 mx-8"><%=  @dashboard[:human_rights_violations_count]%></h1>
-        <div class="flex flex-col justify-between p-4 leading-normal">
-            <h5 class="mb-2 text-1xl font-bold tracking-tight text-gray-900">Other Human Rights Violations</h5>
-            <p class="mb-3 text-sm font-normal text-gray-700"> <%= @dashboard[:current_year_human_rights_violations_count] %> Submitted this year</p>
-        </div>
-    </a>
-  </div>
 </div>
-<div class="border-t border-gray-200 mt-4 mb-4 mt-4"></div>
-    <div class="grid grid-cols-4 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6">
-      <% @dashboard[:human_rights_violations].sort_by(&:sort_order).each do |human_rights_violation| %>
-        <div class="flex flex-col border rounded-xl dark:border-neutral-800">
-          <div class="p-4 md:p-5">
-            <div class="flex items-center gap-x-2">
-              <p class="text-sm font-semibold text-gray-500 dark:text-neutral-500">
-                <%= link_to human_rights_violation.title, documenters_case_details_path(category_id: human_rights_violation.id, category_class: human_rights_violation.category_class) %>
-              </p>
-            </div>
-
-            <h3 class="mt-2 text-2xl sm:text-3xl lg:text-4xl text-gray-800 dark:text-neutral-200">
-              <div class="grid grid-cols-3 mg:grid-cols-6 gap-2">
-                <div>
-                  <span class="font-semibold"><%= human_rights_violation.count %></span>
-                </div>
-              </div>
-            </h3>
-          </div>
-        </div>
-      <% end %>
-    <!-- Card -->
-  </div>
-  <!-- End Grid -->
-</div>
-<!-- End Card Section -->
-
-<header class="pt-5">
-  <h1 class="text-2xl font-bold text-gray-900 mt-2 mb-2">Individual Victims</h1>
-</header>
-<div class="border-t border-gray-200 mb-5"></div>
-
-<div class="grid grid-cols-12 gap-2">
-  <div class="col-span-6">
-    <h1 class="font-semibold text-gray-900">By Gender</h1>
-    <%= pie_chart Victims::IndividualVictim.where.not(gender: nil).group(:gender).count %>
-  </div>
-  <div class="col-span-6">
-    <h1 class="font-semibold text-gray-900">By Age Bracket</h1>
-    <%= bar_chart AgeBracket.chart_data %>
-  </div>
-</div>
-<header class="pt-5">
-  <h1 class="text-2xl font-bold text-gray-900 mt-2 mb-2">Cases By Country </h1>
-</header>
-<div class="border-t border-gray-200 mb-5"></div>
-<div id="geo_chart_div" style="width: 1300px; height: 800px;"></div>
 
 <script src="https://www.gstatic.com/charts/loader.js"></script>
 <script>
   google.charts.load('current', { packages: ['geochart'] });
   google.charts.setOnLoadCallback(drawRegionsMap);
 
-  // Map country name to UUID (if needed)
   var countryMap = {
     <% Country.all.each_with_index do |country, idx| %>
       "<%= j country.name %>": "<%= country.id %>"<%= ',' unless idx == Country.count - 1 %>
@@ -124,8 +99,6 @@
              Killings: <%= record.killings_count || 0 %><br>
              Criminalizations: <%= record.criminalizations_count || 0 %><br>
              Other Violations: <%= record.human_rights_violations_count || 0 %>
-
-
            </div>`
         ]<%= ',' unless record == CaseDetails::CaseDetail.last %>
       <% end %>
