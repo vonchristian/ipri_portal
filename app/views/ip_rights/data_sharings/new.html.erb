@@ -1,11 +1,42 @@
- <%=render '/ip_rights/shared/sidebar', current_step: 2, step_name: "#{t(:data_sharing_agreement)}", percent_finished: 10 %>
+<%= render '/ip_rights/shared/sidebar', current_step: 2, step_name: "#{t(:data_sharing_agreement)}", percent_finished: 10 %>
 
-  <div class="md:mt-0 md:col-span-6 py-5 px-5">
-            <h2 class="font-bold text-xl text-gray-900"><%= t(:data_sharing_agreement) %></h2>
-            <div>
-      <p class="mt-1 text-md text-gray-700 px-4">
-       <%= t(:data_sharing_agreement_hint_html) %>
-      </p>
- <%= form_for @data_sharing, url: :ip_rights_case_detail_data_sharings  do |f| %>
-   <%= render "shared/data_sharings/form", f: f %>
-<% end %>
+<div class="bg-white shadow-md border-t-2 border-t-stone-200 md:p-10 pt-5 max-w-5xl mx-auto">
+    <h2 class="font-semibold text-xl text-gray-900 mb-4">
+      <%= t(:data_sharing_agreement) %>
+    </h2>
+
+    <p class="text-gray-700 text-md mb-6">
+      <%= t(:data_sharing_agreement_hint_html) %>
+    </p>
+
+    <%= form_for @data_sharing, url: :ip_rights_case_detail_data_sharings do |f| %>
+      <div class="space-y-4">
+
+        <!-- Restricted Option -->
+        <label for="case_details_data_sharing_data_sharing_restricted" class="flex items-start p-4 rounded-lg border border-gray-300 cursor-pointer hover:border-blue-500 focus-within:ring-2 focus-within:ring-blue-500">
+          <input name="case_details_data_sharing[data_sharing]" id="case_details_data_sharing_data_sharing_restricted" type="radio" value="restricted"
+            class="mt-1.5 w-5 h-5 text-blue-600 border-gray-300 focus:ring-blue-500">
+          <div class="ml-4">
+            <span class="block text-base font-semibold text-gray-900"><%= t(:restricted) %></span>
+            <span class="block text-sm text-gray-600"><%= t(:restricted_access_to_case_detail) %></span>
+          </div>
+        </label>
+
+        <!-- Unrestricted Option -->
+        <label for="case_details_data_sharing_data_sharing_unrestricted" class="flex items-start p-4 rounded-lg border border-gray-300 cursor-pointer hover:border-blue-500 focus-within:ring-2 focus-within:ring-blue-500">
+          <input name="case_details_data_sharing[data_sharing]" id="case_details_data_sharing_data_sharing_unrestricted" type="radio" value="unrestricted"
+            class="mt-1.5 w-5 h-5 text-blue-600 border-gray-300 focus:ring-blue-500">
+          <div class="ml-4">
+            <span class="block text-base font-semibold text-gray-900"><%= t(:unrestricted) %></span>
+            <span class="block text-sm text-gray-600"><%= t(:unrestricted_access_to_case_detail) %></span>
+          </div>
+        </label>
+
+        <!-- Submit Button -->
+        <div class="pt-4 text-right">
+          <%= f.submit "#{t(:continue)}", class: "inline-flex items-center px-6 py-2 bg-green-600 border border-transparent rounded-lg font-medium text-white hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500 transition" %>
+        </div>
+      </div>
+    <% end %>
+  </div>
+</div>

@@ -39,11 +39,13 @@
     </tbody>
     </table>
     <div class="px-5 py-5  space-y-4 sm:p-6">
-    <%= simple_form_for @case_detail, url: :ip_rights_case_detail_submissions, method: :post do |f| %>
+    <%= simple_form_for @case_detail, url: :ip_rights_case_detail_submissions, method: :post, data: { turbo: false } do |f| %>
            <strong><%= f.input :willing_to_share_more_info, label: "Are you willing to share more information with IPRI?", as: :boolean %></strong>
     <div class="flex flex-col justify-center items-center pt-10">
-      <%= f.submit "Submit Case Factsheet", class: "inline-flex py-4 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-green-900 hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-700" %>
+      <%= f.submit "Submit Case Factsheet", class: "inline-flex py-4 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-green-600 hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-700" %>
      </div>
      <% end %>
 
 </div>
+
+

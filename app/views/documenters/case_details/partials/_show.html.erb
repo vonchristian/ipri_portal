@@ -9,7 +9,7 @@
 
   <!-- Tab Navigation -->
   <nav class="border-b border-gray-200 mt-4">
-    <ul class="flex overflow-x-auto whitespace-nowrap text-sm font-medium text-gray-500 sm:text-base sm:font-semibold">
+    <ul class="flex overflow-x-auto whitespace-nowrap text-xs font-medium text-gray-500 sm:text-base">
       <% tabs = [
           {name: 'Data', path: documenters_case_detail_path(@case_detail)},
           {name: 'Victims', path: documenters_case_detail_victims_path(@case_detail)},
@@ -27,7 +27,7 @@
                              (active ? "text-blue-600 border-blue-600" : "border-transparent hover:text-gray-600 hover:border-gray-300") do %>
             <span><%= tab[:name] %></span>
             <% if tab[:count].to_i.positive? %>
-              <span class="inline-flex items-center ml-2 py-1 px-3 rounded-full text-xs font-medium bg-gray-100 text-black">
+              <span class="inline-flex items-center ml-2 py-1 px-3  text-xs bg-stone-100 font-medium text-black">
                 <%= tab[:count] %>
               </span>
             <% end %>

@@ -3,7 +3,7 @@
   <div class="md:col-span-6 mt-6 ml-0 sm:ml-2">
     <!-- Header and Download Button -->
     <div class="flex flex-col sm:flex-row sm:justify-between sm:items-center gap-3">
-      <h1 class="text-2xl font-semibold text-gray-900 mb-0">Key Data Points</h1>
+      <h1 class="text-xl font-semibold text-gray-900 mb-0">Key Data Points</h1>
       <%= link_to 'Download', documenters_dashboard_index_path(format: 'xlsx'), class:"py-2 px-5 text-sm font-semibold text-gray-900 bg-white border border-gray-300 rounded-md hover:bg-gray-100 hover:text-blue-700 transition" %>
     </div>
 
@@ -35,7 +35,7 @@
   <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
     <!-- Leaderboard Column -->
     <div class="lg:col-span-1">
-      <h2 class="text-2xl font-semibold text-gray-800 mb-6">Human Rights Violations</h2>
+      <h2 class="text-xl font-semibold text-gray-800 mb-6">Human Rights Violations</h2>
       <ul class="space-y-3">
         <% @dashboard[:human_rights_violations].sort_by(&:sort_order).each_with_index do |item, index| %>
           <li class="flex justify-between items-center bg-white border border-gray-200 rounded-lg px-5 py-4 shadow-sm hover:bg-gray-50 transition">
@@ -48,7 +48,7 @@
 
    <!-- Charts Column -->
 <div class="lg:col-span-2 space-y-8 ml-5">
-  <h2 class="text-2xl font-semibold text-gray-800">Individual Victims</h2>
+  <h2 class="text-xl font-semibold text-gray-800">Individual Victims</h2>
 
   <!-- Both charts stacked vertically -->
   <div class="flex flex-col gap-8">

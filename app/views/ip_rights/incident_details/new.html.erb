@@ -1,7 +1,101 @@
-<%= render 'shared/progress', current_step: 3, step_name: "#{t(:place_and_date_of_incident)}", percent_finished: 30 %>
-  <div data-controller="incident-form">
-    <%= simple_form_for @incident_detail, url: :ip_rights_case_detail_incident_details do |f| %>
-      <%= render 'shared/incident_details/form', f: f %>
-    <% end %>
-  </div>
+<%= render '/ip_rights/shared/sidebar', current_step: 3, step_name: t(:place_and_date_of_incident), percent_finished: 30 %>
+
+<div data-controller="incident-form"  class="bg-white shadow-md border-t-2 border-t-stone-200 md:p-10 pt-5 max-w-5xl mx-auto">
+  <%= simple_form_for @incident_detail, url: :ip_rights_case_detail_incident_details do |f| %>
+    
+    <h2 class="text-xl font-semibold text-gray-900 mb-6"><%= t(:place_and_date_of_incident) %></h2>
+
+    <div class="grid grid-cols-1 md:grid-cols-2">
+      <%= f.input :country_id,
+                  label: t(:country_of_incident),
+                  collection: Country.all.map { |c| [c.name, c.id] },
+                  input_html: { class: "rounded-md shadow-sm" } %>
+    </div>
+
+    
+      <%= f.input :subnational_location,
+                  label: t(:subnational_location),
+                  as: :text,
+                  hint: "State, province, city, municipality, etc.",
+                  input_html: { class: "rounded-md shadow-sm" } %>
+
+
+    <fieldset class="mt-8">
+      <legend class="block text-sm font-bold text-gray-700 mb-2">
+        <%= t(:is_this_an_ongoing_case) %>
+      </legend>
+
+      <div class="space-y-4">
+        <% [["No", t(:no_option)], ["Yes", t(:yes_option)]].each do |val, label| %>
+          <label class="flex items-start space-x-3 p-3 border rounded-lg cursor-pointer hover:border-blue-500 transition"
+                 for="incident_detail_ongoing_case_<%= val.downcase %>">
+            <%= f.radio_button :ongoing_case, val,
+                               id: "incident_detail_ongoing_case_#{val.downcase}",
+                               class: "mt-1",
+                               data: { incident_form_target: "input", action: "incident-form#toggle" } %>
+            <span class="text-sm text-gray-700"><%= label %></span>
+          </label>
+        <% end %>
+      </div>
+    </fieldset>
+
+    <div class="mt-8">
+      <label class="block text-sm font-bold text-gray-700 mb-2">
+        <%= t(:start_date_of_incident) %>
+      </label>
+      <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
+        <%= f.input :incident_start_month, label: false, collection: Date::MONTHNAMES.compact,
+                    input_html: { class: "rounded-md shadow-sm" }, include_blank: 'Select Month' %>
+        <%= f.input :incident_start_day, label: false, collection: 1..31, include_blank: 'Select Day',
+                    input_html: { class: "rounded-md shadow-sm" } %>
+        <%= f.input :incident_start_year, label: false,
+                    collection: (Date.current.year - 10)..Date.current.year, include_blank: 'Select Year',
+                    input_html: { class: "rounded-md shadow-sm" } %>
+      </div>
+    </div>
+
+    <div class="mt-8" data-incident-form-target="output">
+      <label class="block text-sm font-bold text-gray-700 mb-2">
+        <%= t(:end_date_of_incident) %>
+      </label>
+      <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
+        <%= f.input :incident_end_month, label: false, collection: Date::MONTHNAMES.compact, include_blank: 'Select Month',
+                    input_html: { class: "rounded-md shadow-sm" } %>
+        <%= f.input :incident_end_day, label: false, collection: 1..31,  include_blank: 'Select Day',
+                    input_html: { class: "rounded-md shadow-sm" } %>
+        <%= f.input :incident_end_year, label: false,
+                    collection: (Date.current.year - 10)..Date.current.year, include_blank: 'Select Year',
+                    input_html: { class: "rounded-md shadow-sm" } %>
+      </div>
+    </div>
+
+    <div class="mt-8">
+      <label for="incident_time" class="block text-sm font-bold text-gray-700 mb-2">
+        <%= t(:incident_time) || "Time of Incident" %>
+      </label>
+      <div class="relative w-full sm:w-60">
+        <input type="time"
+               id="incident_time"
+               name="case_details_incident[incident_time]"
+               class="block w-full p-2.5 border border-gray-300 text-sm rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500"
+               min="00:00"
+               max="23:59"
+               value="00:00" />
+        <div class="absolute inset-y-0 right-3 flex items-center pointer-events-none">
+          <svg class="w-4 h-4 text-gray-400" fill="currentColor" viewBox="0 0 24 24">
+            <path fill-rule="evenodd"
+                  d="M2 12C2 6.477 6.477 2 12 2s10 4.477 10 10-4.477 10-10 10S2 17.523 2 12Zm11-4a1 1 0 1 0-2 0v4a1 1 0 0 0 .293.707l3 3a1 1 0 0 0 1.414-1.414L13 11.586V8Z"
+                  clip-rule="evenodd" />
+          </svg>
+        </div>
+      </div>
+    </div>
+
+    <div class="mt-10 text-right">
+      <button type="submit"
+              class="inline-flex items-center px-6 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm text-white bg-green-600 hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500 transition">
+        <%= t(:continue) %>
+      </button>
+    </div>
+  <% end %>
 </div>

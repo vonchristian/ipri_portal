@@ -12,7 +12,7 @@ module CaseDetails
       :actions_taken_details,
       :case_detail_id
 
-    validates :impact_to_victim_details, :impact_to_community_details, :actions_taken_details, :incident_investigation_details, presence: true
+    validates :impact_to_victim_details, :impact_to_community_details, presence: true
 
     def process!
       if valid?
@@ -29,7 +29,7 @@ module CaseDetails
         actions_taken_details:       actions_taken_details,
         actions_taken_status:        actions_taken_status,
         incident_investigation_status: incident_investigation_status,
-        incident_investigation_details: incident_investigation_details
+        incident_investigation_details: incident_investigation_details,
       )
     end
 

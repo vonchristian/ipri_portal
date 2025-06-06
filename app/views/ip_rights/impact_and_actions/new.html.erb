@@ -1,5 +1,5 @@
 <%= render '/ip_rights/shared/sidebar', current_step: 6, step_name: "Impact of Incident/s of Human Rights Violations", percent_finished: 80 %>
-<div class="col-span-9 bg-white mt-5">
+<div class=" shadow-md border-t-2 border-t-stone-200 md:p-10 pt-5 max-w-5xl mx-auto">
   <div data-controller="impact-and-action-form" class="col-span-9">
     <%= simple_form_for @impact_and_action, url: :ip_rights_case_detail_impact_and_actions do |f| %>
       <h2 class="font-bold text-xl text-gray-900">Impact of Incident/s of Human Rights Violations </h2>
@@ -11,23 +11,24 @@
 
        <div class="px-4 py-5  space-y-4 sm:p-6">
 
-       <%= f.input :actions_taken_status, label: "Is/Are there any other advocacy and/or action/s undertaken ?", collection: [['No', 'No'], ['Yes', 'Yes'] ], label_method: :second, value_method: :first, selected: "No", input_html: { data: { action: "impact-and-action-form#toggleActionTaken" } }  %>
-        <div class="hidden" data-impact-and-action-form-target="actionTakenGroup">
+       <%= f.input :actions_taken_status, label: "Is/Are there any other advocacy and/or action/s undertaken ?", collection: yes_no_options, include_blank: 'Please Select', label_method: :second, value_method: :first, input_html: { data: { action: "impact-and-action-form#toggleActionTaken" } }  %>
+        <div class="hidden" data-impact-and-action-form-target="actionTakenYes">
           <%= f.input :actions_taken_details, as: :text, label: "If YES, Please elaborate with additional information on any actions/investigations from other actors (e.g. national human rights institution, United Nations body, Civil Society, Comm etc and including relevant date/s and institutions office/s or representative/s involved.).",
               hint: "(E.g., community mobilization organized by family and local organization, fund-raising to support lawyers, communication submitted to national/regional human rights institution initiated by local organization and international NGO, etc.)" %>
         </div>
-        <div data-impact-and-action-form-target="actionTakenGroup">
+        <div class="hidden" data-impact-and-action-form-target="actionTakenNo">
           <%= f.input :actions_taken_details, as: :text, label: "If No, please provide more information." %>
         </div>
 
-        <%= f.input :incident_investigation_status, label: "Has there been any investigation/s on the incident of other type of human right violation ?", collection: [['No', 'No'], ['Yes', 'Yes'] ], label_method: :second, value_method: :first, selected: "No", input_html: { data: { action: "impact-and-action-form#toggleInvestigation" } }  %>
-        <div class="hidden" data-impact-and-action-form-target="investigationOnViolationGroup">
+        <%= f.input :incident_investigation_status, label: "Has there been any investigation/s on the incident of other type of human right violation ?", 
+              collection: yes_no_options, label_method: :second, value_method: :first, include_blank: "Please Select", input_html: { data: { action: "impact-and-action-form#toggleInvestigation" } }  %>
+        <div class="hidden" data-impact-and-action-form-target="investigationOnViolationYes">
           <%= f.input :incident_investigation_details, as: :text, label: "If yes, please provide additional information on the investigation, including relevant date/s and institutions/ office/s or representative/s involved, e.g., national human rights institution, United Nations body, etc." %>
         </div>
-        <div data-impact-and-action-form-target="investigationOnViolationGroup">
+        <div class="hidden" data-impact-and-action-form-target="investigationOnViolationNo">
           <%= f.input :incident_investigation_details, as: :text, label: "If no, please elaborate on your response. (e.g. can you provide probable reasons on why there has been no investigation/s conducted? Or, is the case not yet publicly reported? Etc.)" %>
         </div>
-             <div class="px-4 py-3 bg-gray-100 text-right sm:px-6">
+             <div class="px-4 py-3 text-right sm:px-6">
                 <button type="submit" class="inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-green-600 hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500">
                   Save and Proceed
                 </button>

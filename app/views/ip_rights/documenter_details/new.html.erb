@@ -1,7 +1,104 @@
+<%= render '/ip_rights/shared/sidebar', current_step: 1, step_name: t(:details_of_documenter), percent_finished: 1 %>
 
- <%=render '/ip_rights/shared/sidebar', current_step: 1, step_name: "#{t(:details_of_documenter)}", percent_finished: 1 %>
-<div data-controller="documenter-form">
+<div data-controller="documenter-form" class="bg-white shadow-md border-t-2 border-t-stone-200 md:p-10 pt-5 max-w-5xl mx-auto">
   <%= simple_form_for @documenter, as: :case_details_documenter, url: :ip_rights_documenter_details, html: { multipart: true } do |f| %>
-    <%= render "shared/documenter_details/form", f: f %>
+    
+    <h2 class="text-xl font-semibold text-gray-900 mb-6"><%= t(:details_of_documenter) %></h2>
+
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+      <%= f.input :first_name, label: t(:first_name), input_html: { class: "rounded-md shadow-sm" } %>
+      <%= f.input :last_name, label: t(:last_name), input_html: { class: "rounded-md shadow-sm" } %>
+    </div>
+
+    <div class="mt-6">
+      <%= f.input :organization_name, label: t(:organization_or_affiliation), input_html: { class: "rounded-md shadow-sm" } %>
+      <p class="mt-2 text-sm text-gray-500"><%= t(:organization_or_affiliation_help_text) %></p>
+    </div>
+
+    <div class="mt-6">
+      <label class="block text-sm font-medium text-gray-700 mb-2"><%= t(:date_of_submission) %></label>
+      <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
+        <%= f.input :submission_date_month, label: false, collection: Date::MONTHNAMES.compact, selected: Date.current.strftime("%B"), input_html: { class: "rounded-md shadow-sm" } %>
+        <%= f.input :submission_date_day, label: false, collection: 1..Date.current.end_of_month.day, selected: Date.current.day, input_html: { class: "rounded-md shadow-sm" } %>
+        <%= f.input :submission_date_year, label: false, collection: (Date.current.year - 10)..Date.current.year, selected: Date.current.year, input_html: { class: "rounded-md shadow-sm" } %>
+      </div>
+    </div>
+
+    <fieldset class="mt-8">
+      <legend class="text-base font-medium text-gray-900 mb-4"><%= t(:contact_details) %></legend>
+      
+      <%= f.input :email, required: true, label: "Email", input_html: { id: "documenter-email", class: "rounded-md shadow-sm" }, wrapper_html: { class: "mb-4" } %>
+
+      <div class="flex items-center space-x-3 mb-4">
+        <input type="checkbox"
+               class="focus:ring-indigo-500 h-4 w-4 text-indigo-600 border-gray-300 rounded"
+               data-action="documenter-form#togglePhoneGroup">
+        <label class="text-sm font-bold text-gray-700"><%= t(:phone_number) %></label>
+      </div>
+
+      <div class="hidden" data-documenter-form-target="phoneFieldGroup">
+        <%= f.input :phone_number, label: t(:phone_number), input_html: { class: "rounded-md shadow-sm", data: { documenter_form_target: "phone" } } %>
+      </div>
+    </fieldset>
+
+    <div class="mt-8" data-controller="source-of-data">
+      <label class="block text-sm font-bold text-gray-900 mb-2">
+        <%= t(:is_the_documenter_submitting_this_case_factsheet_as_primary_data) %>
+      </label>
+
+      <div class="space-y-4" data-source-of-data-target="input">
+  <% primary_options = {
+    "Yes - (Primary data refers to data that are gathered directly from the victim/s, family/ies of the victim/s, member/s of the Indigenous Peoples that were affected.)" => "Yes",
+    "No, not directly from the source (information is gathered from news outlets, etc.)" => "No"
+  } %>
+
+  <% primary_options.each do |label_text, value| %>
+    <label class="flex items-start space-x-3 p-3 border rounded-lg cursor-pointer hover:border-blue-500 transition"
+           data-action="click->source-of-data#toggle">
+      <input type="radio"
+             name="case_details_documenter[primary_data]"
+             value="<%= value %>"
+             <%= 'checked' if @documenter.primary_data.to_s == value %>
+             class="mt-1 h-5 w-5 text-blue-600 border-gray-300 focus:ring-blue-500"
+             data-source-of-data-target="input">
+      <span class="text-sm text-gray-700"><%= label_text %></span>
+    </label>
+  <% end %>
+</div>
+
+      <div class="mt-6" data-source-of-data-target="output">
+        <%= f.input :data_sources,
+          label: t(:other_relevant_websites_or_links),
+          as: :text,
+          input_html: { class: "rounded-md shadow-sm" } %>
+
+        <div class="mt-4">
+          <label class="block text-sm font-bold text-gray-700 mb-2"><%= t(:upload_document) %></label>
+          <div class="flex justify-center px-6 pt-5 pb-6 border-2 border-dashed border-gray-300 rounded-md">
+            <div class="space-y-1 text-center">
+              <svg class="mx-auto h-12 w-12 text-gray-400" stroke="currentColor" fill="none" viewBox="0 0 48 48">
+                <path d="M28 8H12a4 4 0 00-4 4v20m32-12v8m0 0v8a4 4 0 01-4 4H12a4 4 0 01-4-4v-4m32-4l-3.172-3.172a4 4 0 00-5.656 0L28 28M8 32l9.172-9.172a4 4 0 015.656 0L28 28m0 0l4 4m4-24h8m-4-4v8m-12 4h.02"
+                      stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+              </svg>
+              <div class="flex text-sm text-gray-600 justify-center">
+                <label class="cursor-pointer font-medium text-indigo-600 hover:text-indigo-500">
+                  <span><%= t(:upload_a_file) || "Upload a file" %></span>
+                  <%= f.input :documents, label: false, input_html: { multiple: true }, as: :file %>
+                </label>
+              </div>
+              <p class="text-xs text-gray-500">PDF, PNG, JPG, GIF up to 10MB</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="mt-10 text-right">
+      <button type="submit"
+              class="inline-flex items-center px-6 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm text-white bg-green-600 hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500 transition">
+        <%= t(:continue) %>
+      </button>
+    </div>
+
   <% end %>
 </div>

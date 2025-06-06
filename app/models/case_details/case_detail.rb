@@ -60,12 +60,17 @@ module CaseDetails
 
     def submission_date
       month = submission_date_month.to_i.zero? ? submission_date_month : "#{Date::MONTHNAMES[submission_date_month.to_i]}"
-      "#{month} #{submission_date_day}, #{submission_date_year}"
+
+      [month, submission_date_day, submission_date_year].compact.then do |parts|
+        parts.size == 3 ? "#{parts[0]} #{parts[1]}, #{parts[2]}" : parts.join(" ")
+      end
     end
 
     def incident_start_date
       month = incident_start_month.to_i.zero? ? incident_start_month : "#{Date::MONTHNAMES[incident_start_month.to_i]}"
-      "#{month} #{incident_start_day}, #{incident_start_year}"
+      [month, incident_start_day, incident_start_year].compact.then do |parts|
+        parts.size == 3 ? "#{parts[0]} #{parts[1]}, #{parts[2]}" : parts.join(" ")
+      end
     end
 
     def rights_violations
@@ -74,7 +79,9 @@ module CaseDetails
 
     def incident_end_date
       month = incident_end_month.to_i.zero? ? incident_end_month : "#{Date::MONTHNAMES[incident_end_month.to_i]}"
-      "#{month} #{incident_end_day}, #{incident_end_year}"
+      [month, incident_end_day, incident_end_year].compact.then do |parts|
+        parts.size == 3 ? "#{parts[0]} #{parts[1]}, #{parts[2]}" : parts.join(" ")
+      end
     end
 
     def data_sharing_content
@@ -106,7 +113,7 @@ module CaseDetails
     end
 
     def ongoing_case
-      incident_end_day.present?
+      incident_end_day.blank?
     end
 
     def self.ransackable_associations(auth_object = nil)

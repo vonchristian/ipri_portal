@@ -1,28 +1,23 @@
 import { Controller } from "@hotwired/stimulus"
+import { toggleTargetsByValue } from "utils/toggle_visibility"
 
 export default class extends Controller {
   static targets = [
-    "actionTakenGroup",
-    "investigationOnViolationGroup"
+    "actionTakenYes",
+    "actionTakenNo",
+    "investigationOnViolationYes",
+    "investigationOnViolationNo"
   ]
 
-  toggleActionTaken() {
-    this.actionTakenGroupTargets.forEach((el) => {
-      if(el.classList.value.includes("hidden")) {
-        el.classList.remove("hidden");
-      } else {
-        el.classList.add("hidden");
-      };
-    });
+  toggleActionTaken(event) {
+    const value = event.target.value;
+    toggleTargetsByValue(value, this.actionTakenYesTarget, "Yes");
+    toggleTargetsByValue(value, this.actionTakenNoTarget, "No");
   }
 
-  toggleInvestigation() {
-    this.investigationOnViolationGroupTargets.forEach((el) => {
-      if(el.classList.value.includes("hidden")) {
-        el.classList.remove("hidden");
-      } else {
-        el.classList.add("hidden");
-      };
-    });
+  toggleInvestigation(event) {
+    const value = event.target.value;
+    toggleTargetsByValue(value, this.investigationOnViolationYesTarget, "Yes");
+    toggleTargetsByValue(value, this.investigationOnViolationNoTarget, "No");
   }
 }
