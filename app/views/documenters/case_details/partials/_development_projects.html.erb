@@ -1,6 +1,33 @@
-<div class="flex w-full mx-auto mt-4 justify-between">
-  <h2 class="font-bold text-l text-gray-900"> Development Projects </h2>
-  <%= link_to 'Add New', new_case_detail_development_project_path(case_detail), class: "mr-4 text-gray-900 bg-white border border-gray-300 focus:outline-none hover:bg-gray-100 focus:ring-4 focus:ring-gray-200 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2" %>
-</div>
+<div class="max-w-7xl mx-auto  sm:px-6 lg:px-8 py-8">
+  <div class="flex items-center justify-between mb-6 flex-wrap gap-4">
+    <h1 class="text-2xl font-bold text-gray-900">Development Projects</h1>
+    <%= link_to "Add Project", new_documenters_case_detail_development_project_path(@case_detail),
+        class: "inline-flex items-center px-4 py-2 text-sm font-medium text-white bg-green-600 hover:bg-green-700 rounded-lg transition" %>
+  </div>
 
-<%= render "development_projects/partials/table", development_projects: @development_projects, case_detail: @case_detail %>
+  <% if @case_detail.development_projects.any? %>
+    <div class="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
+      <% @case_detail.development_projects.each do |project| %>
+        <%= link_to documenters_case_detail_development_project_path(@case_detail, project), class: "block bg-white border border-gray-200 rounded-lg shadow-sm hover:shadow-md hover:ring-2 hover:ring-blue-500 transition-all duration-200" do %>
+          <div class="p-6 h-full flex flex-col justify-between">
+            <div>
+              <h2 class="text-lg font-semibold text-gray-900 mb-1 truncate">
+                <%= project.name %>
+              </h2>
+              <p class="text-sm text-gray-500 mb-2">
+                Started: <%= project.project_start_year %>
+              </p>
+              <p class="text-sm text-gray-700 line-clamp-3">
+                <%= project.description.presence || "No description provided." %>
+              </p>
+            </div>
+          </div>
+        <% end %>
+      <% end %>
+    </div>
+  <% else %>
+    <div class="bg-yellow-50 border-l-4 border-yellow-400 p-4 rounded text-yellow-700">
+      No development projects found for this case.
+    </div>
+  <% end %>
+</div>

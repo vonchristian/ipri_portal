@@ -1,0 +1,73 @@
+<div class="max-w-7xl mx-auto px-6 py-10 bg-white shadow border-t-4 space-y-10 my-5">
+    <div class="flex flex-col md:flex-row md:items-center md:justify-between space-y-4 md:space-y-0">
+  <!-- Left: Project Info -->
+  <div>
+    <h1 class="text-2xl font-bold text-gray-900"><%= @development_project.name %></h1>
+    <p class="text-sm text-gray-500">
+      Started Operation: <%= @development_project.project_start_year %>
+    </p>
+  </div>
+
+  <!-- Right: Action Buttons -->
+  <div class="flex space-x-3 justify-start md:justify-end">
+     <%= link_to "Back", documenters_case_detail_development_projects_path(@case_detail),
+                class: "inline-flex items-center px-4 py-2 text-sm font-medium text-gray-700 bg-gray-100 hover:bg-gray-200 rounded-lg" %>
+    <%= link_to "Edit", edit_documenters_case_detail_development_project_path(case_detail_id: @case_detail.id, id: @development_project.id),
+                class: "inline-flex items-center px-4 py-2 text-sm font-medium text-white bg-yellow-600 hover:bg-yellow-700 rounded-lg" %>
+   
+  </div>
+</div>
+
+
+  <div class="border-t border-gray-200 pt-6">
+    <h2 class="text-lg font-semibold text-gray-800 mb-2">Type of Development Project</h2>
+    <p class="text-gray-700 whitespace-pre-line">
+      <%= @development_project.category_name.presence || "-" %>
+    </p>
+  </div>
+
+  <div class="border-t border-gray-200 pt-6">
+    <h2 class="text-lg font-semibold text-gray-800 mb-2">Description</h2>
+    <p class="text-gray-700 whitespace-pre-line">
+      <%= @development_project.description.presence || "-" %>
+    </p>
+  </div>
+
+  <div class="border-t border-gray-200 pt-6">
+    <h2 class="text-lg font-semibold text-gray-800 mb-2">Source of Information</h2>
+    <p class="text-gray-700 whitespace-pre-line">
+      <%= @development_project.website_sources.presence || "-" %>
+    </p>
+  </div>
+
+  <div class="border-t border-gray-200 pt-6">
+      <h2 class="text-lg font-semibold text-gray-800 mb-2">Parent Company Profile</h2>
+    <h2 class="text-sm font-semibold text-gray-800 mb-2">Parent Company Name</h2>
+    <p class="text-gray-700 whitespace-pre-line">
+      <%= @development_project.parent_company_name.presence || "-" %>
+    </p>
+
+     <h2 class="text-sm font-semibold text-gray-800 mb-2 mt-6">Parent Company Description</h2>
+    <p class="text-gray-700 whitespace-pre-line">
+      <%= @development_project.parent_company_description.presence || '-' %>
+    </p>
+
+
+     <h2 class="text-sm font-semibold text-gray-800 mb-2 mt-6">Parent Company Country</h2>
+    <p class="text-gray-700 whitespace-pre-line">
+      <%= @development_project.parent_company_country&.name || '-' %>
+    </p>
+  </div>
+
+  <div class="border-t border-gray-200 pt-6">
+      <h2 class="text-lg font-semibold text-gray-800 mb-2">Source of Funding Profile</h2>
+      <h2 class="text-sm font-semibold text-gray-800 mb-2 mt-6">Source of Funding Description</h2>
+    <p class="text-gray-700 whitespace-pre-line">
+      <%= @development_project.funding_source_description || '-' %>
+    </p>
+
+     <h2 class="text-sm font-semibold text-gray-800 mb-2 mt-6">Source of Information</h2>
+    <p class="text-gray-700 whitespace-pre-line">
+      <%= @development_project.funding_source_data_sources || '-' %>
+    </p>
+</div>

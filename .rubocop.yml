@@ -89,33 +89,6 @@ Style/HashTransformKeys:
 Style/HashTransformValues:
   Enabled: true
 
-Style/MethodCallWithArgsParentheses:
-  IgnoredMethods:
-    - eq
-    - head
-    - include
-    - not_to
-    - print
-    - puts
-    - redirect_back
-    - redirect_to
-    - raise
-    - render
-    - require
-    - require_relative
-    - require_dependency
-    - shared_context
-    - sign_out
-    - stream_from
-    - to
-    - validates
-    - validates_uniqueness_of
-    - yield
-  Exclude:
-    - "db/migrate/**/*"
-    - Gemfile
-    - 'spec/**/*'
-
 # Allow readable block formatting in some weird cases
 # Particularly in something like:
 #   Dev::Util.begin do

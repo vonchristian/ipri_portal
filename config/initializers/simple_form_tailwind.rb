@@ -77,7 +77,7 @@ SimpleForm.setup do |config|
   config.wrappers(
     :vertical_collection,
     item_wrapper_class: "flex items-center",
-    item_label_class: "my-1 ml-3 block text-sm font-medium text-gray-400",
+    item_label_class: "my-1 ml-3 block text-sm font-bold text-gray-700", # updated to bold
     tag: "div",
     class: "my-4",
   ) do |b|
@@ -94,7 +94,7 @@ SimpleForm.setup do |config|
 
     b.use(
       :input,
-      class: "mb-2 mt-2  w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500focus:ring-2",
+      class: "mb-2 mt-2 w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 focus:ring-2",
       error_class: "text-red-700",
       valid_class: "text-green-400",
     )

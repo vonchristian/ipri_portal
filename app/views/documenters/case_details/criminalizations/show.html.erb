@@ -1,11 +1,22 @@
-<div class="bg-white w-full mt-5 mr-5 mx-auto border border-gray-200 shadow-sm rounded-md divide-y divide-gray-100">
-    <div class="ml-5 mt-5 mr-6">
-  <h2 class="font-bold text-2xl text-gray-900 mb-6">Criminalization Details</h2>
-<div class="flex justify-end space-x-4 mb-8">
-     <%= link_to "Back to Case Detail", documenters_case_detail_victims_path(@case_detail), class: "mr-4 text-gray-900 bg-white border border-gray-300 focus:outline-none hover:bg-gray-100 focus:ring-4 focus:ring-gray-200 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2" %>
-    <%= link_to 'Edit', edit_documenters_case_detail_criminalization_path(@criminalization.case_detail, @criminalization), class: "mr-4 text-gray-900 bg-white border border-gray-300 focus:outline-none hover:bg-gray-100 focus:ring-4 focus:ring-gray-200 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2" %>
-    </div>
-  <div class="space-y-4">
+<div class="max-w-7xl mx-auto px-10 mt-5 mb-5 py-10 bg-white shadow border-t-4 space-y-10">
+    <div class="flex flex-col md:flex-row md:items-center md:justify-between space-y-4 md:space-y-0">
+  <!-- Left: Project Info -->
+  <div>
+    <h1 class="text-2xl font-bold text-gray-900">Criminalization Details</h1>
+    
+  </div>
+
+  <!-- Right: Action Buttons -->
+  <div class="flex space-x-3 justify-start md:justify-end">
+     <%= link_to "Back", documenters_case_detail_criminalizations_path(@case_detail),
+                class: "inline-flex items-center px-4 py-2 text-sm font-medium text-gray-700 bg-gray-100 hover:bg-gray-200 rounded-lg" %>
+    <%= link_to "Edit", edit_documenters_case_detail_criminalization_path(case_detail_id: @case_detail.id, id: @criminalization.id),
+                class: "inline-flex items-center px-4 py-2 text-sm font-medium text-white bg-yellow-600 hover:bg-yellow-700 rounded-lg" %>
+   
+  </div>
+</div>
+
+
     <%= render 'show_row', label: "Why was/were the victim/s criminalized?", value: @criminalization.criminalization_details %>
 
     <%= render 'show_row', label: "Did the victim/s experience any form of harassment or intimidation prior to criminalization?", value: humanize_yes_no(@criminalization.experienced_harrassment_or_intimidation) %>
@@ -43,7 +54,7 @@
 
     <%= render 'show_row', label: "How did the incident/s affect the victim/s and his/her/their family?", value: @criminalization.impact_to_victim_details %>
     <%= render 'show_row', label: "How did the incident/s affect the Indigenous Peoples group/s or community/ies and/or organization of the victim/s?", value: @criminalization.impact_to_community_details %>
-  </div>
+
   </div>
 </div>
 
