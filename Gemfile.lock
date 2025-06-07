@@ -129,9 +129,6 @@ GEM
     cssbundling-rails (1.4.1)
       railties (>= 6.0.0)
     csv (3.3.2)
-    cypress-rails (0.8.0.rc1)
-      puma (>= 3.8.0)
-      railties (>= 5.2.0)
     database_cleaner-active_record (2.2.0)
       activerecord (>= 5.a)
       database_cleaner-core (~> 2.0.0)
@@ -492,7 +489,6 @@ DEPENDENCIES
   countries
   cssbundling-rails
   csv
-  cypress-rails (= 0.8.0.rc1)
   database_cleaner-active_record
   devise
   drb

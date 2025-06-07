@@ -66,7 +66,6 @@ group :development, :test do
   gem "factory_bot_rails"
   gem "faker"
   gem "rspec-rails", "~> 7.0.0"
-  gem "cypress-rails", "0.8.0.rc1"
 end
 
 group :development do
