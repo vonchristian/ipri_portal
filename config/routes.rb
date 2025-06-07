@@ -19,11 +19,11 @@ Rails.application.routes.draw do
   end
 
   devise_for :admin_users, ActiveAdmin::Devise.config
-  # begin
-  #   ActiveAdmin.routes(self)
-  # rescue
-  #   ActiveAdmin::DatabaseHitDuringLoad
-  # end
+  begin
+    ActiveAdmin.routes(self)
+  rescue
+    ActiveAdmin::DatabaseHitDuringLoad
+  end
 
   root "documenters/sessions#new"
 
