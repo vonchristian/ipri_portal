@@ -1,44 +1,51 @@
-<div id= 'case-detail-new-individual-victim-form'>
-  <%= simple_form_for @individual_victim, url: :documenters_case_detail_individual_victims do |f| %>
-    <div class="max-w-7xl mx-auto lg:px-0">
-      <h2 class="font-bold text-xl text-gray-900">Individual Victim Details</h2>
-      <div class="md:mt-0 md:col-span-2">
-            <div class="px-4 py-5  space-y-4 sm:p-6">
-                <%= f.input :full_name, label: "Full Name" %>
-                <%= f.input :gender, collection: Victims::IndividualVictim.genders.map {|key, value| [value.upcase, Victims::IndividualVictim.genders.key(value)]} %>
-                <%= f.input :dependent_type, collection: Victims::IndividualVictim.dependent_types.map {|key, value| [key.titleize, Victims::IndividualVictim.dependent_types.key(value)] } %>
-                <label class="block text-sm font-bold text-gray-700">Date of Birth</label>
-                <div data-controller="individual-victim">
-                  <label class="block text-sm font-bold text-gray-900">
-                    Is the victim's date of birth known?
-                  </label>
-                  <%= f.input :date_of_birth_known, label: '', collection: ['No Information','Yes'], checked: 'No Information', input_html: { data: { individual_victim_target: "input", action: "click->individual-victim#toggle" } }, as: :radio_buttons  %>
-                  <div data-individual-victim-target="output">
-                    <div class="grid grid-cols-3 gap-4">
-                      <%= f.input :date_of_birth_month, label: false, collection: Date::MONTHNAMES, selected: Date.current.strftime("%B")  %>
-                      <%= f.input :date_of_birth_day, label: false, collection: 1..(Date.current.all_month.count), selected: Date.current.day %>
-                      <%= f.input :date_of_birth_year, label: false, collection: (Date.current - 100.year).year..(Time.zone.now.year), selected: Date.current.year %>
-                    </div>
-                  </div>
+<div id='case-detail-new-individual-victim-form'>
+  <div class="max-w-7xl mx-auto px-10 mt-5 mb-5 py-10 bg-white shadow border-t-4 border-stone-200 space-y-10">
+    <%= simple_form_for @individual_victim, url: form_url do |f| %>
+      <div class="max-w-7xl mx-auto lg:px-0">
+        <h2 class="font-bold text-xl text-gray-900">Individual Victim Details</h2>
+        <div class="md:mt-0 md:col-span-2">
+          <div class="px-4 py-5 space-y-4 sm:p-6">
+            <%= f.input :full_name, label: "Full Name" %>
+
+            <%= f.input :gender, collection: Victims::IndividualVictim.genders.map { |k, v| [v.upcase, k] } %>
+
+            <%= f.input :dependent_type, collection: Victims::IndividualVictim.dependent_types.map { |k, _| [k.titleize, k] } %>
+
+            <label class="block text-sm font-bold text-gray-700">Date of Birth</label>
+            <div data-controller="individual-victim">
+              <label class="block text-sm font-bold text-gray-900">
+                Is the victim's date of birth known?
+              </label>
+              <%= f.input :date_of_birth_known, label: '', collection: ['No', 'Yes'], checked: 'No',
+                  input_html: { data: { individual_victim_target: "input", action: "click->individual-victim#toggle" } },
+                  as: :radio_buttons %>
+
+              <div data-individual-victim-target="output">
+                <div class="grid grid-cols-3 gap-4">
+                  <%= f.input :date_of_birth_month, label: false, include_blank: 'Please Select', collection: Date::MONTHNAMES %>
+                  <%= f.input :date_of_birth_day, label: false, include_blank: 'Please Select', collection: 1..31 %>
+                  <%= f.input :date_of_birth_year, label: false, include_blank: 'Please Select', collection: (Date.current.year - 100)..Date.current.year %>
                 </div>
-                 <%= f.input :age_bracket_id, label: "Age Bracket", collection: AgeBracket.all.map{|a| [a.description, a.id] } %>
-
-
-
-                <%= f.input :dependent_details, as: :text, label: "Dependent Details", hint: "Please provide details of dependents. (E.g., children, partner, grandchildren etc.) (List details of dependents.)" %>
-
-
-                <%= f.input :ethnic_identity, as: :text, label: "Ethnic Identity", hint: "Name of Indigenous Peoples’ group or Ethnic Identity of victim" %>
-
-              <div class="col-span-6 sm:col-span-3">
-                <label for="first-name" class="block text-sm font-medium text-gray-700 pb-2"></label>
-                <%= f.input :victim_role, as: :text, label: "Role of Victim in the Community",
-                  hint: " (The response in this field can be elder, healer or spiritual leader, community organizer, a vocal protester against human rights violations, etc.) This information is meant to capture the victim’s involvement in the community and understand why s/he was the target of human rights violation and/or the impact of the human rights violation against him/her to the community or movement." %>
-
-              <div class="px-4 py-3 bg-gray-100 text-right sm:px-6">
-                <button type="submit" class="inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-green-600 hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500">
-                  Save Individual Victim
-                </button>
               </div>
+            </div>
+
+            <%= f.input :age_bracket_id, label: "Age Bracket", collection: AgeBracket.all.map { |a| [a.description, a.id] } %>
+
+            <%= f.input :dependent_details, as: :text, label: "Dependent Details",
+                hint: "E.g., children, partner, grandchildren etc. (List details of dependents.)" %>
+
+            <%= f.input :ethnic_identity, as: :text, label: "Ethnic Identity",
+                hint: "Name of Indigenous Peoples’ group or Ethnic Identity of victim" %>
+
+            <%= f.input :victim_role, as: :text, label: "Role of Victim in the Community",
+                hint: "E.g., elder, healer, organizer, protester, etc. This captures community involvement." %>
+
+            <div class="border-t border-gray-200 pt-6">
+              <%= f.submit "Save Individual Victim", class: "w-full sm:w-auto h-12 px-6 text-white transition-colors duration-150 bg-green-700 rounded-lg focus:shadow-outline hover:bg-green-800" %>
+            </div>
+          </div>
+        </div>
+      </div>
     <% end %>
+  </div>
 </div>

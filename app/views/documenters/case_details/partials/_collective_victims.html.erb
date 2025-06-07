@@ -1,0 +1,37 @@
+<header>
+  <div class="flex justify-between p-5">
+    <h1 class="text-lg font-bold text-gray-900">Collective Victims</h1>
+    <%= link_to 'Add Victim', new_documenters_case_detail_collective_victim_path(case_detail), class: "inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md text-white bg-green-600 hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500" %>
+  </div>
+</header>
+
+<div class="max-w-8xl mx-auto px-4 sm:px-6 lg:px-8">
+  <% if @case_detail.collective_victims.any? %>
+    <div class="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+      <% @case_detail.collective_victims.each do |victim| %>
+        <%= link_to documenters_case_detail_collective_victim_path(case_detail_id: @case_detail.id, id: victim.id), class: "block bg-white shadow-md hover:shadow-lg hover:ring-2 hover:ring-blue-600 transition p-5 border border-gray-100 group focus:outline-none focus:ring-2 focus:ring-blue-600"  do %>
+          <div class="space-y-4">
+            <div>
+              <h3 class="text-lg font-semibold text-gray-900">
+                <%= truncate(victim.indigenous_group_description.presence || "No indigenous group info provided.", length: 120) %>
+              </h3>
+               <span class="text-sm bg-gray-100 text-gray-600 px-2 py-0.5 rounded-md">
+          <%= victim.affected_total %> <%= victim.collective_victim_category&.name %>
+        </span>
+            </div>
+            <div class="text-sm text-gray-700 space-y-1">
+              <p><strong>Male:</strong> <%= victim.male_total || 0 %></p>
+              <p><strong>Female:</strong> <%= victim.female_total || 0 %></p>
+              <p>
+                <strong>Details:</strong><br>
+                <span class="whitespace-pre-wrap"><%= victim.victim_details.presence || "No additional details." %></span>
+              </p>
+            </div>
+          </div>
+        <% end %>
+      <% end %>
+    </div>
+  <% else %>
+    <p class="text-center text-gray-500 italic mt-6">No collective victims added yet.</p>
+  <% end %>
+</div>

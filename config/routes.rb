@@ -70,11 +70,9 @@ Rails.application.routes.draw do
       resources :case_details, only: [:index], controller: "/documenters/individual_victims/case_details"
     end
     resources :collective_victims, only: [:index, :show, :edit, :update]
-    resources :individual_victims, only: [:edit, :update]
     resources :case_details, only: [:index, :new, :show] do
-      resources :victims, only: [:index], controller: "case_details/victims"
-      resources :individual_victims, only: [:new, :create], controller: "case_details/individual_victims"
-      resources :collective_victims, only: [:new, :create, :edit, :update, :show], controller: "case_details/collective_victims"
+      resources :individual_victims, only: [:new, :create, :show, :edit, :update, :index], controller: "case_details/individual_victims"
+      resources :collective_victims, only: [:new, :create, :edit, :update, :show, :index], controller: "case_details/collective_victims"
       resources :criminalizations, only: [:index, :new, :create, :edit, :update, :show], controller: "case_details/criminalizations"
       resources :human_rights_violations, only: [:index, :new, :create, :edit, :update], controller: "case_details/human_rights_violations"
       resources :killings, only: [:index, :new, :create, :edit, :update], controller: "case_details/killings"

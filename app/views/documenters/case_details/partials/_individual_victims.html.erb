@@ -1,0 +1,39 @@
+<header class="flex items-center justify-between px-6 py-4">
+  <h1 class="text-xl font-semibold text-gray-900">Individual Victims</h1>
+  <%= link_to 'Add Victim', new_documenters_case_detail_individual_victim_path(case_detail),
+      class: "inline-flex items-center px-4 py-2 bg-green-600 hover:bg-green-700 text-white text-sm font-medium rounded-lg shadow-sm transition" %>
+</header>
+
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 px-6 pb-6">
+  <% case_detail.individual_victims.each do |individual_victim| %>
+    <%= link_to documenters_case_detail_individual_victim_path(case_detail_id: case_detail.id, id: individual_victim.id), class: "block bg-white shadow-md hover:shadow-lg hover:ring-2 hover:ring-blue-600 transition p-5 border border-gray-100 group focus:outline-none focus:ring-2 focus:ring-blue-600" do %>
+      <div class="flex justify-between items-start mb-3">
+        <h2 class="text-lg font-bold text-blue-600 group-hover:underline">
+          <%= individual_victim.full_name %>
+        </h2>
+        <span class="text-sm bg-gray-100 text-gray-600 px-2 py-0.5 rounded-md">
+          <%= individual_victim.gender&.titleize || "—" %>
+        </span>
+      </div>
+
+      <div class="space-y-1 text-sm text-gray-700">
+        <div>
+          <span class="font-medium text-gray-500">Age Bracket:</span>
+          <%= individual_victim.age_bracket.description %>
+        </div>
+        <div>
+          <span class="font-medium text-gray-500">Dependent Type:</span>
+          <%= individual_victim.dependent_type&.titleize || "—" %>
+        </div>
+        <div>
+          <span class="font-medium text-gray-500">Ethnic Identity:</span>
+          <%= individual_victim.ethnic_identity.presence || "—" %>
+        </div>
+        <div>
+          <span class="font-medium text-gray-500">Date of Birth:</span>
+          <%= individual_victim.date_of_birth || "—" %>
+        </div>
+      </div>
+    <% end %>
+  <% end %>
+</div>

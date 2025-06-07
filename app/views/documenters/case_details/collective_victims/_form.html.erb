@@ -1,4 +1,4 @@
-<div class="max-w-7xl mx-auto lg:px-0">
+<div class="max-w-7xl mx-auto px-10 mt-5 mb-5 py-10 bg-white shadow border-t-4 border-stone-200 space-y-10">
   <h2 class="font-bold text-xl text-gray-900">Group of People Victim Details</h2>
   <div class="md:mt-0 md:col-span-2 bg-white px-4">
     <div>
@@ -55,11 +55,10 @@
   </div>
 <% end %>
 
-          <div class="px-4 py-3 bg-gray-100 text-right sm:px-6">
-            <button type="submit" class="inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-green-600 hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500">
-              Next
-            </button>
-          </div>
+  <div class="border-t border-gray-200 pt-6">
+          <%= f.submit "Save Collective Victim", class: "w-full sm:w-auto h-12 px-6 text-white transition-colors duration-150 bg-green-700 rounded-lg focus:shadow-outline hover:bg-green-800" %>
+        </div>
+        
         </div>
       </div>
     </div>

@@ -8,8 +8,18 @@ module Documenters
       before_action :set_case_detail
       before_action :set_collective_victim, only: [:show, :edit, :update]
 
+      def index
+        @collective_victims = @case_detail.collective_victims
+      end
+
+      def show; end
+
       def new
         @collective_victim = ::CaseDetails::Victims::Collective.new
+      end
+
+      def edit
+        build_missing_age_bracket_breakdowns
       end
 
       def create
@@ -17,24 +27,18 @@ module Documenters
 
         if @collective_victim.valid?
           @collective_victim.process!
-          redirect_to documenters_case_detail_victims_url(@case_detail)
+          redirect_to(documenters_case_detail_collective_victims_url(@case_detail))
         else
-          render :new, status: :unprocessable_entity
+          render(:new, status: :unprocessable_entity)
         end
-      end
-
-      def show; end
-
-      def edit
-        build_missing_age_bracket_breakdowns
       end
 
       def update
         if @collective_victim.update(update_params)
-          redirect_to documenters_case_detail_collective_victim_url(@case_detail, @collective_victim)
+          redirect_to(documenters_case_detail_collective_victim_url(@case_detail, @collective_victim))
         else
           build_missing_age_bracket_breakdowns if @collective_victim.age_bracket_breakdowns.empty?
-          render :edit, status: :unprocessable_entity
+          render(:edit, status: :unprocessable_entity)
         end
       end
 
@@ -66,7 +70,7 @@ module Documenters
           :victim_details,
           :male_total,
           :female_total,
-          age_bracket_breakdowns_attributes: [:id, :age_bracket_id, :total, :_destroy]
+          age_bracket_breakdowns_attributes: [:id, :age_bracket_id, :total, :_destroy],
         )
       end
 

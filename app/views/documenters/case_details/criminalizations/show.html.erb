@@ -1,19 +1,24 @@
 <div class="max-w-7xl mx-auto px-10 mt-5 mb-5 py-10 bg-white shadow border-t-4 space-y-10">
-    <div class="flex flex-col md:flex-row md:items-center md:justify-between space-y-4 md:space-y-0">
-    <h1 class="text-xl font-bold text-gray-900">Criminalization Details</h1>
-    
+  <div class="flex flex-col md:flex-row md:items-center md:justify-between space-y-4 md:space-y-0">
+    <!-- Left: Title -->
+    <div class="flex items-center space-x-4">
+      <h1 class="text-xl font-bold text-gray-900">Criminalization Details</h1>
 
+      <% if @criminalization.victims_in_detention.to_s.downcase.in?(%w[yes true 1]) %>
+        <span class="inline-block bg-red-600 text-white text-xs font-semibold px-3 py-1 rounded-full">
+          In Detention
+        </span>
+      <% end %>
+    </div>
 
-  <!-- Right: Action Buttons -->
-  <div class="flex space-x-3 justify-start md:justify-end">
-     <%= link_to "Back", documenters_case_detail_criminalizations_path(@case_detail),
-                class: "inline-flex items-center px-4 py-2 text-sm font-medium text-gray-700 bg-gray-100 hover:bg-gray-200 rounded-lg" %>
-    <%= link_to "Edit", edit_documenters_case_detail_criminalization_path(case_detail_id: @case_detail.id, id: @criminalization.id),
-                class: "inline-flex items-center px-4 py-2 text-sm font-medium text-white bg-yellow-600 hover:bg-yellow-700 rounded-lg" %>
-   
+    <!-- Right: Action Buttons -->
+    <div class="flex space-x-3 justify-start md:justify-end">
+      <%= link_to "Back", documenters_case_detail_criminalizations_path(@case_detail),
+                  class: "inline-flex items-center px-4 py-2 text-sm font-medium text-gray-700 bg-gray-100 hover:bg-gray-200 rounded-lg" %>
+      <%= link_to "Edit", edit_documenters_case_detail_criminalization_path(case_detail_id: @case_detail.id, id: @criminalization.id),
+                  class: "inline-flex items-center px-4 py-2 text-sm font-medium text-white bg-stone-600 hover:bg-stone-700 rounded-lg" %>
+    </div>
   </div>
-</div>
-
 
     <%= render 'show_row', label: "Why was/were the victim/s criminalized?", value: @criminalization.criminalization_details %>
 

@@ -1,251 +1,70 @@
 <% if @criminalizations.present? %>
-<div class="max-w-7xl mx-auto  sm:px-6 lg:px-8 py-8">
+  <div class="max-w-7xl mx-auto sm:px-6 lg:px-8 py-8">
     <div class="flex items-center justify-between mb-6 flex-wrap gap-4">
-    <h1 class="text-xl font-bold text-gray-900">Criminalizations</h1>
-    <%= link_to 'Add New', new_documenters_case_detail_criminalization_path(case_detail), 
-      class: "inline-flex items-center px-4 py-2 text-sm font-medium text-white bg-green-600 hover:bg-green-700 rounded-lg transition ml-5 mr-5" %>
-  </div>
-
-  <% @criminalizations.each_with_index do |criminalization, indx| %>
-  <%= link_to documenters_case_detail_criminalization_path(case_detail_id: case_detail.id, id: criminalization.id) do %>
-  <div class="flex w-full mx-auto justify-between">
-    <h2 class="font-bold text-l text-gray-900 mt-4">Case #<%=indx.succ %> </h2>
-  </div>
-    <div class="grid grid-cols-1 md:grid-cols-12">
-      <div class="col-span-3 ml-4 mt-2">
-        <p class="block mb-2 text-sm font-medium text-gray-900"> Why was/were the victim/s criminalized? </p>
-      </div>
-      <div class="col-span-1">
-      </div>
-      <div class="col-span-7 mt-2">
-        <p class="text-gray-500"> <%= criminalization.criminalization_details %> </p>
-      </div>
-    </div>
-    <div class="grid grid-cols-1 md:grid-cols-12 mt-2">
-      <div class="col-span-3 ml-4 mt-2 mr-2">
-        <p class="block mb-2 text-sm font-medium text-gray-900"> Did the victim/s experience any form of harassment or intimidation prior to criminalization? </p>
-      </div>
-      <div class="col-span-1">
-      </div>
-      <div class="col-span-7 mt-2">
-        <p class="text-gray-500"> <%= criminalization.experienced_harrassment_or_intimidation %> </p>
-        <p class="text-gray-500"> <%= criminalization.harrassment_or_intimidation_details %> </p>
-      </div>
+      <h1 class="text-xl font-bold text-gray-900">Criminalizations</h1>
+      <%= link_to 'Add New', new_documenters_case_detail_criminalization_path(case_detail),
+        class: "inline-flex items-center px-4 py-2 text-sm font-medium text-white bg-green-600 hover:bg-green-700 rounded-lg transition ml-5 mr-5" %>
     </div>
 
-    <div class="grid grid-cols-1 md:grid-cols-12 mt-2">
-      <div class="col-span-3 ml-4 mt-2 mr-2">
-        <p class="block mb-2 text-sm font-medium text-gray-900"> What was/were the accusation/s or charge/s filed against the victim/s?</p>
-      </div>
-      <div class="col-span-1">
-      </div>
-      <div class="col-span-7 mt-2">
-        <p class="text-gray-500"> <%= criminalization.accusation_or_charges_details %> </p>
-      </div>
-    </div>
+    <% @criminalizations.each_with_index do |criminalization, indx| %>
+      <%= link_to documenters_case_detail_criminalization_path(case_detail_id: case_detail.id, id: criminalization.id),
+        class: "block mb-6 border border-gray-200 shadow-md hover:shadow-lg hover:ring-2 hover:ring-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-600 transition bg-white p-6" do %>
 
-    <div class="grid grid-cols-1 md:grid-cols-12 mt-2">
-      <div class="col-span-3 ml-4 mt-2 mr-2">
-        <p class="block mb-2 text-sm font-medium text-gray-900"> What was/were the policy/ies or law/s or institutional justification/s used against the victim/s?</p>
-      </div>
-      <div class="col-span-1">
-      </div>
-      <div class="col-span-7 mt-2">
-        <p class="text-gray-500"> <%= criminalization.policies_or_laws_used %> </p>
-      </div>
-    </div>
+       <div class="flex justify-between items-center mb-2">
+  <h2 class="text-lg font-semibold text-gray-800">Case #<%= indx + 1 %></h2>
 
-    <div class="grid grid-cols-1 md:grid-cols-12 mt-2">
-      <div class="col-span-3 ml-4 mt-2 mr-2">
-        <p class="block mb-2 text-sm font-medium text-gray-900"> Who put forward the accusation/s or charge/s against the victim/s?</p>
-      </div>
-      <div class="col-span-1">
-      </div>
-      <div class="col-span-7 mt-2">
-        <p class="text-gray-500"> <%= criminalization.accuser_categories.pluck(:title).join(", ") %> </p>
-      </div>
-    </div>
-
-    <div class="grid grid-cols-1 md:grid-cols-12 mt-2">
-      <div class="col-span-3 ml-4 mt-2 mr-2">
-        <p class="block mb-2 text-sm font-medium text-gray-900"> Please provide more information about the accusers</p>
-      </div>
-      <div class="col-span-1">
-      </div>
-      <div class="col-span-7 mt-2">
-        <p class="text-gray-500"> <%= criminalization.accuser_details %> </p>
-      </div>
-    </div>
-
-    <div class="grid grid-cols-1 md:grid-cols-12 mt-2">
-      <div class="col-span-3 ml-4 mt-2 mr-2">
-        <p class="block mb-2 text-sm font-medium text-gray-900"> Was/were the accusation/s or charge/s against the victim legally or formally filed?</p>
-      </div>
-      <div class="col-span-1">
-      </div>
-      <div class="col-span-7 mt-2">
-        <p class="text-gray-500"> <%= criminalization.case_filing_status %> </p>
-      </div>
-    </div>
-
-    <div class="grid grid-cols-1 md:grid-cols-12 mt-2">
-      <div class="col-span-3 ml-4 mt-2 mr-2">
-        <p class="block mb-2 text-sm font-medium text-gray-900"> Where was the case/s filed? (e.g., regional court, military court, supreme court, etc.)? </p>
-      </div>
-      <div class="col-span-1">
-      </div>
-      <div class="col-span-7 mt-2">
-        <p class="text-gray-500"> <%= criminalization.case_filing_details %> </p>
-      </div>
-    </div>
-
-    <div class="grid grid-cols-1 md:grid-cols-12 mt-2">
-      <div class="col-span-3 ml-4 mt-2 mr-2">
-        <p class="block mb-2 text-sm font-medium text-gray-900"> Is there a decision on the legal or formal accusation/s or charge/s filed against the victim/s?</p>
-      </div>
-      <div class="col-span-1">
-      </div>
-      <div class="col-span-7 mt-2">
-        <p class="text-gray-500"> <%= criminalization.case_decision_status %> </p>
-      </div>
-    </div>
-
-    <div class="grid grid-cols-1 md:grid-cols-12 mt-2">
-      <div class="col-span-3 ml-4 mt-2 mr-2">
-        <p class="block mb-2 text-sm font-medium text-gray-900"> Please provide more information on the decision on the legal or formal accusation/s or charge/s filed against the victim/s. </p>
-      </div>
-      <div class="col-span-1">
-      </div>
-      <div class="col-span-7 mt-2">
-        <p class="text-gray-500"> <%= criminalization.case_decision_details %> </p>
-      </div>
-    </div>
-
-    <div class="grid grid-cols-1 md:grid-cols-12 mt-2">
-      <div class="col-span-3 ml-4 mt-2 mr-2">
-        <p class="block mb-2 text-sm font-medium text-gray-900"> Is/Are the victim/s in prison or detention facility? </p>
-      </div>
-      <div class="col-span-1">
-      </div>
-      <div class="col-span-7 mt-2">
-        <p class="text-gray-500"> <%= criminalization.victims_in_detention %> </p>
-      </div>
-    </div>
-
-    <div class="grid grid-cols-1 md:grid-cols-12 mt-2">
-      <div class="col-span-3 ml-4 mt-2 mr-2">
-        <p class="block mb-2 text-sm font-medium text-gray-900"> Please provide more information on the current situation of the victim/s</p>
-      </div>
-      <div class="col-span-1">
-      </div>
-      <div class="col-span-7 mt-2">
-        <p class="text-gray-500"> <%= criminalization.victims_in_detention_details %> </p>
-      </div>
-    </div>
-
-    <div class="grid grid-cols-1 md:grid-cols-12 mt-2">
-      <div class="col-span-3 ml-4 mt-2 mr-2">
-        <p class="block mb-2 text-sm font-medium text-gray-900"> Was/Were there (a) legal case/s filed against the alleged perpetrators on behalf of the victim/s criminalized?</p>
-      </div>
-      <div class="col-span-1">
-      </div>
-      <div class="col-span-7 mt-2">
-        <p class="text-gray-500"> <%= criminalization.case_filing_against_perpetrator %> </p>
-      </div>
-    </div>
-
-    <div class="grid grid-cols-1 md:grid-cols-12 mt-2">
-      <div class="col-span-3 ml-4 mt-2 mr-2">
-        <p class="block mb-2 text-sm font-medium text-gray-900"> Please provide further information: Where is/are the case/s filed? Who filed the case? </p>
-      </div>
-      <div class="col-span-1">
-      </div>
-      <div class="col-span-7 mt-2">
-        <p class="text-gray-500"> <%= criminalization.case_filing_against_perpetrator_details %> </p>
-      </div>
-    </div>
-
-    <div class="grid grid-cols-1 md:grid-cols-12 mt-2">
-      <div class="col-span-3 ml-4 mt-2 mr-2">
-        <p class="block mb-2 text-sm font-medium text-gray-900"> Has the State undertaken any action/s to address the incident of criminalization? </p>
-      </div>
-      <div class="col-span-1">
-      </div>
-      <div class="col-span-7 mt-2">
-        <p class="text-gray-500"> <%= criminalization.state_action_to_address_criminalization %> </p>
-      </div>
-    </div>
-
-    <div class="grid grid-cols-1 md:grid-cols-12 mt-2">
-      <div class="col-span-3 ml-4 mt-2 mr-2">
-        <p class="block mb-2 text-sm font-medium text-gray-900"> Please provide more information on the action/s undertaken, including any relevant results </p>
-      </div>
-      <div class="col-span-1">
-      </div>
-      <div class="col-span-7 mt-2">
-        <p class="text-gray-500"> <%= criminalization.state_action_to_address_criminalization_details %> </p>
-      </div>
-    </div>
-
-    <div class="grid grid-cols-1 md:grid-cols-12 mt-2">
-      <div class="col-span-3 ml-4 mt-2 mr-2">
-        <p class="block mb-2 text-sm font-medium text-gray-900"> Has there been any investigation/s on the incident of criminalization? </p>
-      </div>
-      <div class="col-span-1">
-      </div>
-      <div class="col-span-7 mt-2">
-        <p class="text-gray-500"> <%= criminalization.investigation_on_criminalization %> </p>
-      </div>
-    </div>
-
-    <div class="grid grid-cols-1 md:grid-cols-12 mt-2">
-      <div class="col-span-3 ml-4 mt-2 mr-2">
-        <p class="block mb-2 text-sm font-medium text-gray-900"> Please provide additional information on the investigation, including relevant date/s and institutions/ office/s or representative/s involved </p>
-      </div>
-      <div class="col-span-1">
-      </div>
-      <div class="col-span-7 mt-2">
-        <p class="text-gray-500"> <%= criminalization.investigation_on_criminalization_details %> </p>
-      </div>
-    </div>
-
-    <div class="grid grid-cols-1 md:grid-cols-12 mt-2">
-      <div class="col-span-3 ml-4 mt-2 mr-2">
-        <p class="block mb-2 text-sm font-medium text-gray-900"> How did the incident/s affect the victim/s and his/her/their family? </p>
-      </div>
-      <div class="col-span-1">
-      </div>
-      <div class="col-span-7 mt-2">
-        <p class="text-gray-500"> <%= criminalization.impact_to_victim_details %> </p>
-      </div>
-    </div>
-
-    <div class="grid grid-cols-1 md:grid-cols-12 mt-2">
-      <div class="col-span-3 ml-4 mt-2 mr-2">
-        <p class="block mb-2 text-sm font-medium text-gray-900"> How did the incident/s affect the Indigenous Peoples group/s or community/ies and/or organization of the victim/s? </p>
-      </div>
-      <div class="col-span-1">
-      </div>
-      <div class="col-span-7 mt-2">
-        <p class="text-gray-500"> <%= criminalization.impact_to_community_details %> </p>
-      </div>
-    </div>
-
-    <div class="border-t border-gray-200 my-4"></div>
-    <% end %>
+  <% if criminalization.victims_in_detention.to_s.downcase.in?(%w[yes true 1]) %>
+    <span class="inline-block bg-red-600 text-white text-xs font-semibold px-3 py-1 rounded-full">
+      In Detention
+    </span>
   <% end %>
 </div>
-<% else %>
-  <div class="max-w-[85rem] px-4 py-10 sm:px-6 lg:px-8 lg:py-14 mx-auto">
-    <div class="max-w-xl mx-auto">
-      <div class="text-center">
-        <p class="mt-1 text-gray-600 dark:text-neutral-400">
-          No criminalizations found.<br><br>
+        <div class="text-sm text-gray-700 space-y-2">
+          <p><span class="font-medium text-gray-900">Reason:</span> <%= criminalization.criminalization_details %></p>
 
-           <%= link_to 'Add New', new_documenters_case_detail_criminalization_path(case_detail), class: "mr-4 text-gray-900 bg-white border border-gray-300 focus:outline-none hover:bg-gray-100 focus:ring-4 focus:ring-gray-200 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2" %>
-        </p>
-      </div>
-    </div>
+          <% if criminalization.experienced_harrassment_or_intimidation.present? %>
+            <p><span class="font-medium text-gray-900">Harassment before criminalization:</span> <%= criminalization.experienced_harrassment_or_intimidation %></p>
+          <% end %>
+
+          <% if criminalization.accusation_or_charges_details.present? %>
+            <p><span class="font-medium text-gray-900">Accusations:</span> <%= criminalization.accusation_or_charges_details %></p>
+          <% end %>
+
+          <% if criminalization.policies_or_laws_used.present? %>
+            <p><span class="font-medium text-gray-900">Legal basis:</span> <%= criminalization.policies_or_laws_used %></p>
+          <% end %>
+
+          <% if criminalization.accuser_categories.present? %>
+            <p><span class="font-medium text-gray-900">Accusers:</span> <%= criminalization.accuser_categories.pluck(:title).join(", ") %></p>
+          <% end %>
+
+          <% if criminalization.case_filing_status.present? %>
+            <p><span class="font-medium text-gray-900">Case filed:</span> <%= criminalization.case_filing_status %></p>
+          <% end %>
+
+          <% if criminalization.case_decision_status.present? %>
+            <p><span class="font-medium text-gray-900">Decision status:</span> <%= criminalization.case_decision_status %></p>
+          <% end %>
+
+          <% if criminalization.victims_in_detention.present? %>
+            <p><span class="font-medium text-gray-900">In detention:</span> <%= criminalization.victims_in_detention %></p>
+          <% end %>
+
+          <% if criminalization.impact_to_victim_details.present? %>
+            <p><span class="font-medium text-gray-900">Impact on victim:</span> <%= criminalization.impact_to_victim_details %></p>
+          <% end %>
+
+          <% if criminalization.impact_to_community_details.present? %>
+            <p><span class="font-medium text-gray-900">Impact on community:</span> <%= criminalization.impact_to_community_details %></p>
+          <% end %>
+        </div>
+      <% end %>
+    <% end %>
+  </div>
+<% else %>
+  <div class="max-w-4xl mx-auto px-4 py-10 text-center">
+    <p class="text-gray-600 mb-4">No criminalizations found.</p>
+    <%= link_to 'Add New', new_documenters_case_detail_criminalization_path(case_detail),
+      class: "text-white bg-green-600 hover:bg-green-700 focus:ring-4 focus:ring-green-300 font-medium rounded-lg text-sm px-5 py-2.5" %>
   </div>
 <% end %>
-

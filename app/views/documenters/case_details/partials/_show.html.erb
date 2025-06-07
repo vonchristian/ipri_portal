@@ -12,10 +12,11 @@
     <ul class="flex overflow-x-auto whitespace-nowrap text-xs font-medium text-gray-500 sm:text-base">
       <% tabs = [
           {name: 'Data', path: documenters_case_detail_path(@case_detail)},
-          {name: 'Victims', path: documenters_case_detail_victims_path(@case_detail)},
           {name: 'Criminalizations', path: documenters_case_detail_criminalizations_path(@case_detail), count: @case_detail.criminalizations_count},
           {name: 'Killings', path: documenters_case_detail_killings_path(@case_detail), count: @case_detail.killings_count},
           {name: 'Other Human Rights Violations', path: documenters_case_detail_human_rights_violations_path(@case_detail), count: @case_detail.human_rights_violations_count},
+           {name: 'Individual Victims', path: documenters_case_detail_individual_victims_path(@case_detail)},
+           {name: 'Collective Victims', path: documenters_case_detail_collective_victims_path(@case_detail)},
           {name: 'Development Projects', path: documenters_case_detail_development_projects_path(@case_detail), count: @case_detail.development_projects_count}
         ] %>
 
@@ -27,7 +28,7 @@
                              (active ? "text-blue-600 border-blue-600" : "border-transparent hover:text-gray-600 hover:border-gray-300") do %>
             <span><%= tab[:name] %></span>
             <% if tab[:count].to_i.positive? %>
-              <span class="inline-flex items-center ml-2 py-1 px-3  text-xs bg-stone-100 font-medium text-black">
+              <span class="inline-flex rounded-full items-center ml-2 py-1 px-3  text-xs bg-stone-100 font-medium text-black">
                 <%= tab[:count] %>
               </span>
             <% end %>
@@ -40,8 +41,10 @@
   <!-- Content Sections -->
   <% if current_page?(documenters_case_detail_path(@case_detail)) %>
     <%= render 'documenters/case_details/partials/profile', case_detail: @case_detail %>
-  <% elsif current_page?(documenters_case_detail_victims_path(@case_detail)) %>
-    <%= render 'documenters/case_details/partials/victims', case_detail: @case_detail %>
+  <% elsif current_page?(documenters_case_detail_individual_victims_path(@case_detail)) %>
+    <%= render 'documenters/case_details/partials/individual_victims', case_detail: @case_detail %>
+   <% elsif current_page?(documenters_case_detail_collective_victims_path(@case_detail)) %>
+    <%= render 'documenters/case_details/partials/collective_victims', case_detail: @case_detail %>
   <% elsif current_page?(documenters_case_detail_criminalizations_path(@case_detail)) %>
     <%= render 'documenters/case_details/partials/criminalizations', case_detail: @case_detail %>
   <% elsif current_page?(documenters_case_detail_human_rights_violations_path(@case_detail)) %>

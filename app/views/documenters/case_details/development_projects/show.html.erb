@@ -1,11 +1,11 @@
-<div class="max-w-7xl mx-auto px-10 mt-5 mb-5 py-10 bg-white shadow border-t-4 space-y-10">
+<div class="max-w-7xl mx-auto px-10 mt-5 mb-5 py-10 bg-white shadow border-t-4 border-stone-200 space-y-10">
     <div class="flex flex-col md:flex-row md:items-center md:justify-between space-y-4 md:space-y-0">
-        <div>
-      <h1 class="text-xl font-bold text-gray-900"><%= @development_project.name %></h1>
-    <p class="text-sm text-gray-500">
-      Started Operation: <%= @development_project.project_start_year %>
-    </p>
-        </div>
+      <div>
+        <h1 class="text-xl font-bold text-gray-900"><%= @development_project.name %></h1>
+          <p class="text-sm text-gray-500">
+          Started Operation: <%= @development_project.project_start_year %>
+          </p>
+      </div>
 
 
   <!-- Right: Action Buttons -->
@@ -13,7 +13,7 @@
      <%= link_to "Back", documenters_case_detail_development_projects_path(@case_detail),
                 class: "inline-flex items-center px-4 py-2 text-sm font-medium text-gray-700 bg-gray-100 hover:bg-gray-200 rounded-lg" %>
     <%= link_to "Edit", edit_documenters_case_detail_development_project_path(case_detail_id: @case_detail.id, id: @development_project.id),
-                class: "inline-flex items-center px-4 py-2 text-sm font-medium text-white bg-yellow-600 hover:bg-yellow-700 rounded-lg" %>
+                class: "inline-flex items-center px-4 py-2 text-sm font-medium text-white bg-stone-600 hover:bg-stone-700 rounded-lg" %>
    
   </div>
 </div>

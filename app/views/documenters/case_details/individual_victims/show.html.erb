@@ -4,9 +4,9 @@
         <h1 class="text-xl font-bold text-gray-900"><%= @individual_victim.full_name.titleize %></h1>
       </div>
        <div class="flex space-x-3 justify-start md:justify-end">
-     <%= link_to "Back", documenters_case_detail_victims_path(@individual_victim.case_detail),
+     <%= link_to "Back", documenters_case_detail_individual_victims_path(@case_detail),
                 class: "inline-flex items-center px-4 py-2 text-sm font-medium text-gray-700 bg-gray-100 hover:bg-gray-200 rounded-lg" %>
-    <%= link_to "Edit", edit_documenters_individual_victim_path(@individual_victim),
+    <%= link_to "Edit", edit_documenters_case_detail_individual_victim_path(id: @individual_victim.id, case_detail_id: @case_detail.id),
                 class: "inline-flex items-center px-4 py-2 text-sm font-medium text-white bg-stone-600 hover:bg-stone-700 rounded-lg" %>
    
   </div>
