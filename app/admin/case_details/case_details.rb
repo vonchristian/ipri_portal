@@ -4,7 +4,7 @@ ActiveAdmin.register(CaseDetails::CaseDetail, as: "Case Details") do
   belongs_to :country, optional: true
 
   actions :all, except: [:new]
-  filter :country_id, as: :select, collection: Country.all.order(name: :asc).map { |country| [country.name, country.id] }
+  filter :country_id, as: :select, collection: Country.order(name: :asc).map { |country| [country.name, country.id] }
   filter :submission_date_year, as: :select, collection: 20.years.ago.year..Date.current.year, label: "Submission Year"
   filter :incident_start_year, as: :select, collection: 20.years.ago.year..Date.current.year, label: "Incident Year"
   filter :data_sharing, as: :select, collection: CaseDetails::CaseDetail.data_sharings.keys
@@ -57,56 +57,55 @@ ActiveAdmin.register(CaseDetails::CaseDetail, as: "Case Details") do
   form do |f|
     panel "Documenter Details" do
       f.inputs do
-        f.input :documenter_first_name, label: "First Name"
-        f.input :documenter_last_name, label: "Last Name"
-        f.input :organization_name, label: "Organization/Affiliation"
-        f.input :documenter_email, label: "Email"
-        f.input :documenter_phone_number, label: "Phone Number"
-        f.input :willing_to_share_more_info, label: "Are you willing to share more information with IPRI?"
+        f.input(:documenter_first_name, label: "First Name")
+        f.input(:documenter_last_name, label: "Last Name")
+        f.input(:organization_name, label: "Organization/Affiliation")
+        f.input(:documenter_email, label: "Email")
+        f.input(:documenter_phone_number, label: "Phone Number")
+        f.input(:willing_to_share_more_info, label: "Are you willing to share more information with IPRI?")
       end
     end
 
-    panel 'Case Details' do
+    panel "Case Details" do
       f.inputs do
-        f.input :primary_data
-        f.input :submission_date_month, as: :select, collection: Date::MONTHNAMES
-        f.input :submission_date_day, as: :select, collection: 1..(Date.current.all_month.count)
-        f.input :submission_date_year, as: :select, collection: (Date.current - 10.year).year..(Time.zone.now.year)
-        f.input :data_sources
-        f.input :tag_list, as: :select, multiple: true, collection: ActsAsTaggableOn::Tag.pluck(:name)
+        f.input(:primary_data)
+        f.input(:submission_date_month, as: :select, collection: Date::MONTHNAMES)
+        f.input(:submission_date_day, as: :select, collection: 1..(Date.current.all_month.count))
+        f.input(:submission_date_year, as: :select, collection: (Date.current - 10.years).year..(Time.zone.now.year))
+        f.input(:data_sources)
+        f.input(:tag_list, as: :select, multiple: true, collection: ActsAsTaggableOn::Tag.pluck(:name))
       end
     end
 
-    panel 'Place and Date of Incident' do
+    panel "Place and Date of Incident" do
       f.inputs do
-        f.input :country_id, as: :select, collection: Country.all.map{|country| [country.id, country.name] }
-        f.input :subnational_location
-        f.input :location_details_1, label: "Other Location Details (1)"
-        f.input :location_details_2, label: "Other Location Details (2)"
-        f.input :incident_start_month, as: :select, collection: Date::MONTHNAMES
-        f.input :incident_start_day, as: :select, collection: 1..(Date.current.all_month.count)
-        f.input :incident_start_year, as: :select, collection: (Date.current - 10.year).year..(Time.zone.now.year)
-        f.input :incident_end_month, as: :select, collection: Date::MONTHNAMES
-        f.input :incident_end_day, as: :select, collection: 1..(Date.current.all_month.count)
-        f.input :incident_end_year, as: :select, collection: (Date.current - 10.year).year..(Time.zone.now.year)
+        f.input(:country_id, as: :select, collection: Country.all.map { |country| [country.id, country.name] })
+        f.input(:subnational_location)
+        f.input(:location_details_1, label: "Other Location Details (1)")
+        f.input(:location_details_2, label: "Other Location Details (2)")
+        f.input(:incident_start_month, as: :select, collection: Date::MONTHNAMES)
+        f.input(:incident_start_day, as: :select, collection: 1..(Date.current.all_month.count))
+        f.input(:incident_start_year, as: :select, collection: (Date.current - 10.years).year..(Time.zone.now.year))
+        f.input(:incident_end_month, as: :select, collection: Date::MONTHNAMES)
+        f.input(:incident_end_day, as: :select, collection: 1..(Date.current.all_month.count))
+        f.input(:incident_end_year, as: :select, collection: (Date.current - 10.years).year..(Time.zone.now.year))
       end
     end
 
     panel "Impact of Incident/s of Human Rights Violations" do
       f.inputs do
-        f.input :impact_to_victim_details, as: :text, label: "How did the incident/s affect the victim/s and his/her/their family?"
-        f.input :impact_to_community_details, as: :text, label: "How did the incident/s affect the Indigenous Peoples group/s or community/ies and/or organization of the victim/s?"
-        f.input :actions_taken_details, as: :text, label: "Is/Are there any other advocacy and/or action/s undertaken ?"
-        f.input :incident_investigation_details, as: :text, label: "Has there been any investigation/s on the incident of other type of human right violation ?"
+        f.input(:impact_to_victim_details, as: :text, label: "How did the incident/s affect the victim/s and his/her/their family?")
+        f.input(:impact_to_community_details, as: :text, label: "How did the incident/s affect the Indigenous Peoples group/s or community/ies and/or organization of the victim/s?")
+        f.input(:actions_taken_details, as: :text, label: "Is/Are there any other advocacy and/or action/s undertaken ?")
+        f.input(:incident_investigation_details, as: :text, label: "Has there been any investigation/s on the incident of other type of human right violation ?")
       end
     end
-
 
     f.actions
   end
 
   show do |case_detail|
-    panel 'Documenter Details' do
+    panel "Documenter Details" do
       attributes_table do
         row :documenter_first_name
         row :documenter_last_name
@@ -119,7 +118,7 @@ ActiveAdmin.register(CaseDetails::CaseDetail, as: "Case Details") do
       end
     end
 
-    panel 'Case Details' do
+    panel "Case Details" do
       attributes_table do
         row :primary_data
         row :submission_date
@@ -131,7 +130,7 @@ ActiveAdmin.register(CaseDetails::CaseDetail, as: "Case Details") do
       end
     end
 
-    panel 'Place and Date of Incident' do
+    panel "Place and Date of Incident" do
       attributes_table do
         row :country do |case_detail|
           case_detail.country&.name || "No country assigned"
@@ -162,7 +161,7 @@ ActiveAdmin.register(CaseDetails::CaseDetail, as: "Case Details") do
       end
     end
 
-    panel 'Impact of Incident/s of Human Rights Violations' do
+    panel "Impact of Incident/s of Human Rights Violations" do
       attributes_table do
         row "How did the incident/s affect the victim/s and his/her/their family?" do |case_detail|
           case_detail.impact_to_victim_details
@@ -178,7 +177,7 @@ ActiveAdmin.register(CaseDetails::CaseDetail, as: "Case Details") do
       end
     end
 
-    panel 'Criminalizations' do
+    panel "Criminalizations" do
       table_for case_detail.criminalizations do |criminalization|
         column :details do |object|
           link_to object.criminalization_details, admin_case_detail_criminalization_path(case_detail_id: object.case_detail_id, id: object.id)
@@ -192,7 +191,7 @@ ActiveAdmin.register(CaseDetails::CaseDetail, as: "Case Details") do
       end
     end
 
-    panel 'Killings' do
+    panel "Killings" do
       table_for case_detail.killings do |killing|
         column :details do |object|
           link_to object.killing_details, admin_case_detail_killing_path(case_detail_id: object.case_detail_id, id: object.id)
@@ -206,7 +205,7 @@ ActiveAdmin.register(CaseDetails::CaseDetail, as: "Case Details") do
       end
     end
 
-    panel 'Other Human Rights Violations' do
+    panel "Other Human Rights Violations" do
       table_for case_detail.human_rights_violations do |human_rights_violation|
         column :details do |object|
           link_to object.violation_details, admin_case_detail_rights_violation_path(case_detail_id: object.case_detail_id, id: object.id)
@@ -220,7 +219,7 @@ ActiveAdmin.register(CaseDetails::CaseDetail, as: "Case Details") do
       end
     end
 
-    panel 'Individual Victims' do
+    panel "Individual Victims" do
       table_for case_detail.individual_victims do |individual_victim|
         column :full_name do |object|
           link_to object.full_name, admin_case_detail_individual_victim_path(case_detail_id: object.case_detail_id, id: object.id)
@@ -234,15 +233,11 @@ ActiveAdmin.register(CaseDetails::CaseDetail, as: "Case Details") do
       end
     end
 
-    panel 'Collective Victims' do
+    panel "Collective Victims" do
       table_for case_detail.collective_victims do |collective_victim|
         column :details do |object|
           link_to object.victim_details, admin_case_detail_collective_victim_path(case_detail_id: object.case_detail_id, id: object.id)
-
         end
-
-
-
       end
       div do
         para do
