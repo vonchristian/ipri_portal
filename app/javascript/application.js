@@ -16,3 +16,8 @@ application.debug = false
 window.Stimulus   = application
 
 export { application }
+
+// preline 
+document.addEventListener('turbo:load', () => {
+  window.HSStaticMethods?.autoInit?.();
+});

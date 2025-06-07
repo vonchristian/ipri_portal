@@ -5,6 +5,7 @@ module.exports = {
     "./app/helpers/**/*.rb",
     "./app/javascript/**/*.js",
     "./app/views/**/*.{erb,haml,html,slim}",
+    './node_modules/preline/**/*.js'
   ],
   theme: {
     extend: {},
