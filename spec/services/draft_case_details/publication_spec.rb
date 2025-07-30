@@ -3,6 +3,8 @@
 require "rails_helper"
 
 RSpec.describe(DraftCaseDetails::Publication) do
+  subject(:run_service) { described_class.run!(draft_case_detail: draft_case_detail) }
+
   let(:age_bracket) { create(:age_bracket) }
   let(:draft_case_detail) { create(:draft_case_detail, draft_attributes) }
   let(:draft_attributes) do
@@ -33,33 +35,50 @@ RSpec.describe(DraftCaseDetails::Publication) do
       age_bracket_breakdown_13_25: 15,
       age_bracket_breakdown_26_35: 12,
       age_bracket_breakdown_36_59: 8,
-      age_bracket_breakdown_60_plus: 5
+      age_bracket_breakdown_60_plus: 5,
+      criminalization_details: "Protesting against mining",
+      criminalization_experienced_harrassment_or_intimidation: "yes",
+      criminalization_harrassment_or_intimidation_details: "Received threats",
+      accusation_or_charges_details: "Illegal assembly",
+      policies_or_laws_used: "Public Order Act",
+      accuser_details: "Local authorities",
+      criminalization_case_filing_status: "yes",
+      criminalization_case_filing_details: "Regional court",
+      case_decision_status: "pending",
+      case_decision_details: "Awaiting trial",
+      victims_in_detention: "no",
+      victims_in_detention_details: "Released on bail",
+      case_filing_against_perpetrator: "no",
+      case_filing_against_perpetrator_details: "No investigation conducted",
+      state_action_to_address_criminalization: "no"
     }
   end
+
+  let(:case_detail) { CaseDetails::CaseDetail.last }
 
   before do
     Rails.application.load_seed
   end
 
   describe "#execute" do
-    subject { described_class.run!(draft_case_detail: draft_case_detail) }
-
     it "creates a case detail" do
-      expect { subject }.to(change(CaseDetails::CaseDetail, :count).by(1))
+      expect { run_service }.to(change(CaseDetails::CaseDetail, :count).by(1))
     end
 
     it "creates an individual victim" do
-      expect { subject }.to(change(Victims::IndividualVictim, :count).by(1))
+      expect { run_service }.to(change(Victims::IndividualVictim, :count).by(1))
     end
 
     it "creates a collective victim" do
-      expect { subject }.to(change(Victims::CollectiveVictim, :count).by(1))
+      expect { run_service }.to(change(Victims::CollectiveVictim, :count).by(1))
+    end
+
+    it "creates a criminalization" do
+      expect { run_service }.to(change(Criminalizations::Criminalization, :count).by(1))
     end
 
     context "when case detail is created" do
-      before { subject }
-
-      let(:case_detail) { CaseDetails::CaseDetail.last }
+      before { run_service }
 
       it "has correct reference number" do
         expect(case_detail.reference_number).to(eq("REF123"))
@@ -77,7 +96,7 @@ RSpec.describe(DraftCaseDetails::Publication) do
     end
 
     context "when individual victim is created" do
-      before { subject }
+      before { run_service }
 
       let(:individual_victim) { Victims::IndividualVictim.last }
 
@@ -94,16 +113,13 @@ RSpec.describe(DraftCaseDetails::Publication) do
   end
 
   describe "#create_collective_victims" do
-    let(:case_detail) { create(:case_detail) }
-    let(:service) { described_class.new(draft_case_detail: draft_case_detail) }
-
     it "creates a collective victim" do
-      expect { service.send(:create_collective_victims, case_detail) }
+      expect { run_service }
         .to(change(Victims::CollectiveVictim, :count).by(1))
     end
 
     context "when collective victim is created" do
-      before { service.send(:create_collective_victims, case_detail) }
+      before { run_service }
 
       let(:collective_victim) { Victims::CollectiveVictim.last }
 
@@ -117,21 +133,16 @@ RSpec.describe(DraftCaseDetails::Publication) do
 
   describe "#create_age_bracket_breakdowns" do
     let(:collective_victim) { create(:collective_victim) }
-    let!(:age_bracket_a) { AgeBracket.find_by(name: "A") }
-    let!(:age_bracket_b) { AgeBracket.find_by(name: "B") }
-    let!(:age_bracket_c) { AgeBracket.find_by(name: "C") }
-    let!(:age_bracket_d) { AgeBracket.find_by(name: "D") }
-    let!(:age_bracket_e) { AgeBracket.find_by(name: "E") }
 
     let(:service) { described_class.new(draft_case_detail: draft_case_detail) }
 
     it "creates age bracket breakdowns" do
-      expect { service.send(:create_age_bracket_breakdowns, collective_victim) }
+      expect { run_service }
         .to(change(Victims::AgeBracketBreakdown, :count).by(5))
     end
 
     context "when breakdowns are created" do
-      before { service.send(:create_age_bracket_breakdowns, collective_victim) }
+      before { run_service }
 
       let(:breakdowns) { Victims::AgeBracketBreakdown.last(5) }
 
@@ -141,6 +152,35 @@ RSpec.describe(DraftCaseDetails::Publication) do
 
       it "has correct age brackets" do
         expect(breakdowns.map { |b| b.age_bracket.name }).to(contain_exactly("A", "B", "C", "D", "E"))
+      end
+    end
+  end
+
+  describe "#create_criminalizations" do
+    it "creates a criminalization" do
+      expect { run_service }
+        .to(change(Criminalizations::Criminalization, :count).by(1))
+    end
+
+    context "when criminalization is created" do
+      before { run_service }
+
+      let(:criminalization) { Criminalizations::Criminalization.last }
+
+      it "has correct details" do
+        expect(criminalization.criminalization_details).to(eq("Protesting against mining"))
+        expect(criminalization.experienced_harrassment_or_intimidation).to(eq("yes"))
+        expect(criminalization.accusation_or_charges_details).to(eq("Illegal assembly"))
+      end
+
+      it "has correct case information" do
+        expect(criminalization.case_filing_status).to(eq("yes"))
+        expect(criminalization.case_decision_status).to(eq("pending"))
+        expect(criminalization.victims_in_detention).to(eq("no"))
+      end
+
+      it "is associated with case detail" do
+        expect(criminalization.reload.case_detail).to(eq(case_detail))
       end
     end
   end

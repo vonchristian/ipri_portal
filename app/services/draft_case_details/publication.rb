@@ -20,7 +20,7 @@ class DraftCaseDetails::Publication < ActiveInteraction::Base
 
     create_individual_victims(case_detail)
     create_collective_victims(case_detail)
-    # create_criminalizations(case_detail)
+    create_criminalizations(case_detail)
     # create_human_rights_violations(case_detail)
     # create_killings(case_detail)
     # create_development_projects(case_detail)
@@ -82,5 +82,25 @@ class DraftCaseDetails::Publication < ActiveInteraction::Base
         total: draft_case_detail.age_bracket_breakdown_60_plus,
       )
     end
+  end
+
+  def create_criminalizations(case_detail)
+    case_detail.criminalizations.create!(
+      criminalization_details: draft_case_detail.criminalization_details,
+      experienced_harrassment_or_intimidation: draft_case_detail.criminalization_experienced_harrassment_or_intimidation,
+      harrassment_or_intimidation_details: draft_case_detail.criminalization_harrassment_or_intimidation_details,
+      accusation_or_charges_details: draft_case_detail.accusation_or_charges_details,
+      policies_or_laws_used: draft_case_detail.policies_or_laws_used,
+      accuser_details: draft_case_detail.accuser_details,
+      case_filing_status: draft_case_detail.criminalization_case_filing_status,
+      case_filing_details: draft_case_detail.criminalization_case_filing_details,
+      case_decision_status: draft_case_detail.case_decision_status,
+      case_decision_details: draft_case_detail.case_decision_details,
+      victims_in_detention: draft_case_detail.victims_in_detention,
+      victims_in_detention_details: draft_case_detail.victims_in_detention_details,
+      case_filing_against_perpetrator: draft_case_detail.case_filing_against_perpetrator,
+      case_filing_against_perpetrator_details: draft_case_detail.case_filing_against_perpetrator_details,
+      state_action_to_address_criminalization: draft_case_detail.state_action_to_address_criminalization,
+    )
   end
 end

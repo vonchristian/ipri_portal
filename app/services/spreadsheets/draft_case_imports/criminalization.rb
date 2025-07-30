@@ -9,8 +9,8 @@ module Spreadsheets
       def execute
         draft_case_detail.update(
           criminalization_details: case_data["Why was/were the victim/s criminalized?"],
-          experienced_harrassment_or_intimidation: case_data["Did the victim/s experience any form of harassment or intimidation prior to criminalization?"],
-          harrassment_or_intimidation_details: case_data["If yes, please provide more information - Did the victim/s experience any form of harassment or intimidation prior to criminalization?"],
+          criminalization_experienced_harrassment_or_intimidation: case_data["Did the victim/s experience any form of harassment or intimidation prior to criminalization?"],
+          criminalization_harrassment_or_intimidation_details: case_data["If yes, please provide more information - Did the victim/s experience any form of harassment or intimidation prior to criminalization?"],
           accusation_or_charges_details: case_data["What was/were the accusation/s or charge/s filed against the victim/s?"],
           policies_or_laws_used: case_data["What was/were the policy/ies or law/s or institutional justification/s used against the victim/s?"],
           accuser_details: case_data["Who put forward the accusation/s or charge/s against the victim/s?"],
