@@ -8,10 +8,10 @@ module Documenters
 
     def create
       case_import = CaseImport.create(case_import_params)
-      Spreadsheets::Import.run(spreadsheet_path: case_import.spreadsheet.path, documenter_id: current_documenter.id)
+      Spreadsheets::Import.run(spreadsheet_path: case_import.spreadsheet.path, documenter_id: current_documenter.id, case_import: case_import)
 
       respond_to do |format|
-        format.html { redirect_to documenters_dashboard_index_path }
+        format.html { redirect_to(case_import_path(case_import)) }
       end
     end
 

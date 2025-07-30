@@ -1,0 +1,137 @@
+
+<div class="overflow-auto max-w-full">
+  <table class="min-w-full text-sm text-left border border-gray-300 table-auto">
+    <thead class="bg-gray-100 text-xs font-semibold uppercase sticky top-0 z-10">
+      <tr>
+        <th class="px-4 py-2 border">Field</th>
+        <th class="px-4 py-2 border">Value</th>
+      </tr>
+    </thead>
+    <tbody class="divide-y divide-gray-200 text-gray-800">
+
+      <% def row(label, value) %>
+        <tr>
+          <td class="px-4 py-2 border align-top font-medium text-gray-600"><%= label %></td>
+          <td class="px-4 py-2 border align-top whitespace-pre-wrap"><%=  value %></td>
+        </tr>
+      <% end %>
+
+      <% def section(title) %>
+        <tr class="bg-gray-50 font-bold text-gray-700">
+          <td colspan="2" class="px-4 py-2"><%= title %></td>
+        </tr>
+      <% end %>
+
+      <% section "Basic Info" %>
+      <% row "Case Import ID", link_to(detail.case_import_id, draft_case_detail_path(detail)) %>
+      <% row "Organization Name", detail.organization_name %>
+      <% row "Reference Number", detail.reference_number %>
+      <% row "Primary Data?", detail.primary_data %>
+      <% row "Data Sharing", detail.data_sharing %>
+
+      <% section "Dates" %>
+      <% row "Submission Date", "#{detail.submission_date}" %>
+      <% row "Incident Start", "#{detail.incident_start_year}-#{detail.incident_start_month}-#{detail.incident_start_day}" %>
+      <% row "Incident End", "#{detail.incident_end_year}-#{detail.incident_end_month}-#{detail.incident_end_day}" %>
+      <% row "Incident Time", "#{detail.incident_hour}:#{detail.incident_minute}" %>
+      <% row "Time Period", detail.time_period %>
+
+      <% section "Location" %>
+      <% row "Country ID", detail.country_id %>
+      <% row "Subnational Location", detail.subnational_location %>
+      <% row "Location Details 1", detail.location_details_1 %>
+      <% row "Location Details 2", detail.location_details_2 %>
+
+      <% section "Sources and Totals" %>
+      <% row "Data Sources", detail.data_sources %>
+      <% row "Affected Total", detail.affected_total %>
+      <% row "Male Total", detail.male_total %>
+      <% row "Female Total", detail.female_total %>
+      <% row "Refer to Individuals?", detail.refer_to_individuals %>
+
+      <% section "Victim Info" %>
+      <% row "Victim Details", detail.victim_details %>
+      <% row "Full Name", detail.full_name %>
+      <% row "Gender", detail.gender %>
+      <% row "Ethnic Identity", detail.ethnic_identity %>
+      <% row "Dependent Type", detail.dependent_type %>
+      <% row "Date of Birth", "#{detail.date_of_birth_year}-#{detail.date_of_birth_month}-#{detail.date_of_birth_day}" %>
+      <% row "Victim Role", detail.victim_role %>
+      <% row "Dependent Details", detail.dependent_details %>
+      <% row "Age Bracket ID", detail.age_bracket_id %>
+      <% row "Breakdown 0-12", detail.age_bracket_breakdown_0_12 %>
+      <% row "Breakdown 13-17", detail.age_bracket_breakdown_13_17 %>
+      <% row "Breakdown 18-24", detail.age_bracket_breakdown_18_24 %>
+      <% row "Breakdown 25-59", detail.age_bracket_breakdown_25_59 %>
+      <% row "Breakdown 60+", detail.age_bracket_breakdown_60_plus %>
+
+      <% section "Criminalization" %>
+      <% row "Details", detail.criminalization_details %>
+      <% row "Harassment or Intimidation?", detail.criminalization_experienced_harrassment_or_intimidation %>
+      <% row "Harassment Details", detail.criminalization_harrassment_or_intimidation_details %>
+      <% row "Accusation/Charges", detail.accusation_or_charges_details %>
+      <% row "Policies or Laws Used", detail.policies_or_laws_used %>
+      <% row "Accuser Details", detail.accuser_details %>
+      <% row "Case Filing Status", detail.criminalization_case_filing_status %>
+      <% row "Filing Details", detail.criminalization_case_filing_details %>
+      <% row "Case Decision Status", detail.case_decision_status %>
+      <% row "Case Decision Details", detail.case_decision_details %>
+      <% row "Victims in Detention", detail.victims_in_detention %>
+      <% row "Detention Details", detail.victims_in_detention_details %>
+      <% row "Filing Against Perpetrator", detail.case_filing_against_perpetrator %>
+      <% row "Perpetrator Case Details", detail.case_filing_against_perpetrator_details %>
+      <% row "State Action", detail.state_action_to_address_criminalization %>
+      <% row "State Action Details", detail.state_action_to_address_criminalization_details %>
+      <% row "Investigation", detail.investigation_on_criminalization %>
+      <% row "Investigation Details", detail.investigation_on_criminalization_details %>
+      <% row "Impact to Victim", detail.criminalization_impact_to_victim_details %>
+      <% row "Impact to Community", detail.criminalization_impact_to_community_details %>
+
+      <% section "Project Info" %>
+      <% row "Project Name", detail.project_name %>
+      <% row "Project Description", detail.project_description %>
+      <% row "Project Start Year", detail.project_start_year %>
+      <% row "Project Website Sources", detail.project_website_sources %>
+      <% row "Development Project Category", detail.development_project_category %>
+
+      <% section "Violation Info" %>
+      <% row "Violation Details", detail.violation_details %>
+      <% row "Perpetrators Known?", detail.violation_alleged_perpetrators_known %>
+      <% row "Perpetrator Details", detail.violation_alleged_perpetrator_details %>
+      <% row "Filing Status", detail.human_rights_violation_case_filing_status %>
+      <% row "Filing Details", detail.human_rights_violation_case_filing_details %>
+      <% row "State Action", detail.state_action_to_address_violation %>
+      <% row "State Action Details", detail.state_action_to_address_violation_details %>
+      <% row "Investigation", detail.investigation_on_violation %>
+      <% row "Investigation Details", detail.investigation_on_violation_details %>
+      <% row "Impact to Victim", detail.human_rights_violation_impact_to_victim_details %>
+      <% row "Impact to Community", detail.human_rights_violation_impact_to_community_details %>
+
+      <% section "Killing Info" %>
+      <% row "Killing Details", detail.killing_details %>
+      <% row "Killing Carried Out", detail.killing_carried_out %>
+      <% row "Harassment?", detail.killing_experienced_harrassment_or_intimidation %>
+      <% row "Harassment Details", detail.killing_harrassment_or_intimidation_details %>
+      <% row "Perpetrators Known?", detail.killing_alleged_perpetrators_known %>
+      <% row "Perpetrator Details", detail.killing_alleged_perpetrator_details %>
+      <% row "Case Filing Status", detail.killing_case_filing_status %>
+      <% row "State Action", detail.state_action_to_address_killing %>
+      <% row "State Action Details", detail.state_action_to_address_killing_details %>
+      <% row "Investigation", detail.investigation_on_killing %>
+      <% row "Investigation Details", detail.investigation_on_killing_details %>
+
+      <% section "Documenter Info" %>
+      <% row "Documenter ID", detail.documenter_id %>
+      <% row "First Name", detail.documenter_first_name %>
+      <% row "Last Name", detail.documenter_last_name %>
+      <% row "Email", detail.documenter_email %>
+      <% row "Phone Number", detail.documenter_phone_number %>
+
+      <% section "Additional Impacts & Actions" %>
+      <% row "Impact to Victim (other)", detail.impact_to_victim_details %>
+      <% row "Impact to Community (other)", detail.impact_to_community_details %>
+      <% row "Actions Taken", detail.actions_taken_details %>
+
+    </tbody>
+  </table>
+</div>

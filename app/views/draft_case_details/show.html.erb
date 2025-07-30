@@ -1,0 +1,102 @@
+<%= content_tag :div, class: "overflow-auto text-sm" do %>
+<span class="inline-flex items-center px-3.5 py-2.5 rounded-full text-xs font-medium
+  bg-yellow-100 text-gray-800">
+  Draft
+</span>
+  <table class="min-w-full divide-y divide-gray-300">
+    <thead class="bg-gray-100 text-left text-xs font-semibold uppercase tracking-wider">
+      <tr>
+        <th colspan="2" class="px-4 py-2">General Info</th>
+      </tr>
+    </thead>
+    <tbody class="divide-y divide-gray-200">
+      <tr>
+        <td class="font-medium px-4 py-2">Organization</td>
+        <td class="px-4 py-2" contenteditable="true"
+          data-controller="inlineedit"
+          data-inlineedit-url-value="<%= draft_case_detail_path(@draft_case_detail) %>"
+          data-inlineedit-name-value="organization_name"
+          data-action="blur->inlineedit#save">
+          <%= @draft_case_detail.organization_name %>
+        </td>
+      </tr>
+      <tr>
+        <td class="font-medium px-4 py-2">Reference #</td>
+        <td class="px-4 py-2" contenteditable="true"
+          data-controller="inlineedit"
+          data-inlineedit-url-value="<%= draft_case_detail_path(@draft_case_detail) %>"
+          data-inlineedit-name-value="reference_number"
+          data-action="blur->inlineedit#save">
+          <%= @draft_case_detail.reference_number %>
+        </td>
+      </tr>
+    </tbody>
+
+    <thead class="bg-gray-100 text-left text-xs font-semibold uppercase tracking-wider">
+      <tr><th colspan="2" class="px-4 py-2">Date & Time</th></tr>
+    </thead>
+    <tbody class="divide-y divide-gray-200">
+      <tr>
+        <td class="font-medium px-4 py-2">Submission Date</td>
+         <td class="px-4 py-2" contenteditable="true"
+          data-controller="inlineedit"
+          data-inlineedit-url-value="<%= draft_case_detail_path(@draft_case_detail) %>"
+          data-inlineedit-name-value="submission_date"
+          data-action="blur->inlineedit#save">
+          <%= @draft_case_detail.submission_date %>
+        </td>
+      </tr>
+      <tr>
+        <td class="font-medium px-4 py-2">Incident Time</td>
+        <td class="px-4 py-2"><%= "#{@draft_case_detail.incident_hour}:#{@draft_case_detail.incident_minute}" %></td>
+      </tr>
+    </tbody>
+
+    <thead class="bg-gray-100 text-left text-xs font-semibold uppercase tracking-wider">
+      <tr><th colspan="2" class="px-4 py-2">Location</th></tr>
+    </thead>
+    <tbody class="divide-y divide-gray-200">
+      <tr>
+        <td class="font-medium px-4 py-2">Subnational Location</td>
+        <td class="px-4 py-2"><%= @draft_case_detail.subnational_location %></td>
+      </tr>
+      <tr>
+        <td class="font-medium px-4 py-2">Location Details</td>
+        <td class="px-4 py-2"><%= @draft_case_detail.location_details_1 %></td>
+      </tr>
+    </tbody>
+
+    <thead class="bg-gray-100 text-left text-xs font-semibold uppercase tracking-wider">
+      <tr><th colspan="2" class="px-4 py-2">Impact & Victims</th></tr>
+    </thead>
+    <tbody class="divide-y divide-gray-200">
+      <tr>
+        <td class="font-medium px-4 py-2">Victim Details</td>
+        <td class="px-4 py-2 whitespace-pre-line"><%= @draft_case_detail.victim_details %></td>
+      </tr>
+      <tr>
+        <td class="font-medium px-4 py-2">Community Impact</td>
+        <td class="px-4 py-2 whitespace-pre-line"><%= @draft_case_detail.impact_to_community_details %></td>
+      </tr>
+    </tbody>
+
+    <thead class="bg-gray-100 text-left text-xs font-semibold uppercase tracking-wider">
+      <tr><th colspan="2" class="px-4 py-2">Criminalization</th></tr>
+    </thead>
+    <tbody class="divide-y divide-gray-200">
+      <tr>
+        <td class="font-medium px-4 py-2">Details</td>
+        <td class="px-4 py-2 whitespace-pre-line"><%= @draft_case_detail.criminalization_details %></td>
+      </tr>
+      <tr>
+        <td class="font-medium px-4 py-2">Case Status</td>
+        <td class="px-4 py-2"><%= @draft_case_detail.criminalization_case_filing_status %></td>
+      </tr>
+    </tbody>
+
+    <!-- Add more sections like Project, Killing, etc. similarly -->
+
+  </table>
+<% end %>
+<%= button_to "Publish", draft_case_detail_publication_path(@draft_case_detail),
+    class: "inline-flex items-center px-3 py-1.5 rounded text-sm font-medium bg-blue-600 text-white hover:bg-blue-700" %>

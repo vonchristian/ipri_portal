@@ -88,7 +88,7 @@ gem "active_interaction-extras"
 gem "kt-paperclip", "~> 6.4", ">= 6.4.1"
 
 gem "pundit", "~> 2.3"
-gem "activeadmin", "4.0.0.beta15", git: "https://github.com/activeadmin/activeadmin", branch: :master
+gem "activeadmin", "4.0.0.beta16", git: "https://github.com/activeadmin/activeadmin", branch: :master
 gem "devise"
 gem "acts-as-taggable-on"
 gem "counter_culture", "~> 3.2"
@@ -98,7 +98,7 @@ gem "ffi"
 gem "caxlsx"
 gem "caxlsx_rails"
 gem "tailwindcss-ruby", "~> 3.4"
-# gem "tailwindcss-rails"
+gem "tailwindcss-rails"
 
 gem "prawn"
 gem "prawn-table"
