@@ -57,6 +57,12 @@ Rails.application.routes.draw do
     resources :documenter_details, only: [:new, :create]
   end
 
+  resources :case_imports, only: [:show]
+
+  resources :draft_case_details, only: [:show, :update] do
+    resource :publication, only: [:create], controller: "draft_case_details/publications"
+  end
+
   namespace :documenters do
     resources :case_imports, only: [:new, :create]
     resources :documenter, only: [] do

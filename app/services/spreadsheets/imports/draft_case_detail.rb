@@ -2,24 +2,25 @@
 
 module Spreadsheets
   module Imports
-    class CaseDetail < ActiveInteraction::Base
+    class DraftCaseDetail < ActiveInteraction::Base
+      object :case_import
       hash :case_data, strip: false
       string :documenter_id
-      def execute
-        create_case_detail
 
-        @case_detail
+      def execute
+        create_draft_case_detail
+
+        @draft_case_detail
       end
 
       private
 
-      def create_case_detail
-        @case_detail = CaseDetails::CaseDetail.create!(
+      def create_draft_case_detail
+        @case_draft_detail = CaseDetails::DraftCaseDetail.create!(
+          case_import: case_import,
           reference_number: SecureRandom.uuid,
           organization_name: case_data["Organization / Affiliation"] || "No Organization",
-          submission_date_year: parse_submission_date(case_data["Submission Date"]).year,
-          submission_date_day: parse_submission_date(case_data["Submission Date"]).day,
-          submission_date_month: parse_submission_date(case_data["Submission Date"]).strftime("%B"),
+          submission_date: parse_submission_date(case_data["Submission Date"]),
           primary_data: primary_data(case_data["Is the documenter submitting this case factsheet as primary data?"]),
           data_sharing: data_sharing(case_data["As the documenter, I understand that Indigenous Peoples Rights International (IPRI) will record the information detailed in this case factsheet in its database. I am submitting this case factsheet with the following restrictions: (tick as preferred)"]),
           country: find_country(case_data["Country of incident"]),

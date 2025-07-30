@@ -2,6 +2,7 @@
 
 class CaseImport < ApplicationRecord
   has_attached_file :spreadsheet
+  has_many :draft_case_details, class_name: "CaseDetails::DraftCaseDetail"
 
   validates_attachment :spreadsheet,
     presence: true,

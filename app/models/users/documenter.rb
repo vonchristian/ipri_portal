@@ -3,8 +3,9 @@
 module Users
   class Documenter < ApplicationRecord
     has_secure_password
+    belongs_to :country, optional: true
 
-    enum role: {
+    enum :role, {
       ipri_employee: "IPRI Employee",
       country_partner: "Country Partner",
     }

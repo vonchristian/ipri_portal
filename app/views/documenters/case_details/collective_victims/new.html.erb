@@ -43,19 +43,19 @@
 </div>
 
                <div class="col-span-6 sm:col-span-3">
-                <%= f.input :male_total, label: "Write the number of MALE from the total number of individuals affected" %>
+                <%= f.input :male_total, label: "Write the number of MALE from the total number of individuals affected", input_html: { value: 0 } %>
               </div>
 
                <div class="col-span-6 sm:col-span-3">
-                <%= f.input :female_total, label: "Write the number of FEMALE from the total number of individuals affected" %>
+                <%= f.input :female_total, label: "Write the number of FEMALE from the total number of individuals affected", input_html: { value: 0 } %>
               </div>
 
               <% AgeBracket.all.each do |age_bracket| %>
               <%= f.fields_for :age_bracket_breakdowns do |ff| %>
-               <%= ff.hidden_field :age_bracket_id, value: age_bracket.id %>
-               <div class="col-span-6 sm:col-span-3">
-                <%= ff.input :total, label: "Write the number of #{age_bracket.description}  from the total number of individuals affected" %>
-              </div>
+                <%= ff.hidden_field :age_bracket_id, value: age_bracket.id %>
+                <div class="col-span-6 sm:col-span-3">
+                  <%= ff.input :total, label: "Write the number of #{age_bracket.description}  from the total number of individuals affected", input_html: { value: 0 } %>
+                </div>
               <% end %>
               <% end %>
              <div class="border-t border-gray-200 pt-6">
